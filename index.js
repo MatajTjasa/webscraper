@@ -3,6 +3,7 @@ const cheerio = require('cheerio')
 const fs = require('fs')
 const puppeteer = require('puppeteer')
 
+// Add input parameters: departure, arrival and date
 const submitForm = async () => {
     try {
         const browser = await puppeteer.launch({ headless: false });
