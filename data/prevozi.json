@@ -1,0 +1,96 @@
+[
+  {
+    "routeElement": {},
+    "from": "Ljubljana",
+    "to": "Maribor (Nova vas)",
+    "count": "0",
+    "trips": []
+  },
+  {
+    "routeElement": {},
+    "from": "Ljubljana",
+    "to": "Maribor",
+    "count": "8",
+    "trips": [
+      {
+        "time": "01:00",
+        "description": "Lane",
+        "price": "6€"
+      },
+      {
+        "time": "06:00",
+        "description": "Janko",
+        "price": "6€"
+      },
+      {
+        "time": "13:40",
+        "description": "SMS Tesla ModelS",
+        "price": "7€"
+      },
+      {
+        "time": "14:10",
+        "description": "Ivan",
+        "price": "5€"
+      },
+      {
+        "time": "14:25",
+        "description": "Srečko",
+        "price": "7€"
+      },
+      {
+        "time": "15:45",
+        "description": "DANIJEL",
+        "price": "6€"
+      },
+      {
+        "time": "19:30",
+        "description": "Marko",
+        "price": "6€"
+      },
+      {
+        "time": "20:35",
+        "description": "sabina",
+        "price": "6€"
+      }
+    ]
+  },
+  {
+    "routeElement": {},
+    "from": "Ljubljana",
+    "to": "Ptuj",
+    "count": "1",
+    "trips": [
+      {
+        "time": "07:20",
+        "description": "Iztok",
+        "price": "5€"
+      }
+    ]
+  },
+  {
+    "routeElement": {},
+    "from": "Ljubljana",
+    "to": "Slovenska Bistrica",
+    "count": "1",
+    "trips": [
+      {
+        "time": "17:00",
+        "description": "Mladen",
+        "price": "5€"
+      }
+    ]
+  },
+  {
+    "routeElement": {},
+    "from": "Ljubljana",
+    "to": "Tepanje",
+    "count": "1",
+    "trips": [
+      {
+        "time": "14:50",
+        "description": "Gregor",
+        "price": "5€"
+      }
+    ]
+  }
+]

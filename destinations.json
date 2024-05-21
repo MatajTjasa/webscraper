@@ -1,0 +1,16 @@
+{
+  "entryStations": [
+    {
+      "value": "",
+      "text": "",
+      "selected": true
+    }
+  ],
+  "exitStations": [
+    {
+      "value": "",
+      "text": "",
+      "selected": true
+    }
+  ]
+}
