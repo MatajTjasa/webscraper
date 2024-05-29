@@ -1,0 +1,242 @@
+[
+  {
+    "departureStation": "Maribor",
+    "departureTime": "03:10",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "05:42",
+    "travelTime": "02:32",
+    "trainType": "RG 1605"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "04:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "06:56",
+    "travelTime": "02:31",
+    "trainType": "LPV 2001"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "04:50",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "07:03",
+    "travelTime": "02:13",
+    "trainType": "RG 607"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "05:20",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "08:04",
+    "travelTime": "01:26",
+    "trainType": "LPV 2901"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "05:50",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "07:43",
+    "travelTime": "01:53",
+    "trainType": "ICS 11"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "06:20",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "08:58",
+    "travelTime": "01:29",
+    "trainType": "LPV 2903"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "06:32",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "09:03",
+    "travelTime": "00:32",
+    "trainType": "LPV 2981"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "07:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "10:00",
+    "travelTime": "01:26",
+    "trainType": "LPV 2803"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "08:20",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "10:09",
+    "travelTime": "01:49",
+    "trainType": "ICS 31"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "08:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "11:03",
+    "travelTime": "01:25",
+    "trainType": "LPV 2933"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "09:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "12:04",
+    "travelTime": "01:25",
+    "trainType": "LPV 2905"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "10:20",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "13:04",
+    "travelTime": "01:26",
+    "trainType": "LPV 2805"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "10:50",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "12:43",
+    "travelTime": "01:53",
+    "trainType": "ICS 17"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "11:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "14:12",
+    "travelTime": "01:25",
+    "trainType": "LPV 2911"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "11:45",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "14:00",
+    "travelTime": "02:15",
+    "trainType": "EC 151"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "12:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "15:07",
+    "travelTime": "01:26",
+    "trainType": "LPV 2807"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "13:40",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "16:04",
+    "travelTime": "01:13",
+    "trainType": "RG 615"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "13:47",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "16:42",
+    "travelTime": "00:19",
+    "trainType": "LPV 2985"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "14:28",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "17:03",
+    "travelTime": "01:26",
+    "trainType": "LPV 2907"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "15:23",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "18:08",
+    "travelTime": "01:36",
+    "trainType": "LPV 2917"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "15:35",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "17:38",
+    "travelTime": "02:03",
+    "trainType": "MV 155"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "16:45",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "18:56",
+    "travelTime": "02:11",
+    "trainType": "RG 617"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "17:20",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "20:04",
+    "travelTime": "01:34",
+    "trainType": "LPV 2921"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "17:40",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "19:43",
+    "travelTime": "02:03",
+    "trainType": "MV 157"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "18:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "21:04",
+    "travelTime": "01:27",
+    "trainType": "LPV 2937"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "19:20",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "21:55",
+    "travelTime": "01:32",
+    "trainType": "LPV 2925"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "19:20",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "22:08",
+    "travelTime": "01:32",
+    "trainType": "LPV 2925"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "20:10",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "22:15",
+    "travelTime": "02:05",
+    "trainType": "IC 523"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "20:25",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "23:04",
+    "travelTime": "01:26",
+    "trainType": "LPV 2927"
+  },
+  {
+    "departureStation": "Maribor",
+    "departureTime": "22:45",
+    "arrivalStation": "Ljubljana",
+    "arrivalTime": "01:03",
+    "travelTime": "02:18",
+    "trainType": "IC 310"
+  }
+]
