@@ -58,7 +58,7 @@ async function scrapeDestinations() {
     console.log(destinations);
 
     // Save destinations to JSON file
-    fs.writeFile('slovenske_zeleznice_destinations.json', JSON.stringify(destinations, null, 2), err => {
+    fs.writeFile('../data/destinations/slovenske_zeleznice_destinations.json', JSON.stringify(destinations, null, 2), err => {
         if (err) console.log('Error writing file:', err);
         else console.log('Successfully written to slovenske_zeleznice_destinations.json');
     });
@@ -91,11 +91,11 @@ async function scrapeDestinations() {
     console.log(trainSchedules);
 
     // Save the scraped data to a JSON file
-    fs.writeFile('train_schedules.json', JSON.stringify(trainSchedules, null, 2), err => {
+    fs.writeFile('../data/timetable/slovenske_zeleznice.json', JSON.stringify(trainSchedules, null, 2), err => {
         if (err) console.log('Error writing file:', err);
-        else console.log('Successfully written to train_schedules.json');
+        else console.log('Successfully written to slovenske_zeleznice.json');
     });
-    //await browser.close();
+    await browser.close();
 
 }
 function delay(ms) {

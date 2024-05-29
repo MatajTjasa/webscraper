@@ -6,7 +6,7 @@ async function scrapeOptions() {
     const page = await browser.newPage();
 
     // Replace this URL with the actual page URL you wish to scrape
-    await page.goto('https://prevoz.org/');
+    await page.goto('https://prevozi.org/');
 
     await page.select('#id_fc', 'SI');
     /*await delay(1000);
@@ -65,7 +65,7 @@ async function scrapeOptions() {
     console.log(dateOptions);
 
     // Save date options to JSON file
-    fs.writeFile('C://Users/mataj/WebstormProjects/webscraper/data/prevozi_dates.json', JSON.stringify(dateOptions, null, 2), err => {
+    fs.writeFile('../data/prevozi_dates.json', JSON.stringify(dateOptions, null, 2), err => {
         if (err) console.log('Error writing file:', err);
         else console.log('Successfully written to prevozi_dates.json');
     });
@@ -87,7 +87,7 @@ async function scrapeOptions() {
     console.log(destinationOptions);
 
     // Save destination options to JSON file
-    fs.writeFile('C://Users/mataj/WebstormProjects/webscraper/data/prevozi_destinations.json', JSON.stringify(destinationOptions, null, 2), err => {
+    fs.writeFile('../data/destinations/prevozi_destinations.json', JSON.stringify(destinationOptions, null, 2), err => {
         if (err) console.log('Error writing file:', err);
         else console.log('Successfully written to prevozi_destinations.json');
     });
@@ -129,7 +129,7 @@ async function scrapeOptions() {
     console.log(dynamicData);
 
     // Save dynamic data to JSON file
-    fs.writeFile('C://Users/mataj/WebstormProjects/webscraper/data/prevozi.json', JSON.stringify(dynamicData, null, 2), err => {
+    fs.writeFile('../data/destinations/prevozi.json', JSON.stringify(dynamicData, null, 2), err => {
         if (err) console.log('Error writing file:', err);
         else console.log('Successfully written to prevozi.json');
     });

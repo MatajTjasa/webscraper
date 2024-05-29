@@ -1,3 +1,4 @@
+// THIS IS A COPY OF INDEX.JS, REWRITE THE INDEX.JS!
 const axios = require('axios')
 const cheerio = require('cheerio')
 const fs = require('fs')
@@ -14,7 +15,6 @@ const submitForm = async () => {
         await page.goto('https://arriva.si/vozni-redi/');
 
         await delay(1000); // Wait for 5 seconds
-
 
         console.log("Waiting for the accept button to appear...");
         try {
@@ -96,7 +96,7 @@ const submitForm = async () => {
             document.querySelector('#trip-date').value = '';
         });
 
-        await page.type('#trip-date', '29.03.2024');
+        await page.type('#trip-date', '31.05.2024');
         await page.click('#trip-date');
 
         // Submit
@@ -110,7 +110,7 @@ const submitForm = async () => {
         await delay(5000); // Wait for 5 seconds
 
         console.log("Getting url...")
-        const currentUrl = await page.url();
+        const currentUrl = page.url();
         console.log("Current page URL:", currentUrl);
 
         // Return the URL
@@ -190,7 +190,7 @@ const fetchConnection = async (url) => {
 
             // Write data to a file (example)
             const jsonData = JSON.stringify(connectionData, null, 2); // Convert data to JSON string with indentation
-            fs.writeFile('C://Users/mataj/WebstormProjects/webscraper/data/arriva.json', jsonData, 'utf8', (err) => {
+            fs.writeFile('../data/timetable/arriva.json', jsonData, 'utf8', (err) => {
                 if (err) {
                     console.error(err);
                 } else {
