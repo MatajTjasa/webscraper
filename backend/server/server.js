@@ -1,7 +1,11 @@
 const express = require('express');
 const redis = require('redis');
 const mongoose = require('mongoose');
-const { apms, arriva, prevozi, slovenske_zeleznice } = require('../scrapers');
+const apms = require('../scrapers/apms.js');
+const arriva = require('../scrapers/arriva.js');
+const prevozi = require('../scrapers/prevozi.js');
+const slovenske_zeleznice = require('../scrapers/slovenske_zeleznice.js');
+
 const {scrapeAPMS} = require("../scrapers/apms");
 
 const app = express();
