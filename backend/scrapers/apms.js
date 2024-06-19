@@ -1,8 +1,9 @@
 const fs = require('fs');
 const puppeteer = require('puppeteer');
+const path = require("path");
 
 async function scrapeAPMS(departure, destination, date) {
-    const browser = await puppeteer.launch({ headless: true }); // Set to true for headless mode
+    const browser = await puppeteer.launch({headless: false}); // Set to true for headless mode
     const page = await browser.newPage();
 
     await page.goto('https://apms.si/');
@@ -56,8 +57,15 @@ async function scrapeAPMS(departure, destination, date) {
             return [];
         } else {
             console.log(scheduleData);
-            fs.writeFileSync('../data/timetable/apms.json', JSON.stringify(scheduleData, null, 2), 'utf8');
-            console.log('Bus schedule data has been saved to apms.json');
+
+            // Ensure the directory exists
+            const directory = path.resolve(__dirname, "../data/timetable");
+            if (!fs.existsSync(directory)) {
+                fs.mkdirSync(directory, {recursive: true});
+            }
+
+            fs.writeFileSync(path.resolve(directory, "apms.json"), JSON.stringify(scheduleData, null, 2), "utf8");
+            console.log("Bus schedule data has been saved to apms.json");
             return scheduleData;
         }
     } catch (e) {

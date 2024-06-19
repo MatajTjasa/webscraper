@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const redis = require('redis');
 const mongoose = require('mongoose');
@@ -30,7 +31,7 @@ app.post('/searchAPMS', async (req, res) => {
     }
 });
 
-/*
+/!*
 app.post('/search', async (req, res) => {
     const { date, departure, destination } = req.body;
     const cacheKey = `${departure}-${destination}-${date}`;
@@ -54,13 +55,13 @@ app.post('/search', async (req, res) => {
         }
     });
 });
-*/
+*!/
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
 
-/*
+/!*
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -93,4 +94,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+*!/
 */

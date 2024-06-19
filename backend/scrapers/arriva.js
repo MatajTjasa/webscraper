@@ -1,11 +1,9 @@
-// THIS IS A COPY OF INDEX.JS, REWRITE THE INDEX.JS!
 const axios = require('axios')
 const cheerio = require('cheerio')
 const fs = require('fs')
 const puppeteer = require('puppeteer')
 
-// Add input parameters: departure, arrival and date
-const submitForm = async () => {
+async function scrapeArriva(departure, destination, date) {
     try {
         const browser = await puppeteer.launch({ headless: false });
         const page = await browser.newPage();
@@ -25,8 +23,8 @@ const submitForm = async () => {
             console.log("Accept button not found within the timeout period. Proceeding with the script...");
         }
 
-        const departure = "Ljubljana AP"
-        const arrival = "Maribor AP"
+        // const departure = "Ljubljana AP"
+        // const arrival = "Maribor AP"
 
         // Departure field
         console.log("Clicking input for departure...");
@@ -60,7 +58,7 @@ const submitForm = async () => {
 
         // Arrival field
         console.log("Clicking input for arrival...");
-        await page.type('.input-destination', arrival);
+        await page.type('.input-destination', destination);
 
         await delay(1000); // Wait for 1 second
 
@@ -79,7 +77,7 @@ const submitForm = async () => {
             console.log('Checking if arrival dropdown item matches input:', firstArrivalDropdownItem);
 
             // Check if the input in the arrival field matches the first item in the dropdown
-            if (arrival.toLowerCase() === firstArrivalDropdownItem.toLowerCase()) {
+            if (destination.toLowerCase() === firstArrivalDropdownItem.toLowerCase()) {
                 console.log('Arrival dropdown item matches input. Clicking...');
                 await page.click('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item');
             } else {
@@ -96,7 +94,8 @@ const submitForm = async () => {
             document.querySelector('#trip-date').value = '';
         });
 
-        await page.type('#trip-date', '31.05.2024');
+        //await page.type('#trip-date', '31.05.2024');
+        await page.type('#trip-date', date);
         await page.click('#trip-date');
 
         // Submit
@@ -114,31 +113,22 @@ const submitForm = async () => {
         console.log("Current page URL:", currentUrl);
 
         // Return the URL
-        return currentUrl;
+        return await fetchConnection(currentUrl);
     } catch (error) {
         console.error(error);
-        return null;
+        return [];
     }
-};
+}
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-submitForm().then(url => {
-    if (url) {
-        console.log("Fetching url:", url);
-        fetchConnection(url);
-    } else {
-        console.log("Failed to retrieve URL.");
-    }
-});
-
 const fetchConnection = async (url) => {
     try {
         if (!url) {
             console.log("URL is missing.");
-            return;
+            return [];
         }
 
         const response = await axios.get(url);
@@ -197,8 +187,11 @@ const fetchConnection = async (url) => {
                     console.log('Data has been saved to arriva.json');
                 }
             });
+            return connectionData;
         }
     } catch (err) {
         console.error(err);
     }
 };
+
+module.exports = {scrapeArriva};

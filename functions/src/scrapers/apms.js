@@ -10,7 +10,7 @@ const puppeteer = require("puppeteer");
  * @return {Promise<Array>} - A promise that resolves to an array of bus schedules.
  */
 async function scrapeAPMS(departure, destination, date) {
-  const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
 
   await page.goto("https://apms.si/");
@@ -39,10 +39,12 @@ async function scrapeAPMS(departure, destination, date) {
   await page.click("#iskanje", {clickCount: 3});
   await delay(2000);
 
+    console.log("Searching...");
+
   try {
     await page.waitForSelector(
         ".latest-item.bts.grid-template-content",
-        {timeout: 30000},
+        {timeout: 6000},
     );
     const scheduleData = await page.evaluate(() => {
       const rows = Array.from(
