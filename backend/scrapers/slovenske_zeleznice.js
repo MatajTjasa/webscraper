@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
-async function scrapeDestinations() {
+async function scrapeSlovenskeZeleznice(departure, destination, date) {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
 
@@ -10,42 +10,43 @@ async function scrapeDestinations() {
     await page.goto('https://potniski.sz.si/', { waitUntil: 'networkidle2' });
     await page.waitForSelector('#entry-station-selectized', { visible: true });
 
-    // date
+    // Set the travel date
     await page.waitForSelector('#departure-date', { visible: true });
     await page.evaluate(() => {
         document.querySelector('#departure-date').value = '';
     });
-    await page.type('#departure-date', '30.5.2024')
+    await page.type('#departure-date', date);
     await delay(1000);
 
-
-    // Click on the input field to display the dropdown
+    // Select departure station
+    await page.evaluate(() => {
+        document.querySelector('#entry-station-selectized').scrollIntoView();
+    });
     await page.click('#entry-station-selectized');
     await page.waitForSelector('.selectize-dropdown-content', { visible: true });
-
-    // Select the option with the text "Maribor"
-    await page.evaluate(() => {
+    await page.evaluate((departure) => {
         const departures = Array.from(document.querySelectorAll('.selectize-dropdown-content .option'));
-        const departure = departures.find(option => option.textContent.trim() === 'Maribor');
-        if (departure) {
-            departure.click();
+        const departureOption = departures.find(option => option.textContent.trim() === departure);
+        if (departureOption) {
+            departureOption.click();
         }
-    });
+    }, departure);
 
     await delay(2000);
 
-    await page.waitForSelector('#exit-station-selectized', { visible: true });
-
-    // Click on the input field to display the dropdown
-    await page.click('#exit-station-selectized');
-
+    // Select destination station
     await page.evaluate(() => {
-        const arrivals = Array.from(document.querySelectorAll('.v-izstop .selectize-dropdown-content .option'));
-        const arrival = arrivals.find(option => option.textContent.trim() === 'Ljubljana');
-        if (arrival) {
-            arrival.click();
-        }
+        document.querySelector('#exit-station-selectized').scrollIntoView();
     });
+    await page.click('#exit-station-selectized');
+    await page.waitForSelector('.selectize-dropdown-content', {visible: true});
+    await page.evaluate((destination) => {
+        const arrivals = Array.from(document.querySelectorAll('.selectize-dropdown-content .option'));
+        const arrivalOption = arrivals.find(option => option.textContent.trim() === destination);
+        if (arrivalOption) {
+            arrivalOption.click();
+        }
+    }, destination);
 
     // Get the list of destinations after selection
     const destinations = await page.evaluate(() => {
@@ -63,7 +64,11 @@ async function scrapeDestinations() {
         else console.log('Successfully written to slovenske_zeleznice_destinations.json');
     });
 
-    await page.click('button.btn.btn-primary[type="submit"]');
+    // Click the submit button
+    await page.evaluate(() => {
+        document.querySelector('button[type="submit"]').scrollIntoView();
+    });
+    await page.click('button[type="submit"]');
 
     await page.waitForSelector('.connection', { visible: true });
 
@@ -96,9 +101,13 @@ async function scrapeDestinations() {
         else console.log('Successfully written to slovenske_zeleznice.json');
     });
     await browser.close();
-
 }
+
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-scrapeDestinations().catch(err => console.error('Error executing scrapeDestinations:', err));
+
+// Example usage
+scrapeSlovenskeZeleznice('Ljubljana', 'Maribor', '30.06.2024').catch(err => console.error('Error executing scrapeDestinations:', err));
+
+module.exports = {scrapeSlovenskeZeleznice};

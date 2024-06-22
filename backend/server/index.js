@@ -1,12 +1,9 @@
 const express = require('express');
 const redis = require('redis');
 // const mongoose = require('mongoose');
-// const apms = require('../scrapers/apms.js');
-// const arriva = require('../scrapers/arriva.js');
-// const prevozi = require('../scrapers/prevozi.js');
-// const slovenske_zeleznice = require('../scrapers/slovenske_zeleznice.js');
 const {scrapeAPMS} = require("../scrapers/apms");
 const {scrapeArriva} = require("../scrapers/arriva");
+const {scrapeSlovenskeZeleznice} = require("../scrapers/slovenske_zeleznice");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -69,6 +66,22 @@ app.post('/webscraper/searchArriva', async (req, res) => {
         res.status(500).json({error: 'An error occurred while scraping data.'});
     }
     console.log('Ending request searchArriva.')
+});
+
+app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
+    console.log('Starting request searchSlovenskeZeleznice.')
+    const {date, departure, destination} = req.body;
+    const cacheKey = `${departure}-${destination}-${date}`;
+    console.log(cacheKey)
+    try {
+        const results = await scrapeSlovenskeZeleznice(departure, destination, date);
+        // Save to cache
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchSlovenskeZeleznice.')
 });
 
 app.listen(PORT, () => {
