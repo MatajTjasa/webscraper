@@ -1,14 +1,21 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
+// TODO
+
 async function scrapeSlovenskeZeleznice(departure, destination, date) {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
 
     // Navigate to the train schedule page
-    await page.goto('https://potniski.sz.si/');
     await page.goto('https://potniski.sz.si/', { waitUntil: 'networkidle2' });
-    await page.waitForSelector('#entry-station-selectized', { visible: true });
+
+    // Accept cookies if the banner is present
+    const acceptCookiesSelector = '#cn-accept-cookie';
+    if (await page.$(acceptCookiesSelector) !== null) {
+        await page.click(acceptCookiesSelector);
+        await delay(1000); // Wait for the cookies banner to disappear
+    }
 
     // Set the travel date
     await page.waitForSelector('#departure-date', { visible: true });
@@ -19,34 +26,12 @@ async function scrapeSlovenskeZeleznice(departure, destination, date) {
     await delay(1000);
 
     // Select departure station
-    await page.evaluate(() => {
-        document.querySelector('#entry-station-selectized').scrollIntoView();
-    });
-    await page.click('#entry-station-selectized');
-    await page.waitForSelector('.selectize-dropdown-content', { visible: true });
-    await page.evaluate((departure) => {
-        const departures = Array.from(document.querySelectorAll('.selectize-dropdown-content .option'));
-        const departureOption = departures.find(option => option.textContent.trim() === departure);
-        if (departureOption) {
-            departureOption.click();
-        }
-    }, departure);
+    await selectStation(page, '#entry-station-selectized', departure);
 
     await delay(2000);
 
     // Select destination station
-    await page.evaluate(() => {
-        document.querySelector('#exit-station-selectized').scrollIntoView();
-    });
-    await page.click('#exit-station-selectized');
-    await page.waitForSelector('.selectize-dropdown-content', {visible: true});
-    await page.evaluate((destination) => {
-        const arrivals = Array.from(document.querySelectorAll('.selectize-dropdown-content .option'));
-        const arrivalOption = arrivals.find(option => option.textContent.trim() === destination);
-        if (arrivalOption) {
-            arrivalOption.click();
-        }
-    }, destination);
+    await selectStation(page, '#exit-station-selectized', destination);
 
     // Get the list of destinations after selection
     const destinations = await page.evaluate(() => {
@@ -64,43 +49,81 @@ async function scrapeSlovenskeZeleznice(departure, destination, date) {
         else console.log('Successfully written to slovenske_zeleznice_destinations.json');
     });
 
-    // Click the submit button
-    await page.evaluate(() => {
-        document.querySelector('button[type="submit"]').scrollIntoView();
+    // Ensure the submit button is visible and clickable
+    const buttonVisible = await page.evaluate(() => {
+        const button = document.querySelector('button[type="submit"]');
+        if (button) {
+            button.scrollIntoView({behavior: 'smooth', block: 'center'});
+            console.log('Submit button is scrolled into view.');
+            return true;
+        } else {
+            console.log('Submit button not found.');
+            return false;
+        }
     });
-    await page.click('button[type="submit"]');
 
-    await page.waitForSelector('.connection', { visible: true });
+    if (buttonVisible) {
+        await delay(1000); // Additional delay to ensure the element is scrolled into view
+        await page.waitForSelector('button[type="submit"]', {visible: true});
 
-    // Scrape the train schedule data
-    const trainSchedules = await page.evaluate(() => {
-        const connections = Array.from(document.querySelectorAll('.connection'));
-        return connections.map(connection => {
-            const departureStation = connection.querySelector('.item.has-issues div:first-child strong').innerText;
-            const departureTime = connection.querySelector('.item.has-issues div:first-child strong:nth-child(2)').innerText;
-            const arrivalStation = connection.querySelector('.item:last-child strong').innerText;
-            const arrivalTime = connection.querySelector('.item:last-child strong:nth-child(2)').innerText;
-            const travelTime = connection.querySelector('.item.between div:first-child strong').innerText;
-            const trainType = connection.querySelector('.train-list-item .train-trigger').innerText;
-            return {
-                departureStation,
-                departureTime,
-                arrivalStation,
-                arrivalTime,
-                travelTime,
-                trainType
-            };
+        try {
+            await page.click('button[type="submit"]', {delay: 100, clickCount: 3});
+            console.log('Submit button has been clicked.');
+        } catch (error) {
+            console.log('Failed to click the submit button with Puppeteer:', error);
+            try {
+                // Try clicking the button using JavaScript if Puppeteer's click method fails
+                await page.evaluate(() => {
+                    document.querySelector('button[type="submit"]').click();
+                });
+                console.log('Submit button has been clicked using JavaScript.');
+            } catch (jsError) {
+                console.log('Failed to click the submit button with JavaScript:', jsError);
+            }
+        }
+
+        await page.waitForSelector('.connection', {visible: true});
+
+        // Scrape the train schedule data
+        const trainSchedules = await page.evaluate(() => {
+            const connections = Array.from(document.querySelectorAll('.connection'));
+            return connections.map(connection => {
+                const departureStation = connection.querySelector('.item.has-issues div:first-child strong').innerText;
+                const departureTime = connection.querySelector('.item.has-issues div:first-child strong:nth-child(2)').innerText;
+                const arrivalStation = connection.querySelector('.item:last-child strong').innerText;
+                const arrivalTime = connection.querySelector('.item:last-child strong:nth-child(2)').innerText;
+                const travelTime = connection.querySelector('.item.between div:first-child strong').innerText;
+                const trainType = connection.querySelector('.train-list-item .train-trigger').innerText;
+                return {
+                    departureStation,
+                    departureTime,
+                    arrivalStation,
+                    arrivalTime,
+                    travelTime,
+                    trainType
+                };
+            });
         });
-    });
 
-    console.log(trainSchedules);
+        console.log(trainSchedules);
 
-    // Save the scraped data to a JSON file
-    fs.writeFile('../data/timetable/slovenske_zeleznice.json', JSON.stringify(trainSchedules, null, 2), err => {
-        if (err) console.log('Error writing file:', err);
-        else console.log('Successfully written to slovenske_zeleznice.json');
-    });
+        // Save the scraped data to a JSON file
+        fs.writeFile('../data/timetable/slovenske_zeleznice.json', JSON.stringify(trainSchedules, null, 2), err => {
+            if (err) console.log('Error writing file:', err);
+            else console.log('Successfully written to slovenske_zeleznice.json');
+        });
+    } else {
+        console.log('Submit button was not visible or not found.');
+    }
+
     await browser.close();
+}
+
+async function selectStation(page, selector, station) {
+    await page.click(selector);
+    await page.type(selector, station);
+    await delay(2000);  // Wait for dropdown options to appear
+    await page.keyboard.press('Enter');
 }
 
 function delay(ms) {
@@ -108,6 +131,6 @@ function delay(ms) {
 }
 
 // Example usage
-scrapeSlovenskeZeleznice('Ljubljana', 'Maribor', '30.06.2024').catch(err => console.error('Error executing scrapeDestinations:', err));
+//scrapeSlovenskeZeleznice('Ljubljana', 'Maribor', '30.06.2024').catch(err => console.error('Error executing scrapeDestinations:', err));
 
 module.exports = {scrapeSlovenskeZeleznice};
