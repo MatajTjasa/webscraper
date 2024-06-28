@@ -12,7 +12,7 @@ This project is a web scraper designed to collect transportation data from vario
 - Caches scraped data using Redis to reduce the load on the target websites.
 - Provides an API to fetch the transportation data.
 
-# Features in the making
+## Features in the making
 - Friendly GUI using React
 - Scheduler that monitors and handles DOM changes 
 
@@ -69,9 +69,6 @@ This project is a web scraper designed to collect transportation data from vario
 
 ### API Endpoints
 
-#### `POST /webscraper/searchAPMS`
-
-Fetches transportation data from the APMS service.
 
 - **Request Body:**
 
@@ -82,6 +79,10 @@ Fetches transportation data from the APMS service.
         "destination": "Maribor"
     }
     ```
+
+#### `POST /webscraper/searchAPMS`
+
+Fetches transportation data from the APMS service.
 
 - **Response:**
 
@@ -102,16 +103,6 @@ Fetches transportation data from the APMS service.
 
 Fetches transportation data from the Arriva service.
 
-- **Request Body:**
-
-    ```json
-    {
-        "date": "30.06.2024",
-        "departure": "Ljubljana",
-        "destination": "Maribor"
-    }
-    ```
-
 - **Response:**
 
     ```json
@@ -130,16 +121,6 @@ Fetches transportation data from the Arriva service.
 #### `POST /webscraper/searchSlovenskeZeleznice`
 
 Fetches transportation data from Slovenske železnice.
-
-- **Request Body:**
-
-    ```json
-    {
-        "date": "30.06.2024",
-        "departure": "Ljubljana",
-        "destination": "Maribor"
-    }
-    ```
 
 - **Response:**
 
@@ -160,15 +141,6 @@ Fetches transportation data from Slovenske železnice.
 
 Fetches transportation data from Slovenske železnice using a specific URL.
 
-- **Request Body:**
-
-    ```json
-    {
-        "date": "30.06.2024",
-        "departure": "Ljubljana",
-        "destination": "Maribor"
-    }
-    ```
 
 - **Response:**
 
