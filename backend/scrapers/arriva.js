@@ -112,6 +112,18 @@ async function scrapeArriva(departure, destination, date) {
         const currentUrl = page.url();
         console.log("Current page URL:", currentUrl);
 
+        // Check for the error message indicating no direct connections
+        const noDirectConnection = await page.evaluate(() => {
+            const alertElement = document.querySelector('.alert.alert-danger');
+            return alertElement ? alertElement.textContent.trim() : null;
+        });
+
+        if (noDirectConnection) {
+            console.log("No direct connections found.");
+            await browser.close();
+            return [];
+        }
+
         // Return the URL
         return await fetchConnection(currentUrl);
     } catch (error) {

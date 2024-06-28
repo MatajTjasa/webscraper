@@ -3,6 +3,7 @@ const redis = require('redis');
 // const mongoose = require('mongoose');
 const {scrapeAPMS} = require("../scrapers/apms");
 const {scrapeArriva} = require("../scrapers/arriva");
+const {scrapePrevozi} = require("../scrapers/prevozi");
 const {scrapeSlovenskeZeleznice} = require("../scrapers/slovenske_zeleznice");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
 
@@ -26,14 +27,14 @@ app.use(express.json());
 app.post('/webscraper/searchAPMS', async (req, res) => {
     console.log('Starting request searchAPMS.')
     const {date, departure, destination} = req.body;
-    const cacheKey = `${departure}-${destination}-${date}`;
+    const cacheKey = `APMS-${departure}-${destination}-${date}`;
     console.log(cacheKey)
     try {
         // Check cache
-        // const cachedData = await redisClient.get(cacheKey);
-        // if (cachedData) {
-        //     return res.json(JSON.parse(cachedData));
-        // }
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            return res.json(JSON.parse(cachedData));
+        }
 
         // Scrape data if not in cache
         const results = await scrapeAPMS(departure, destination, date);
@@ -49,14 +50,13 @@ app.post('/webscraper/searchAPMS', async (req, res) => {
 app.post('/webscraper/searchArriva', async (req, res) => {
     console.log('Starting request searchArriva.')
     const {date, departure, destination} = req.body;
-    const cacheKey = `${departure}-${destination}-${date}`;
+    const cacheKey = `Arriva-${departure}-${destination}-${date}`;
     console.log(cacheKey)
     try {
-        // Check cache
-        // const cachedData = await redisClient.get(cacheKey);
-        // if (cachedData) {
-        //     return res.json(JSON.parse(cachedData));
-        // }
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            return res.json(JSON.parse(cachedData));
+        }
 
         // Scrape data if not in cache
         const results = await scrapeArriva(departure, destination, date);
@@ -85,37 +85,14 @@ app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
     console.log('Ending request searchSlovenskeZeleznice.')
 });
 
-/*app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
-    console.log('Starting request searchSlovenskeZelezniceByUrl.');
-    const { date, departure, destination } = req.body;
-    const cacheKey = `${departure}-${destination}-${date}`;
-    console.log(cacheKey);
-    try {
-        // Check cache
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData) {
-            return res.json(JSON.parse(cachedData));
-        }
-
-        // Scrape data if not in cache
-        const results = await scrapeSlovenskeZelezniceByUrl(departure, destination, date);
-        // Save to cache
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
-        res.json(results);
-    } catch (error) {
-        res.status(500).json({ error: 'An error occurred while scraping data.' });
-    }
-    console.log('Ending request searchSlovenskeZelezniceByUrl.');
-});*/
-
 app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     console.log('Starting request searchSlovenskeZelezniceByUrl.');
     const {date, departure, destination} = req.body;
-    const cacheKey = `${departure}-${destination}-${date}`;
+    const cacheKey = `Train-${departure}-${destination}-${date}`;
     console.log(cacheKey);
 
     try {
-        // Check cache
+        // Add private method where user sends for example "Maribor" and you search key code from slovenske_zeleznice_destinations.json
         const cachedData = await redisClient.get(cacheKey);
         if (cachedData) {
             console.log('Cache hit');
@@ -136,6 +113,27 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     console.log('Ending request searchSlovenskeZelezniceByUrl.');
 });
 
+app.post('/webscraper/searchPrevozi', async (req, res) => {
+    console.log('Starting request searchPrevozi.')
+    const {date, departure, destination} = req.body;
+    const cacheKey = `Prevozi-${departure}-${destination}-${date}`;
+    console.log(cacheKey)
+    try {
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            return res.json(JSON.parse(cachedData));
+        }
+
+        // Scrape data if not in cache
+        const results = await scrapePrevozi(departure, destination, date);
+        // Save to cache
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchPrevozi.')
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

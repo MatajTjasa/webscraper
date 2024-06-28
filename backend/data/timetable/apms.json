@@ -1,30 +1,6 @@
 [
   {
     "id": 1,
-    "departureTime": "05:25",
-    "arrivalTime": "07:03",
-    "duration": "01:38",
-    "kilometers": "129 km",
-    "price": "11.30 €"
-  },
-  {
-    "id": 2,
-    "departureTime": "06:35",
-    "arrivalTime": "08:12",
-    "duration": "01:37",
-    "kilometers": "129 km",
-    "price": "11.30 €"
-  },
-  {
-    "id": 3,
-    "departureTime": "07:40",
-    "arrivalTime": "09:17",
-    "duration": "01:37",
-    "kilometers": "129 km",
-    "price": "11.30 €"
-  },
-  {
-    "id": 4,
     "departureTime": "08:00",
     "arrivalTime": "09:40",
     "duration": "01:40",
@@ -32,26 +8,10 @@
     "price": "11.30 €"
   },
   {
-    "id": 5,
-    "departureTime": "12:50",
-    "arrivalTime": "14:27",
-    "duration": "01:37",
-    "kilometers": "129 km",
-    "price": "11.30 €"
-  },
-  {
-    "id": 6,
-    "departureTime": "17:05",
-    "arrivalTime": "18:45",
+    "id": 2,
+    "departureTime": "18:25",
+    "arrivalTime": "20:05",
     "duration": "01:40",
-    "kilometers": "129 km",
-    "price": "11.30 €"
-  },
-  {
-    "id": 7,
-    "departureTime": "18:45",
-    "arrivalTime": "20:22",
-    "duration": "01:37",
     "kilometers": "129 km",
     "price": "11.30 €"
   }

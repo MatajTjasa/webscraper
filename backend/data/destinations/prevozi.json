@@ -1,135 +1,80 @@
 [
   {
     "routeElement": {},
-    "from": "Ljubljana",
-    "to": "Maribor (Nova vas)",
-    "count": "0",
-    "trips": []
-  },
-  {
-    "routeElement": {},
-    "from": "Domžale",
-    "to": "Maribor",
-    "count": "1",
-    "trips": [
-      {
-        "time": "05:30",
-        "description": "Saša",
-        "price": "5€"
-      }
-    ]
-  },
-  {
-    "routeElement": {},
-    "from": "Ljubljana",
-    "to": "Fram",
-    "count": "1",
-    "trips": [
-      {
-        "time": "14:20",
-        "description": "Uroš",
-        "price": "6€"
-      }
-    ]
-  },
-  {
-    "routeElement": {},
-    "from": "Ljubljana",
-    "to": "Maribor",
-    "count": "9",
-    "trips": [
-      {
-        "time": "01:25",
-        "description": "Sionsi d.o.o.",
-        "price": "10€"
-      },
-      {
-        "time": "11:15",
-        "description": "Martin",
-        "price": "6€"
-      },
-      {
-        "time": "12:00",
-        "description": "Marko",
-        "price": "6€"
-      },
-      {
-        "time": "14:00",
-        "description": "Andrej",
-        "price": "6€"
-      },
-      {
-        "time": "14:25",
-        "description": "Srečko",
-        "price": "7€"
-      },
-      {
-        "time": "14:35",
-        "description": "Urban",
-        "price": "6€"
-      },
-      {
-        "time": "15:40",
-        "description": "Jakov",
-        "price": "6€"
-      },
-      {
-        "time": "16:15",
-        "description": "Nina",
-        "price": "7€"
-      },
-      {
-        "time": "17:30",
-        "description": "Domen",
-        "price": "7€"
-      }
-    ]
-  },
-  {
-    "routeElement": {},
-    "from": "Ljubljana",
-    "to": "Ptuj",
+    "from": "Maribor",
+    "to": "Ljubljana",
     "count": "3",
     "trips": [
       {
-        "time": "12:00",
-        "description": "Marko",
-        "price": "6€"
+        "time": "04:30",
+        "description": "Tjana",
+        "price": "7€"
       },
       {
-        "time": "13:15",
-        "description": "Saša",
-        "price": "6€"
+        "time": "16:50",
+        "description": "Gregor",
+        "price": "7€"
       },
       {
-        "time": "14:00",
-        "description": "Andrej",
+        "time": "17:00",
+        "description": "Marjan",
+        "price": "6€"
+      }
+    ]
+  },
+  {
+    "routeElement": {},
+    "from": "Maribor",
+    "to": "Kranj",
+    "count": "1",
+    "trips": [
+      {
+        "time": "16:00",
+        "description": "Dragomir",
+        "price": "10€"
+      }
+    ]
+  },
+  {
+    "routeElement": {},
+    "from": "Ptuj",
+    "to": "Ljubljana",
+    "count": "1",
+    "trips": [
+      {
+        "time": "16:30",
+        "description": "Damjan",
         "price": "7€"
       }
     ]
   },
   {
     "routeElement": {},
-    "from": "Ljubljana",
-    "to": "Slovenske Konjice",
-    "count": "1",
+    "from": "Slovenska Bistrica",
+    "to": "Ljubljana",
+    "count": "2",
     "trips": [
       {
-        "time": "15:00",
-        "description": "Rastko",
+        "time": "16:50",
+        "description": "Damjan",
+        "price": "5€"
+      },
+      {
+        "time": "19:00",
+        "description": "Jan",
         "price": "5€"
       }
     ]
   },
   {
     "routeElement": {},
-    "from": "Ljubljana",
-    "to": "Tepanje",
+    "from": "Slovenske Konjice",
+    "to": "Ljubljana",
     "count": "1",
     "trips": [
       {
-        "time": "14:50",
-        "description": "Gregor",
+        "time": "19:10",
+        "description": "Jan",
         "price": "5€"
       }
     ]
