@@ -1,68 +1,83 @@
-/*import logo from './logo.svg';
+import React, {useState} from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [departureStationCode, setDepartureStationCode] = useState('');
+    const [destinationStationCode, setDestinationStationCode] = useState('');
+    const [date, setDate] = useState('');
+    const [results, setResults] = useState([]);
 
-  export default App;
-}*/
-import logo from './images/logo.svg';
-import React, { useEffect, useState } from 'react';
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/webscraper/searchSlovenskeZelezniceByUrl', {
+                departureStationCode,
+                destinationStationCode,
+                date
+            });
+            setResults(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
-function App() {
-  const [trainSchedules, setTrainSchedules] = useState([]);
-
-  useEffect(() => {
-    fetch('/api/train-schedules')
-        .then(response => response.json())
-        .then(data => setTrainSchedules(data))
-        .catch(error => console.error('Error fetching train schedules:', error));
-  }, []);
-
-  return (
-      <div className="App">
-          <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo"/>
-              <p>
-                  Edit <code>src/App.js</code> and save to reload.
-              </p>
-              <a
-                  className="App-link"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-              >
-                  Learn React
-              </a>
-          </header>
-
-        <h1>Train Schedules</h1>
-        <ul>
-            {trainSchedules.map((schedule, index) => (
-                <li key={index}>
-                    {schedule.departureStation} to {schedule.arrivalStation} at {schedule.departureTime} - {schedule.trainType}
-                </li>
-            ))}
-        </ul>
-    </div>
-);
+    return (
+        <div className="App">
+            <header className="App-header">
+                <h1>Slovenske Zeleznice Web Scraper</h1>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Departure Station Code"
+                        value={departureStationCode}
+                        onChange={(e) => setDepartureStationCode(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Destination Station Code"
+                        value={destinationStationCode}
+                        onChange={(e) => setDestinationStationCode(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Date (dd.mm.yyyy)"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                    />
+                    <button type="submit">Search</button>
+                </form>
+                <div>
+                    {results.length > 0 && (
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Departure Station</th>
+                                <th>Departure Time</th>
+                                <th>Arrival Station</th>
+                                <th>Arrival Time</th>
+                                <th>Travel Time</th>
+                                <th>Train Type</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {results.map((result, index) => (
+                                <tr key={index}>
+                                    <td>{result.departureStation}</td>
+                                    <td>{result.departureTime}</td>
+                                    <td>{result.arrivalStation}</td>
+                                    <td>{result.arrivalTime}</td>
+                                    <td>{result.travelTime}</td>
+                                    <td>{result.trainType}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
+            </header>
+        </div>
+    );
 }
 
 export default App;

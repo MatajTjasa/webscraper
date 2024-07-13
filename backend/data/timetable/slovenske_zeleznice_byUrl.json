@@ -9,6 +9,14 @@
   },
   {
     "departureStation": "Ljubljana",
+    "departureTime": "04:48",
+    "arrivalStation": "Zidani Most\nob 05:53",
+    "arrivalTime": "",
+    "travelTime": "02:41",
+    "trainType": "LPV 2251"
+  },
+  {
+    "departureStation": "Ljubljana",
     "departureTime": "05:00",
     "arrivalStation": "Maribor",
     "arrivalTime": "07:16",
@@ -33,6 +41,30 @@
   },
   {
     "departureStation": "Ljubljana",
+    "departureTime": "06:50",
+    "arrivalStation": "Maribor",
+    "arrivalTime": "09:02",
+    "travelTime": "02:12",
+    "trainType": "RG 606"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "06:55",
+    "arrivalStation": "Zidani Most\nob 08:00",
+    "arrivalTime": "",
+    "travelTime": "02:31",
+    "trainType": "LPV 2255"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "07:35",
+    "arrivalStation": "Zidani Most\nob 08:40",
+    "arrivalTime": "",
+    "travelTime": "03:13",
+    "trainType": "LPV 2207"
+  },
+  {
+    "departureStation": "Ljubljana",
     "departureTime": "08:00",
     "arrivalStation": "Maribor",
     "arrivalTime": "09:55",
@@ -44,8 +76,24 @@
     "departureTime": "08:25",
     "arrivalStation": "Zidani Most\nob 09:20",
     "arrivalTime": "",
-    "travelTime": "03:03",
+    "travelTime": "02:23",
     "trainType": "EN 415"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "08:55",
+    "arrivalStation": "Zidani Most\nob 10:00",
+    "arrivalTime": "",
+    "travelTime": "02:33",
+    "trainType": "LPV 2259"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "09:55",
+    "arrivalStation": "Zidani Most\nob 11:00",
+    "arrivalTime": "",
+    "travelTime": "02:42",
+    "trainType": "LPV 2261"
   },
   {
     "departureStation": "Ljubljana",
@@ -62,6 +110,14 @@
     "arrivalTime": "13:25",
     "travelTime": "02:35",
     "trainType": "LPV 2004"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "11:55",
+    "arrivalStation": "Zidani Most\nob 13:00",
+    "arrivalTime": "",
+    "travelTime": "02:41",
+    "trainType": "LPV 2265"
   },
   {
     "departureStation": "Ljubljana",
@@ -89,11 +145,27 @@
   },
   {
     "departureStation": "Ljubljana",
-    "departureTime": "14:45",
-    "arrivalStation": "Zidani Most\nob 15:43",
+    "departureTime": "13:35",
+    "arrivalStation": "Zidani Most\nob 14:33",
     "arrivalTime": "",
-    "travelTime": "02:47",
-    "trainType": "EC 211"
+    "travelTime": "02:15",
+    "trainType": "RG 629"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "13:55",
+    "arrivalStation": "Maribor",
+    "arrivalTime": "16:26",
+    "travelTime": "02:31",
+    "trainType": "LPV 2008"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "14:50",
+    "arrivalStation": "Zidani Most\nob 15:55",
+    "arrivalTime": "",
+    "travelTime": "02:42",
+    "trainType": "LPV 2271"
   },
   {
     "departureStation": "Ljubljana",
@@ -118,6 +190,22 @@
     "arrivalTime": "18:19",
     "travelTime": "02:14",
     "trainType": "EC 150"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "16:25",
+    "arrivalStation": "Zidani Most\nob 17:30",
+    "arrivalTime": "",
+    "travelTime": "02:27",
+    "trainType": "LPV 2227"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "16:50",
+    "arrivalStation": "Zidani Most\nob 17:55",
+    "arrivalTime": "",
+    "travelTime": "02:38",
+    "trainType": "LPV 2275"
   },
   {
     "departureStation": "Ljubljana",
@@ -150,6 +238,14 @@
     "arrivalTime": "21:45",
     "travelTime": "02:00",
     "trainType": "IC 526"
+  },
+  {
+    "departureStation": "Ljubljana",
+    "departureTime": "19:55",
+    "arrivalStation": "Zidani Most\nob 21:00",
+    "arrivalTime": "",
+    "travelTime": "02:33",
+    "trainType": "LPV 2281"
   },
   {
     "departureStation": "Ljubljana",

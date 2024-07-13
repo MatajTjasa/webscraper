@@ -3,34 +3,11 @@
     "routeElement": {},
     "from": "Maribor",
     "to": "Ljubljana",
-    "count": "3",
-    "trips": [
-      {
-        "time": "04:30",
-        "description": "Tjana",
-        "price": "7€"
-      },
-      {
-        "time": "16:50",
-        "description": "Gregor",
-        "price": "7€"
-      },
-      {
-        "time": "17:00",
-        "description": "Marjan",
-        "price": "6€"
-      }
-    ]
-  },
-  {
-    "routeElement": {},
-    "from": "Maribor",
-    "to": "Kranj",
     "count": "1",
     "trips": [
       {
-        "time": "16:00",
-        "description": "Dragomir",
+        "time": "19:30",
+        "description": "Armin",
         "price": "10€"
       }
     ]
@@ -42,9 +19,9 @@
     "count": "1",
     "trips": [
       {
-        "time": "16:30",
-        "description": "Damjan",
-        "price": "7€"
+        "time": "20:00",
+        "description": "Jan",
+        "price": "6€"
       }
     ]
   },
@@ -52,29 +29,24 @@
     "routeElement": {},
     "from": "Slovenska Bistrica",
     "to": "Ljubljana",
-    "count": "2",
+    "count": "1",
     "trips": [
       {
-        "time": "16:50",
-        "description": "Damjan",
-        "price": "5€"
-      },
-      {
-        "time": "19:00",
+        "time": "20:25",
         "description": "Jan",
-        "price": "5€"
+        "price": "6€"
       }
     ]
   },
   {
     "routeElement": {},
-    "from": "Slovenske Konjice",
+    "from": "Tepanje",
     "to": "Ljubljana",
     "count": "1",
     "trips": [
       {
-        "time": "19:10",
-        "description": "Jan",
+        "time": "20:00",
+        "description": "Anemarie",
         "price": "5€"
       }
     ]
