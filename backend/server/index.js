@@ -6,9 +6,12 @@ const {scrapeArriva} = require("../scrapers/arriva");
 const {scrapePrevozi} = require("../scrapers/prevozi");
 const {scrapeSlovenskeZeleznice} = require("../scrapers/slovenske_zeleznice");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 
 // Connect to Redis
 const redisClient = redis.createClient({

@@ -3,17 +3,17 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-    const [departureStationCode, setDepartureStationCode] = useState('');
-    const [destinationStationCode, setDestinationStationCode] = useState('');
+    const [departure, setDeparture] = useState('');
+    const [destination, setDestination] = useState('');
     const [date, setDate] = useState('');
     const [results, setResults] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/webscraper/searchSlovenskeZelezniceByUrl', {
-                departureStationCode,
-                destinationStationCode,
+            const response = await axios.post('http://localhost:3000/webscraper/searchSlovenskeZelezniceByUrl', {
+                departure,
+                destination,
                 date
             });
             setResults(response.data);
@@ -30,14 +30,14 @@ function App() {
                     <input
                         type="text"
                         placeholder="Departure Station Code"
-                        value={departureStationCode}
-                        onChange={(e) => setDepartureStationCode(e.target.value)}
+                        value={departure}
+                        onChange={(e) => setDeparture(e.target.value)}
                     />
                     <input
                         type="text"
                         placeholder="Destination Station Code"
-                        value={destinationStationCode}
-                        onChange={(e) => setDestinationStationCode(e.target.value)}
+                        value={destination}
+                        onChange={(e) => setDestination(e.target.value)}
                     />
                     <input
                         type="text"
