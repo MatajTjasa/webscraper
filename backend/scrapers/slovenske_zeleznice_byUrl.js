@@ -21,21 +21,32 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
             return foundElement ? foundElement.innerText.trim() : '';
         };
 
+        const splitInfo = (info) => {
+            const regex = /(.+?)(?:\sob\s|\nob\s)(\d{2}:\d{2})/;
+            const match = info.match(regex);
+            if (match) {
+                return {
+                    station: match[1].trim(),
+                    time: match[2].trim()
+                };
+            }
+            return {
+                station: info.trim(),
+                time: ''
+            };
+        };
+
         const connections = Array.from(document.querySelectorAll('.connection'));
         return connections.map(connection => {
-            const departureInfo = getTextContent(connection, '.item.has-issues .text-wrapper .fw-medium').split(' ob ');
-            const arrivalInfo = getTextContent(connection, '.item.train-exit-station .fw-medium').split(' ob ');
-            const departureStation = departureInfo[0].trim();
-            const departureTime = departureInfo[1]?.trim() || '';
-            const arrivalStation = arrivalInfo[0].trim();
-            const arrivalTime = arrivalInfo[1]?.trim() || '';
+            const departureInfo = splitInfo(getTextContent(connection, '.item.has-issues .text-wrapper .fw-medium'));
+            const arrivalInfo = splitInfo(getTextContent(connection, '.item.train-exit-station .fw-medium'));
             const travelTime = getTextContent(connection, '.d-flex.me-md-3.mt-2.mt-md-0.flex-column.flex-md-row .value.has-white-bg.fs-5.fit-content');
             const trainType = getTextContent(connection, '.train-list-item .train-trigger').trim();
             return {
-                departureStation,
-                departureTime,
-                arrivalStation,
-                arrivalTime,
+                departureStation: departureInfo.station,
+                departureTime: departureInfo.time,
+                arrivalStation: arrivalInfo.station,
+                arrivalTime: arrivalInfo.time,
                 travelTime,
                 trainType
             };
@@ -56,6 +67,6 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
 }
 
 // Example usage with station codes
-//scrapeSlovenskeZelezniceByUrl('42300', '43400', '25.07.2024').catch(err => console.error('Error executing scrapeSlovenskeZelezniceByUrl:', err));
+scrapeSlovenskeZelezniceByUrl('42300', '43400', '25.07.2024').catch(err => console.error('Error executing scrapeSlovenskeZelezniceByUrl:', err));
 
 module.exports = {scrapeSlovenskeZelezniceByUrl};
