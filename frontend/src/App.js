@@ -24,58 +24,63 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <h1>Slovenske Zeleznice Web Scraper</h1>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Departure Station Code"
-                        value={departure}
-                        onChange={(e) => setDeparture(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Destination Station Code"
-                        value={destination}
-                        onChange={(e) => setDestination(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Date (dd.mm.yyyy)"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                    />
-                    <button type="submit">Search</button>
-                </form>
-                <div>
-                    {results.length > 0 && (
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Departure Station</th>
-                                <th>Departure Time</th>
-                                <th>Arrival Station</th>
-                                <th>Arrival Time</th>
-                                <th>Travel Time</th>
-                                <th>Train Type</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {results.map((result, index) => (
-                                <tr key={index}>
-                                    <td>{result.departureStation}</td>
-                                    <td>{result.departureTime}</td>
-                                    <td>{result.arrivalStation}</td>
-                                    <td>{result.arrivalTime}</td>
-                                    <td>{result.travelTime}</td>
-                                    <td>{result.trainType}</td>
+            <div className="cloud" style={{top: '50px', left: '50px'}}></div>
+            <div className="cloud" style={{top: '100px', left: '250px'}}></div>
+            <div className="cloud" style={{top: '150px', right: '50px'}}></div>
+            <div className="container">
+                <header className="App-header">
+                    <h1>Bus, train, car schedules</h1>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder="Departure Station Code"
+                            value={departure}
+                            onChange={(e) => setDeparture(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Destination Station Code"
+                            value={destination}
+                            onChange={(e) => setDestination(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Date (dd.mm.yyyy)"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                        <button type="submit">Search</button>
+                    </form>
+                    <div>
+                        {results.length > 0 && (
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Departure Station</th>
+                                    <th>Departure Time</th>
+                                    <th>Arrival Station</th>
+                                    <th>Arrival Time</th>
+                                    <th>Travel Time</th>
+                                    <th>Train Type</th>
                                 </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    )}
-                </div>
-            </header>
+                                </thead>
+                                <tbody>
+                                {results.map((result, index) => (
+                                    <tr key={index}>
+                                        <td>{result.departureStation}</td>
+                                        <td>{result.departureTime}</td>
+                                        <td>{result.arrivalStation}</td>
+                                        <td>{result.arrivalTime}</td>
+                                        <td>{result.travelTime}</td>
+                                        <td>{result.trainType}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        )}
+                    </div>
+                </header>
+            </div>
         </div>
     );
 }

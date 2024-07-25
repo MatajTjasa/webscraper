@@ -67,6 +67,6 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
 }
 
 // Example usage with station codes
-scrapeSlovenskeZelezniceByUrl('42300', '43400', '25.07.2024').catch(err => console.error('Error executing scrapeSlovenskeZelezniceByUrl:', err));
+//scrapeSlovenskeZelezniceByUrl('42300', '43400', '25.07.2024').catch(err => console.error('Error executing scrapeSlovenskeZelezniceByUrl:', err));
 
 module.exports = {scrapeSlovenskeZelezniceByUrl};
