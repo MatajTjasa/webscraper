@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Kraj": "Maribor",
+    "Vlak": "43400",
+    "APMS": "Maribor AP",
+    "Arriva": "Maribor AP",
+    "Prevozi": "Maribor"
+  },
+  {
+    "Id": 2,
+    "Kraj": "Ljubljana",
+    "Vlak": "42300",
+    "APMS": "Ljubljana AP",
+    "Arriva": "Ljubljana AP",
+    "Prevozi": "Ljubljana"
+  },
+  {
+    "Id": 3,
+    "Kraj": "Celje",
+    "Vlak": "42300",
+    "APMS": "Celje AP",
+    "Arriva": "",
+    "Prevozi": "Celje"
+  }
+]

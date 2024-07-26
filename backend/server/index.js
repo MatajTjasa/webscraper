@@ -12,6 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(express.json());
 
 // Connect to Redis
 const redisClient = redis.createClient({
@@ -25,8 +26,29 @@ redisClient.connect().then(() => {
     console.error('Redis connection error:', err);
 });
 
-app.use(express.json());
+// Connect to MongoDB
+const {MongoClient} = require('mongodb');
+require('dotenv').config();
 
+const uri = process.env.MONGODB_URI;
+
+async function main() {
+    const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+
+    try {
+        await client.connect();
+        console.log("Connected to MongoDB");
+    } catch (e) {
+        console.error('MongoDB connection error:', e);
+    } finally {
+        await client.close();
+    }
+}
+
+main().catch(console.error);
+
+
+// API
 app.post('/webscraper/searchAPMS', async (req, res) => {
     console.log('Starting request searchAPMS.')
     const {date, departure, destination} = req.body;
