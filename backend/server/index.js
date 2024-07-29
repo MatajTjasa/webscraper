@@ -1,6 +1,6 @@
 const express = require('express');
 const redis = require('redis');
-// const mongoose = require('mongoose');
+const {MongoClient} = require('mongodb');
 const {scrapeAPMS} = require("../scrapers/apms");
 const {scrapeArriva} = require("../scrapers/arriva");
 const {scrapePrevozi} = require("../scrapers/prevozi");
@@ -10,6 +10,8 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+require('dotenv').config({path: '../../.env'});
 
 app.use(cors());
 app.use(express.json());
@@ -26,88 +28,87 @@ redisClient.connect().then(() => {
     console.error('Redis connection error:', err);
 });
 
-// Connect to MongoDB
-const {MongoClient} = require('mongodb');
-require('dotenv').config();
+console.log('Environment Variables:', process.env);
 
+// Connect to MongoDB
 const uri = process.env.MONGODB_URI;
 
-async function main() {
-    const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+if (!uri) {
+    console.error('MongoDB URI is not defined. Check your environment variables.');
+} else {
+    async function main() {
+        const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
-    try {
-        await client.connect();
-        console.log("Connected to MongoDB");
-    } catch (e) {
-        console.error('MongoDB connection error:', e);
-    } finally {
-        await client.close();
+        try {
+            await client.connect();
+            console.log("Connected to MongoDB");
+        } catch (e) {
+            console.error('MongoDB connection error:', e);
+        } finally {
+            await client.close();
+        }
     }
+
+    main().catch(console.error);
 }
+
 
 main().catch(console.error);
 
-
-// API
+// API Endpoints
 app.post('/webscraper/searchAPMS', async (req, res) => {
-    console.log('Starting request searchAPMS.')
+    console.log('Starting request searchAPMS.');
     const {date, departure, destination} = req.body;
     const cacheKey = `APMS-${departure}-${destination}-${date}`;
-    console.log(cacheKey)
+    console.log(cacheKey);
     try {
-        // Check cache
         const cachedData = await redisClient.get(cacheKey);
         if (cachedData) {
             return res.json(JSON.parse(cachedData));
         }
 
-        // Scrape data if not in cache
         const results = await scrapeAPMS(departure, destination, date);
-        // Save to cache
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
         res.status(500).json({error: 'An error occurred while scraping data.'});
     }
-    console.log('Ending request searchAPMS.')
+    console.log('Ending request searchAPMS.');
 });
 
 app.post('/webscraper/searchArriva', async (req, res) => {
-    console.log('Starting request searchArriva.')
+    console.log('Starting request searchArriva.');
     const {date, departure, destination} = req.body;
     const cacheKey = `Arriva-${departure}-${destination}-${date}`;
-    console.log(cacheKey)
+    console.log(cacheKey);
     try {
         const cachedData = await redisClient.get(cacheKey);
         if (cachedData) {
             return res.json(JSON.parse(cachedData));
         }
 
-        // Scrape data if not in cache
         const results = await scrapeArriva(departure, destination, date);
-        // Save to cache
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
         res.status(500).json({error: 'An error occurred while scraping data.'});
     }
-    console.log('Ending request searchArriva.')
+    console.log('Ending request searchArriva.');
 });
 
 app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
-    console.log('Starting request searchSlovenskeZeleznice.')
+    console.log('Starting request searchSlovenskeZeleznice.');
     const {date, departure, destination} = req.body;
     const cacheKey = `${departure}-${destination}-${date}`;
-    console.log(cacheKey)
+    console.log(cacheKey);
     try {
         const results = await scrapeSlovenskeZeleznice(departure, destination, date);
-        // Save to cache
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
         res.status(500).json({error: 'An error occurred while scraping data.'});
     }
-    console.log('Ending request searchSlovenskeZeleznice.')
+    console.log('Ending request searchSlovenskeZeleznice.');
 });
 
 app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
@@ -115,9 +116,7 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     const {date, departure, destination} = req.body;
     const cacheKey = `Train-${departure}-${destination}-${date}`;
     console.log(cacheKey);
-
     try {
-        // Add private method where user sends for example "Maribor" and you search key code from slovenske_zeleznice_destinations.json
         const cachedData = await redisClient.get(cacheKey);
         if (cachedData) {
             console.log('Cache hit');
@@ -125,11 +124,8 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
         }
 
         console.log('Cache miss, scraping data...');
-        // Scrape data if not in cache
         const results = await scrapeSlovenskeZelezniceByUrl(departure, destination, date);
-
-        // Save to cache
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
         console.error('Error during scraping or cache operation:', error);
@@ -139,25 +135,23 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
 });
 
 app.post('/webscraper/searchPrevozi', async (req, res) => {
-    console.log('Starting request searchPrevozi.')
+    console.log('Starting request searchPrevozi.');
     const {date, departure, destination} = req.body;
     const cacheKey = `Prevozi-${departure}-${destination}-${date}`;
-    console.log(cacheKey)
+    console.log(cacheKey);
     try {
         const cachedData = await redisClient.get(cacheKey);
         if (cachedData) {
             return res.json(JSON.parse(cachedData));
         }
 
-        // Scrape data if not in cache
         const results = await scrapePrevozi(departure, destination, date);
-        // Save to cache
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache for 1 hour
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
         res.status(500).json({error: 'An error occurred while scraping data.'});
     }
-    console.log('Ending request searchPrevozi.')
+    console.log('Ending request searchPrevozi.');
 });
 
 app.listen(PORT, () => {
