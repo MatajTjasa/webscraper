@@ -1,4 +1,4 @@
-require('dotenv').config();  // Ensure this is at the top
+require('dotenv').config();
 const express = require('express');
 const redis = require('redis');
 const {MongoClient} = require('mongodb');
