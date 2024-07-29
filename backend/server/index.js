@@ -1,3 +1,4 @@
+require('dotenv').config();  // Ensure this is at the top
 const express = require('express');
 const redis = require('redis');
 const {MongoClient} = require('mongodb');
@@ -10,8 +11,6 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-require('dotenv').config({path: '../../.env'});
 
 app.use(cors());
 app.use(express.json());
@@ -51,9 +50,6 @@ if (!uri) {
 
     main().catch(console.error);
 }
-
-
-main().catch(console.error);
 
 // API Endpoints
 app.post('/webscraper/searchAPMS', async (req, res) => {
