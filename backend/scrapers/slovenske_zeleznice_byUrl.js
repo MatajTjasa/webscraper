@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
-    const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
 
     // Construct the correct URL

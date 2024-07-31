@@ -1,103 +1,187 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import './App.css';
+const express = require('express');
+const redis = require('redis');
+const {MongoClient} = require('mongodb');
+const {scrapeAPMS} = require("../scrapers/apms");
+const {scrapeArriva} = require("../scrapers/arriva");
+const {scrapePrevozi} = require("../scrapers/prevozi");
+const {scrapeSlovenskeZeleznice} = require("../scrapers/slovenske_zeleznice");
+const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
+const cors = require('cors');
+const fs = require('fs');
+require('dotenv').config();
 
-function App() {
-    const [departure, setDeparture] = useState('');
-    const [destination, setDestination] = useState('');
-    const [date, setDate] = useState('');
-    const [results, setResults] = useState([]);
-    const [destinations, setDestinations] = useState([]);
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-    useEffect(() => {
-        const fetchDestinations = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/webscraper/destinations');
-                setDestinations(response.data);
-            } catch (error) {
-                console.error('Error fetching destinations:', error);
-            }
-        };
+app.use(cors());
+app.use(express.json());
 
-        fetchDestinations();
-    }, []);
+// Load destinations data
+const path = require('path');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchSlovenskeZelezniceByUrl', {
-                departure,
-                destination,
-                date
-            });
-            setResults(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+// Load destinations data
+const destinationsPath = path.join(__dirname, '../data/destinations/destinations.json');
+const destinations = JSON.parse(fs.readFileSync(destinationsPath, 'utf-8'));
 
-    return (
-        <div className="App">
-            <div className="cloud" style={{top: '50px', left: '50px'}}></div>
-            <div className="cloud" style={{top: '100px', left: '250px'}}></div>
-            <div className="cloud" style={{top: '150px', right: '50px'}}></div>
-            <div className="container">
-                <header className="App-header">
-                    <h1>Bus, train, car schedules</h1>
-                    <form onSubmit={handleSubmit}>
-                        <select value={departure} onChange={(e) => setDeparture(e.target.value)} required>
-                            <option value="" disabled>Select Departure</option>
-                            {destinations.map((dest, index) => (
-                                <option key={index} value={dest.Kraj}>{dest.Kraj}</option>
-                            ))}
-                        </select>
-                        <select value={destination} onChange={(e) => setDestination(e.target.value)} required>
-                            <option value="" disabled>Select Destination</option>
-                            {destinations.map((dest, index) => (
-                                <option key={index} value={dest.Kraj}>{dest.Kraj}</option>
-                            ))}
-                        </select>
-                        <input
-                            type="text"
-                            placeholder="Date (dd.mm.yyyy)"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            required
-                        />
-                        <button type="submit">Search</button>
-                    </form>
-                    <div>
-                        {results.length > 0 && (
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Departure Station</th>
-                                    <th>Departure Time</th>
-                                    <th>Arrival Station</th>
-                                    <th>Arrival Time</th>
-                                    <th>Travel Time</th>
-                                    <th>Train Type</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {results.map((result, index) => (
-                                    <tr key={index}>
-                                        <td>{result.departureStation}</td>
-                                        <td>{result.departureTime}</td>
-                                        <td>{result.arrivalStation}</td>
-                                        <td>{result.arrivalTime}</td>
-                                        <td>{result.travelTime}</td>
-                                        <td>{result.trainType}</td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
-                        )}
-                    </div>
-                </header>
-            </div>
-        </div>
-    );
+console.log('Destinations data loaded:', destinations);
+
+// Function to map location names to their codes
+function getDestinationCode(kraj, type) {
+    const destination = destinations.find(dest => dest.Kraj.toLowerCase() === kraj.toLowerCase());
+    return destination ? destination[type] : null;
 }
 
-export default App;
+// Connect to Redis
+const redisClient = redis.createClient({
+    url: process.env.REDIS_URL
+});
+redisClient.on('error', (err) => console.error('Redis error:', err));
+
+redisClient.connect().then(() => {
+    console.log('Connected to Redis');
+}).catch(err => {
+    console.error('Redis connection error:', err);
+});
+
+//console.log('Environment Variables:', process.env);
+
+// Connect to MongoDB
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+    console.error('MongoDB URI is not defined. Check your environment variables.');
+} else {
+    async function main() {
+        const client = new MongoClient(uri);
+
+        try {
+            await client.connect();
+            console.log("Connected to MongoDB");
+        } catch (e) {
+            console.error('MongoDB connection error:', e);
+        } finally {
+            await client.close();
+        }
+    }
+
+    main().catch(console.error);
+}
+
+// API Endpoints
+
+app.get('/webscraper/destinations', (req, res) => {
+    const destinationsList = destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj}));
+    res.json(destinationsList);
+});
+
+app.post('/webscraper/searchAPMS', async (req, res) => {
+    console.log('Starting request searchAPMS.');
+    const {date, departure, destination} = req.body;
+    const cacheKey = `APMS-${departure}-${destination}-${date}`;
+    console.log(cacheKey);
+    try {
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            return res.json(JSON.parse(cachedData));
+        }
+
+        const results = await scrapeAPMS(departure, destination, date);
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchAPMS.');
+});
+
+app.post('/webscraper/searchArriva', async (req, res) => {
+    console.log('Starting request searchArriva.');
+    const {date, departure, destination} = req.body;
+    const cacheKey = `Arriva-${departure}-${destination}-${date}`;
+    console.log(cacheKey);
+    try {
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            return res.json(JSON.parse(cachedData));
+        }
+
+        const results = await scrapeArriva(departure, destination, date);
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchArriva.');
+});
+
+app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
+    console.log('Starting request searchSlovenskeZeleznice.');
+    const {date, departure, destination} = req.body;
+    const cacheKey = `${departure}-${destination}-${date}`;
+    console.log(cacheKey);
+    try {
+        const results = await scrapeSlovenskeZeleznice(departure, destination, date);
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchSlovenskeZeleznice.');
+});
+
+app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
+    console.log('Starting request searchSlovenskeZelezniceByUrl.');
+    const {date, departure, destination} = req.body;
+
+    // Map location names to codes
+    const departureCode = getDestinationCode(departure, 'Vlak');
+    const destinationCode = getDestinationCode(destination, 'Vlak');
+
+    if (!departureCode || !destinationCode) {
+        return res.status(400).json({error: 'Invalid departure or destination location.'});
+    }
+
+    const cacheKey = `Train-${departureCode}-${destinationCode}-${date}`;
+    console.log(cacheKey);
+
+    try {
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            console.log('Cache hit');
+            return res.json(JSON.parse(cachedData));
+        }
+
+        console.log('Cache miss, scraping data...');
+        const results = await scrapeSlovenskeZelezniceByUrl(departureCode, destinationCode, date);
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        res.json(results);
+    } catch (error) {
+        console.error('Error during scraping or cache operation:', error);
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchSlovenskeZelezniceByUrl.');
+});
+
+app.post('/webscraper/searchPrevozi', async (req, res) => {
+    console.log('Starting request searchPrevozi.');
+    const {date, departure, destination} = req.body;
+    const cacheKey = `Prevozi-${departure}-${destination}-${date}`;
+    console.log(cacheKey);
+    try {
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            return res.json(JSON.parse(cachedData));
+        }
+
+        const results = await scrapePrevozi(departure, destination, date);
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchPrevozi.');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
