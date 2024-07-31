@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -10,6 +10,9 @@ function App() {
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
+
+    const departureRef = useRef(null);
+    const destinationRef = useRef(null);
 
     useEffect(() => {
         const fetchDestinations = async () => {
@@ -23,6 +26,23 @@ function App() {
 
         fetchDestinations();
     }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (departureRef.current && !departureRef.current.contains(event.target)) {
+                setDepartureDropdownActive(false);
+            }
+            if (destinationRef.current && !destinationRef.current.contains(event.target)) {
+                setDestinationDropdownActive(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [departureRef, destinationRef]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,61 +87,66 @@ function App() {
                 <header className="App-header">
                     <h1>Bus, train, car schedules</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="custom-dropdown-container">
-                            <input
-                                type="text"
-                                placeholder="Select Departure"
-                                value={departure}
-                                onChange={handleDepartureChange}
-                                className="custom-dropdown"
-                                onClick={() => setDepartureDropdownActive(!departureDropdownActive)}
-                            />
-                            {departureDropdownActive && (
-                                <div className="custom-dropdown-list active">
-                                    {destinations
-                                        .filter(dest => dest.Kraj.toLowerCase().includes(departure.toLowerCase()))
-                                        .map((dest, index) => (
-                                            <div
-                                                key={index}
-                                                onClick={() => handleDepartureSelect(dest.Kraj)}
-                                            >
-                                                {dest.Kraj}
-                                            </div>
-                                        ))}
-                                </div>
-                            )}
+                        <div className="form-group">
+                            <div className="custom-dropdown-container" ref={departureRef}>
+                                <input
+                                    type="text"
+                                    placeholder="Select Departure"
+                                    value={departure}
+                                    onChange={handleDepartureChange}
+                                    className="custom-dropdown"
+                                    onClick={() => setDepartureDropdownActive(!departureDropdownActive)}
+                                />
+                                {departureDropdownActive && (
+                                    <div className="custom-dropdown-list active">
+                                        {destinations
+                                            .filter(dest => dest.Kraj.toLowerCase().includes(departure.toLowerCase()))
+                                            .map((dest, index) => (
+                                                <div
+                                                    key={index}
+                                                    onClick={() => handleDepartureSelect(dest.Kraj)}
+                                                >
+                                                    {dest.Kraj}
+                                                </div>
+                                            ))}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="custom-dropdown-container" ref={destinationRef}>
+                                <input
+                                    type="text"
+                                    placeholder="Select Destination"
+                                    value={destination}
+                                    onChange={handleDestinationChange}
+                                    className="custom-dropdown"
+                                    onClick={() => setDestinationDropdownActive(!destinationDropdownActive)}
+                                />
+                                {destinationDropdownActive && (
+                                    <div className="custom-dropdown-list active">
+                                        {destinations
+                                            .filter(dest => dest.Kraj.toLowerCase().includes(destination.toLowerCase()))
+                                            .map((dest, index) => (
+                                                <div
+                                                    key={index}
+                                                    onClick={() => handleDestinationSelect(dest.Kraj)}
+                                                >
+                                                    {dest.Kraj}
+                                                </div>
+                                            ))}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="custom-dropdown-container">
+                                <input
+                                    type="text"
+                                    placeholder="Date (dd.mm.yyyy)"
+                                    value={date}
+                                    onChange={(e) => setDate(e.target.value)}
+                                    className="custom-date"
+                                />
+                            </div>
+                            <button type="submit">Search</button>
                         </div>
-                        <div className="custom-dropdown-container">
-                            <input
-                                type="text"
-                                placeholder="Select Destination"
-                                value={destination}
-                                onChange={handleDestinationChange}
-                                className="custom-dropdown"
-                                onClick={() => setDestinationDropdownActive(!destinationDropdownActive)}
-                            />
-                            {destinationDropdownActive && (
-                                <div className="custom-dropdown-list active">
-                                    {destinations
-                                        .filter(dest => dest.Kraj.toLowerCase().includes(destination.toLowerCase()))
-                                        .map((dest, index) => (
-                                            <div
-                                                key={index}
-                                                onClick={() => handleDestinationSelect(dest.Kraj)}
-                                            >
-                                                {dest.Kraj}
-                                            </div>
-                                        ))}
-                                </div>
-                            )}
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Date (dd.mm.yyyy)"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                        />
-                        <button type="submit">Search</button>
                     </form>
                     <div className="results-container">
                         {results.length > 0 && (
