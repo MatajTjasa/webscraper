@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const redis = require('redis');
 const {MongoClient} = require('mongodb');
@@ -8,6 +7,8 @@ const {scrapePrevozi} = require("../scrapers/prevozi");
 const {scrapeSlovenskeZeleznice} = require("../scrapers/slovenske_zeleznice");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
 const cors = require('cors');
+const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,9 +16,24 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Load destinations data
+const path = require('path');
+
+// Load destinations data
+const destinationsPath = path.join(__dirname, '../data/destinations/destinations.json');
+const destinations = JSON.parse(fs.readFileSync(destinationsPath, 'utf-8'));
+
+console.log('Destinations data loaded:', destinations);
+
+// Function to map location names to their codes
+function getDestinationCode(kraj, type) {
+    const destination = destinations.find(dest => dest.Kraj.toLowerCase() === kraj.toLowerCase());
+    return destination ? destination[type] : null;
+}
+
 // Connect to Redis
 const redisClient = redis.createClient({
-    url: 'rediss://red-cpe4mnlds78s73eqb9g0:wGvO2IXLBtYp0zDAosMpIynXyAclcRlz@frankfurt-redis.render.com:6379'
+    url: process.env.REDIS_URL
 });
 redisClient.on('error', (err) => console.error('Redis error:', err));
 
@@ -27,7 +43,7 @@ redisClient.connect().then(() => {
     console.error('Redis connection error:', err);
 });
 
-console.log('Environment Variables:', process.env);
+//console.log('Environment Variables:', process.env);
 
 // Connect to MongoDB
 const uri = process.env.MONGODB_URI;
@@ -36,7 +52,7 @@ if (!uri) {
     console.error('MongoDB URI is not defined. Check your environment variables.');
 } else {
     async function main() {
-        const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+        const client = new MongoClient(uri);
 
         try {
             await client.connect();
@@ -110,8 +126,18 @@ app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
 app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     console.log('Starting request searchSlovenskeZelezniceByUrl.');
     const {date, departure, destination} = req.body;
-    const cacheKey = `Train-${departure}-${destination}-${date}`;
+
+    // Map location names to codes
+    const departureCode = getDestinationCode(departure, 'Vlak');
+    const destinationCode = getDestinationCode(destination, 'Vlak');
+
+    if (!departureCode || !destinationCode) {
+        return res.status(400).json({error: 'Invalid departure or destination location.'});
+    }
+
+    const cacheKey = `Train-${departureCode}-${destinationCode}-${date}`;
     console.log(cacheKey);
+
     try {
         const cachedData = await redisClient.get(cacheKey);
         if (cachedData) {
@@ -120,7 +146,7 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
         }
 
         console.log('Cache miss, scraping data...');
-        const results = await scrapeSlovenskeZelezniceByUrl(departure, destination, date);
+        const results = await scrapeSlovenskeZelezniceByUrl(departureCode, destinationCode, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
