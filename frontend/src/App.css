@@ -2,82 +2,89 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom right, #ffffff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 80%, #B4ECF0); /* Adjust the gradient */
-    color: #333; /* Darker text color for better readability */
-    position: relative; /* Needed for positioning clouds */
-    overflow: auto; /* Enable scrolling */
-    min-height: 100vh; /* Ensure the body covers the full viewport height */
+    background: linear-gradient(to bottom right, #ffffff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 80%, #B4ECF0);
+    color: #333;
+    position: relative;
+    overflow: auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
+    width: 100%;
     max-width: 1200px;
     margin: 50px auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
 h1 {
     text-align: center;
-    color: #4682B4; /* Change title color to blue */
+    color: #4682B4;
     margin-bottom: 30px;
-    font-family: 'Verdana', sans-serif; /* More modern font */
-    font-size: 2.5em; /* Larger font size */
+    font-family: 'Verdana', sans-serif;
+    font-size: 2.5em;
 }
 
 form {
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
-    flex-wrap: wrap; /* Enable wrapping for inputs */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 input[type="text"],
-input[type="date"] {
+input[type="date"],
+.custom-dropdown {
     padding: 10px;
     margin: 5px;
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.8); /* Slightly transparent input background */
+    background: rgba(255, 255, 255, 0.8);
     color: #333;
-    flex: 1 1 200px; /* Flexible width for inputs */
+    flex: 1 1 200px;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #4682B4; /* Updated button color */
+    background-color: #4682B4;
     color: #fff;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    transition: background-color 0.3s ease;
     margin: 5px;
 }
 
 button:hover {
-    background-color: #4169E1; /* Slightly darker blue on hover */
+    background-color: #4169E1;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background: rgba(255, 255, 255, 0.9); /* Slightly transparent table background */
-    border-radius: 8px; /* Rounded corners */
-    overflow: hidden; /* Fix for rounded corners */
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
 }
 
 th, td {
     padding: 15px;
-    text-align: left;
-    font-family: 'Verdana', sans-serif; /* Consistent font */
+    text-align: center;
+    font-family: 'Verdana', sans-serif;
 }
 
 th {
-    background-color: #4682B4; /* Updated header color */
+    background-color: #4682B4;
     color: white;
     text-transform: uppercase;
     font-size: 14px;
@@ -85,15 +92,15 @@ th {
 
 td {
     border-bottom: 1px solid #ddd;
-    font-size: 14px; /* Smaller font size for better readability */
+    font-size: 14px;
 }
 
 tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent row background */
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 tr:hover {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent row background */
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .cloud {
@@ -103,7 +110,7 @@ tr:hover {
     border-radius: 100px;
     height: 60px;
     width: 200px;
-    z-index: -1; /* Position clouds behind content */
+    z-index: -1;
 }
 
 .cloud:before,
@@ -141,9 +148,10 @@ tr:hover {
     }
 
     input[type="text"],
-    input[type="date"] {
+    input[type="date"],
+    .custom-dropdown {
         flex: 1 1 auto;
-        width: 100%; /* Full width for smaller screens */
+        width: 100%;
     }
 
     button {
@@ -153,4 +161,87 @@ tr:hover {
     th, td {
         padding: 10px;
     }
+}
+
+/* Custom dropdown styles */
+.custom-dropdown-container {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    margin: 5px;
+}
+
+.custom-dropdown input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-dropdown-list {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.custom-dropdown-list.active {
+    display: block;
+}
+
+.custom-dropdown-list div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.custom-dropdown-list div:hover {
+    background-color: rgba(70, 130, 180, 0.2);
+}
+
+/* Other existing styles */
+
+.results-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    font-family: 'Verdana', sans-serif;
+}
+
+th {
+    background-color: #4682B4;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.9);
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -7,6 +7,22 @@ function App() {
     const [destination, setDestination] = useState('');
     const [date, setDate] = useState('');
     const [results, setResults] = useState([]);
+    const [destinations, setDestinations] = useState([]);
+    const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
+    const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
+
+    useEffect(() => {
+        const fetchDestinations = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/webscraper/destinations');
+                setDestinations(response.data);
+            } catch (error) {
+                console.error('Error fetching destinations:', error);
+            }
+        };
+
+        fetchDestinations();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,6 +38,26 @@ function App() {
         }
     };
 
+    const handleDepartureChange = (e) => {
+        setDeparture(e.target.value);
+        setDepartureDropdownActive(true);
+    };
+
+    const handleDestinationChange = (e) => {
+        setDestination(e.target.value);
+        setDestinationDropdownActive(true);
+    };
+
+    const handleDepartureSelect = (value) => {
+        setDeparture(value);
+        setDepartureDropdownActive(false);
+    };
+
+    const handleDestinationSelect = (value) => {
+        setDestination(value);
+        setDestinationDropdownActive(false);
+    };
+
     return (
         <div className="App">
             <div className="cloud" style={{top: '50px', left: '50px'}}></div>
@@ -31,18 +67,54 @@ function App() {
                 <header className="App-header">
                     <h1>Bus, train, car schedules</h1>
                     <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            placeholder="Departure Station Code"
-                            value={departure}
-                            onChange={(e) => setDeparture(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Destination Station Code"
-                            value={destination}
-                            onChange={(e) => setDestination(e.target.value)}
-                        />
+                        <div className="custom-dropdown-container">
+                            <input
+                                type="text"
+                                placeholder="Select Departure"
+                                value={departure}
+                                onChange={handleDepartureChange}
+                                className="custom-dropdown"
+                                onClick={() => setDepartureDropdownActive(!departureDropdownActive)}
+                            />
+                            {departureDropdownActive && (
+                                <div className="custom-dropdown-list active">
+                                    {destinations
+                                        .filter(dest => dest.Kraj.toLowerCase().includes(departure.toLowerCase()))
+                                        .map((dest, index) => (
+                                            <div
+                                                key={index}
+                                                onClick={() => handleDepartureSelect(dest.Kraj)}
+                                            >
+                                                {dest.Kraj}
+                                            </div>
+                                        ))}
+                                </div>
+                            )}
+                        </div>
+                        <div className="custom-dropdown-container">
+                            <input
+                                type="text"
+                                placeholder="Select Destination"
+                                value={destination}
+                                onChange={handleDestinationChange}
+                                className="custom-dropdown"
+                                onClick={() => setDestinationDropdownActive(!destinationDropdownActive)}
+                            />
+                            {destinationDropdownActive && (
+                                <div className="custom-dropdown-list active">
+                                    {destinations
+                                        .filter(dest => dest.Kraj.toLowerCase().includes(destination.toLowerCase()))
+                                        .map((dest, index) => (
+                                            <div
+                                                key={index}
+                                                onClick={() => handleDestinationSelect(dest.Kraj)}
+                                            >
+                                                {dest.Kraj}
+                                            </div>
+                                        ))}
+                                </div>
+                            )}
+                        </div>
                         <input
                             type="text"
                             placeholder="Date (dd.mm.yyyy)"
@@ -51,7 +123,7 @@ function App() {
                         />
                         <button type="submit">Search</button>
                     </form>
-                    <div>
+                    <div className="results-container">
                         {results.length > 0 && (
                             <table>
                                 <thead>
