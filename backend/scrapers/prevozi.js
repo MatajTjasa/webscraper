@@ -117,7 +117,7 @@ async function scrapePrevozi(departure, destination, date) {
 
     if (noDirectConnectionMessage) {
         console.log("No direct connections found.");
-        fs.writeFileSync('../data/destinations/prevozi.json', JSON.stringify([], null, 2));
+        fs.writeFileSync('../data/timetable/prevozi.json', JSON.stringify([], null, 2));
         await browser.close();
         return null;
     }
@@ -153,7 +153,7 @@ async function scrapePrevozi(departure, destination, date) {
     console.log(dynamicData);
 
     // Save dynamic data to JSON file
-    fs.writeFile('../data/destinations/prevozi.json', JSON.stringify(dynamicData, null, 2), err => {
+    fs.writeFile('../data/timetable/prevozi.json', JSON.stringify(dynamicData, null, 2), err => {
         if (err) console.log('Error writing file:', err);
         else console.log('Successfully written to prevozi.json');
     });
