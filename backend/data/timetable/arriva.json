@@ -1,24 +1,24 @@
 [
   {
-    "timeDeparture": "04:45",
-    "locationDeparture": "Maribor AP",
-    "timeArrival": "06:35",
-    "locationArrival": "Ljubljana AP",
-    "travelDuration": "01:50",
-    "prevoznikElement": "Arriva d.o.o.",
-    "peronElement": "1",
-    "length": "131 km",
-    "price": "11.7 EUR"
+    "departure": "Ljubljana AP",
+    "departureTime": "08:00",
+    "arrival": "Maribor AP",
+    "arrivalTime": "09:51",
+    "travelDuration": "01:51",
+    "prevoznik": "Arriva d.o.o.",
+    "peron": "18",
+    "length": "134 km",
+    "price": "0 EUR"
   },
   {
-    "timeDeparture": "11:00",
-    "locationDeparture": "Maribor AP",
-    "timeArrival": "12:50",
-    "locationArrival": "Ljubljana AP",
-    "travelDuration": "01:50",
-    "prevoznikElement": "Arriva d.o.o.",
-    "peronElement": "1",
-    "length": "131 km",
-    "price": "11.7 EUR"
+    "departure": "Ljubljana AP",
+    "departureTime": "15:30",
+    "arrival": "Maribor AP",
+    "arrivalTime": "17:21",
+    "travelDuration": "01:51",
+    "prevoznik": "Arriva d.o.o.",
+    "peron": "15",
+    "length": "134 km",
+    "price": "0 EUR"
   }
 ]

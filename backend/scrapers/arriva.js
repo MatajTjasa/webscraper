@@ -12,7 +12,7 @@ async function scrapeArriva(departure, destination, date) {
         console.log("Navigating to the website...");
         await page.goto('https://arriva.si/vozni-redi/');
 
-        await delay(1000); // Wait for 5 seconds
+        await delay(1000);
 
         console.log("Waiting for the accept button to appear...");
         try {
@@ -23,14 +23,11 @@ async function scrapeArriva(departure, destination, date) {
             console.log("Accept button not found within the timeout period. Proceeding with the script...");
         }
 
-        // const departure = "Ljubljana AP"
-        // const arrival = "Maribor AP"
-
         // Departure field
         console.log("Clicking input for departure...");
         await page.type('.input-departure', departure);
 
-        await delay(1000); // Wait for 5 seconds
+        await delay(1000);
 
         console.log("Waiting for departure dropdown menu...");
         await page.waitForSelector('.departure-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', {visible: true});
@@ -60,7 +57,7 @@ async function scrapeArriva(departure, destination, date) {
         console.log("Clicking input for arrival...");
         await page.type('.input-destination', destination);
 
-        await delay(1000); // Wait for 1 second
+        await delay(1000);
 
         console.log("Waiting for arrival dropdown menu...");
         await page.waitForSelector('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', { visible: true , timeout: 40000});
@@ -152,18 +149,18 @@ const fetchConnection = async (url) => {
             const connection = $(el);
 
             // Extract departure and arrival details
-            const timeDepartureElement = connection.find('.departure-arrival .departure td span');
-            const timeDeparture = timeDepartureElement.eq(0).text().trim();
-            const locationDeparture = timeDepartureElement.parent().next().find('span').text().trim();
+            const departureTimeElement = connection.find('.departure-arrival .departure td span');
+            const departureTime = departureTimeElement.eq(0).text().trim();
+            const departure = departureTimeElement.parent().next().find('span').text().trim();
 
-            const timeArrivalElement = connection.find('.departure-arrival .arrival td span');
-            const timeArrival = timeArrivalElement.eq(0).text().trim();
-            const locationArrival = timeArrivalElement.parent().next().find('span').text().trim();
+            const arrivalTimeElement = connection.find('.departure-arrival .arrival td span');
+            const arrivalTime = arrivalTimeElement.eq(0).text().trim();
+            const arrival = arrivalTimeElement.parent().next().find('span').text().trim();
 
             // Extract duration details
             const travelDuration = connection.find('.duration .travel-duration span').text().trim();
-            const prevoznikElement = connection.find('.duration .prevoznik span').eq(1).text().trim();
-            const peronElement = connection.find('.duration .peron span').eq(1).text().trim();
+            const prevoznik = connection.find('.duration .prevoznik span').eq(1).text().trim();
+            const peron = connection.find('.duration .peron span').eq(1).text().trim();
 
             // Extract length and price
             const length = connection.find('.length').text().trim();
@@ -171,13 +168,13 @@ const fetchConnection = async (url) => {
 
             // Push all data into connectionData array
             connectionData.push({
-                timeDeparture,
-                locationDeparture,
-                timeArrival,
-                locationArrival,
+                departure,
+                departureTime,
+                arrival,
+                arrivalTime,
                 travelDuration,
-                prevoznikElement,
-                peronElement,
+                prevoznik,
+                peron,
                 length,
                 price
             });
@@ -207,3 +204,5 @@ const fetchConnection = async (url) => {
 };
 
 module.exports = {scrapeArriva};
+
+scrapeArriva('Ljubljana AP', 'Maribor AP', '08.08.2024').catch(err => console.error('Error executing scrapeArriva:', err));

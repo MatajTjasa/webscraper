@@ -35,7 +35,7 @@ async function scrapeAPMS(departure, destination, date) {
     // Handle if there are no results
     try {
         await page.waitForSelector('.latest-item.bts.grid-template-content', { timeout: 30000 });
-        const scheduleData = await page.evaluate(() => {
+        const scheduleData = await page.evaluate((dep, dest) => {
             const rows = Array.from(document.querySelectorAll('.latest-item.bts.grid-template-content'));
             if (!rows.length) throw new Error("No schedule data elements found.");
 
@@ -43,14 +43,16 @@ async function scrapeAPMS(departure, destination, date) {
                 const details = Array.from(row.querySelectorAll('.single-latest-fl p'));
                 return {
                     id: index + 1,
-                    departureTime: details[0] ? details[0].textContent.trim() : "Unknown",
-                    arrivalTime: details[1] ? details[1].textContent.trim() : "Unknown",
-                    duration: details[2] ? details[2].textContent.trim() : "Unknown",
-                    kilometers: details[3] ? details[3].textContent.trim() : "Unknown",
-                    price: details[4] ? details[4].textContent.trim() : "Unknown"
+                    departure: dep,
+                    departureTime: details[0] ? details[0].textContent.trim() : "",
+                    arrival: dest,
+                    arrivalTime: details[1] ? details[1].textContent.trim() : "",
+                    duration: details[2] ? details[2].textContent.trim() : "",
+                    kilometers: details[3] ? details[3].textContent.trim() : "",
+                    price: details[4] ? details[4].textContent.trim() : ""
                 };
             });
-        });
+        }, departure, destination);
 
         if (scheduleData.length === 0) {
             console.log("No bus schedules found.");
@@ -79,5 +81,7 @@ async function scrapeAPMS(departure, destination, date) {
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+//scrapeAPMS('Ljubljana AP', 'Maribor AP', '08.04.2024').catch(err => console.error('Error executing scrapeAPMS:', err));
 
 module.exports = { scrapeAPMS };

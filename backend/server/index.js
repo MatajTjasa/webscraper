@@ -94,11 +94,19 @@ app.post('/webscraper/searchAPMS', async (req, res) => {
     const {date, departure, destination} = req.body;
     const cacheKey = `APMS-${departure}-${destination}-${date}`;
     console.log(cacheKey);
+
+    const departureMap = getDestinationCode(departure, 'APMS');
+    const destinationMap = getDestinationCode(destination, 'APMS');
+
+    if (!departureMap || !destinationMap) {
+        return res.status(400).json({error: 'Invalid departure or destination location.'});
+    }
+
     try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData) {
-            return res.json(JSON.parse(cachedData));
-        }
+        /*        const cachedData = await redisClient.get(cacheKey);
+                if (cachedData) {
+                    return res.json(JSON.parse(cachedData));
+                }*/
 
         const results = await scrapeAPMS(departure, destination, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
@@ -200,6 +208,8 @@ app.post('/webscraper/searchPrevozi', async (req, res) => {
 app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     console.log('Starting request searchPrevoziByUrl.');
     const {date, departure, destination} = req.body;
+    const cacheKey = `PrevoziByUrl-${departure}-${destination}-${date}`;
+    console.log(cacheKey);
 
     // Mapping
     const dateMap = reformatDate(date);
@@ -210,8 +220,6 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
         return res.status(400).json({error: 'Invalid departure or destination location.'});
     }
 
-    const cacheKey = `PrevoziByUrl-${departure}-${destination}-${date}`;
-    console.log(cacheKey);
 
     try {
         /*        const cachedData = await redisClient.get(cacheKey);
