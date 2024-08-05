@@ -151,4 +151,4 @@ function delay(ms) {
 module.exports = {scrapeArrivaByUrl};
 
 // Example usage
-scrapeArrivaByUrl('Ljubljana AP', 'Maribor AP', '08.08.2024').catch(err => console.error('Error executing scrapeArrivaByUrl:', err));
+//scrapeArrivaByUrl('Ljubljana AP', 'Maribor AP', '08.08.2024').catch(err => console.error('Error executing scrapeArrivaByUrl:', err));

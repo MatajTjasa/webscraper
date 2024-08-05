@@ -205,4 +205,4 @@ const fetchConnection = async (url) => {
 
 module.exports = {scrapeArriva};
 
-scrapeArriva('Ljubljana AP', 'Maribor AP', '08.08.2024').catch(err => console.error('Error executing scrapeArriva:', err));
+//scrapeArriva('Ljubljana AP', 'Maribor AP', '08.08.2024').catch(err => console.error('Error executing scrapeArriva:', err));

@@ -3,6 +3,7 @@ const redis = require('redis');
 const {MongoClient} = require('mongodb');
 const {scrapeAPMS} = require("../scrapers/apms");
 const {scrapeArriva} = require("../scrapers/arriva");
+const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
 const {scrapePrevozi} = require("../scrapers/prevozi");
 const {scrapePrevoziByUrl} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZeleznice} = require("../scrapers/slovenske_zeleznice");
@@ -17,7 +18,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Load destinations data
 const path = require('path');
 
 // Load destinations data
@@ -34,22 +34,16 @@ function getDestinationCode(kraj, type) {
 
 // Function to reformat date from dd.mm.yyyy to yyyy-mm-dd
 function reformatDate(date) {
-
-    // Checking if date is already formated
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     if (datePattern.test(date)) {
         return date;
     }
-
     const [day, month, year] = date.split('.');
     return `${year}-${month}-${day}`;
 }
 
-
 // Connect to Redis
-const redisClient = redis.createClient({
-    url: process.env.REDIS_URL
-});
+const redisClient = redis.createClient({url: process.env.REDIS_URL});
 redisClient.on('error', (err) => console.error('Redis error:', err));
 
 redisClient.connect().then(() => {
@@ -57,8 +51,6 @@ redisClient.connect().then(() => {
 }).catch(err => {
     console.error('Redis connection error:', err);
 });
-
-//console.log('Environment Variables:', process.env);
 
 // Connect to MongoDB
 const uri = process.env.MONGODB_URI;
@@ -82,8 +74,19 @@ if (!uri) {
     main().catch(console.error);
 }
 
-// API Endpoints
+// Retry wrapper function
+const retry = (fn, retries = 3) => async (...args) => {
+    for (let i = 0; i < retries; i++) {
+        try {
+            return await fn(...args);
+        } catch (error) {
+            console.error(`Attempt ${i + 1} failed:`, error);
+            if (i === retries - 1) throw error;
+        }
+    }
+};
 
+// API Endpoints
 app.get('/webscraper/destinations', (req, res) => {
     const destinationsList = destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj}));
     res.json(destinationsList);
@@ -108,7 +111,7 @@ app.post('/webscraper/searchAPMS', async (req, res) => {
                     return res.json(JSON.parse(cachedData));
                 }*/
 
-        const results = await scrapeAPMS(departure, destination, date);
+        const results = await retry(scrapeAPMS)(departure, destination, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
@@ -128,7 +131,7 @@ app.post('/webscraper/searchArriva', async (req, res) => {
             return res.json(JSON.parse(cachedData));
         }
 
-        const results = await scrapeArriva(departure, destination, date);
+        const results = await retry(scrapeArriva)(departure, destination, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
@@ -137,13 +140,46 @@ app.post('/webscraper/searchArriva', async (req, res) => {
     console.log('Ending request searchArriva.');
 });
 
+app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
+    console.log('Starting request searchArrivaByUrl.');
+    const {date, departure, destination} = req.body;
+    const cacheKey = `ArrivaByUrl-${departure}-${destination}-${date}`;
+    console.log(cacheKey);
+
+    // Mapping
+    const dateMap = reformatDate(date);
+    const departureMap = getDestinationCode(departure, 'Arriva');
+    const destinationMap = getDestinationCode(destination, 'Arriva');
+
+    if (!departureMap || !destinationMap) {
+        return res.status(400).json({error: 'Invalid departure or destination location.'});
+    }
+
+    try {
+        /*        const cachedData = await redisClient.get(cacheKey);
+                if (cachedData) {
+                    console.log('Cache hit');
+                    return res.json(JSON.parse(cachedData));
+                }
+                console.log('Cache miss, scraping data...');*/
+
+        const results = await retry(scrapeArrivaByUrl)(departureMap, destinationMap, dateMap);
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        res.json(results);
+    } catch (error) {
+        console.error('Error during scraping or cache operation:', error);
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchArrivaByUrl.');
+});
+
 app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
     console.log('Starting request searchSlovenskeZeleznice.');
     const {date, departure, destination} = req.body;
     const cacheKey = `${departure}-${destination}-${date}`;
     console.log(cacheKey);
     try {
-        const results = await scrapeSlovenskeZeleznice(departure, destination, date);
+        const results = await retry(scrapeSlovenskeZeleznice)(departure, destination, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
@@ -175,7 +211,7 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
         }
 
         console.log('Cache miss, scraping data...');
-        const results = await scrapeSlovenskeZelezniceByUrl(departureCode, destinationCode, date);
+        const results = await retry(scrapeSlovenskeZelezniceByUrl)(departureCode, destinationCode, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
@@ -196,7 +232,7 @@ app.post('/webscraper/searchPrevozi', async (req, res) => {
             return res.json(JSON.parse(cachedData));
         }
 
-        const results = await scrapePrevozi(departure, destination, date);
+        const results = await retry(scrapePrevozi)(departure, destination, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
@@ -229,7 +265,7 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
                 }
                 console.log('Cache miss, scraping data...');*/
 
-        const results = await scrapePrevoziByUrl(departureMap, destinationMap, dateMap);
+        const results = await retry(scrapePrevoziByUrl)(departureMap, destinationMap, dateMap);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
