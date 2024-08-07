@@ -16,7 +16,7 @@ async function extractId(page, selector) {
 async function scrapeArrivaByUrl(departure, destination, date) {
     let browser;
     try {
-        browser = await puppeteer.launch({headless: false});
+        browser = await puppeteer.launch({headless: true});
         const page = await browser.newPage();
 
         console.log("Navigating to the Arriva website...");

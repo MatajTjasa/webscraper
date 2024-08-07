@@ -17,7 +17,7 @@ async function scrapePrevoziByUrl(departure, destination, date) {
     const url = `https://prevoz.org/prevoz/list/?fc=SI&f=${encodeURIComponent(departure)}&tc=SI&t=${encodeURIComponent(destination)}&d=${date}`;
 
     try {
-        await page.goto(url, {waitUntil: 'networkidle2'});
+        await page.goto(url, {waitUntil: 'networkidle0'});
 
         // Check for 404 error
         const error404 = await page.$eval('h1.fw-bolden.mb-4', element => element.innerText.includes('Napaka 404'));

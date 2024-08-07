@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const path = require("path");
 
 async function scrapeAPMS(departure, destination, date) {
-    const browser = await puppeteer.launch({headless: false}); // Set to true for headless mode
+    const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
 
     await page.goto('https://apms.si/');

@@ -93,6 +93,61 @@ app.get('/webscraper/destinations', (req, res) => {
     res.json(destinationsList);
 });
 
+app.post('/webscraper/searchAll', async (req, res) => {
+    console.log('Starting request searchAll.');
+    const {date, departure, destination} = req.body;
+
+    const cacheKey = `searchAll-${departure}-${destination}-${date}`;
+    console.log(cacheKey);
+
+    // Mapping
+    const departureMapAPMS = getDestinationCode(departure, 'APMS');
+    const destinationMapAPMS = getDestinationCode(destination, 'APMS');
+    const departureMapArriva = getDestinationCode(departure, 'Arriva');
+    const destinationMapArriva = getDestinationCode(destination, 'Arriva');
+    const departureCodeTrain = getDestinationCode(departure, 'Vlak');
+    const destinationCodeTrain = getDestinationCode(destination, 'Vlak');
+    const departureMapPrevozi = getDestinationCode(departure, 'Prevozi');
+    const destinationMapPrevozi = getDestinationCode(destination, 'Prevozi');
+
+    // Validate mappings
+    if (!departureMapAPMS || !destinationMapAPMS || !departureMapArriva || !destinationMapArriva || !departureCodeTrain || !destinationCodeTrain || !departureMapPrevozi || !destinationMapPrevozi) {
+        return res.status(400).json({error: 'Invalid departure or destination location.'});
+    }
+
+    try {
+        const tasks = [
+            {name: 'APMS', fn: scrapeAPMS, args: [departureMapAPMS, destinationMapAPMS, date]},
+            {name: 'Arriva', fn: scrapeArrivaByUrl, args: [departureMapArriva, destinationMapArriva, date]},
+            {name: 'Train', fn: scrapeSlovenskeZelezniceByUrl, args: [departureCodeTrain, destinationCodeTrain, date]},
+            {
+                name: 'Prevozi',
+                fn: scrapePrevoziByUrl,
+                args: [departureMapPrevozi, destinationMapPrevozi, reformatDate(date)]
+            }
+        ];
+
+        const results = {};
+        await Promise.all(tasks.map(async task => {
+            console.log(`Starting ${task.name} scraper`);
+            try {
+                results[task.name] = await retry(task.fn)(...task.args);
+                console.log(`${task.name} results:`, results[task.name]);
+            } catch (error) {
+                console.error(`Error during ${task.name} scraping:`, error);
+            }
+        }));
+
+        // Cache the results
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        res.json(results);
+    } catch (error) {
+        console.error('Error during scraping:', error);
+        res.status(500).json({error: 'An error occurred while scraping data.'});
+    }
+    console.log('Ending request searchAll.');
+});
+
 app.post('/webscraper/searchAPMS', async (req, res) => {
     console.log('Starting request searchAPMS.');
     const {date, departure, destination} = req.body;
@@ -184,6 +239,8 @@ app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
 app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     console.log('Starting request searchSlovenskeZelezniceByUrl.');
     const {date, departure, destination} = req.body;
+    const cacheKey = `Train-${departure}-${destination}-${date}`;
+    console.log(cacheKey);
 
     // Map location names to codes
     const departureCode = getDestinationCode(departure, 'Vlak');
@@ -193,15 +250,12 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
         return res.status(400).json({error: 'Invalid departure or destination location.'});
     }
 
-    const cacheKey = `Train-${departureCode}-${destinationCode}-${date}`;
-    console.log(cacheKey);
-
     try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData) {
-            console.log('Cache hit');
-            return res.json(JSON.parse(cachedData));
-        }
+        /*        const cachedData = await redisClient.get(cacheKey);
+                if (cachedData) {
+                    console.log('Cache hit');
+                    return res.json(JSON.parse(cachedData));
+                }*/
 
         console.log('Cache miss, scraping data...');
         const results = await retry(scrapeSlovenskeZelezniceByUrl)(departureCode, destinationCode, date);
