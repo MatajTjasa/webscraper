@@ -6,7 +6,7 @@ function App() {
     const [departure, setDeparture] = useState('');
     const [destination, setDestination] = useState('');
     const [date, setDate] = useState('');
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState({});
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
@@ -47,7 +47,7 @@ function App() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchSlovenskeZelezniceByUrl', {
+            const response = await axios.post('http://localhost:3000/webscraper/searchAll', {
                 departure,
                 destination,
                 date
@@ -149,31 +149,36 @@ function App() {
                         </div>
                     </form>
                     <div className="results-container">
-                        {results.length > 0 && (
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Departure Station</th>
-                                    <th>Departure Time</th>
-                                    <th>Arrival Station</th>
-                                    <th>Arrival Time</th>
-                                    <th>Travel Time</th>
-                                    <th>Train Type</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {results.map((result, index) => (
-                                    <tr key={index}>
-                                        <td>{result.departureStation}</td>
-                                        <td>{result.departureTime}</td>
-                                        <td>{result.arrivalStation}</td>
-                                        <td>{result.arrivalTime}</td>
-                                        <td>{result.travelTime}</td>
-                                        <td>{result.trainType}</td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
+                        {Object.keys(results).length > 0 && (
+                            Object.keys(results).map(key => (
+                                <div key={key} className="result-section">
+                                    <h2>{key} Results</h2>
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>Departure Station</th>
+                                            <th>Departure Time</th>
+                                            <th>Arrival Station</th>
+                                            <th>Arrival Time</th>
+                                            <th>Travel Time</th>
+                                            <th>Transport Type</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {results[key].map((result, index) => (
+                                            <tr key={index}>
+                                                <td>{result.departureStation}</td>
+                                                <td>{result.departureTime}</td>
+                                                <td>{result.arrivalStation}</td>
+                                                <td>{result.arrivalTime}</td>
+                                                <td>{result.travelTime}</td>
+                                                <td>{result.trainType}</td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ))
                         )}
                     </div>
                 </header>

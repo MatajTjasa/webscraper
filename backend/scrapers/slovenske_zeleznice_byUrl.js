@@ -11,7 +11,7 @@ function ensureDirectoryExistence(filePath) {
 }
 
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
-    const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
 
     const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
