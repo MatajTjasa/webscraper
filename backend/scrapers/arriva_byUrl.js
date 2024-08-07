@@ -14,37 +14,47 @@ async function extractId(page, selector) {
 }
 
 async function scrapeArrivaByUrl(departure, destination, date) {
+    let browser;
     try {
-        const browser = await puppeteer.launch({headless: false});
+        browser = await puppeteer.launch({headless: false});
         const page = await browser.newPage();
 
-        // Preprocess departure and destination to replace spaces with '+'
-        const formattedDeparture = formatLocation(departure);
-        const formattedDestination = formatLocation(destination);
-
-        // Navigate to the Arriva website
         console.log("Navigating to the Arriva website...");
         await page.goto('https://arriva.si/vozni-redi/', {waitUntil: 'networkidle0'});
 
         await delay(3000);
 
-        // Enter departure and select the first suggestion to get the departure ID
+        try {
+            await page.waitForSelector("#CybotCookiebotDialogBodyLevelButtonAccept", {timeout: 10000});
+            console.log("Clicking on the accept button...");
+            await page.click("#CybotCookiebotDialogBodyLevelButtonAccept");
+        } catch (error) {
+            console.log("Accept button not found within the timeout period. Proceeding with the script...");
+        }
+
+        const formattedDeparture = formatLocation(departure);
+        const formattedDestination = formatLocation(destination);
+
+        // Extract departure ID
         await page.type('.input-departure', departure);
         await page.waitForSelector('.departure-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', {visible: true});
         await page.click('.departure-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item');
         await delay(1000);
-
-        // Extract departure ID
         const departureId = await extractId(page, '#departure_id');
-
-        // Enter destination and select the first suggestion to get the destination ID
-        await page.type('.input-destination', destination);
-        await page.waitForSelector('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', {visible: true});
-        await page.click('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item');
-        await delay(1000);
+        console.log('DepartureID: ', departureId);
 
         // Extract destination ID
+        console.log("typing destination");
+        await page.type('.input-destination', destination);
+        console.log("waiting for selector dropdown destination");
+        await page.waitForSelector('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', {visible: true});
+        console.log("clicking selector dropdown destination");
+        await page.click('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item');
+        await delay(1000);
+        console.log("extracting destination id....");
         const destinationId = await extractId(page, '#destination_id');
+        await delay(1000);
+        console.log('DestinationID: ', destinationId);
 
         console.log(`Extracted IDs - Departure ID: ${departureId}, Destination ID: ${destinationId}`);
 
@@ -68,8 +78,11 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         await browser.close();
         return connectionData;
     } catch (error) {
-        console.error(error);
-        return [];
+        if (browser) {
+            await browser.close();
+        }
+        console.error('Error in scrapeArrivaByUrl:', error);
+        throw error;  // Ensure the error is thrown to trigger retries
     }
 }
 

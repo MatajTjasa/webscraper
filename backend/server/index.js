@@ -26,7 +26,6 @@ const destinations = JSON.parse(fs.readFileSync(destinationsPath, 'utf-8'));
 
 console.log('Destinations data loaded:', destinations);
 
-// Function to map location names to their codes
 function getDestinationCode(kraj, type) {
     const destination = destinations.find(dest => dest.Kraj.toLowerCase() === kraj.toLowerCase());
     return destination ? destination[type] : null;
@@ -78,13 +77,15 @@ if (!uri) {
 const retry = (fn, retries = 3) => async (...args) => {
     for (let i = 0; i < retries; i++) {
         try {
+            console.log(`Attempt ${i + 1} to run ${fn.name}`);
             return await fn(...args);
         } catch (error) {
-            console.error(`Attempt ${i + 1} failed:`, error);
+            console.warn(`Attempt ${i + 1} failed:`, error);
             if (i === retries - 1) throw error;
         }
     }
 };
+
 
 // API Endpoints
 app.get('/webscraper/destinations', (req, res) => {
@@ -147,7 +148,6 @@ app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     console.log(cacheKey);
 
     // Mapping
-    const dateMap = reformatDate(date);
     const departureMap = getDestinationCode(departure, 'Arriva');
     const destinationMap = getDestinationCode(destination, 'Arriva');
 
@@ -156,14 +156,7 @@ app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     }
 
     try {
-        /*        const cachedData = await redisClient.get(cacheKey);
-                if (cachedData) {
-                    console.log('Cache hit');
-                    return res.json(JSON.parse(cachedData));
-                }
-                console.log('Cache miss, scraping data...');*/
-
-        const results = await retry(scrapeArrivaByUrl)(departureMap, destinationMap, dateMap);
+        const results = await retry(scrapeArrivaByUrl, 3)(departureMap, destinationMap, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
