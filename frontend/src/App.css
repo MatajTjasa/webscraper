@@ -1,3 +1,5 @@
+/* App.css */
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -10,142 +12,6 @@ body {
     min-height: 100vh;
     overflow: auto;
     position: relative;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 100%;
-}
-
-h1 {
-    text-align: center;
-    color: #4682B4;
-    margin-bottom: 30px;
-    font-family: 'Verdana', sans-serif;
-    font-size: 2.5em;
-}
-
-form {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-    gap: 10px;
-}
-
-.form-group {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-}
-
-.custom-dropdown-container {
-    position: relative;
-    width: 200px;
-    margin: 5px;
-}
-
-.custom-dropdown, .custom-date {
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0.8);
-    color: #333;
-    flex: 1 1 auto;
-}
-
-.custom-dropdown input, .custom-date input {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.custom-dropdown-list {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    max-height: 150px;
-    overflow-y: auto;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-}
-
-.custom-dropdown-list.active {
-    display: block;
-}
-
-.custom-dropdown-list div {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.custom-dropdown-list div:hover {
-    background: rgba(70, 130, 180, 0.2);
-}
-
-button {
-    padding: 10px 20px;
-    background: #4682B4;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    flex: 1 1 200px;
-    margin: 5px;
-}
-
-button:hover {
-    background: #4169E1;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-}
-
-th, td {
-    padding: 15px;
-    font-family: 'Verdana', sans-serif;
-    text-align: center;
-}
-
-th {
-    background: #4682B4;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 14px;
-    padding: 15px;
-}
-
-td {
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
-    padding: 15px; /* Added padding for consistent spacing */
-}
-
-
-tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.8);
-}
-
-tr:hover {
-    background: rgba(255, 255, 255, 0.9);
 }
 
 .cloud {
@@ -180,33 +46,9 @@ tr:hover {
     top: -90px;
 }
 
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2em;
-    }
-
-    form {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .custom-dropdown-container, .custom-date, button {
-        width: 100%;
-    }
-
-    th, td {
-        padding: 10px; /* Adjusted padding for smaller screens */
-    }
-
-    th {
-        font-size: 12px;
-    }
+.container {
+    background: rgba(255, 255, 255, 0.8); /* Adjust the opacity */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.results-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    width: 100%;
-}
-

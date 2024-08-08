@@ -1,32 +1,32 @@
 [
   {
     "id": 1,
-    "departure": "Maribor",
+    "departure": "Maribor AP",
     "departureTime": "05:50",
-    "arrival": "Ljubljana",
-    "arrivalTime": "07:20",
-    "duration": "01:30",
-    "kilometers": "125,629 km",
+    "arrival": "Ljubljana AP",
+    "arrivalTime": "07:28",
+    "duration": "01:38",
+    "kilometers": "128,674 km",
     "price": ""
   },
   {
     "id": 2,
-    "departure": "Maribor",
+    "departure": "Maribor AP",
     "departureTime": "10:20",
-    "arrival": "Ljubljana",
-    "arrivalTime": "11:50",
-    "duration": "01:30",
-    "kilometers": "125,629 km",
+    "arrival": "Ljubljana AP",
+    "arrivalTime": "11:58",
+    "duration": "01:38",
+    "kilometers": "128,674 km",
     "price": ""
   },
   {
     "id": 3,
-    "departure": "Maribor",
+    "departure": "Maribor AP",
     "departureTime": "15:35",
-    "arrival": "Ljubljana",
-    "arrivalTime": "17:05",
-    "duration": "01:30",
-    "kilometers": "125,629 km",
+    "arrival": "Ljubljana AP",
+    "arrivalTime": "17:13",
+    "duration": "01:38",
+    "kilometers": "128,674 km",
     "price": ""
   }
 ]

@@ -195,7 +195,7 @@
     "arrivalTime": "18:56",
     "travelTime": "02:11",
     "trainType": "RG 617",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -204,7 +204,7 @@
     "arrivalTime": "18:54",
     "travelTime": "02:44",
     "trainType": "LPV 2921",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -213,7 +213,7 @@
     "arrivalTime": "19:43",
     "travelTime": "02:03",
     "trainType": "MV 157",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -222,7 +222,7 @@
     "arrivalTime": "19:52",
     "travelTime": "02:39",
     "trainType": "LPV 2937",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -231,7 +231,7 @@
     "arrivalTime": "20:52",
     "travelTime": "02:35",
     "trainType": "LPV 2925",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -240,7 +240,7 @@
     "arrivalTime": "20:52",
     "travelTime": "02:48",
     "trainType": "LPV 2925",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -249,7 +249,7 @@
     "arrivalTime": "22:15",
     "travelTime": "02:05",
     "trainType": "IC 523",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -258,7 +258,7 @@
     "arrivalTime": "21:51",
     "travelTime": "02:39",
     "trainType": "LPV 2927",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
