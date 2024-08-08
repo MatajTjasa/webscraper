@@ -1,6 +1,22 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 const fs = require('fs');
 const path = require("path");
+require('dotenv').config();
+
+// Hiding puppeteer usage
+puppeteer.use(StealthPlugin());
+
+puppeteer.use(
+    RecaptchaPlugin({
+        provider: {
+            id: '2captcha',
+            token: process.env.CAPTCHA_APIKEY
+        },
+        visualFeedback: true
+    })
+);
 
 function ensureDirectoryExistence(filePath) {
     const dirname = path.dirname(filePath);
@@ -26,6 +42,35 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
         console.error('Page error:', error);
         pageErrors.push(error);
     });
+
+    // Captcha check
+    const isCaptchaPresent = await page.evaluate(() => {
+        return document.querySelector('.g-recaptcha') !== null;
+    });
+
+    if (isCaptchaPresent) {
+        console.log('Captcha detected, attempting to solve...');
+        const {solved, error} = await page.solveRecaptchas();
+        if (solved) {
+            console.log('Captcha solved.');
+        } else {
+            console.error('Captcha solving failed:', error);
+            await browser.close();
+            throw new Error('Failed to solve captcha');
+        }
+    }
+
+    const noConnectionsMessage = await page.evaluate(() => {
+        const alertElement = document.querySelector('.alert.alert-danger');
+        const connectionElements = document.querySelectorAll('.connection');
+        return alertElement ? alertElement.innerText.includes('Za relacijo na izbrani dan ni povezave.') : connectionElements.length === 0;
+    });
+
+    if (noConnectionsMessage) {
+        console.log('No connections found for the selected date and route.');
+        await browser.close();
+        return [];
+    }
 
     try {
         await page.waitForSelector('.connection.connection-active', {visible: true}); //.connection
@@ -98,4 +143,4 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
 module.exports = {scrapeSlovenskeZelezniceByUrl};
 
 // Example usage with station codes
-//scrapeSlovenskeZelezniceByUrl('42300', '43400', '07.08.2024').catch(err => console.error('Error executing scrapeSlovenskeZelezniceByUrl:', err));
+//scrapeSlovenskeZelezniceByUrl('42300', '43400', '08.08.2024').catch(err => console.error('Error executing scrapeSlovenskeZelezniceByUrl:', err));
