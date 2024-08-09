@@ -1,20 +1,18 @@
 import React, {useState, useEffect, useRef} from 'react';
+import {useLocation} from 'react-router-dom';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
-import LoadingSpinner from './LoadingSpinner';
 
-function SearchForm() {
+function SearchForm({onSearch}) {
     const [departure, setDeparture] = useState('');
     const [destination, setDestination] = useState('');
     const [date, setDate] = useState('');
-    const [loading, setLoading] = useState(false);
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
 
+    const location = useLocation();
     const departureRef = useRef(null);
     const destinationRef = useRef(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDestinations = async () => {
@@ -30,37 +28,15 @@ function SearchForm() {
     }, []);
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (departureRef.current && !departureRef.current.contains(event.target)) {
-                setDepartureDropdownActive(false);
-            }
-            if (destinationRef.current && !destinationRef.current.contains(event.target)) {
-                setDestinationDropdownActive(false);
-            }
-        };
+        const queryParams = new URLSearchParams(location.search);
+        const departure = queryParams.get('departure');
+        const destination = queryParams.get('destination');
+        const date = queryParams.get('date');
 
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [departureRef, destinationRef]);
-
-    const fetchResults = async (departure, destination, date) => {
-        setLoading(true);
-        try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchAll', {
-                departure,
-                destination,
-                date
-            });
-            setLoading(false);
-            navigate(`/od:${departure}/do:${destination}/datum:${date}`, {state: {results: response.data}});
-        } catch (error) {
-            setLoading(false);
-            console.error('Error fetching data:', error);
-        }
-    };
+        if (departure) setDeparture(departure);
+        if (destination) setDestination(destination);
+        if (date) setDate(date);
+    }, [location.search]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -68,8 +44,7 @@ function SearchForm() {
             alert('Please fill in all fields.');
             return;
         }
-
-        fetchResults(departure, destination, date);
+        onSearch(departure, destination, date);
     };
 
     const handleDepartureChange = (e) => {
@@ -162,14 +137,10 @@ function SearchForm() {
                                 className="custom-date px-4 py-2 border border-gray-300 rounded-md w-full"
                             />
                         </div>
-                        <button
-                            type="submit"
-                            className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4"
-                        >
-                            Search
+                        <button type="submit"
+                                className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4">Search
                         </button>
                     </form>
-                    {loading && <LoadingSpinner/>}
                 </header>
             </div>
         </div>

@@ -2,18 +2,25 @@ import React, {useEffect} from 'react';
 
 function LoadingSpinner() {
     useEffect(() => {
-        // Initialize the loader
-        const ldld = new window.ldloader({root: '.ldld'});
+        // Check if ldLoader is loaded correctly
+        if (window.ldLoader) {
+            const ldld = new window.ldLoader({root: '.ldld'});
+            ldld.on();  // Turn on the loader
 
-        return () => {
-            // Clean up loader instance if needed
-            ldld.toggle(false);
-        };
+            // Cleanup to turn off the loader on unmount
+            return () => ldld.off();
+        } else {
+            console.error('ldLoader is not available.');
+        }
     }, []);
 
     return (
-        <div className="flex justify-center mt-4">
-            <div className="ldld full"></div>
+        <div className="spinner-container">
+            <img
+                className="ldld"
+                src={`././public/spinner.svg`}  // fix
+                alt="Loading..."
+            />
         </div>
     );
 }

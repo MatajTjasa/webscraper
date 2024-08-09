@@ -3,16 +3,15 @@ import {useLocation} from 'react-router-dom';
 
 function Results() {
     const location = useLocation();
-    const {results} = location.state;
-
-    if (!results) {
-        return <div>No results found.</div>;
-    }
+    const results = location.state?.results || [];
 
     const renderPrevoziResults = (prevozi) => {
+        if (!prevozi || prevozi.length === 0) {
+            return noResultsMessage('Prevozi');
+        }
         return prevozi.map((route, index) => (
             <div key={index} className="result-section mb-8">
-                <h2 className="text-2xl font-semibold text-center mb-4">
+                <h2 className="text-2xl font-semibold mb-4">
                     {route.from} to {route.to} ({route.count} trips)
                 </h2>
                 <table className="table-auto w-full bg-white rounded-md shadow-md">
@@ -38,9 +37,12 @@ function Results() {
     };
 
     const renderTrainResults = (trains) => {
+        if (!trains || trains.length === 0) {
+            return noResultsMessage('Slovenske železnice');
+        }
         return (
             <div className="result-section mb-8">
-                <h2 className="text-2xl font-semibold text-center mb-4">Train Results</h2>
+                <h2 className="text-2xl font-semibold mb-4">Train Results</h2>
                 <table className="table-auto w-full bg-white rounded-md shadow-md">
                     <thead>
                     <tr>
@@ -69,10 +71,14 @@ function Results() {
         );
     };
 
+    // Rendering APMS section
     const renderAPMSResults = (apms) => {
+        if (!apms || apms.length === 0) {
+            return noResultsMessage('APMS');
+        }
         return (
             <div className="result-section mb-8">
-                <h2 className="text-2xl font-semibold text-center mb-4">APMS Results</h2>
+                <h2 className="text-2xl font-semibold mb-4">APMS Results</h2>
                 <table className="table-auto w-full bg-white rounded-md shadow-md">
                     <thead>
                     <tr>
@@ -101,10 +107,14 @@ function Results() {
         );
     };
 
+    // Rendering Arriva section
     const renderArrivaResults = (arriva) => {
+        if (!arriva || arriva.length === 0) {
+            return noResultsMessage('Arriva');
+        }
         return (
             <div className="result-section mb-8">
-                <h2 className="text-2xl font-semibold text-center mb-4">Arriva Results</h2>
+                <h2 className="text-2xl font-semibold mb-4">Arriva Results</h2>
                 <table className="table-auto w-full bg-white rounded-md shadow-md">
                     <thead>
                     <tr>
@@ -138,23 +148,24 @@ function Results() {
     };
 
     return (
-        <div className="App">
-            <div className="cloud" style={{top: '50px', left: '50px'}}></div>
-            <div className="cloud" style={{top: '100px', left: '250px'}}></div>
-            <div className="cloud" style={{top: '150px', right: '50px'}}></div>
-            <div className="container bg-white bg-opacity-80 p-8 rounded-lg shadow-lg relative z-10">
-                <header className="App-header text-center">
-                    <h1 className="text-[#4682B4] mb-8 text-4xl font-semibold">Bus, train, car schedules</h1>
-                    <div className="results-container mt-8 w-full">
-                        {results.Prevozi && renderPrevoziResults(results.Prevozi)}
-                        {results.Train && renderTrainResults(results.Train)}
-                        {results.APMS && renderAPMSResults(results.APMS)}
-                        {results.Arriva && renderArrivaResults(results.Arriva)}
-                    </div>
-                </header>
-            </div>
+        <div className="results-container mt-8 w-full">
+            {results.Arriva && renderArrivaResults(results.Arriva)}
+            {results.APMS && renderAPMSResults(results.APMS)}
+            {results.Train && renderTrainResults(results.Train)}
+            {results.Prevozi && renderPrevoziResults(results.Prevozi)}
         </div>
     );
 }
+
+const noResultsMessage = (transportType) => {
+    let message = "Za izbrani datum ni na voljo prevozov.";
+
+    return (
+        <div className="result-section mb-8">
+            <h2 className="text-2xl font-semibold mb-4">{transportType} Results</h2>
+            <p className="text-gray-600 italic">{message}</p>
+        </div>
+    );
+};
 
 export default Results;
