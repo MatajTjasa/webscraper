@@ -3,10 +3,10 @@ import axios from 'axios';
 import {useNavigate, useLocation} from 'react-router-dom';
 import Results from './Results';
 
-function SearchForm() {
-    const [departure, setDeparture] = useState('');
-    const [destination, setDestination] = useState('');
-    const [date, setDate] = useState('');
+function SearchForm({onSearch, initialDeparture, initialDestination, initialDate}) {
+    const [departure, setDeparture] = useState(initialDeparture || '');
+    const [destination, setDestination] = useState(initialDestination || '');
+    const [date, setDate] = useState(initialDate || '');
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState(null);
     const [destinations, setDestinations] = useState([]);
@@ -49,43 +49,18 @@ function SearchForm() {
         };
     }, [departureRef, destinationRef]);
 
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        const departure = queryParams.get('departure');
-        const destination = queryParams.get('destination');
-        const date = queryParams.get('date');
-
-        if (departure && destination && date) {
-            setDeparture(departure);
-            setDestination(destination);
-            setDate(date);
-            fetchResults(departure, destination, date);
-        }
-    }, [location.search]);
-
-    const fetchResults = async (departure, destination, date) => {
-        setLoading(true);
-        try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchAll', {
-                departure,
-                destination,
-                date
-            });
-            setLoading(false);
-            setResults(response.data);
-        } catch (error) {
-            setLoading(false);
-            console.error('Error fetching data:', error);
-        }
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!departure || !destination || !date) {
             alert('Please fill in all fields.');
             return;
         }
-        navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
+
+        if (onSearch) {
+            onSearch(departure, destination, date);
+        } else {
+            navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
+        }
     };
 
     const handleDepartureChange = (e) => {
@@ -184,9 +159,6 @@ function SearchForm() {
                     </form>
                     {loading && <div>Loading...</div>}
                 </header>
-
-                {/* Render the Results component if results are available */}
-                {results && <Results results={results}/>}
             </div>
         </div>
     );

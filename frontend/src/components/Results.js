@@ -1,25 +1,10 @@
 import React from 'react';
-import {useLocation} from 'react-router-dom';
 
-function Results() {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
+function Results({results}) {
+    console.log('Results data:', results);
 
-    console.log(location.search);
-
-    const departure = queryParams.get('departure');
-    const destination = queryParams.get('destination');
-    const date = queryParams.get('date');
-
-    console.log('Departure:', departure);
-    console.log('Destination:', destination);
-    console.log('Date:', date);
-
-    // Assuming you get the results from location.state
-    const results = location.state?.results;
-    console.log(results);
     if (!results) {
-        return <div>No results found.</div>; // Debug why does it always stop here
+        return <div>No results found.</div>;
     }
 
     const renderPrevoziResults = (prevozi) => {
@@ -88,7 +73,6 @@ function Results() {
         );
     };
 
-    // Rendering APMS section
     const renderAPMSResults = (apms) => {
         if (!apms || apms.length === 0) {
             return noResultsMessage('APMS');
@@ -124,7 +108,6 @@ function Results() {
         );
     };
 
-    // Rendering Arriva section
     const renderArrivaResults = (arriva) => {
         if (!arriva || arriva.length === 0) {
             return noResultsMessage('Arriva');

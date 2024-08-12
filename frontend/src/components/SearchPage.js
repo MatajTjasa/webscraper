@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import SearchForm from './SearchForm';
 import Results from './Results';
 import axios from 'axios';
 
-console.log("Starting on search")
 function SearchPage() {
     const [results, setResults] = useState(null);
-    const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
@@ -34,14 +32,10 @@ function SearchPage() {
         }
     };
 
-    const handleSearch = (departure, destination, date) => {
-        navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
-    };
-
     return (
         <div>
-            <SearchForm onSearch={handleSearch}/>
-            {results && <Results results={results}/>}
+            <SearchForm/>
+            {results ? <Results results={results}/> : <div>Loading...</div>}
         </div>
     );
 }
