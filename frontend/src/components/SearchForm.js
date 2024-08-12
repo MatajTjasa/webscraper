@@ -1,21 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react';
-import axios from 'axios';
 import {useNavigate, useLocation} from 'react-router-dom';
-import Results from './Results';
+import axios from 'axios';
 
 function SearchForm({onSearch, initialDeparture, initialDestination, initialDate}) {
+    const location = useLocation();
     const [departure, setDeparture] = useState(initialDeparture || '');
     const [destination, setDestination] = useState(initialDestination || '');
     const [date, setDate] = useState(initialDate || '');
-    const [loading, setLoading] = useState(false);
-    const [results, setResults] = useState(null);
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
 
     const navigate = useNavigate();
-    const location = useLocation();
-
     const departureRef = useRef(null);
     const destinationRef = useRef(null);
 
@@ -28,7 +24,6 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                 console.error('Error fetching destinations:', error);
             }
         };
-
         fetchDestinations();
     }, []);
 
@@ -48,6 +43,18 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [departureRef, destinationRef]);
+
+    // Populate fields based on URL parameters
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const urlDeparture = queryParams.get('departure');
+        const urlDestination = queryParams.get('destination');
+        const urlDate = queryParams.get('date');
+
+        if (urlDeparture) setDeparture(urlDeparture);
+        if (urlDestination) setDestination(urlDestination);
+        if (urlDate) setDate(urlDate);
+    }, [location.search]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -157,7 +164,6 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                                 className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4">Search
                         </button>
                     </form>
-                    {loading && <div>Loading...</div>}
                 </header>
             </div>
         </div>
