@@ -3,7 +3,24 @@ import {useLocation} from 'react-router-dom';
 
 function Results() {
     const location = useLocation();
-    const results = location.state?.results || [];
+    const queryParams = new URLSearchParams(location.search);
+
+    console.log(location.search);
+
+    const departure = queryParams.get('departure');
+    const destination = queryParams.get('destination');
+    const date = queryParams.get('date');
+
+    console.log('Departure:', departure);
+    console.log('Destination:', destination);
+    console.log('Date:', date);
+
+    // Assuming you get the results from location.state
+    const results = location.state?.results;
+    console.log(results);
+    if (!results) {
+        return <div>No results found.</div>; // Debug why does it always stop here
+    }
 
     const renderPrevoziResults = (prevozi) => {
         if (!prevozi || prevozi.length === 0) {

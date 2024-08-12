@@ -4,6 +4,7 @@ import SearchForm from './SearchForm';
 import Results from './Results';
 import axios from 'axios';
 
+console.log("Starting on search")
 function SearchPage() {
     const [results, setResults] = useState(null);
     const navigate = useNavigate();

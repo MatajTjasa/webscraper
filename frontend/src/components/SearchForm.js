@@ -1,16 +1,21 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {useLocation} from 'react-router-dom';
 import axios from 'axios';
+import {useNavigate, useLocation} from 'react-router-dom';
+import Results from './Results';
 
-function SearchForm({onSearch}) {
+function SearchForm() {
     const [departure, setDeparture] = useState('');
     const [destination, setDestination] = useState('');
     const [date, setDate] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [results, setResults] = useState(null);
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
 
+    const navigate = useNavigate();
     const location = useLocation();
+
     const departureRef = useRef(null);
     const destinationRef = useRef(null);
 
@@ -28,15 +33,51 @@ function SearchForm({onSearch}) {
     }, []);
 
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (departureRef.current && !departureRef.current.contains(event.target)) {
+                setDepartureDropdownActive(false);
+            }
+            if (destinationRef.current && !destinationRef.current.contains(event.target)) {
+                setDestinationDropdownActive(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [departureRef, destinationRef]);
+
+    useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const departure = queryParams.get('departure');
         const destination = queryParams.get('destination');
         const date = queryParams.get('date');
 
-        if (departure) setDeparture(departure);
-        if (destination) setDestination(destination);
-        if (date) setDate(date);
+        if (departure && destination && date) {
+            setDeparture(departure);
+            setDestination(destination);
+            setDate(date);
+            fetchResults(departure, destination, date);
+        }
     }, [location.search]);
+
+    const fetchResults = async (departure, destination, date) => {
+        setLoading(true);
+        try {
+            const response = await axios.post('http://localhost:3000/webscraper/searchAll', {
+                departure,
+                destination,
+                date
+            });
+            setLoading(false);
+            setResults(response.data);
+        } catch (error) {
+            setLoading(false);
+            console.error('Error fetching data:', error);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,7 +85,7 @@ function SearchForm({onSearch}) {
             alert('Please fill in all fields.');
             return;
         }
-        onSearch(departure, destination, date);
+        navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
     };
 
     const handleDepartureChange = (e) => {
@@ -141,7 +182,11 @@ function SearchForm({onSearch}) {
                                 className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4">Search
                         </button>
                     </form>
+                    {loading && <div>Loading...</div>}
                 </header>
+
+                {/* Render the Results component if results are available */}
+                {results && <Results results={results}/>}
             </div>
         </div>
     );
