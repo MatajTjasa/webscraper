@@ -3,7 +3,7 @@ import LoadingComponent from '../components/LoadingComponent';
 
 function ResultsPrevozi({results, isLoading}) {
     if (isLoading) {
-        return <LoadingComponent text="Pridobivanje podatkov iz strani Prevozi..."/>;
+        return <LoadingComponent text="Pridobivanje podatkov iz strani Prevozi.org..."/>;
     }
 
     if (!results || results.length === 0) {

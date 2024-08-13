@@ -32,12 +32,23 @@ async function scrapeAPMS(departure, destination, date) {
     await page.click("#iskanje", { clickCount: 3 });
     await delay(2000);
 
-    // Handle if there are no results
+    // Check if results are found
+    const noResults = await page.evaluate(() => {
+        const resultContainer = document.querySelector('#rezultati');
+        return resultContainer && resultContainer.children.length === 0;
+    });
+
+    if (noResults) {
+        console.log("No schedules found.");
+        await browser.close();
+        return [];
+    }
+
     try {
         await page.waitForSelector('.latest-item.bts.grid-template-content', { timeout: 30000 });
+
         const scheduleData = await page.evaluate((dep, dest) => {
             const rows = Array.from(document.querySelectorAll('.latest-item.bts.grid-template-content'));
-            if (!rows.length) throw new Error("No schedule data elements found.");
 
             return rows.map((row, index) => {
                 const details = Array.from(row.querySelectorAll('.single-latest-fl p'));
@@ -51,11 +62,11 @@ async function scrapeAPMS(departure, destination, date) {
                     kilometers: details[3] ? details[3].textContent.trim() : "",
                     price: details[4] ? details[4].textContent.trim() : ""
                 };
-            });
+            }).filter(item => item.departureTime !== "" && item.arrivalTime !== ""); // Filter out invalid entries
         }, departure, destination);
 
         if (scheduleData.length === 0) {
-            console.log("No bus schedules found.");
+            console.log("No valid bus schedules found.");
             return [];
         } else {
             console.log(scheduleData);
@@ -82,6 +93,6 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-//scrapeAPMS('Ljubljana AP', 'Maribor AP', '08.04.2024').catch(err => console.error('Error executing scrapeAPMS:', err));
+//scrapeAPMS('Ljubljana AP', 'Maribor AP', '13.08.2024').catch(err => console.error('Error executing scrapeAPMS:', err));
 
 module.exports = { scrapeAPMS };

@@ -1,6 +1,7 @@
 const express = require('express');
 const redis = require('redis');
 const {MongoClient} = require('mongodb');
+const cron = require('node-cron');
 const {scrapeAPMS} = require("../scrapers/apms");
 const {scrapeArriva} = require("../scrapers/arriva");
 const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
@@ -14,32 +15,16 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
-
-const path = require('path');
 
 // Load destinations data
 const destinationsPath = path.join(__dirname, '../data/destinations/destinations.json');
 const destinations = JSON.parse(fs.readFileSync(destinationsPath, 'utf-8'));
 
 console.log('Destinations data loaded:', destinations);
-
-function getDestinationCode(kraj, type) {
-    const destination = destinations.find(dest => dest.Kraj.toLowerCase() === kraj.toLowerCase());
-    return destination ? destination[type] : null;
-}
-
-// Function to reformat date from dd.mm.yyyy to yyyy-mm-dd
-function reformatDate(date) {
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    if (datePattern.test(date)) {
-        return date;
-    }
-    const [day, month, year] = date.split('.');
-    return `${year}-${month}-${day}`;
-}
 
 // Connect to Redis
 const redisClient = redis.createClient({url: process.env.REDIS_URL});
@@ -53,23 +38,20 @@ redisClient.connect().then(() => {
 
 // Connect to MongoDB
 const uri = process.env.MONGODB_URI;
+let mongoClient;
 
 if (!uri) {
     console.error('MongoDB URI is not defined. Check your environment variables.');
 } else {
     async function main() {
-        const client = new MongoClient(uri);
-
+        mongoClient = new MongoClient(uri);
         try {
-            await client.connect();
+            await mongoClient.connect();
             console.log("Connected to MongoDB");
         } catch (e) {
             console.error('MongoDB connection error:', e);
-        } finally {
-            await client.close();
         }
     }
-
     main().catch(console.error);
 }
 
@@ -86,12 +68,74 @@ const retry = (fn, retries = 3) => async (...args) => {
     }
 };
 
+// Function to check Redis for existing data
+async function getCachedData(cacheKey) {
+    const cachedData = await redisClient.get(cacheKey);
+    if (cachedData) {
+        console.log('Cache hit');
+        return JSON.parse(cachedData);
+    }
+    return null;
+}
 
-// API Endpoints
-app.get('/webscraper/destinations', (req, res) => {
-    const destinationsList = destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj}));
-    res.json(destinationsList);
+// Function to refresh cache
+async function refreshCache() {
+    console.log('Starting cache refresh task.');
+    const db = mongoClient.db('webscraperDB');
+    const commonDestinations = await db.collection('transport').find({}).toArray();
+
+    const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
+    const date = new Date().toLocaleDateString('en-CA', options); // YYYY-MM-DD
+    console.log('Today: ' + date);
+
+    for (const {departure, destination} of commonDestinations) {
+        const tasks = [
+            {
+                name: 'APMS',
+                fn: scrapeAPMS,
+                cacheKey: `APMS-${departure}-${destination}-${date}`,
+                args: [departure, destination, date]
+            },
+            {
+                name: 'Arriva',
+                fn: scrapeArrivaByUrl,
+                cacheKey: `ArrivaByUrl-${departure}-${destination}-${date}`,
+                args: [departure, destination, date]
+            },
+            {
+                name: 'Train',
+                fn: scrapeSlovenskeZelezniceByUrl,
+                cacheKey: `Train-${departure}-${destination}-${date}`,
+                args: [departure, destination, date]
+            },
+            {
+                name: 'Prevozi',
+                fn: scrapePrevoziByUrl,
+                cacheKey: `PrevoziByUrl-${departure}-${destination}-${date}`,
+                args: [departure, destination, date]
+            }
+        ];
+
+        for (const task of tasks) {
+            try {
+                console.log(`Refreshing cache for ${task.name} - ${departure} to ${destination}`);
+                const result = await retry(task.fn)(...task.args);
+                await redisClient.setEx(task.cacheKey, 3600, JSON.stringify(result));
+                console.log(`${task.name} cache updated for ${departure} to ${destination}.`);
+            } catch (error) {
+                console.error(`Error refreshing cache for ${task.name} - ${departure} to ${destination}:`, error);
+            }
+        }
+    }
+
+    console.log('Cache refresh task completed.');
+}
+
+// Schedule the task to run every 30 minutes
+cron.schedule('*/30 * * * *', () => {
+    refreshCache();
 });
+refreshCache();
 
 app.post('/webscraper/searchAll', async (req, res) => {
     console.log('Starting request searchAll.');
@@ -100,42 +144,54 @@ app.post('/webscraper/searchAll', async (req, res) => {
     const cacheKey = `searchAll-${departure}-${destination}-${date}`;
     console.log(cacheKey);
 
-    // Mapping
-    const departureMapAPMS = getDestinationCode(departure, 'APMS');
-    const destinationMapAPMS = getDestinationCode(destination, 'APMS');
-    const departureMapArriva = getDestinationCode(departure, 'Arriva');
-    const destinationMapArriva = getDestinationCode(destination, 'Arriva');
-    const departureCodeTrain = getDestinationCode(departure, 'Vlak');
-    const destinationCodeTrain = getDestinationCode(destination, 'Vlak');
-    const departureMapPrevozi = getDestinationCode(departure, 'Prevozi');
-    const destinationMapPrevozi = getDestinationCode(destination, 'Prevozi');
+    // Checking Redis for cached data
+    const cachedData = await getCachedData(cacheKey);
+    if (cachedData) {
+        return res.json(cachedData);
+    }
+
+    const departureCodes = getDestinationCodes(departure);
+    const destinationCodes = getDestinationCodes(destination);
 
     // Validate mappings
-    if (!departureMapAPMS || !destinationMapAPMS || !departureMapArriva || !destinationMapArriva || !departureCodeTrain || !destinationCodeTrain || !departureMapPrevozi || !destinationMapPrevozi) {
+    if (!departureCodes.valid || !destinationCodes.valid) {
         return res.status(400).json({error: 'Invalid departure or destination location.'});
     }
 
-    try {
-        const tasks = [
-            {name: 'APMS', fn: scrapeAPMS, args: [departureMapAPMS, destinationMapAPMS, date]},
-            {name: 'Arriva', fn: scrapeArrivaByUrl, args: [departureMapArriva, destinationMapArriva, date]},
-            {name: 'Train', fn: scrapeSlovenskeZelezniceByUrl, args: [departureCodeTrain, destinationCodeTrain, date]},
-            {
-                name: 'Prevozi',
-                fn: scrapePrevoziByUrl,
-                args: [departureMapPrevozi, destinationMapPrevozi, reformatDate(date)]
-            }
-        ];
+    // Preparing the tasks, only including those with valid mappings
+    const tasks = [];
 
+    if (departureCodes.APMS && destinationCodes.APMS) {
+        tasks.push({name: 'APMS', fn: scrapeAPMS, args: [departureCodes.APMS, destinationCodes.APMS, date]});
+    }
+
+    if (departureCodes.Arriva && destinationCodes.Arriva) {
+        tasks.push({
+            name: 'Arriva',
+            fn: scrapeArrivaByUrl,
+            args: [departureCodes.Arriva, destinationCodes.Arriva, date]
+        });
+    }
+
+    tasks.push({
+        name: 'Train',
+        fn: scrapeSlovenskeZelezniceByUrl,
+        args: [departureCodes.Train, destinationCodes.Train, date]
+    });
+
+    if (departureCodes.Prevozi && destinationCodes.Prevozi) {
+        tasks.push({
+            name: 'Prevozi',
+            fn: scrapePrevoziByUrl,
+            args: [departureCodes.Prevozi, destinationCodes.Prevozi, reformatDate(date)]
+        });
+    }
+
+    try {
         const results = {};
         await Promise.all(tasks.map(async task => {
             console.log(`Starting ${task.name} scraper`);
-            try {
-                results[task.name] = await retry(task.fn)(...task.args);
-                console.log(`${task.name} results:`, results[task.name]);
-            } catch (error) {
-                console.error(`Error during ${task.name} scraping:`, error);
-            }
+            results[task.name] = await retry(task.fn)(...task.args);
         }));
 
         // Cache the results
@@ -158,42 +214,36 @@ app.post('/webscraper/searchAPMS', async (req, res) => {
     const destinationMap = getDestinationCode(destination, 'APMS');
 
     if (!departureMap || !destinationMap) {
-        return res.status(400).json({error: 'Invalid departure or destination location.'});
+        console.log('APMS does not support this departure or destination or it is invalid. Departure: {departureMap}, Destination: {destinationMap}');
     }
 
     try {
-        /*        const cachedData = await redisClient.get(cacheKey);
-                if (cachedData) {
-                    return res.json(JSON.parse(cachedData));
-                }*/
+        // Check Redis for cached data
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            // Check if cached data is valid (not an empty array or invalid)
+            if (Array.isArray(parsedData) && parsedData.length > 0 && parsedData[0].departureTime !== "undefined") {
+                console.log('Valid cache hit');
+                return res.json(parsedData);
+            } else {
+                console.log('Cache contains invalid or empty data, proceeding to scrape.');
+            }
+        }
 
-        const results = await retry(scrapeAPMS)(departure, destination, date);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        // If no valid cache, scrape the data
+        const results = await retry(scrapeAPMS)(departureMap, destinationMap, date);
+
+        // If results are valid, cache them; otherwise, store an empty array in cache
+        const cacheValue = results.length > 0 ? JSON.stringify(results) : JSON.stringify([]);
+        await redisClient.setEx(cacheKey, 3600, cacheValue);
+
         res.json(results);
     } catch (error) {
+        console.error('Error during scraping:', error);
         res.status(500).json({error: 'An error occurred while scraping data.'});
     }
     console.log('Ending request searchAPMS.');
-});
-
-app.post('/webscraper/searchArriva', async (req, res) => {
-    console.log('Starting request searchArriva.');
-    const {date, departure, destination} = req.body;
-    const cacheKey = `Arriva-${departure}-${destination}-${date}`;
-    console.log(cacheKey);
-    try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData) {
-            return res.json(JSON.parse(cachedData));
-        }
-
-        const results = await retry(scrapeArriva)(departure, destination, date);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
-        res.json(results);
-    } catch (error) {
-        res.status(500).json({error: 'An error occurred while scraping data.'});
-    }
-    console.log('Ending request searchArriva.');
 });
 
 app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
@@ -202,16 +252,15 @@ app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     const cacheKey = `ArrivaByUrl-${departure}-${destination}-${date}`;
     console.log(cacheKey);
 
-    // Mapping
-    const departureMap = getDestinationCode(departure, 'Arriva');
-    const destinationMap = getDestinationCode(destination, 'Arriva');
+    const departureCodes = getDestinationCodes(departure);
+    const destinationCodes = getDestinationCodes(destination);
 
-    if (!departureMap || !destinationMap) {
-        return res.status(400).json({error: 'Invalid departure or destination location.'});
+    if (!departureCodes.Arriva || !destinationCodes.Arriva) {
+        console.log({error: 'Arriva does not support this departure or destination or it is invalid.'});
     }
 
     try {
-        const results = await retry(scrapeArrivaByUrl, 3)(departureMap, destinationMap, date);
+        const results = await retry(scrapeArrivaByUrl, 3)(departureCodes.Arriva, destinationCodes.Arriva, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
@@ -226,6 +275,7 @@ app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
     const {date, departure, destination} = req.body;
     const cacheKey = `${departure}-${destination}-${date}`;
     console.log(cacheKey);
+
     try {
         const results = await retry(scrapeSlovenskeZeleznice)(departure, destination, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
@@ -247,16 +297,10 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     const destinationCode = getDestinationCode(destination, 'Vlak');
 
     if (!departureCode || !destinationCode) {
-        return res.status(400).json({error: 'Invalid departure or destination location.'});
+        console.log({error: 'Slovenske železnice do not support this departure or destination or it is invalid.'});
     }
 
     try {
-        /*        const cachedData = await redisClient.get(cacheKey);
-                if (cachedData) {
-                    console.log('Cache hit');
-                    return res.json(JSON.parse(cachedData));
-                }*/
-
         console.log('Cache miss, scraping data...');
         const results = await retry(scrapeSlovenskeZelezniceByUrl)(departureCode, destinationCode, date);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
@@ -266,26 +310,6 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
         res.status(500).json({error: 'An error occurred while scraping data.'});
     }
     console.log('Ending request searchSlovenskeZelezniceByUrl.');
-});
-
-app.post('/webscraper/searchPrevozi', async (req, res) => {
-    console.log('Starting request searchPrevozi.');
-    const {date, departure, destination} = req.body;
-    const cacheKey = `Prevozi-${departure}-${destination}-${date}`;
-    console.log(cacheKey);
-    try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData) {
-            return res.json(JSON.parse(cachedData));
-        }
-
-        const results = await retry(scrapePrevozi)(departure, destination, date);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
-        res.json(results);
-    } catch (error) {
-        res.status(500).json({error: 'An error occurred while scraping data.'});
-    }
-    console.log('Ending request searchPrevozi.');
 });
 
 app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
@@ -300,18 +324,10 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     const destinationMap = getDestinationCode(destination, 'Prevozi');
 
     if (!departureMap || !destinationMap) {
-        return res.status(400).json({error: 'Invalid departure or destination location.'});
+        console.log({error: 'Prevozi do not support this departure or destination or it is invalid.'});
     }
 
-
     try {
-        /*        const cachedData = await redisClient.get(cacheKey);
-                if (cachedData) {
-                    console.log('Cache hit');
-                    return res.json(JSON.parse(cachedData));
-                }
-                console.log('Cache miss, scraping data...');*/
-
         const results = await retry(scrapePrevoziByUrl)(departureMap, destinationMap, dateMap);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
@@ -321,6 +337,34 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     }
     console.log('Ending request searchPrevoziByUrl.');
 });
+
+// Helper methods
+function getDestinationCodes(kraj) {
+    const destination = destinations.find(dest => dest.Kraj.toLowerCase() === kraj.toLowerCase());
+    if (!destination) {
+        return {valid: false};
+    }
+
+    const mappings = {
+        APMS: destination.APMS || "",
+        Arriva: destination.Arriva || "",
+        Train: destination.Vlak || "",
+        Prevozi: destination.Prevozi || ""
+    };
+
+    const valid = Object.values(mappings).every(code => code !== "");
+
+    return {...mappings, valid};
+}
+
+function reformatDate(date) {
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    if (datePattern.test(date)) { // from dd.mm.yyyy to yyyy-mm-dd
+        return date;
+    }
+    const [day, month, year] = date.split('.');
+    return `${year}-${month}-${day}`;
+}
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

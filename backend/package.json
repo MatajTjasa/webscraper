@@ -23,6 +23,7 @@
     "express": "^4.19.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.1",
+    "node-cron": "^3.0.3",
     "puppeteer": "^22.15.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-recaptcha": "^3.6.8",

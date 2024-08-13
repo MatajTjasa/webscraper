@@ -1,0 +1,18 @@
+[
+  {
+    "departure": "Maribor",
+    "destination": "Celje"
+  },
+  {
+    "departure": "Maribor",
+    "destination": "Ljubljana"
+  },
+  {
+    "departure": "Ljubljana",
+    "destination": "Celje"
+  },
+  {
+    "departure": "Ljubljana",
+    "destination": "Maribor"
+  }
+]

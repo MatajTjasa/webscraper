@@ -3,7 +3,7 @@ import LoadingComponent from '../components/LoadingComponent';
 
 function ResultsTrains({results, isLoading}) {
     if (isLoading) {
-        return <LoadingComponent text="Pridobivanje podatkov iz strani Train..."/>;
+        return <LoadingComponent text="Pridobivanje podatkov iz strani Slovenske železnice..."/>;
     }
 
     if (!results || results.length === 0) {

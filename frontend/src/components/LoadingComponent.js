@@ -1,8 +1,6 @@
 import React from 'react';
 import '../App.css';
 
-//import busLoading from '../../public/bus_loading.svg'; // Import the SVG file
-
 function LoadingComponent({text}) {
     return (
         <div className="loading-container">
