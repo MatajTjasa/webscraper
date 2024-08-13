@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Results({results}) {
-    console.log('Results data:', results);
+    console.log('results data:', results);
 
     if (!results) {
         return <div>No results found.</div>;
