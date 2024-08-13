@@ -98,17 +98,13 @@ function SearchPage() {
             <SearchForm/>
             <div className="results-container mt-8 w-full">
 
-                {/* Render APMS Results */}
                 <ResultsAPMS results={apmsResults} isLoading={loadingAPMS}/>
 
-                {/* Render Arriva Results */}
                 <ResultsArriva results={arrivaResults} isLoading={loadingArriva}/>
 
-                {/* Render Train Results */}
-                {loadingTrains ? <div>Loading Trains...</div> : <ResultsTrains results={trainsResults}/>}
+                <ResultsTrains results={trainsResults} isLoading={loadingTrains}/>
 
-                {/* Render Prevozi Results */}
-                {loadingPrevozi ? <div>Loading Prevozi...</div> : <ResultsPrevozi results={prevoziResults}/>}
+                <ResultsPrevozi results={prevoziResults} isLoading={loadingPrevozi}/>
             </div>
         </div>
     );

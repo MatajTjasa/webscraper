@@ -1,12 +1,17 @@
 import React from 'react';
+import LoadingComponent from '../components/LoadingComponent';
 
-function ResultsArriva({results}) {
+function ResultsArriva({results, isLoading}) {
+    if (isLoading) {
+        return <LoadingComponent text="Pridobivanje podatkov iz strani Arriva..."/>;
+    }
+
     if (!results || results.length === 0) {
         return <div>No Arriva results available.</div>;
     }
 
     return (
-        <div className="result-section mb-8">
+        <div className="container result-section mb-8">
             <h2 className="text-2xl font-semibold mb-4">Arriva Results</h2>
             <table className="table-auto w-full bg-white rounded-md shadow-md">
                 <thead>

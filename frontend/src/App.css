@@ -57,10 +57,16 @@ body {
     justify-content: center;
     flex-direction: column;
     margin: 20px 0;
+    background: rgba(255, 255, 255, 0.8); /* Same as the search form */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-height: 100px; /* Optional: ensure it has some height even if the content is small */
 }
 
 .loading-icon {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     margin-bottom: 10px;
 }

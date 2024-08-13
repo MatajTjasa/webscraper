@@ -11,7 +11,7 @@ function ResultsAPMS({results, isLoading}) {
     }
 
     return (
-        <div className="result-section mb-8">
+        <div className="container result-section mb-8">
             <h2 className="text-2xl font-semibold mb-4">APMS Results</h2>
             <table className="table-auto w-full bg-white rounded-md shadow-md">
                 <thead>

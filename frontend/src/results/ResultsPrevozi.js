@@ -1,15 +1,20 @@
 import React from 'react';
+import LoadingComponent from '../components/LoadingComponent';
 
-function ResultsPrevozi({results}) {
+function ResultsPrevozi({results, isLoading}) {
+    if (isLoading) {
+        return <LoadingComponent text="Pridobivanje podatkov iz strani Prevozi..."/>;
+    }
+
     if (!results || results.length === 0) {
         return <div>No Prevozi results available.</div>;
     }
 
     return (
-        <div className="result-section mb-8">
+        <div className="container result-section mb-8">
             <h2 className="text-2xl font-semibold mb-4">Prevozi Results</h2>
             {results.map((route, index) => (
-                <div key={index} className="result-section mb-8">
+                <div key={index} className="mb-8">
                     <h3 className="text-xl font-semibold mb-2">
                         {route.from} to {route.to} ({route.count} trips)
                     </h3>
