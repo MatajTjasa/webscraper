@@ -15,6 +15,7 @@ async function scrapePrevoziByUrl(departure, destination, date) {
     const page = await browser.newPage();
 
     const url = `https://prevoz.org/prevoz/list/?fc=SI&f=${encodeURIComponent(departure)}&tc=SI&t=${encodeURIComponent(destination)}&d=${date}`;
+    console.log('Prevozi URL: ' + url)
 
     try {
         await page.goto(url, {waitUntil: 'networkidle0'});

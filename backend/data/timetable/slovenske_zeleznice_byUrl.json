@@ -168,7 +168,7 @@
     "arrivalTime": "15:54",
     "travelTime": "02:35",
     "trainType": "LPV 2907",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -177,7 +177,7 @@
     "arrivalTime": "16:59",
     "travelTime": "02:45",
     "trainType": "LPV 2917",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",
@@ -186,7 +186,7 @@
     "arrivalTime": "17:38",
     "travelTime": "02:03",
     "trainType": "MV 155",
-    "isActive": false
+    "isActive": true
   },
   {
     "departureStation": "Maribor",

@@ -35,7 +35,7 @@ async function scrapeAPMS(departure, destination, date) {
     // Check if results are found
     const noResults = await page.evaluate(() => {
         const resultContainer = document.querySelector('#rezultati');
-        return resultContainer && resultContainer.children.length === 0;
+        return !resultContainer || resultContainer.children.length === 0;
     });
 
     if (noResults) {
@@ -52,17 +52,26 @@ async function scrapeAPMS(departure, destination, date) {
 
             return rows.map((row, index) => {
                 const details = Array.from(row.querySelectorAll('.single-latest-fl p'));
+                const departureTime = details[0] ? details[0].textContent.trim() : "undefined";
+                const arrivalTime = details[1] ? details[1].textContent.trim() : "undefined";
+
+                // Filtering out rows with "undefined" data
+                if (departureTime === "undefined" || arrivalTime === "undefined") {
+                    console.log("No schedules found.");
+                    return [];
+                }
+
                 return {
                     id: index + 1,
                     departure: dep,
-                    departureTime: details[0] ? details[0].textContent.trim() : "",
+                    departureTime,
                     arrival: dest,
-                    arrivalTime: details[1] ? details[1].textContent.trim() : "",
+                    arrivalTime,
                     duration: details[2] ? details[2].textContent.trim() : "",
                     kilometers: details[3] ? details[3].textContent.trim() : "",
                     price: details[4] ? details[4].textContent.trim() : ""
                 };
-            }).filter(item => item.departureTime !== "" && item.arrivalTime !== ""); // Filter out invalid entries
+            }).filter(item => item.departureTime && item.arrivalTime); // Filter out invalid entries
         }, departure, destination);
 
         if (scheduleData.length === 0) {
@@ -93,6 +102,7 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-//scrapeAPMS('Ljubljana AP', 'Maribor AP', '13.08.2024').catch(err => console.error('Error executing scrapeAPMS:', err));
+// Example call for testing
+// scrapeAPMS('Maribor AP', 'Ljubljana AP', '13.08.2024').catch(err => console.error('Error executing scrapeAPMS:', err));
 
 module.exports = { scrapeAPMS };

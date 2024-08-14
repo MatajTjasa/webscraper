@@ -44,14 +44,14 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         console.log('DepartureID: ', departureId);
 
         // Extract destination ID
-        console.log("typing destination");
+        console.log("Typing destination");
         await page.type('.input-destination', destination);
-        console.log("waiting for selector dropdown destination");
+        console.log("Waiting for selector dropdown destination");
         await page.waitForSelector('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', {visible: true});
-        console.log("clicking selector dropdown destination");
+        console.log("Clicking selector dropdown destination");
         await page.click('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item');
         await delay(1000);
-        console.log("extracting destination id....");
+        console.log("Extracting destination id....");
         const destinationId = await extractId(page, '#destination_id');
         await delay(1000);
         console.log('DestinationID: ', destinationId);
@@ -162,6 +162,3 @@ function delay(ms) {
 }
 
 module.exports = {scrapeArrivaByUrl};
-
-// Example usage
-//scrapeArrivaByUrl('Ljubljana AP', 'Maribor AP', '08.08.2024').catch(err => console.error('Error executing scrapeArrivaByUrl:', err));
