@@ -72,7 +72,7 @@ function scheduleCacheRefresh(redisClient, PORT) {
     const timeIntervals = [
         {interval: '*/30 * * * *', offset: 0, ttl: 1800},  // 30 minutes TTL (time to live) for today
         {interval: '0 * * * *', offset: 1, ttl: 3600},      // 1 hour TTL for tomorrow
-        {interval: '0 */8 * * *', offset: 2, ttl: 14400}    // 4 hours TTL for the day after tomorrow
+        {interval: '0 */4 * * *', offset: 2, ttl: 14400}    // 4 hours TTL for the day after tomorrow
     ];
 
     for (const {interval, offset, ttl} of timeIntervals) {
