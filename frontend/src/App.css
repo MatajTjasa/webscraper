@@ -45,7 +45,7 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.8); /* Adjust the opacity */
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -57,12 +57,12 @@ body {
     justify-content: center;
     flex-direction: column;
     margin: 20px 0;
-    background: rgba(255, 255, 255, 0.8); /* Same as the search form */
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    min-height: 100px; /* Optional: ensure it has some height even if the content is small */
+    min-height: 100px;
 }
 
 .loading-icon {
