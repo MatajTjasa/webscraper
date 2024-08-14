@@ -156,6 +156,7 @@ app.post('/webscraper/searchAPMS', async (req, res) => {
 
     if (!validateTransportSupport(departureCodes, destinationCodes, 'APMS')) {
         console.log('APMS does not support this departure or destination.');
+        return res.json({message: "Departure or destination is not supported."});
     }
 
     try {
@@ -204,6 +205,7 @@ app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
 
     if (!validateTransportSupport(departureCodes, destinationCodes, 'Arriva')) {
         console.log('Arriva does not support this departure or destination.');
+        return res.json({message: "Departure or destination is not supported."});
     }
 
     try {
@@ -251,6 +253,7 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
 
     if (!validateTransportSupport(departureCodes, destinationCodes, 'Train')) {
         console.log('Slovenske železnice do not support this departure or destination.');
+        return res.json({message: "Departure or destination is not supported."});
     }
 
     try {
@@ -304,6 +307,7 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
 
     if (!validateTransportSupport(departureCodes, destinationCodes, 'Prevozi')) {
         console.log('Prevozi do not support this departure or destination.');
+        return res.json({message: "Departure or destination is not supported."});
     }
 
     try {

@@ -1,7 +1,6 @@
 const {MongoClient} = require('mongodb');
 const cron = require('node-cron');
-const axios = require('axios'); // Add Axios to make HTTP requests
-const redis = require('redis');
+const axios = require('axios');
 
 const uri = process.env.MONGODB_URI;
 let mongoClient;
@@ -16,126 +15,79 @@ async function getCommonDestinations() {
     return await collection.find({}).toArray();
 }
 
-async function refreshCache(redisClient, PORT) {
-    console.log('Starting cache refresh task.');
-
+function getSlovenianDateString(offset = 0) {
     const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
-    const date = new Date().toLocaleDateString('sl-SI', options).split(' ').join(''); // DD.MM.YYYY
+    return new Date(Date.now() + offset * 86400000).toLocaleDateString('sl-SI', options).split(' ').join('');
+}
+
+async function refreshCacheForDate(redisClient, PORT, date, ttl) {
+    console.log(`Starting cache refresh task for ${date}.`);
+
     const commonDestinations = await getCommonDestinations();
 
-    for (const {departure, destination} of commonDestinations) {
-        const tasks = [
-            {
-                name: 'APMS',
-                url: `/webscraper/searchAPMS`,
-                cacheKey: `APMS-${departure}-${destination}-${date}`,
-                data: {departure, destination, date}
-            },
-            {
-                name: 'Arriva',
-                url: `/webscraper/searchArrivaByUrl`,
-                cacheKey: `ArrivaByUrl-${departure}-${destination}-${date}`,
-                data: {departure, destination, date}
-            },
-            {
-                name: 'Train',
-                url: `/webscraper/searchSlovenskeZelezniceByUrl`,
-                cacheKey: `Train-${departure}-${destination}-${date}`,
-                data: {departure, destination, date}
-            },
-            {
-                name: 'Prevozi',
-                url: `/webscraper/searchPrevoziByUrl`,
-                cacheKey: `PrevoziByUrl-${departure}-${destination}-${date}`,
-                data: {departure, destination, date}
-            }
-        ];
+    const tasks = commonDestinations.flatMap(({departure, destination}) => [
+        {
+            name: 'APMS',
+            url: `/webscraper/searchAPMS`,
+            cacheKey: `APMS-${departure}-${destination}-${date}`,
+            data: {departure, destination, date}
+        },
+        {
+            name: 'Arriva',
+            url: `/webscraper/searchArrivaByUrl`,
+            cacheKey: `ArrivaByUrl-${departure}-${destination}-${date}`,
+            data: {departure, destination, date}
+        },
+        {
+            name: 'Train',
+            url: `/webscraper/searchSlovenskeZelezniceByUrl`,
+            cacheKey: `Train-${departure}-${destination}-${date}`,
+            data: {departure, destination, date}
+        },
+        {
+            name: 'Prevozi',
+            url: `/webscraper/searchPrevoziByUrl`,
+            cacheKey: `PrevoziByUrl-${departure}-${destination}-${date}`,
+            data: {departure, destination, date}
+        }
+    ]);
 
-        for (const task of tasks) {
-            try {
-                console.log(`Refreshing cache for ${task.name} - ${departure} to ${destination}`);
+    for (const task of tasks) {
+        try {
+            console.log(`Refreshing cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}`);
 
-                const result = await axios.post(`http://localhost:${PORT}${task.url}`, task.data);
+            const result = await axios.post(`http://localhost:${PORT}${task.url}`, task.data);
+            await redisClient.setEx(task.cacheKey, ttl, JSON.stringify(result.data));
 
-                await redisClient.setEx(task.cacheKey, 1800, JSON.stringify(result.data));
-                console.log(`${task.name} cache updated for ${departure} to ${destination}.`);
-            } catch (error) {
-                console.error(`Error refreshing cache for ${task.name} - ${departure} to ${destination}:`, error);
-            }
+            console.log(`${task.name} cache updated for ${task.data.departure} to ${task.data.destination} on ${date}.`);
+        } catch (error) {
+            console.error(`Error refreshing cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}:`, error);
         }
     }
 
-    console.log('Cache refresh task completed.');
+    console.log(`Cache refresh task completed for ${date}.`);
 }
 
 function scheduleCacheRefresh(redisClient, PORT) {
-    // Runs every 30 minutes
-    cron.schedule('*/30 * * * *', () => {
-        refreshCache(redisClient, PORT);
-    });
+    const timeIntervals = [
+        {interval: '*/30 * * * *', offset: 0, ttl: 1800},  // 30 minutes TTL (time to live) for today
+        {interval: '0 * * * *', offset: 1, ttl: 3600},      // 1 hour TTL for tomorrow
+        {interval: '0 */8 * * *', offset: 2, ttl: 14400}    // 4 hours TTL for the day after tomorrow
+    ];
 
-    // Run once on startup
-    refreshCache(redisClient, PORT);
+    for (const {interval, offset, ttl} of timeIntervals) {
+        cron.schedule(interval, () => {
+            const date = getSlovenianDateString(offset);
+            refreshCacheForDate(redisClient, PORT, date, ttl);
+        });
+    }
+
+    // Initial cache refresh for today, tomorrow, and the day after tomorrow
+    timeIntervals.forEach(({offset, ttl}) => {
+        refreshCacheForDate(redisClient, PORT, getSlovenianDateString(offset), ttl);
+    });
 }
 
 module.exports = {
     scheduleCacheRefresh,
 };
-
-/*async function refreshCache() {
-    console.log('Starting cache refresh task.');
-    const db = mongoClient.db('webscraperDB');
-    const commonDestinations = await db.collection('transport').find({}).toArray();
-
-    const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
-    const date = new Date().toLocaleDateString('sl-SI', options); // DD.MM.YYYY
-    // console.log('Today: ' + date);
-    for (const {departure, destination} of commonDestinations) {
-        const tasks = [
-            {
-                name: 'APMS',
-                fn: scrapeAPMS,
-                cacheKey: `APMS-${departure}-${destination}-${date}`,
-                args: [departure, destination, date]
-            },
-            {
-                name: 'Arriva',
-                fn: scrapeArrivaByUrl,
-                cacheKey: `ArrivaByUrl-${departure}-${destination}-${date}`,
-                args: [departure, destination, date]
-            },
-            {
-                name: 'Train',
-                fn: scrapeSlovenskeZelezniceByUrl,
-                cacheKey: `Train-${departure}-${destination}-${date}`,
-                args: [departure, destination, date]
-            },
-            {
-                name: 'Prevozi',
-                fn: scrapePrevoziByUrl,
-                cacheKey: `PrevoziByUrl-${departure}-${destination}-${date}`,
-                args: [departure, destination, date]
-            }
-        ];
-
-        for (const task of tasks) {
-            try {
-                console.log(`Refreshing cache for ${task.name} - ${departure} to ${destination}`);
-                const result = await retry(task.fn)(...task.args);
-                await redisClient.setEx(task.cacheKey, 3600, JSON.stringify(result));
-                console.log(`${task.name} cache updated for ${departure} to ${destination}.`);
-            } catch (error) {
-                console.error(`Error refreshing cache for ${task.name} - ${departure} to ${destination}:`, error);
-            }
-        }
-    }
-
-    console.log('Cache refresh task completed.');
-}
-
-
-// Schedule the task to run every 30 minutes
-cron.schedule('*!/30 * * * *', () => {
-    refreshCache();
-});
-refreshCache();*/
