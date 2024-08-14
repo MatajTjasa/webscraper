@@ -10,6 +10,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const navigate = useNavigate();
     const departureRef = useRef(null);
@@ -58,16 +59,17 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (isSubmitting) return; // Prevent multiple submissions
+
         if (!departure || !destination || !date) {
             alert('Please fill in all fields.');
             return;
         }
 
-        if (onSearch) {
-            onSearch(departure, destination, date);
-        } else {
-            navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
-        }
+        setIsSubmitting(true); // Set to true to prevent further submissions
+        navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
+        // Force the page to reload
+        window.location.reload();
     };
 
     const handleDepartureChange = (e) => {
@@ -161,7 +163,10 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                             />
                         </div>
                         <button type="submit"
-                                className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4">Search
+                                className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4"
+                                disabled={isSubmitting} // Disable button when submitting
+                        >
+                            {isSubmitting ? 'Searching...' : 'Search'}
                         </button>
                     </form>
                 </header>

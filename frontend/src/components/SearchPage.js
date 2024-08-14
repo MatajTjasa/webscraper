@@ -25,6 +25,18 @@ function SearchPage() {
         const destination = queryParams.get('destination');
         const date = queryParams.get('date');
 
+        // Reset loading states
+        setLoadingArriva(true);
+        setLoadingTrains(true);
+        setLoadingAPMS(true);
+        setLoadingPrevozi(true);
+
+        // Reset results
+        setArrivaResults(null);
+        setTrainsResults(null);
+        setApmsResults(null);
+        setPrevoziResults(null);
+
         if (departure && destination && date) {
             fetchPrevoziResults(departure, destination, date);
             fetchArrivaResults(departure, destination, date);
