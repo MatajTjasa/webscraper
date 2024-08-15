@@ -11,23 +11,31 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
     const departureRef = useRef(null);
     const destinationRef = useRef(null);
 
+    // Fetch destinations on component mount
     useEffect(() => {
         const fetchDestinations = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/webscraper/destinations');
                 setDestinations(response.data);
             } catch (error) {
-                console.error('Error fetching destinations:', error);
+                if (error.response && error.response.status === 429) {
+                    setErrorMessage('Ups, preveč zahtev! Počakaj malo in poskusi znova.');
+                } else {
+                    console.error('Error fetching destinations:', error);
+                    setErrorMessage('Nekaj je šlo narobe pri iskanju destinacij. Poskusi znova kasneje.');
+                }
             }
         };
         fetchDestinations();
     }, []);
 
+    // Handle click outside of dropdowns to close them
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (departureRef.current && !departureRef.current.contains(event.target)) {
@@ -62,14 +70,19 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
         if (isSubmitting) return; // Prevent multiple submissions
 
         if (!departure || !destination || !date) {
-            alert('Please fill in all fields.');
+            alert('Prosim zapolni vsa polja.');
             return;
         }
 
         setIsSubmitting(true); // Set to true to prevent further submissions
+
+        // Navigate to results page
         navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
-        // Force the page to reload
-        window.location.reload();
+
+        // Simulate a delay for user experience (e.g., showing loading)
+        setTimeout(() => {
+            setIsSubmitting(false);
+        }, 500);
     };
 
     const handleDepartureChange = (e) => {
@@ -166,9 +179,10 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                                 className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4"
                                 disabled={isSubmitting} // Disable button when submitting
                         >
-                            {isSubmitting ? 'Searching...' : 'Search'}
+                            {isSubmitting ? 'Iskanje...' : 'Išči'}
                         </button>
                     </form>
+                    {errorMessage && <p className="error-message text-red-500 mt-4">{errorMessage}</p>}
                 </header>
             </div>
         </div>

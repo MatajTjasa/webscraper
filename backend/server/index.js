@@ -7,6 +7,7 @@ const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice
 const {scheduleCacheRefresh} = require('./cacheManager');
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
+const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -16,6 +17,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+const limiter = rateLimit({
+    windowMs: 5 * 60 * 1000, // 5min
+    max: 50, // limit of requests in 5min
+    message: "Too many requests from this IP, please try again after 15 minutes"
+});
+app.use(limiter);
 
 // Connect to Redis
 const redisClient = redis.createClient({url: process.env.REDIS_URL});
@@ -28,6 +35,22 @@ redisClient.connect().then(() => {
     console.error('Redis connection error:', err);
 });
 
+const ongoingRequests = new Map();
+
+function trackRequest(key, promise, controller) {
+    ongoingRequests.set(key, {promise, controller});
+}
+
+function clearRequest(key) {
+    ongoingRequests.delete(key);
+}
+
+function abortRequest(key) {
+    if (ongoingRequests.has(key)) {
+        ongoingRequests.get(key).controller.abort();
+        ongoingRequests.delete(key);
+    }
+}
 
 // Function to check Redis for existing data
 async function getCachedData(cacheKey) {
@@ -42,145 +65,86 @@ async function getCachedData(cacheKey) {
 // API
 app.get('/webscraper/destinations', async (req, res) => {
     const cacheKey = 'destinations';
-
     let destinations = await getCachedData(cacheKey);
 
     if (!destinations) {
         destinations = await getDestinationsFromDatabase();
-
-        await redisClient.setEx(cacheKey, 43200, JSON.stringify(destinations)); //12h TTL
+        await redisClient.setEx(cacheKey, 43200, JSON.stringify(destinations)); // 12h TTL
     }
 
     res.json(destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj})));
 });
 
-app.post('/webscraper/searchAPMS', async (req, res) => {
-    console.log('Starting request searchAPMS.');
-    const {date, departure, destination} = req.body;
-    const cacheKey = `APMS-${departure}-${destination}-${date}`;
-    console.log(cacheKey);
+async function handleSearch(req, res, scraperFn, transportType, formatDate = false) {
+    let {date, departure, destination} = req.body;
+    const cacheKey = `${transportType}-${departure}-${destination}-${date}`;
+
+    date = formatDate ? reformatDate(date) : date;
+
+    if (ongoingRequests.has(cacheKey)) {
+        console.log('Duplicate request found, terminating the first one.');
+        abortRequest(cacheKey);
+    }
+
+    const controller = new AbortController();
+    const signal = controller.signal;
 
     try {
         const cachedData = await redisClient.get(cacheKey);
         if (cachedData && cachedData !== '[]') {
-            console.log('Retrieving APMS data from cache.')
+            console.log('Retrieving data from cache.');
             return res.json(JSON.parse(cachedData));
         }
 
+        const departureCodes = await getDestinationCodes(departure, redisClient);
+        const destinationCodes = await getDestinationCodes(destination, redisClient);
 
-        const departureCodes = await await getDestinationCodes(departure, redisClient);
-        const destinationCodes = await await await getDestinationCodes(destination, redisClient);
-
-        if (!validateTransportSupport(departureCodes, destinationCodes, 'APMS')) {
-            console.log('APMS does not support this departure or destination.');
+        if (!validateTransportSupport(departureCodes, destinationCodes, transportType)) {
+            console.log(`${transportType} does not support this departure or destination.`);
             return res.json({message: "Departure or destination is not supported."});
         }
 
-        const results = await retry(scrapeAPMS)(departureCodes.APMS, destinationCodes.APMS, date);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        const scraperPromise = retry(scraperFn)(departureCodes[transportType], destinationCodes[transportType], date, {signal});
+        trackRequest(cacheKey, scraperPromise, controller);
+
+        const results = await scraperPromise;
+        clearRequest(cacheKey);
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache the results
         res.json(results);
     } catch (error) {
-        console.error('Error during scraping:', error);
-        res.status(500).json({error: 'An error occurred while scraping data.'});
+        clearRequest(cacheKey);
+        if (error.name === 'AbortError') {
+            console.log(`Request ${cacheKey} was aborted.`);
+        } else {
+            console.error('Error during scraping:', error);
+            res.status(500).json({error: 'An error occurred while scraping data.'});
+        }
     }
+}
+
+app.post('/webscraper/searchAPMS', async (req, res) => {
+    console.log('Starting request searchAPMS.');
+    await handleSearch(req, res, scrapeAPMS, 'APMS');
     console.log('Ending request searchAPMS.');
 });
 
 app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     console.log('Starting request searchArrivaByUrl.');
-    const {date, departure, destination} = req.body;
-    const cacheKey = `ArrivaByUrl-${departure}-${destination}-${date}`;
-    console.log(cacheKey);
-
-    try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData && cachedData !== '[]') {
-            console.log('Retrieving Arriva data from cache.')
-            return res.json(JSON.parse(cachedData));
-        }
-
-        const departureCodes = await await getDestinationCodes(departure, redisClient);
-        const destinationCodes = await getDestinationCodes(destination, redisClient);
-
-        if (!validateTransportSupport(departureCodes, destinationCodes, 'Arriva')) {
-            console.log('Arriva does not support this departure or destination.');
-            return res.json({message: "Departure or destination is not supported."});
-        }
-
-        const results = await retry(scrapeArrivaByUrl, 3)(departureCodes.Arriva, destinationCodes.Arriva, date);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
-        res.json(results);
-
-    } catch (error) {
-        console.error('Error during scraping or cache operation:', error);
-        res.status(500).json({error: 'An error occurred while scraping data.'});
-    }
+    await handleSearch(req, res, scrapeArrivaByUrl, 'Arriva');
     console.log('Ending request searchArrivaByUrl.');
 });
 
 app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     console.log('Starting request searchSlovenskeZelezniceByUrl.');
-    const {date, departure, destination} = req.body;
-    const cacheKey = `Train-${departure}-${destination}-${date}`;
-    console.log(cacheKey);
-
-    try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData && cachedData !== '[]') {
-            console.log('Retrieving Slovenske železnice data from cache.')
-            return res.json(JSON.parse(cachedData));
-        }
-
-        const departureCodes = await getDestinationCodes(departure, redisClient);
-        const destinationCodes = await getDestinationCodes(destination, redisClient);
-
-        if (!validateTransportSupport(departureCodes, destinationCodes, 'Train')) {
-            console.log('Slovenske železnice do not support this departure or destination.');
-            return res.json({message: "Departure or destination is not supported."});
-        }
-
-        console.log('Cache miss, scraping data...');
-        const results = await retry(scrapeSlovenskeZelezniceByUrl)(departureCodes.Train, destinationCodes.Train, date);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
-        res.json(results);
-    } catch (error) {
-        console.error('Error during scraping or cache operation:', error);
-        res.status(500).json({error: 'An error occurred while scraping data.'});
-    }
+    await handleSearch(req, res, scrapeSlovenskeZelezniceByUrl, 'Train');
     console.log('Ending request searchSlovenskeZelezniceByUrl.');
 });
 
 app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     console.log('Starting request searchPrevoziByUrl.');
-    const {date, departure, destination} = req.body;
-    const cacheKey = `PrevoziByUrl-${departure}-${destination}-${date}`;
-    console.log(cacheKey);
-
-    try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData && cachedData !== '[]') {
-            console.log('Retrieving Prevozi data from cache.')
-            return res.json(JSON.parse(cachedData));
-        }
-
-        const departureCodes = await getDestinationCodes(departure, redisClient);
-        const destinationCodes = await getDestinationCodes(destination, redisClient);
-
-        if (!validateTransportSupport(departureCodes, destinationCodes, 'Prevozi')) {
-            console.log('Prevozi do not support this departure or destination.');
-            return res.json({message: "Departure or destination is not supported."});
-        }
-
-        const results = await retry(scrapePrevoziByUrl)(departureCodes.Prevozi, destinationCodes.Prevozi, reformatDate(date));
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
-        res.json(results);
-    } catch (error) {
-        console.error('Error during scraping or cache operation:', error);
-        res.status(500).json({error: 'An error occurred while scraping data.'});
-    }
+    await handleSearch(req, res, scrapePrevoziByUrl, 'Prevozi', true);
     console.log('Ending request searchPrevoziByUrl.');
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
