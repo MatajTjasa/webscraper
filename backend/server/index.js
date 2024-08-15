@@ -1,6 +1,5 @@
 const express = require('express');
 const redis = require('redis');
-const {MongoClient} = require('mongodb');
 const {scrapeAPMS} = require("../scrapers/apms");
 const {scrapeArriva} = require("../scrapers/arriva");
 const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
@@ -9,42 +8,17 @@ const {scrapePrevoziByUrl} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZeleznice} = require("../scrapers/slovenske_zeleznice");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
 const {scheduleCacheRefresh} = require('./cacheManager');
+const {retry, validateTransportSupport, getDestinationCodes, reformatDate} = require('./helpers');
+const {getDestinationsFromDatabase} = require('./database');
 const cors = require('cors');
-const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const path = require('path');
 
 app.use(cors());
 app.use(express.json());
 
-// Load destinations data
-const destinationsPath = path.join(__dirname, '../data/destinations/destinations.json');
-const destinations = JSON.parse(fs.readFileSync(destinationsPath, 'utf-8'));
-
-console.log('Destinations data loaded:', destinations);
-
-// Connect to MongoDB
-const uri = process.env.MONGODB_URI;
-let mongoClient;
-
-if (!uri) {
-    console.error('MongoDB URI is not defined. Check your environment variables.');
-} else {
-    async function main() {
-        mongoClient = new MongoClient(uri);
-        try {
-            await mongoClient.connect();
-            console.log("Connected to MongoDB");
-        } catch (e) {
-            console.error('MongoDB connection error:', e);
-        }
-    }
-
-    main().catch(console.error);
-}
 
 // Connect to Redis
 const redisClient = redis.createClient({url: process.env.REDIS_URL});
@@ -69,11 +43,19 @@ async function getCachedData(cacheKey) {
 }
 
 // API
+app.get('/webscraper/destinations', async (req, res) => {
+    const cacheKey = 'destinations';
 
-app.get('/webscraper/destinations', (req, res) => {
-    const destinationsList = destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj}));
-    res.json(destinationsList);
-})
+    let destinations = await getCachedData(cacheKey);
+
+    if (!destinations) {
+        destinations = await getDestinationsFromDatabase();
+
+        await redisClient.setEx(cacheKey, 43200, JSON.stringify(destinations)); //12h TTL
+    }
+
+    res.json(destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj})));
+});
 
 app.post('/webscraper/searchAll', async (req, res) => {
     console.log('Starting request searchAll.');
@@ -88,8 +70,8 @@ app.post('/webscraper/searchAll', async (req, res) => {
         return res.json(cachedData);
     }
 
-    const departureCodes = getDestinationCodes(departure);
-    const destinationCodes = getDestinationCodes(destination);
+    const departureCodes = await getDestinationCodes(departure, redisClient);
+    const destinationCodes = await getDestinationCodes(destination, redisClient);
 
     // Validate mappings
     if (!departureCodes.valid || !destinationCodes.valid) {
@@ -165,8 +147,8 @@ app.post('/webscraper/searchAPMS', async (req, res) => {
         }
 
 
-        const departureCodes = getDestinationCodes(departure);
-        const destinationCodes = getDestinationCodes(destination);
+        const departureCodes = await await getDestinationCodes(departure, redisClient);
+        const destinationCodes = await await await getDestinationCodes(destination, redisClient);
 
         if (!validateTransportSupport(departureCodes, destinationCodes, 'APMS')) {
             console.log('APMS does not support this departure or destination.');
@@ -221,8 +203,8 @@ app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
             return res.json(JSON.parse(cachedData));
         }
 
-        const departureCodes = getDestinationCodes(departure);
-        const destinationCodes = getDestinationCodes(destination);
+        const departureCodes = await await getDestinationCodes(departure, redisClient);
+        const destinationCodes = await getDestinationCodes(destination, redisClient);
 
         if (!validateTransportSupport(departureCodes, destinationCodes, 'Arriva')) {
             console.log('Arriva does not support this departure or destination.');
@@ -246,8 +228,8 @@ app.post('/webscraper/searchSlovenskeZeleznice', async (req, res) => {
     const cacheKey = `${departure}-${destination}-${date}`;
     console.log(cacheKey);
 
-    const departureCodes = getDestinationCodes(departure);
-    const destinationCodes = getDestinationCodes(destination);
+    const departureCodes = await getDestinationCodes(departure, redisClient);
+    const destinationCodes = await getDestinationCodes(destination, redisClient);
 
     if (!validateTransportSupport(departureCodes, destinationCodes, 'Train')) {
         console.log('Slovenske železnice do not support this departure or destination.');
@@ -276,8 +258,8 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
             return res.json(JSON.parse(cachedData));
         }
 
-        const departureCodes = getDestinationCodes(departure);
-        const destinationCodes = getDestinationCodes(destination);
+        const departureCodes = await getDestinationCodes(departure, redisClient);
+        const destinationCodes = await getDestinationCodes(destination, redisClient);
 
         if (!validateTransportSupport(departureCodes, destinationCodes, 'Train')) {
             console.log('Slovenske železnice do not support this departure or destination.');
@@ -301,8 +283,8 @@ app.post('/webscraper/searchPrevozi', async (req, res) => {
     const cacheKey = `Prevozi-${departure}-${destination}-${date}`;
     console.log(cacheKey);
 
-    const departureCodes = getDestinationCodes(departure);
-    const destinationCodes = getDestinationCodes(destination);
+    const departureCodes = await getDestinationCodes(departure, redisClient);
+    const destinationCodes = await getDestinationCodes(destination, redisClient);
 
     if (!validateTransportSupport(departureCodes, destinationCodes, 'Prevozi')) {
         console.log('Prevozi do not support this departure or destination.');
@@ -336,8 +318,8 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
             return res.json(JSON.parse(cachedData));
         }
 
-        const departureCodes = getDestinationCodes(departure);
-        const destinationCodes = getDestinationCodes(destination);
+        const departureCodes = await getDestinationCodes(departure, redisClient);
+        const destinationCodes = await getDestinationCodes(destination, redisClient);
 
         if (!validateTransportSupport(departureCodes, destinationCodes, 'Prevozi')) {
             console.log('Prevozi do not support this departure or destination.');
@@ -354,55 +336,6 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     console.log('Ending request searchPrevoziByUrl.');
 });
 
-// Helper methods
-const retry = (fn, retries = 3) => async (...args) => {
-    for (let i = 0; i < retries; i++) {
-        try {
-            console.log(`Attempt ${i + 1} to run ${fn.name}`);
-            return await fn(...args);
-        } catch (error) {
-            console.warn(`Attempt ${i + 1} failed:`, error);
-            if (i === retries - 1) throw error;
-        }
-    }
-};
-
-function validateTransportSupport(departureCodes, destinationCodes, transportType) {
-    const departureMap = departureCodes[transportType];
-    const destinationMap = destinationCodes[transportType];
-
-    if (!departureMap || !destinationMap) {
-        return false;
-    }
-    return true;
-}
-
-function getDestinationCodes(kraj) {
-    const destination = destinations.find(dest => dest.Kraj.toLowerCase() === kraj.toLowerCase());
-    if (!destination) {
-        return {valid: false};
-    }
-
-    const mappings = {
-        APMS: destination.APMS || "",
-        Arriva: destination.Arriva || "",
-        Train: destination.Vlak || "",
-        Prevozi: destination.Prevozi || ""
-    };
-
-    const valid = Object.values(mappings).every(code => code !== "");
-
-    return {...mappings, valid};
-}
-
-function reformatDate(date) {
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    if (datePattern.test(date)) { // from dd.mm.yyyy to yyyy-mm-dd
-        return date;
-    }
-    const [day, month, year] = date.split('.');
-    return `${year}-${month}-${day}`;
-}
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

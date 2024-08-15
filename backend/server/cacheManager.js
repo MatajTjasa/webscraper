@@ -1,19 +1,6 @@
-const {MongoClient} = require('mongodb');
 const cron = require('node-cron');
 const axios = require('axios');
-
-const uri = process.env.MONGODB_URI;
-let mongoClient;
-
-async function getCommonDestinations() {
-    if (!mongoClient) {
-        mongoClient = new MongoClient(uri);
-        await mongoClient.connect();
-    }
-    const database = mongoClient.db('webscraperDB');
-    const collection = database.collection('transport');
-    return await collection.find({}).toArray();
-}
+const {getCommonDestinations} = require('./database');
 
 function getSlovenianDateString(offset = 0) {
     const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
@@ -87,6 +74,7 @@ function scheduleCacheRefresh(redisClient, PORT) {
         refreshCacheForDate(redisClient, PORT, getSlovenianDateString(offset), ttl);
     });
 }
+
 
 module.exports = {
     scheduleCacheRefresh,

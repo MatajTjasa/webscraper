@@ -1,6 +1,6 @@
 [
   {
-    "Id": 1,
+    "_id": 1,
     "Kraj": "Maribor",
     "Vlak": "43400",
     "APMS": "Maribor AP",
@@ -8,7 +8,7 @@
     "Prevozi": "Maribor"
   },
   {
-    "Id": 2,
+    "_id": 2,
     "Kraj": "Ljubljana",
     "Vlak": "42300",
     "APMS": "Ljubljana AP",
@@ -16,7 +16,7 @@
     "Prevozi": "Ljubljana"
   },
   {
-    "Id": 3,
+    "_id": 3,
     "Kraj": "Celje",
     "Vlak": "43100",
     "APMS": "Celje AP",
