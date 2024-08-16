@@ -6,9 +6,10 @@ function ResultsArriva({results, isLoading}) {
         return (
             <LoadingComponent content={
                 <>
-                    Pridobivanje podatkov iz strani <a href="https://arriva.si" target="_blank"
+                    Pridobivanje podatkov iz strani <a href="https://arriva.si"
+                                                       target="_blank"
                                                        rel="noopener noreferrer"
-                                                       className="text-blue-600 underline hover:text-blue-800">Arriva</a>...
+                                                       className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Arriva</a>...
                 </>
             }/>
         );

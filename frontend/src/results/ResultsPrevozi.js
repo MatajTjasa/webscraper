@@ -6,16 +6,27 @@ function ResultsPrevozi({results, isLoading}) {
         return (
             <LoadingComponent content={
                 <>
-                    Pridobivanje podatkov iz strani <a href="https://prevoz.org" target="_blank"
-                                                       rel="noopener noreferrer">Prevozi</a>...
+                    Pridobivanje podatkov iz strani <a href="https://prevoz.org"
+                                                       target="_blank"
+                                                       rel="noopener noreferrer"
+                                                       className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Prevozi</a>...
                 </>
             }/>
         );
     }
 
     if (!results || results.length === 0) {
-        return <div>Iskanih rezultatov ponudnika <a href={'https://prevoz.org/'}>Prevozi</a> nismo našli.</div>;
+        return (
+            <div className="container result-section mb-8">
+                <p className="text-gray-800 text-md leading-relaxed italic text-center">
+                    Iskanih rezultatov ponudnika <a href="https://prevoz.org/"
+                                                    className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Prevozi</a> nismo
+                    našli.
+                </p>
+            </div>
+        );
     }
+
     return (
         <div className="container result-section mb-8">
             <h2 className="text-2xl font-semibold mb-4">Prevozi</h2>

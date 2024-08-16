@@ -117,7 +117,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                         <div className="custom-dropdown-container relative w-52" ref={departureRef}>
                             <input
                                 type="text"
-                                placeholder="Select Departure"
+                                placeholder="Kraj odhoda"
                                 value={departure}
                                 onChange={handleDepartureChange}
                                 className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
@@ -125,7 +125,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                             />
                             {departureDropdownActive && (
                                 <div
-                                    className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto">
+                                    className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
                                     {destinations
                                         .filter(dest => dest.Kraj.toLowerCase().includes(departure.toLowerCase()))
                                         .map((dest, index) => (
@@ -143,7 +143,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                         <div className="custom-dropdown-container relative w-52" ref={destinationRef}>
                             <input
                                 type="text"
-                                placeholder="Select Destination"
+                                placeholder="Kraj prihoda"
                                 value={destination}
                                 onChange={handleDestinationChange}
                                 className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
@@ -151,7 +151,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                             />
                             {destinationDropdownActive && (
                                 <div
-                                    className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto">
+                                    className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
                                     {destinations
                                         .filter(dest => dest.Kraj.toLowerCase().includes(destination.toLowerCase()))
                                         .map((dest, index) => (
@@ -168,7 +168,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                         </div>
                         <div className="custom-dropdown-container relative w-52">
                             <input
-                                type="text"
+                                type="date"
                                 placeholder="Date (dd.mm.yyyy)"
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
