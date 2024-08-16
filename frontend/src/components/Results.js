@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 
 function Results({results}) {
@@ -170,4 +171,4 @@ const noResultsMessage = (transportType) => {
     );
 };
 
-export default Results;
+export default Results;*/
