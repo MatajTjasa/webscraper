@@ -6,7 +6,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
     const location = useLocation();
     const [departure, setDeparture] = useState(initialDeparture || '');
     const [destination, setDestination] = useState(initialDestination || '');
-    const [date, setDate] = useState(initialDate || '');
+    const [date, setDate] = useState('');
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
@@ -62,7 +62,15 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
 
         if (urlDeparture) setDeparture(urlDeparture);
         if (urlDestination) setDestination(urlDestination);
-        if (urlDate) setDate(urlDate);
+        if (urlDate) {
+            setDate(urlDate);
+        } else {
+            // Set default date if not provided in URL
+            const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
+            const slovenianTime = new Intl.DateTimeFormat('en-GB', options).format(new Date());
+            const [day, month, year] = slovenianTime.split('/');
+            setDate(`${year}-${month}-${day}`);
+        }
     }, [location.search]);
 
     const handleSubmit = (e) => {

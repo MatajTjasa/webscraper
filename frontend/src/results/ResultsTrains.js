@@ -63,7 +63,7 @@ function ResultsTrains({results, isLoading}) {
                     </tr>
                     </thead>
                     <tbody>
-                    {!showInactive && (
+                    {inactiveRows.length > 0 && !showInactive && (
                         <tr>
                             <td colSpan="6" className="text-center p-0">
                                 <div
@@ -89,7 +89,7 @@ function ResultsTrains({results, isLoading}) {
 
                             {inactiveRows.map((train, index) => (
                                 <tr key={index}
-                                    className={`hover:bg-gray-200 ${'text-red-400'} ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}`}>
+                                    className={`hover:bg-gray-200 text-red-400 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}`}>
                                     <td className="border px-4 py-2">{train.departureStation}</td>
                                     <td className="border px-4 py-2">{train.departureTime}</td>
                                     <td className="border px-4 py-2">{train.arrivalStation}</td>
