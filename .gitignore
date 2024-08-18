@@ -3,5 +3,6 @@ node_modules
 *.env
 .idea/
 backend/.env
+backend/data
 frontend/.env
 frontend/.env.production
