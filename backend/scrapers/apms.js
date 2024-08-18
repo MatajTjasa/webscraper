@@ -1,9 +1,30 @@
 const fs = require('fs');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
 const path = require("path");
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
+require('dotenv').config();
+
+// Hiding puppeteer usage
+puppeteer.use(StealthPlugin());
+
+puppeteer.use(
+    RecaptchaPlugin({
+        provider: {
+            id: '2captcha',
+            token: process.env.CAPTCHA_APIKEY
+        },
+        visualFeedback: true
+    })
+);
 
 async function scrapeAPMS(departure, destination, date) {
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: puppeteer.executablePath()
+    });
+
     const page = await browser.newPage();
 
     await page.goto('https://apms.si/');
@@ -24,12 +45,12 @@ async function scrapeAPMS(departure, destination, date) {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
 
-    await page.click('#datum', { clickCount: 3 });
+    await page.click('#datum', {clickCount: 3});
     await page.keyboard.press('Backspace');
     await page.type('#datum', date);
     await delay(1000);
 
-    await page.click("#iskanje", { clickCount: 3 });
+    await page.click("#iskanje", {clickCount: 3});
     await delay(2000);
 
     // Check if results are found
@@ -45,7 +66,7 @@ async function scrapeAPMS(departure, destination, date) {
     }
 
     try {
-        await page.waitForSelector('.latest-item.bts.grid-template-content', { timeout: 30000 });
+        await page.waitForSelector('.latest-item.bts.grid-template-content', {timeout: 30000});
 
         const scheduleData = await page.evaluate((dep, dest) => {
             const rows = Array.from(document.querySelectorAll('.latest-item.bts.grid-template-content'));
@@ -105,4 +126,4 @@ function delay(ms) {
 // Example call for testing
 // scrapeAPMS('Maribor AP', 'Ljubljana AP', '13.08.2024').catch(err => console.error('Error executing scrapeAPMS:', err));
 
-module.exports = { scrapeAPMS };
+module.exports = {scrapeAPMS};

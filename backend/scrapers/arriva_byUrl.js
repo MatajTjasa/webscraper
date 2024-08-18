@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
 const path = require('path');
 
 function formatLocation(location) {
@@ -16,7 +16,11 @@ async function extractId(page, selector) {
 async function scrapeArrivaByUrl(departure, destination, date) {
     let browser;
     try {
-        browser = await puppeteer.launch({headless: true});
+        browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            executablePath: puppeteer.executablePath()
+        });
         const page = await browser.newPage();
 
         console.log("Navigating to the Arriva website...");

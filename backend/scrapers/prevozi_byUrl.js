@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
 const fs = require('fs');
 const path = require('path');
 
@@ -11,7 +11,11 @@ function ensureDirectoryExistence(filePath) {
 }
 
 async function scrapePrevoziByUrl(departure, destination, date) {
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: puppeteer.executablePath() // Ensure Puppeteer uses bundled Chromium
+    });
     const page = await browser.newPage();
 
     const url = `https://prevoz.org/prevoz/list/?fc=SI&f=${encodeURIComponent(departure)}&tc=SI&t=${encodeURIComponent(destination)}&d=${date}`;
