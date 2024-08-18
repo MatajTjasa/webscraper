@@ -31,7 +31,7 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: process.env.PUPPETEER_CACHE_DIR
+        executablePath: process.env.PUPPETEER_CACHE_DIR//path.join(process.env.PUPPETEER_CACHE_DIR, 'chrome-win', 'chrome.exe')
     });
 
     const page = await browser.newPage();

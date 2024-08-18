@@ -30,13 +30,12 @@ async function extractId(page, selector) {
 }
 
 async function scrapeArrivaByUrl(departure, destination, date) {
-    //console.log('Chromium path:', puppeteer.executablePath());
     let browser;
     try {
         browser = await puppeteer.launch({
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            executablePath: process.env.PUPPETEER_CACHE_DIR
+            executablePath: puppeteer.executablePath()
         });
         const page = await browser.newPage();
 

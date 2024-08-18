@@ -20,11 +20,11 @@ puppeteer.use(
 );*/
 
 async function scrapeAPMS(departure, destination, date) {
-    //console.log('Chromium path:', puppeteer.executablePath());
+    console.log('Chromium path:', puppeteer.executablePath());
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: process.env.PUPPETEER_CACHE_DIR
+        executablePath: puppeteer.executablePath()
     });
 
     const page = await browser.newPage();
