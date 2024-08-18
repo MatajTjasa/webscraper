@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "backend/server/index.js",
   "scripts": {
-    "start": "npx puppeteer install && node server/index.js",
+    "start": "npx puppeteer install browsers install chrome && node server/index.js",
     "dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf build"
