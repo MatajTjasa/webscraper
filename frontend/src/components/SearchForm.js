@@ -22,7 +22,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
     useEffect(() => {
         const fetchDestinations = async () => {
             try {
-                const response = await axios.get('/webscraper/destinations');
+                const response = await axios.get('${process.env.REACT_APP_API_URL}/webscraper/destinations');
                 setDestinations(response.data);
             } catch (error) {
                 if (error.response && error.response.status === 429) {

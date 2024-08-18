@@ -49,7 +49,7 @@ function SearchPage() {
 
     const fetchArrivaResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('/webscraper/searchArrivaByUrl', {
+            const response = await axios.post('${process.env.REACT_APP_API_URL}/webscraper/searchArrivaByUrl', {
                 departure,
                 destination,
                 date
@@ -64,7 +64,7 @@ function SearchPage() {
 
     const fetchTrainsResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('/webscraper/searchSlovenskeZelezniceByUrl', {
+            const response = await axios.post('${process.env.REACT_APP_API_URL}/webscraper/searchSlovenskeZelezniceByUrl', {
                 departure,
                 destination,
                 date
@@ -79,7 +79,7 @@ function SearchPage() {
 
     const fetchAPMSResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('/webscraper/searchAPMS', {
+            const response = await axios.post('${process.env.REACT_APP_API_URL}/webscraper/searchAPMS', {
                 departure,
                 destination,
                 date
@@ -94,7 +94,7 @@ function SearchPage() {
 
     const fetchPrevoziResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('/webscraper/searchPrevoziByUrl', {
+            const response = await axios.post('${process.env.REACT_APP_API_URL}/webscraper/searchPrevoziByUrl', {
                 departure,
                 destination,
                 date
