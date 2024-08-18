@@ -28,6 +28,7 @@ async function extractId(page, selector) {
 }
 
 async function scrapeArrivaByUrl(departure, destination, date) {
+    console.log('Chromium path:', puppeteer.executablePath());
     let browser;
     try {
         browser = await puppeteer.launch({
