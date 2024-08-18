@@ -6,6 +6,8 @@ export PUPPETEER_CACHE_DIR=/opt/render/project/.cache/puppeteer
 
 npm install
 
+mkdir -p $PUPPETEER_CACHE_DIR
+
 if [[ ! -d $PUPPETEER_CACHE_DIR ]]; then
   echo "...Copying Puppeteer Cache from Build Cache"
   cp -R $XDG_CACHE_HOME/puppeteer/ $PUPPETEER_CACHE_DIR
