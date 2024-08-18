@@ -15,7 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://webscraper-w92y.onrender.com'],
+    origin: ['http://localhost:3000', 'http://localhost:5000', 'https://webscraper-w92y.onrender.com', 'https://frontend-vmg7.onrender.com'],
     optionsSuccessStatus: 200, // legacy browser support
 };
 app.use(cors(corsOptions));
