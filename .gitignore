@@ -1,5 +1,7 @@
 node_modules
 .idea
+*.env
+.idea/
 backend/.env
 frontend/.env
 frontend/.env.production
