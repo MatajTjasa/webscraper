@@ -29,7 +29,13 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Connect to Redis
-const redisClient = redis.createClient({url: process.env.REDIS_URL});
+const redisClient = redis.createClient({
+    url: process.env.REDIS_URL,
+    socket: {
+        tls: true,
+        rejectUnauthorized: true
+    }
+});
 redisClient.on('error', (err) => console.error('Redis error:', err));
 
 redisClient.connect().then(() => {
