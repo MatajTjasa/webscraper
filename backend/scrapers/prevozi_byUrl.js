@@ -5,6 +5,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 require('dotenv').config();
 
+/*// Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
 puppeteer.use(
@@ -15,7 +16,7 @@ puppeteer.use(
         },
         visualFeedback: true
     })
-);
+);*/
 
 function ensureDirectoryExistence(filePath) {
     const dirname = path.dirname(filePath);
@@ -26,11 +27,11 @@ function ensureDirectoryExistence(filePath) {
 }
 
 async function scrapePrevoziByUrl(departure, destination, date) {
-    console.log('Chromium path:', puppeteer.executablePath());
+    //console.log('Chromium path:', puppeteer.executablePath());
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: puppeteer.executablePath()
+        executablePath: process.env.PUPPETEER_CACHE_DIR
     });
     const page = await browser.newPage();
 

@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require("path");
 require('dotenv').config();
 
-// Hiding puppeteer usage
+/*// Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
 puppeteer.use(
@@ -16,7 +16,7 @@ puppeteer.use(
         },
         visualFeedback: true
     })
-);
+);*/
 
 function ensureDirectoryExistence(filePath) {
     const dirname = path.dirname(filePath);
@@ -27,11 +27,11 @@ function ensureDirectoryExistence(filePath) {
 }
 
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
-    console.log('Chromium path:', puppeteer.executablePath());
+    //console.log('Chromium path:', puppeteer.executablePath());
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: puppeteer.executablePath()
+        executablePath: process.env.PUPPETEER_CACHE_DIR
     });
 
     const page = await browser.newPage();
