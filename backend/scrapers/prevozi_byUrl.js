@@ -1,6 +1,21 @@
-const puppeteer = require('puppeteer-extra');
 const fs = require('fs');
+const puppeteer = require('puppeteer-extra');
 const path = require('path');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
+require('dotenv').config();
+
+puppeteer.use(StealthPlugin());
+
+puppeteer.use(
+    RecaptchaPlugin({
+        provider: {
+            id: '2captcha',
+            token: process.env.CAPTCHA_APIKEY
+        },
+        visualFeedback: true
+    })
+);
 
 function ensureDirectoryExistence(filePath) {
     const dirname = path.dirname(filePath);
@@ -14,12 +29,12 @@ async function scrapePrevoziByUrl(departure, destination, date) {
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: puppeteer.executablePath() // Ensure Puppeteer uses bundled Chromium
+        executablePath: puppeteer.executablePath()
     });
     const page = await browser.newPage();
 
     const url = `https://prevoz.org/prevoz/list/?fc=SI&f=${encodeURIComponent(departure)}&tc=SI&t=${encodeURIComponent(destination)}&d=${date}`;
-    console.log('Prevozi URL: ' + url)
+    console.log('Prevozi URL: ' + url);
 
     try {
         await page.goto(url, {waitUntil: 'networkidle0'});

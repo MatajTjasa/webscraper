@@ -3,6 +3,20 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const puppeteer = require('puppeteer-extra');
 const path = require('path');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
+require('dotenv').config();
+
+puppeteer.use(StealthPlugin());
+puppeteer.use(
+    RecaptchaPlugin({
+        provider: {
+            id: '2captcha',
+            token: process.env.CAPTCHA_APIKEY
+        },
+        visualFeedback: true
+    })
+);
 
 function formatLocation(location) {
     return location.replace(/\s+/g, '+');
