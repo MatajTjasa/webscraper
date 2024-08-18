@@ -3,6 +3,7 @@ import {useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
 
 function SearchForm({onSearch, initialDeparture, initialDestination, initialDate}) {
+    const API = process.env.REACT_APP_API_URL;
     const location = useLocation();
     const [departure, setDeparture] = useState(initialDeparture || '');
     const [destination, setDestination] = useState(initialDestination || '');
@@ -21,7 +22,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
     useEffect(() => {
         const fetchDestinations = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/webscraper/destinations');
+                const response = await axios.get('${API}/webscraper/destinations');
                 setDestinations(response.data);
             } catch (error) {
                 if (error.response && error.response.status === 429) {
@@ -120,7 +121,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
             <div className="cloud" style={{top: '150px', right: '50px'}}></div>
             <div className="container bg-white bg-opacity-80 p-8 rounded-lg shadow-lg relative z-10">
                 <header className="App-header text-center">
-                    <h1 className="text-[#4682B4] mb-8 text-4xl font-semibold">Bus, train, car schedules</h1>
+                    <h1 className="text-[#4682B4] mb-8 text-4xl font-semibold">Vlak, avto, bus urniki</h1>
                     <form onSubmit={handleSubmit} className="flex flex-wrap justify-center space-x-4">
                         <div className="custom-dropdown-container relative w-52" ref={departureRef}>
                             <input

@@ -7,6 +7,8 @@ import ResultsAPMS from '../results/ResultsAPMS';
 import ResultsPrevozi from '../results/ResultsPrevozi';
 import axios from 'axios';
 
+const API = process.env.REACT_APP_API_URL;
+
 function SearchPage() {
     const [arrivaResults, setArrivaResults] = useState(null);
     const [trainsResults, setTrainsResults] = useState(null);
@@ -47,7 +49,7 @@ function SearchPage() {
 
     const fetchArrivaResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchArrivaByUrl', {
+            const response = await axios.post('${API}/webscraper/searchArrivaByUrl', {
                 departure,
                 destination,
                 date
@@ -62,7 +64,7 @@ function SearchPage() {
 
     const fetchTrainsResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchSlovenskeZelezniceByUrl', {
+            const response = await axios.post('${API}/webscraper/searchSlovenskeZelezniceByUrl', {
                 departure,
                 destination,
                 date
@@ -77,7 +79,7 @@ function SearchPage() {
 
     const fetchAPMSResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchAPMS', {
+            const response = await axios.post('${API}/webscraper/searchAPMS', {
                 departure,
                 destination,
                 date
@@ -92,7 +94,7 @@ function SearchPage() {
 
     const fetchPrevoziResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post('http://localhost:3000/webscraper/searchPrevoziByUrl', {
+            const response = await axios.post('${API}/webscraper/searchPrevoziByUrl', {
                 departure,
                 destination,
                 date

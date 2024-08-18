@@ -1,6 +1,6 @@
 {
-  "short_name": "SP",
-  "name": "Strgaj prevoz",
+  "short_name": "VAB",
+  "name": "VlakAvtoBus",
   "icons": [
     {
       "src": "favicon.ico",
