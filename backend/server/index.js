@@ -40,7 +40,6 @@ redisClient.on('error', (err) => console.error('Redis error:', err));
 
 redisClient.connect().then(() => {
     console.log('Connected to Redis');
-    scheduleCacheRefresh(redisClient, PORT);
 }).catch(err => {
     console.error('Redis connection error:', err);
 });
