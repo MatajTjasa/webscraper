@@ -88,45 +88,32 @@ app.get('/webscraper/destinations', async (req, res) => {
 async function handleSearch(req, res, scraperFn, transportType, formatDate = false) {
     let {date, departure, destination} = req.body;
     const cacheKey = `${transportType}-${departure}-${destination}-${date}`;
-    const lockKey = `lock-cache-refresh-${date}`;
 
     date = formatDate ? reformatDate(date) : date;
 
-    const isLocked = await redisClient.get(lockKey);
-    if (isLocked) {
-        console.log(`Cache is being updated for ${date}. Please try again later.`);
-        return res.status(503).json({message: "Cache is being updated. Please try again later."});
+    const cachedData = await redisClient.get(cacheKey);
+    if (cachedData && cachedData !== '[]') {
+        console.log('Retrieving data from cache.');
+        return res.json(JSON.parse(cachedData));
     }
 
-    if (ongoingRequests.has(cacheKey)) {
-        console.log('Duplicate request found, terminating the first one.');
-        abortRequest(cacheKey);
+    const departureCodes = await getDestinationCodes(departure, redisClient);
+    const destinationCodes = await getDestinationCodes(destination, redisClient);
+
+    if (!validateTransportSupport(departureCodes, destinationCodes, transportType)) {
+        console.log(`${transportType} does not support this departure or destination.`);
+        return res.json({message: "Departure or destination is not supported."});
     }
 
     const controller = new AbortController();
     const signal = controller.signal;
 
     try {
-        const cachedData = await redisClient.get(cacheKey);
-        if (cachedData && cachedData !== '[]') {
-            console.log('Retrieving data from cache.');
-            return res.json(JSON.parse(cachedData));
-        }
-
-        const departureCodes = await getDestinationCodes(departure, redisClient);
-        const destinationCodes = await getDestinationCodes(destination, redisClient);
-
-        if (!validateTransportSupport(departureCodes, destinationCodes, transportType)) {
-            console.log(`${transportType} does not support this departure or destination.`);
-            return res.json({message: "Departure or destination is not supported."});
-        }
-
         const scraperPromise = retry(scraperFn)(departureCodes[transportType], destinationCodes[transportType], date, {signal});
         trackRequest(cacheKey, scraperPromise, controller);
 
         const results = await scraperPromise;
         clearRequest(cacheKey);
-
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {

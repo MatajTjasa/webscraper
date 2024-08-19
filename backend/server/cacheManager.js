@@ -10,17 +10,6 @@ function getSlovenianDateString(offset = 0) {
 }
 
 async function refreshCacheForDate(redisClient, PORT, date, ttl) {
-    const lockKey = `lock-cache-refresh-${date}`;
-    const isLocked = await redisClient.get(lockKey);
-
-    if (isLocked) {
-        console.log(`Cache is currently being updated for ${date}. Skipping refresh.`);
-        return;
-    }
-
-    console.log(`Starting cache refresh task for ${date}.`);
-    await redisClient.set(lockKey, 'locked', {EX: ttl});
-
     console.log(`Starting cache refresh task for ${date}.`);
 
     const commonDestinations = await getCommonDestinations();
@@ -55,20 +44,17 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
     for (const task of tasks) {
         try {
             console.log(`Refreshing cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}`);
-
             const result = await axios.post(`http://localhost:${PORT}${task.url}`, task.data);
             await redisClient.setEx(task.cacheKey, ttl, JSON.stringify(result.data));
-
             console.log(`${task.name} cache updated for ${task.data.departure} to ${task.data.destination} on ${date}.`);
         } catch (error) {
-            console.error(`Error refreshing cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}:`, error);
+            console.error(`Failed to refresh cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}: ${error.message}`);
         }
 
         await new Promise(resolve => setTimeout(resolve, 1000 * 30));  // 30s delay between each task
     }
 
     console.log(`Cache refresh task completed for ${date}.`);
-    await redisClient.del(lockKey);
 }
 
 async function runSequentially(redisClient, PORT) {
@@ -78,6 +64,7 @@ async function runSequentially(redisClient, PORT) {
     }
 
     isTaskRunning = true;
+    const startTime = Date.now();
 
     const datesAndTTLs = [
         {offset: 0, ttl: 1800},  // 30 minutes TTL for today
@@ -90,6 +77,9 @@ async function runSequentially(redisClient, PORT) {
         await refreshCacheForDate(redisClient, PORT, date, ttl);
     }
 
+    const endTime = Date.now();
+    const duration = ((endTime - startTime) / 1000).toFixed(2);
+    console.log(`Cache refresh process completed. Total duration: ${duration} seconds. Started at: ${new Date(startTime).toLocaleTimeString()}, Ended at: ${new Date(endTime).toLocaleTimeString()}.`);
     isTaskRunning = false;
 }
 
@@ -103,7 +93,6 @@ function scheduleCacheRefresh(redisClient, PORT) {
     // Initial cache refresh for today, tomorrow, and the day after tomorrow
     runSequentially(redisClient, PORT);
 }
-
 
 module.exports = {
     scheduleCacheRefresh,
