@@ -7,7 +7,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 require('dotenv').config();
 
-/*// Hiding puppeteer usage
+// Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
 puppeteer.use(
@@ -18,7 +18,7 @@ puppeteer.use(
         },
         visualFeedback: true
     })
-);*/
+);
 
 function formatLocation(location) {
     return location.replace(/\s+/g, '+');

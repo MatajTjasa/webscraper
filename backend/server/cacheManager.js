@@ -2,12 +2,25 @@ const cron = require('node-cron');
 const axios = require('axios');
 const {getCommonDestinations} = require('./database');
 
+let isTaskRunning = false;
+
 function getSlovenianDateString(offset = 0) {
     const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
     return new Date(Date.now() + offset * 86400000).toLocaleDateString('sl-SI', options).split(' ').join('');
 }
 
 async function refreshCacheForDate(redisClient, PORT, date, ttl) {
+    const lockKey = `lock-cache-refresh-${date}`;
+    const isLocked = await redisClient.get(lockKey);
+
+    if (isLocked) {
+        console.log(`Cache is currently being updated for ${date}. Skipping refresh.`);
+        return;
+    }
+
+    console.log(`Starting cache refresh task for ${date}.`);
+    await redisClient.set(lockKey, 'locked', {EX: ttl});
+
     console.log(`Starting cache refresh task for ${date}.`);
 
     const commonDestinations = await getCommonDestinations();
@@ -50,29 +63,45 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
         } catch (error) {
             console.error(`Error refreshing cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}:`, error);
         }
+
+        await new Promise(resolve => setTimeout(resolve, 1000 * 30));  // 30s delay between each task
     }
 
     console.log(`Cache refresh task completed for ${date}.`);
+    await redisClient.del(lockKey);
+}
+
+async function runSequentially(redisClient, PORT) {
+    if (isTaskRunning) {
+        console.log('Previous task is still running. Skipping this execution.');
+        return;
+    }
+
+    isTaskRunning = true;
+
+    const datesAndTTLs = [
+        {offset: 0, ttl: 1800},  // 30 minutes TTL for today
+        {offset: 1, ttl: 3600},  // 1 hour TTL for tomorrow
+        {offset: 2, ttl: 14400}  // 4 hours TTL for the day after tomorrow
+    ];
+
+    for (const {offset, ttl} of datesAndTTLs) {
+        const date = getSlovenianDateString(offset);
+        await refreshCacheForDate(redisClient, PORT, date, ttl);
+    }
+
+    isTaskRunning = false;
 }
 
 function scheduleCacheRefresh(redisClient, PORT) {
-    const timeIntervals = [
-        {interval: '*/30 * * * *', offset: 0, ttl: 1800},  // 30 minutes TTL (time to live) for today
-        {interval: '0 * * * *', offset: 1, ttl: 3600},      // 1 hour TTL for tomorrow
-        {interval: '0 */4 * * *', offset: 2, ttl: 14400}    // 4 hours TTL for the day after tomorrow
-    ];
-
-    for (const {interval, offset, ttl} of timeIntervals) {
-        cron.schedule(interval, () => {
-            const date = getSlovenianDateString(offset);
-            refreshCacheForDate(redisClient, PORT, date, ttl);
-        });
-    }
+    // Schedule the refresh to run at specific intervals
+    cron.schedule('*/30 * * * *', () => {
+        console.log('Scheduled task started');
+        runSequentially(redisClient, PORT);
+    });
 
     // Initial cache refresh for today, tomorrow, and the day after tomorrow
-    timeIntervals.forEach(({offset, ttl}) => {
-        refreshCacheForDate(redisClient, PORT, getSlovenianDateString(offset), ttl);
-    });
+    runSequentially(redisClient, PORT);
 }
 
 

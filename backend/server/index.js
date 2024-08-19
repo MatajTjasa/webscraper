@@ -88,8 +88,15 @@ app.get('/webscraper/destinations', async (req, res) => {
 async function handleSearch(req, res, scraperFn, transportType, formatDate = false) {
     let {date, departure, destination} = req.body;
     const cacheKey = `${transportType}-${departure}-${destination}-${date}`;
+    const lockKey = `lock-cache-refresh-${date}`;
 
     date = formatDate ? reformatDate(date) : date;
+
+    const isLocked = await redisClient.get(lockKey);
+    if (isLocked) {
+        console.log(`Cache is being updated for ${date}. Please try again later.`);
+        return res.status(503).json({message: "Cache is being updated. Please try again later."});
+    }
 
     if (ongoingRequests.has(cacheKey)) {
         console.log('Duplicate request found, terminating the first one.');
@@ -119,7 +126,8 @@ async function handleSearch(req, res, scraperFn, transportType, formatDate = fal
 
         const results = await scraperPromise;
         clearRequest(cacheKey);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results)); // Cache the results
+
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
         clearRequest(cacheKey);
