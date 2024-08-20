@@ -3,13 +3,13 @@ const puppeteer = require('puppeteer-extra');
 const path = require("path");
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
+const {safeGoto} = require('../server/helpers');
 require('dotenv').config();
 
 // Hiding puppeteer usage
-/*// Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
-puppeteer.use(
+/*puppeteer.use(
     RecaptchaPlugin({
         provider: {
             id: '2captcha',
@@ -28,8 +28,7 @@ async function scrapeAPMS(departure, destination, date) {
     });
 
     const page = await browser.newPage();
-
-    await page.goto('https://apms.si/', {waitUntil: 'networkidle0'});
+    await safeGoto(page, 'https://apms.si/');
     await page.waitForSelector('#odhod');
     await page.waitForSelector('#prihod');
     await page.waitForSelector('#datum');

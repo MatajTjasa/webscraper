@@ -5,12 +5,13 @@ const puppeteer = require('puppeteer-extra');
 const path = require('path');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
+const {safeGoto} = require('../server/helpers');
 require('dotenv').config();
 
 // Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
-puppeteer.use(
+/*puppeteer.use(
     RecaptchaPlugin({
         provider: {
             id: '2captcha',
@@ -18,7 +19,7 @@ puppeteer.use(
         },
         visualFeedback: true
     })
-);
+);*/
 
 function formatLocation(location) {
     return location.replace(/\s+/g, '+');
@@ -40,8 +41,7 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         const page = await browser.newPage();
 
         console.log("Navigating to the Arriva website...");
-        await page.goto('https://arriva.si/vozni-redi/', {waitUntil: 'networkidle0'});
-
+        await safeGoto(page, 'https://arriva.si/vozni-redi/');
         await delay(3000);
 
         try {
@@ -86,7 +86,7 @@ async function scrapeArrivaByUrl(departure, destination, date) {
 
         const url = `https://arriva.si/vozni-redi/?departure-123=${formattedDeparture}&departure_id=${departureId}&departure=${formattedDeparture}&destination=${formattedDestination}&destination_id=${destinationId}&trip_date=${date}`;
         console.log("Navigating to the URL:", url);
-        await page.goto(url, {waitUntil: 'networkidle0'});
+        await safeGoto(page, url);
         console.log("Current page URL:", page.url());
 
         const noDirectConnection = await page.evaluate(() => {

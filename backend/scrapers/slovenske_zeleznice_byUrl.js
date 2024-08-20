@@ -3,9 +3,10 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 const fs = require('fs');
 const path = require("path");
+const {safeGoto} = require('../server/helpers');
 require('dotenv').config();
 
-/*// Hiding puppeteer usage
+// Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
 puppeteer.use(
@@ -16,7 +17,7 @@ puppeteer.use(
         },
         visualFeedback: true
     })
-);*/
+);
 
 function ensureDirectoryExistence(filePath) {
     const dirname = path.dirname(filePath);
@@ -37,17 +38,11 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
     const page = await browser.newPage();
 
     const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
-
-    await page.goto(url, {waitUntil: 'networkidle0'});
     console.log(url);
-    console.log('Page should be fully loaded (vlak)');
 
-    // Check for any errors in the page
-    const pageErrors = [];
-    page.on('pageerror', error => {
-        console.error('Page error:', error);
-        pageErrors.push(error);
-    });
+    await safeGoto(page, url);
+    console.log('Page should be fully loaded (vlak): ' + page.url());
+    
 
     // Captcha check
     const isCaptchaPresent = await page.evaluate(() => {

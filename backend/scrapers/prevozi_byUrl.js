@@ -3,12 +3,13 @@ const puppeteer = require('puppeteer-extra');
 const path = require('path');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
+const {safeGoto} = require('../server/helpers');
 require('dotenv').config();
 
-/*// Hiding puppeteer usage
+// Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
-puppeteer.use(
+/*puppeteer.use(
     RecaptchaPlugin({
         provider: {
             id: '2captcha',
@@ -38,7 +39,7 @@ async function scrapePrevoziByUrl(departure, destination, date) {
     console.log('Prevozi URL: ' + url);
 
     try {
-        await page.goto(url, {waitUntil: 'networkidle0'});
+        await safeGoto(page, url);
 
         // Check for 404 error
         const error404 = await page.$eval('h1.fw-bolden.mb-4', element => element.innerText.includes('Napaka 404'));

@@ -72,11 +72,25 @@ function reformatDateForCache(date) {
     return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
 }
 
+async function safeGoto(page, url) {
+    for (let i = 0; i < 3; i++) {
+        try {
+            await page.goto(url, {waitUntil: 'networkidle0', timeout: 60000});
+            return;
+        } catch (error) {
+            console.error(`Attempt ${i + 1} failed:`, error);
+            await new Promise(resolve => setTimeout(resolve, 2000));  // wait 2s before retrying
+        }
+    }
+    throw new Error(`Failed to load ${url} after multiple attempts`);
+}
+
 
 module.exports = {
     retry,
     validateTransportSupport,
     getDestinationCodes,
     reformatDate,
-    reformatDateForCache
+    reformatDateForCache,
+    safeGoto
 };
