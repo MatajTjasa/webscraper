@@ -5,13 +5,13 @@ const puppeteer = require('puppeteer-extra');
 const path = require('path');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
-const {safeGoto} = require('../server/helpers');
+const {safeGoto, delay} = require('../server/helpers');
 require('dotenv').config();
 
 // Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
-/*puppeteer.use(
+puppeteer.use(
     RecaptchaPlugin({
         provider: {
             id: '2captcha',
@@ -19,7 +19,7 @@ puppeteer.use(StealthPlugin());
         },
         visualFeedback: true
     })
-);*/
+);
 
 function formatLocation(location) {
     return location.replace(/\s+/g, '+');
@@ -39,6 +39,7 @@ async function scrapeArrivaByUrl(departure, destination, date) {
             executablePath: puppeteer.executablePath()
         });
         const page = await browser.newPage();
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36');
 
         console.log("Navigating to the Arriva website...");
         await safeGoto(page, 'https://arriva.si/vozni-redi/');
@@ -182,9 +183,5 @@ const fetchConnection = async (url) => {
         return [];
     }
 };
-
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 module.exports = {scrapeArrivaByUrl};

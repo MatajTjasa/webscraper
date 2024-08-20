@@ -9,7 +9,7 @@ require('dotenv').config();
 // Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
-/*puppeteer.use(
+puppeteer.use(
     RecaptchaPlugin({
         provider: {
             id: '2captcha',
@@ -17,7 +17,7 @@ puppeteer.use(StealthPlugin());
         },
         visualFeedback: true
     })
-);*/
+);
 
 function ensureDirectoryExistence(filePath) {
     const dirname = path.dirname(filePath);

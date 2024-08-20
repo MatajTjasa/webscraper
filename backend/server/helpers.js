@@ -14,6 +14,10 @@ const retry = (fn, retries = 3) => async (...args) => {
     }
 };
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function validateTransportSupport(departureCodes, destinationCodes, transportType) {
     const departureMap = departureCodes[transportType];
     const destinationMap = destinationCodes[transportType];
@@ -92,5 +96,6 @@ module.exports = {
     getDestinationCodes,
     reformatDate,
     reformatDateForCache,
-    safeGoto
+    safeGoto,
+    delay
 };

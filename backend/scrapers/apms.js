@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer-extra');
 const path = require("path");
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
-const {safeGoto} = require('../server/helpers');
+const {safeGoto, delay} = require('../server/helpers');
 require('dotenv').config();
 
 // Hiding puppeteer usage
@@ -118,10 +118,6 @@ async function scrapeAPMS(departure, destination, date) {
     } finally {
         await browser.close();
     }
-}
-
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Example call for testing
