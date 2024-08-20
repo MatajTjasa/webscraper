@@ -21,6 +21,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.set('trust proxy', 1);
+
 const limiter = rateLimit({
     windowMs: 5 * 60 * 1000, // 5min
     max: 50, // limit of requests in 5min

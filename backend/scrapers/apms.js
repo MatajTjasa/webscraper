@@ -29,7 +29,7 @@ async function scrapeAPMS(departure, destination, date) {
 
     const page = await browser.newPage();
 
-    await page.goto('https://apms.si/');
+    await page.goto('https://apms.si/', {waitUntil: 'networkidle0'});
     await page.waitForSelector('#odhod');
     await page.waitForSelector('#prihod');
     await page.waitForSelector('#datum');

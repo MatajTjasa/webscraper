@@ -47,7 +47,13 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         try {
             await page.waitForSelector("#CybotCookiebotDialogBodyLevelButtonAccept", {timeout: 10000});
             console.log("Clicking on the accept button...");
-            await page.click("#CybotCookiebotDialogBodyLevelButtonAccept");
+
+            const acceptButton = await page.$("#CybotCookiebotDialogBodyLevelButtonAccept");
+            if (acceptButton) {
+                await acceptButton.click();
+            } else {
+                console.log("Accept button not found or already removed.");
+            }
         } catch (error) {
             console.log("Accept button not found within the timeout period. Proceeding with the script...");
         }
