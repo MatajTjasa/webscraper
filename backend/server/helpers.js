@@ -1,3 +1,4 @@
+const moment = require('moment');
 const {getDestinationsFromDatabase} = require('./database');
 
 // Helper methods
@@ -57,13 +58,18 @@ const getDestinationCodes = async (kraj, redisClient) => {
     return {...mappings, valid};
 };
 
-function reformatDate(date) {
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    if (datePattern.test(date)) { // from dd.mm.yyyy to yyyy-mm-dd
-        return date;
+function reformatDate(date, transportType) {
+    if (transportType === 'Prevozi') {
+        return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('YYYY-MM-DD');
+    } else if (transportType === 'APMS' || transportType === 'Arriva') {
+        return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
+    } else {
+        return date;// train accepts both
     }
-    const [day, month, year] = date.split('.');
-    return `${year}-${month}-${day}`;
+}
+
+function reformatDateForCache(date) {
+    return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
 }
 
 
@@ -72,4 +78,5 @@ module.exports = {
     validateTransportSupport,
     getDestinationCodes,
     reformatDate,
+    reformatDateForCache
 };

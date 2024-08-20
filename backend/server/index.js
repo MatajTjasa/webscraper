@@ -5,7 +5,7 @@ const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
 const {scrapePrevoziByUrl} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
 const {scheduleCacheRefresh} = require('./cacheManager');
-const {retry, validateTransportSupport, getDestinationCodes, reformatDate} = require('./helpers');
+const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
@@ -84,11 +84,11 @@ app.get('/webscraper/destinations', async (req, res) => {
     res.json(destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj})));
 });
 
-async function handleSearch(req, res, scraperFn, transportType, formatDate = false) {
+async function handleSearch(req, res, scraperFn, transportType) {
     let {date, departure, destination} = req.body;
-    const cacheKey = `${transportType}-${departure}-${destination}-${date}`;
+    const cacheKey = `${transportType}-${departure}-${destination}-${reformatDateForCache(date)}`;
 
-    date = formatDate ? reformatDate(date) : date;
+    date = reformatDate(date, transportType);
 
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData && cachedData !== '[]') {
@@ -134,7 +134,7 @@ app.post('/webscraper/searchAPMS', async (req, res) => {
 
 app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     console.log('Starting request searchArrivaByUrl.');
-    await handleSearch(req, res, scrapeArrivaByUrl, 'Arriva');
+    await handleSearch(req, res, scrapeArrivaByUrl, 'Arriva', false);
     console.log('Ending request searchArrivaByUrl.');
 });
 
