@@ -7,8 +7,6 @@ import ResultsAPMS from '../results/ResultsAPMS';
 import ResultsPrevozi from '../results/ResultsPrevozi';
 import axios from 'axios';
 
-const API = process.env.REACT_APP_API_URL;
-
 function SearchPage() {
     const [arrivaResults, setArrivaResults] = useState(null);
     const [trainsResults, setTrainsResults] = useState(null);
@@ -79,7 +77,7 @@ function SearchPage() {
 
     const fetchAPMSResults = async (departure, destination, date) => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/webscraper/searchAPMS`, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/webscraper/searchAPMSbyUrl`, {
                 departure,
                 destination,
                 date

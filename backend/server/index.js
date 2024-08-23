@@ -1,6 +1,6 @@
 const express = require('express');
 const redis = require('redis');
-const {scrapeAPMS} = require("../scrapers/apms");
+const {scrapeAPMSbyUrl} = require("../scrapers/apms_byUrl");
 const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
 const {scrapePrevoziByUrl} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
@@ -128,10 +128,10 @@ async function handleSearch(req, res, scraperFn, transportType) {
     }
 }
 
-app.post('/webscraper/searchAPMS', async (req, res) => {
-    console.log('Starting request searchAPMS.');
-    await handleSearch(req, res, scrapeAPMS, 'APMS');
-    console.log('Ending request searchAPMS.');
+app.post('/webscraper/searchAPMSbyUrl', async (req, res) => {
+    console.log('Starting request searchAPMSbyUrl.');
+    await handleSearch(req, res, scrapeAPMSbyUrl, 'APMS');
+    console.log('Ending request searchAPMSbyUrl.');
 });
 
 app.post('/webscraper/searchArrivaByUrl', async (req, res) => {

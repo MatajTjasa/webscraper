@@ -37,12 +37,15 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
 
     const page = await browser.newPage();
 
-    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
+    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search
+                                                            &current-language=sl
+                                                            &departure-date=${date}
+                                                            &entry-station=${departureStationCode}
+                                                            &exit-station=${destinationStationCode}`;
     console.log(url);
 
     await safeGoto(page, url);
     console.log('Page should be fully loaded (vlak): ' + page.url());
-    
 
     // Captcha check
     const isCaptchaPresent = await page.evaluate(() => {

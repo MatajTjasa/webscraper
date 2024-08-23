@@ -82,8 +82,8 @@ async function safeGoto(page, url) {
             await page.goto(url, {waitUntil: 'networkidle0', timeout: 60000});
             return;
         } catch (error) {
-            console.error(`Attempt ${i + 1} failed:`, error);
-            await new Promise(resolve => setTimeout(resolve, 2000));  // wait 2s before retrying
+            console.error(`Attempt ${i + 1} to load page failed:`, error);
+            await delay(2000);
         }
     }
     throw new Error(`Failed to load ${url} after multiple attempts`);
