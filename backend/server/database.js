@@ -7,7 +7,7 @@ const uri = process.env.MONGODB_URI;
 let mongoClient;
 
 if (!uri) {
-    console.error('MongoDB URI is not defined. Check your environment variables.');
+    return console.error('MongoDB URI is not defined. Check your environment variables.');
 } else {
     async function main() {
         mongoClient = new MongoClient(uri);
@@ -22,12 +22,13 @@ if (!uri) {
     main().catch(console.error);
 }
 
+const database = mongoClient.db('webscraperDB');
+
 async function getDestinationsFromDatabase() {
     if (!mongoClient) {
         mongoClient = new MongoClient(uri);
         await mongoClient.connect();
     }
-    const database = mongoClient.db('webscraperDB');
     const collection = database.collection('destinations');
     return await collection.find({}).toArray();
 }
@@ -37,9 +38,14 @@ async function getCommonDestinations() {
         mongoClient = new MongoClient(uri);
         await mongoClient.connect();
     }
-    const database = mongoClient.db('webscraperDB');
     const collection = database.collection('transport');
     return await collection.find({}).toArray();
 }
 
-module.exports = {getDestinationsFromDatabase, getCommonDestinations};
+async function getCodeArriva(locationName) {
+    const collection = database.collection('arrivaDestinations');
+    const result = await collection.findOne({POS_NAZ: locationName});
+    return result ? result.JPOS_IJPP : null;
+}
+
+module.exports = {getDestinationsFromDatabase, getCommonDestinations, getCodeArriva};

@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const {safeGoto} = require('../server/helpers');
+require('dotenv').config();
 
 puppeteer.use(StealthPlugin());
 

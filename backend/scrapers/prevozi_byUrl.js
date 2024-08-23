@@ -41,15 +41,12 @@ async function scrapePrevoziByUrl(departure, destination, date) {
     try {
         await safeGoto(page, url);
 
-        // Check for 404 error
         const error404 = await page.$eval('h1.fw-bolden.mb-4', element => element.innerText.includes('Napaka 404'));
         if (error404) {
             console.error('Error 404: Page not found');
             await browser.close();
             return [];
         }
-
-        // Check if the card element exists
         const cardExists = await page.$('.card');
         if (!cardExists) {
             console.log('No cards found');
@@ -57,7 +54,6 @@ async function scrapePrevoziByUrl(departure, destination, date) {
             return [];
         }
 
-        // Scrape the ride share data
         const rideShares = await page.evaluate(() => {
             const data = [];
             const cards = document.querySelectorAll('.card');
@@ -65,19 +61,18 @@ async function scrapePrevoziByUrl(departure, destination, date) {
             cards.forEach(card => {
                 const cardBody = card.querySelector('.card-body');
                 if (cardBody && cardBody.innerText.includes('Noben prevoz ne ustreza iskalnim pogojem')) {
-                    // No rides available
                     data.push(null);
-                    return;
+                    return [];
                 }
 
                 const routeElement = card.querySelector('.d-flex.fw-bolden.h4.m-0');
                 if (!routeElement) {
-                    return; // Skip if route element is not found
+                    return [];
                 }
                 const fromElement = routeElement.querySelector('span:first-child');
                 const toElement = routeElement.querySelector('span:last-child');
                 if (!fromElement || !toElement) {
-                    return; // Skip if from or to elements are not found
+                    return [];
                 }
                 const from = fromElement.innerText.trim();
                 const to = toElement.innerText.trim();
@@ -108,10 +103,9 @@ async function scrapePrevoziByUrl(departure, destination, date) {
         console.log(rideShares);
 
         const filePath = path.join(__dirname, '../data/timetable/prevozi_byUrl.json');
-        // Ensure the directory exists
+
         ensureDirectoryExistence(filePath);
 
-        // Save data to JSON file
         fs.writeFile(filePath, JSON.stringify(rideShares, null, 2), err => {
             if (err) {
                 console.error('Error writing file:', err);
