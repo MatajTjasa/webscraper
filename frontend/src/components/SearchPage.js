@@ -12,10 +12,11 @@ function SearchPage() {
     const [trainsResults, setTrainsResults] = useState(null);
     const [apmsResults, setApmsResults] = useState(null);
     const [prevoziResults, setPrevoziResults] = useState(null);
-    const [loadingArriva, setLoadingArriva] = useState(true);
-    const [loadingTrains, setLoadingTrains] = useState(true);
-    const [loadingAPMS, setLoadingAPMS] = useState(true);
-    const [loadingPrevozi, setLoadingPrevozi] = useState(true);
+    const [loadingArriva, setLoadingArriva] = useState(false);
+    const [loadingTrains, setLoadingTrains] = useState(false);
+    const [loadingAPMS, setLoadingAPMS] = useState(false);
+    const [loadingPrevozi, setLoadingPrevozi] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const location = useLocation();
 
@@ -25,24 +26,32 @@ function SearchPage() {
         const destination = queryParams.get('destination');
         const date = queryParams.get('date');
 
-        // Reset loading states
-        setLoadingArriva(true);
-        setLoadingTrains(true);
-        setLoadingAPMS(true);
-        setLoadingPrevozi(true);
-
-        // Reset results
         setArrivaResults(null);
         setTrainsResults(null);
         setApmsResults(null);
         setPrevoziResults(null);
 
-        if (departure && destination && date) {
-            fetchPrevoziResults(departure, destination, date);
-            fetchArrivaResults(departure, destination, date);
-            fetchTrainsResults(departure, destination, date);
-            fetchAPMSResults(departure, destination, date);
+        if (departure === destination) {
+            setErrorMessage('Kraj odhoda in kraj prihoda ne smeta biti enaka.');
+            return;
         }
+
+        if (!departure || !destination || !date) {
+            setErrorMessage('Prosim izpolnite vsa polja.');
+            return;
+        }
+
+        setErrorMessage('');
+
+        setLoadingArriva(true);
+        setLoadingTrains(true);
+        setLoadingAPMS(true);
+        setLoadingPrevozi(true);
+
+        fetchPrevoziResults(departure, destination, date);
+        fetchArrivaResults(departure, destination, date);
+        fetchTrainsResults(departure, destination, date);
+        fetchAPMSResults(departure, destination, date);
     }, [location.search]);
 
     const fetchArrivaResults = async (departure, destination, date) => {
@@ -53,9 +62,9 @@ function SearchPage() {
                 date
             });
             setArrivaResults(response.data);
-            setLoadingArriva(false);
         } catch (error) {
             console.error('Error fetching Arriva data:', error);
+        } finally {
             setLoadingArriva(false);
         }
     };
@@ -68,9 +77,9 @@ function SearchPage() {
                 date
             });
             setTrainsResults(response.data);
-            setLoadingTrains(false);
         } catch (error) {
             console.error('Error fetching Trains data:', error);
+        } finally {
             setLoadingTrains(false);
         }
     };
@@ -83,9 +92,9 @@ function SearchPage() {
                 date
             });
             setApmsResults(response.data);
-            setLoadingAPMS(false);
         } catch (error) {
             console.error('Error fetching APMS data:', error);
+        } finally {
             setLoadingAPMS(false);
         }
     };
@@ -98,26 +107,29 @@ function SearchPage() {
                 date
             });
             setPrevoziResults(response.data);
-            setLoadingPrevozi(false);
         } catch (error) {
             console.error('Error fetching Prevozi data:', error);
+        } finally {
             setLoadingPrevozi(false);
         }
     };
 
     return (
         <div>
-            <SearchForm/>
-            <div className="results-container mt-8 w-full">
-
-                <ResultsAPMS results={apmsResults} isLoading={loadingAPMS}/>
-
-                <ResultsArriva results={arrivaResults} isLoading={loadingArriva}/>
-
-                <ResultsTrains results={trainsResults} isLoading={loadingTrains}/>
-
-                <ResultsPrevozi results={prevoziResults} isLoading={loadingPrevozi}/>
-            </div>
+            <SearchForm
+                initialDeparture={new URLSearchParams(location.search).get('departure')}
+                initialDestination={new URLSearchParams(location.search).get('destination')}
+                initialDate={new URLSearchParams(location.search).get('date')}
+                errorMessage={errorMessage}
+            />
+            {!errorMessage && (
+                <div className="results-container mt-8 w-full">
+                    <ResultsAPMS results={apmsResults} isLoading={loadingAPMS}/>
+                    <ResultsArriva results={arrivaResults} isLoading={loadingArriva}/>
+                    <ResultsTrains results={trainsResults} isLoading={loadingTrains}/>
+                    <ResultsPrevozi results={prevoziResults} isLoading={loadingPrevozi}/>
+                </div>
+            )}
         </div>
     );
 }

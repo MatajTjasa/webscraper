@@ -1,42 +1,33 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
-function SearchForm({onSearch, initialDeparture, initialDestination, initialDate}) {
+function SearchForm({initialDeparture, initialDestination, initialDate, errorMessage}) {
     const API = process.env.REACT_APP_API_URL;
-    const location = useLocation();
     const [departure, setDeparture] = useState(initialDeparture || '');
     const [destination, setDestination] = useState(initialDestination || '');
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(initialDate || '');
     const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
     const departureRef = useRef(null);
     const destinationRef = useRef(null);
 
-    // Fetch destinations on component mount
     useEffect(() => {
         const fetchDestinations = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/webscraper/destinations`);
+                const response = await axios.get(`${API}/webscraper/destinations`);
                 setDestinations(response.data);
             } catch (error) {
-                if (error.response && error.response.status === 429) {
-                    setErrorMessage('Ups, preveč zahtev! Počakaj malo in poskusi znova.');
-                } else {
-                    console.error('Error fetching destinations:', error);
-                    setErrorMessage('Nekaj je šlo narobe pri iskanju destinacij. Poskusi znova kasneje.');
-                }
+                console.error('Error fetching destinations:', error);
             }
         };
         fetchDestinations();
-    }, []);
+    }, [API]);
 
-    // Handle click outside of dropdowns to close them
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (departureRef.current && !departureRef.current.contains(event.target)) {
@@ -54,64 +45,27 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
         };
     }, [departureRef, destinationRef]);
 
-    // Populate fields based on URL parameters
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        const urlDeparture = queryParams.get('departure');
-        const urlDestination = queryParams.get('destination');
-        const urlDate = queryParams.get('date');
-
-        if (urlDeparture) setDeparture(urlDeparture);
-        if (urlDestination) setDestination(urlDestination);
-        if (urlDate) {
-            setDate(urlDate);
-        } else {
-            // Set default date if not provided in URL
-            const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
-            const slovenianTime = new Intl.DateTimeFormat('en-GB', options).format(new Date());
-            const [day, month, year] = slovenianTime.split('/');
-            setDate(`${year}-${month}-${day}`);
-        }
-    }, [location.search]);
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (isSubmitting) return; // Prevent multiple submissions
+        if (isSubmitting) return;
 
-        if (!departure || !destination || !date) {
-            alert('Prosim zapolni vsa polja.');
+        if (departure === destination) {
+            setIsSubmitting(false);
             return;
         }
 
-        setIsSubmitting(true); // Set to true to prevent further submissions
+        if (!departure || !destination || !date) {
+            setIsSubmitting(false);
+            return;
+        }
 
-        // Navigate to results page
+        setIsSubmitting(true);
+
         navigate(`/search?departure=${departure}&destination=${destination}&date=${date}`);
 
-        // Simulate a delay for user experience (e.g., showing loading)
         setTimeout(() => {
             setIsSubmitting(false);
         }, 500);
-    };
-
-    const handleDepartureChange = (e) => {
-        setDeparture(e.target.value);
-        setDepartureDropdownActive(true);
-    };
-
-    const handleDestinationChange = (e) => {
-        setDestination(e.target.value);
-        setDestinationDropdownActive(true);
-    };
-
-    const handleDepartureSelect = (value) => {
-        setDeparture(value);
-        setDepartureDropdownActive(false);
-    };
-
-    const handleDestinationSelect = (value) => {
-        setDestination(value);
-        setDestinationDropdownActive(false);
     };
 
     return (
@@ -128,7 +82,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                                 type="text"
                                 placeholder="Kraj odhoda"
                                 value={departure}
-                                onChange={handleDepartureChange}
+                                onChange={(e) => setDeparture(e.target.value)}
                                 className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
                                 onClick={() => setDepartureDropdownActive(!departureDropdownActive)}
                             />
@@ -140,7 +94,10 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                                         .map((dest, index) => (
                                             <div
                                                 key={index}
-                                                onClick={() => handleDepartureSelect(dest.Kraj)}
+                                                onClick={() => {
+                                                    setDeparture(dest.Kraj);
+                                                    setDepartureDropdownActive(false);
+                                                }}
                                                 className="px-4 py-2 cursor-pointer hover:bg-blue-100"
                                             >
                                                 {dest.Kraj}
@@ -154,7 +111,7 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                                 type="text"
                                 placeholder="Kraj prihoda"
                                 value={destination}
-                                onChange={handleDestinationChange}
+                                onChange={(e) => setDestination(e.target.value)}
                                 className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
                                 onClick={() => setDestinationDropdownActive(!destinationDropdownActive)}
                             />
@@ -166,7 +123,10 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                                         .map((dest, index) => (
                                             <div
                                                 key={index}
-                                                onClick={() => handleDestinationSelect(dest.Kraj)}
+                                                onClick={() => {
+                                                    setDestination(dest.Kraj);
+                                                    setDestinationDropdownActive(false);
+                                                }}
                                                 className="px-4 py-2 cursor-pointer hover:bg-blue-100"
                                             >
                                                 {dest.Kraj}
@@ -184,14 +144,19 @@ function SearchForm({onSearch, initialDeparture, initialDestination, initialDate
                                 className="custom-date px-4 py-2 border border-gray-300 rounded-md w-full"
                             />
                         </div>
-                        <button type="submit"
-                                className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4"
-                                disabled={isSubmitting} // Disable button when submitting
+                        <button
+                            type="submit"
+                            className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4"
+                            disabled={isSubmitting}
                         >
                             {isSubmitting ? 'Iskanje...' : 'Išči'}
                         </button>
                     </form>
-                    {errorMessage && <p className="error-message text-red-500 mt-4">{errorMessage}</p>}
+                    {errorMessage && (
+                        <p className="error-message text-red-500 mt-4">
+                            {errorMessage}
+                        </p>
+                    )}
                 </header>
             </div>
         </div>
