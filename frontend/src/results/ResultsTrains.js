@@ -1,34 +1,8 @@
 import React, {useState} from 'react';
-import LoadingComponent from '../components/LoadingComponent';
+import loadingEmptyState from "../components/LoadingEmptyState";
 
-function ResultsTrains({results, isLoading}) {
+function ResultsTrains({results}) {
     const [showInactive, setShowInactive] = useState(false);
-
-    if (isLoading) {
-        return (
-            <LoadingComponent content={
-                <>
-                    Pridobivanje podatkov iz strani <a href="https://potniski.sz.si/"
-                                                       target="_blank"
-                                                       rel="noopener noreferrer"
-                                                       className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Slovenske
-                    železnice</a>...
-                </>
-            }/>
-        );
-    }
-
-    if (!results || results.length === 0) {
-        return (
-            <div className="container result-section mb-8">
-                <p className="text-gray-800 text-md leading-relaxed italic text-center">
-                    Iskanih rezultatov ponudnika <a href="https://potniski.sz.si/"
-                                                    className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Slovenske
-                    železnice</a> nismo našli.
-                </p>
-            </div>
-        );
-    }
 
     const toggleInactiveRows = () => {
         setShowInactive(!showInactive);
@@ -129,4 +103,4 @@ function ResultsTrains({results, isLoading}) {
     );
 }
 
-export default ResultsTrains;
+export default loadingEmptyState(ResultsTrains, 'Slovenske železnice', 'https://potniski.sz.si/');

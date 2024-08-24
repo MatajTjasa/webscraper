@@ -1,32 +1,7 @@
 import React from 'react';
-import LoadingComponent from '../components/LoadingComponent';
+import loadingEmptyState from "../components/LoadingEmptyState";
 
-function ResultsPrevozi({results, isLoading}) {
-    if (isLoading) {
-        return (
-            <LoadingComponent content={
-                <>
-                    Pridobivanje podatkov iz strani <a href="https://prevoz.org"
-                                                       target="_blank"
-                                                       rel="noopener noreferrer"
-                                                       className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Prevozi</a>...
-                </>
-            }/>
-        );
-    }
-
-    if (!results || results.length === 0) {
-        return (
-            <div className="container result-section mb-8">
-                <p className="text-gray-800 text-md leading-relaxed italic text-center">
-                    Iskanih rezultatov ponudnika <a href="https://prevoz.org/"
-                                                    className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Prevozi</a> nismo
-                    našli.
-                </p>
-            </div>
-        );
-    }
-
+function ResultsPrevozi({results}) {
     return (
         <div className="container result-section mb-8">
             <h2 className="text-2xl font-semibold mb-4">Prevozi</h2>
@@ -62,4 +37,4 @@ function ResultsPrevozi({results, isLoading}) {
     );
 }
 
-export default ResultsPrevozi;
+export default loadingEmptyState(ResultsPrevozi, 'Prevozi', 'https://prevoz.org');

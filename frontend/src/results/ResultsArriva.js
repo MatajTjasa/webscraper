@@ -1,32 +1,7 @@
 import React from 'react';
-import LoadingComponent from '../components/LoadingComponent';
+import loadingEmptyState from "../components/LoadingEmptyState";
 
-function ResultsArriva({results, isLoading}) {
-    if (isLoading) {
-        return (
-            <LoadingComponent content={
-                <>
-                    Pridobivanje podatkov iz strani <a href="https://arriva.si"
-                                                       target="_blank"
-                                                       rel="noopener noreferrer"
-                                                       className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Arriva</a>...
-                </>
-            }/>
-        );
-    }
-
-    if (!results || results.length === 0) {
-        return (
-            <div className="container result-section mb-8">
-                <p className="text-gray-800 text-md leading-relaxed italic text-center">
-                    Iskanih rezultatov ponudnika <a href="https://arriva.si"
-                                                    className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">Arriva</a> nismo
-                    našli.
-                </p>
-            </div>
-        );
-    }
-
+function ResultsArriva({results}) {
     return (
         <div className="container result-section mb-8">
             <h2 className="text-2xl font-semibold mb-4">Rezultati za Arriva</h2>
@@ -63,4 +38,4 @@ function ResultsArriva({results, isLoading}) {
     );
 }
 
-export default ResultsArriva;
+export default loadingEmptyState(ResultsArriva, 'Arriva', 'https://arriva.si');

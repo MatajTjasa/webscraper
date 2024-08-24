@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Suspense} from 'react';
 import {useLocation} from 'react-router-dom';
 import SearchForm from '../components/SearchForm';
-import ResultsArriva from '../results/ResultsArriva';
-import ResultsTrains from '../results/ResultsTrains';
-import ResultsAPMS from '../results/ResultsAPMS';
-import ResultsPrevozi from '../results/ResultsPrevozi';
+import LoadingComponent from '../components/LoadingComponent';
 import axios from 'axios';
+
+const ResultsAPMS = React.lazy(() => import('../results/ResultsAPMS'));
+const ResultsArriva = React.lazy(() => import('../results/ResultsArriva'));
+const ResultsTrains = React.lazy(() => import('../results/ResultsTrains'));
+const ResultsPrevozi = React.lazy(() => import('../results/ResultsPrevozi'));
 
 function SearchPage() {
     const [arrivaResults, setArrivaResults] = useState(null);
@@ -124,10 +126,12 @@ function SearchPage() {
             />
             {!errorMessage && (
                 <div className="results-container mt-8 w-full">
-                    <ResultsAPMS results={apmsResults} isLoading={loadingAPMS}/>
-                    <ResultsArriva results={arrivaResults} isLoading={loadingArriva}/>
-                    <ResultsTrains results={trainsResults} isLoading={loadingTrains}/>
-                    <ResultsPrevozi results={prevoziResults} isLoading={loadingPrevozi}/>
+                    <Suspense fallback={<LoadingComponent content="Nalaganje podatkov..."/>}>
+                        <ResultsAPMS results={apmsResults} isLoading={loadingAPMS}/>
+                        <ResultsArriva results={arrivaResults} isLoading={loadingArriva}/>
+                        <ResultsTrains results={trainsResults} isLoading={loadingTrains}/>
+                        <ResultsPrevozi results={prevoziResults} isLoading={loadingPrevozi}/>
+                    </Suspense>
                 </div>
             )}
         </div>

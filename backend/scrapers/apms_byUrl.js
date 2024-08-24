@@ -7,7 +7,7 @@ puppeteer.use(StealthPlugin());
 
 async function scrapeAPMSbyUrl(departure, destination, date) {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
         executablePath: puppeteer.executablePath()
     });
