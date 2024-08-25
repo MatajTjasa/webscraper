@@ -1,11 +1,10 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
-const fs = require('fs');
-const path = require("path");
+const {safeGoto} = require('../server/helpers');
 require('dotenv').config();
 
-/*// Hiding puppeteer usage
+// Hiding puppeteer usage
 puppeteer.use(StealthPlugin());
 
 puppeteer.use(
@@ -16,38 +15,26 @@ puppeteer.use(
         },
         visualFeedback: true
     })
-);*/
-
-function ensureDirectoryExistence(filePath) {
-    const dirname = path.dirname(filePath);
-    if (fs.existsSync(dirname)) {
-        return true;
-    }
-    fs.mkdirSync(dirname, {recursive: true});
-}
+);
 
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
-    //console.log('Chromium path:', puppeteer.executablePath());
     const browser = await puppeteer.launch({
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: process.env.PUPPETEER_CACHE_DIR//path.join(process.env.PUPPETEER_CACHE_DIR, 'chrome-win', 'chrome.exe')
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
+        executablePath: puppeteer.executablePath()
     });
 
     const page = await browser.newPage();
 
-    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
-
-    await page.goto(url, {waitUntil: 'networkidle0'});
+    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search
+                                                            &current-language=sl
+                                                            &departure-date=${date}
+                                                            &entry-station=${departureStationCode}
+                                                            &exit-station=${destinationStationCode}`;
     console.log(url);
-    console.log('Page should be fully loaded (vlak)');
 
-    // Check for any errors in the page
-    const pageErrors = [];
-    page.on('pageerror', error => {
-        console.error('Page error:', error);
-        pageErrors.push(error);
-    });
+    await safeGoto(page, url);
+    console.log('Page should be fully loaded (vlak): ' + page.url());
 
     // Captcha check
     const isCaptchaPresent = await page.evaluate(() => {
@@ -130,17 +117,6 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
     });
 
     console.log(trainSchedules);
-
-    const filePath = path.join(__dirname, '../data/timetable/slovenske_zeleznice_byUrl.json');
-    ensureDirectoryExistence(filePath);
-
-    fs.writeFile(filePath, JSON.stringify(trainSchedules, null, 2), err => {
-        if (err) {
-            console.error('Error writing file slovenske_zeleznice_byUrl.json:', err);
-        } else {
-            console.log('Successfully written to slovenske_zeleznice_byUrl.json.');
-        }
-    });
 
     await browser.close();
     return trainSchedules;

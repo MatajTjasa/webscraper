@@ -1,3 +1,4 @@
+const moment = require('moment');
 const {getDestinationsFromDatabase} = require('./database');
 
 // Helper methods
@@ -12,6 +13,10 @@ const retry = (fn, retries = 3) => async (...args) => {
         }
     }
 };
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function validateTransportSupport(departureCodes, destinationCodes, transportType) {
     const departureMap = departureCodes[transportType];
@@ -57,13 +62,31 @@ const getDestinationCodes = async (kraj, redisClient) => {
     return {...mappings, valid};
 };
 
-function reformatDate(date) {
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    if (datePattern.test(date)) { // from dd.mm.yyyy to yyyy-mm-dd
-        return date;
+function reformatDate(date, transportType) {
+    if (transportType === 'Prevozi') {
+        return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('YYYY-MM-DD');
+    } else if (transportType === 'APMS' || transportType === 'Arriva') {
+        return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
+    } else {
+        return date;// train accepts both
     }
-    const [day, month, year] = date.split('.');
-    return `${year}-${month}-${day}`;
+}
+
+function reformatDateForCache(date) {
+    return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
+}
+
+async function safeGoto(page, url) {
+    for (let i = 0; i < 3; i++) {
+        try {
+            await page.goto(url, {waitUntil: 'networkidle0', timeout: 60000});
+            return;
+        } catch (error) {
+            console.error(`Attempt ${i + 1} to load page failed:`, error);
+            await delay(2000);
+        }
+    }
+    throw new Error(`Failed to load ${url} after multiple attempts`);
 }
 
 
@@ -72,4 +95,7 @@ module.exports = {
     validateTransportSupport,
     getDestinationCodes,
     reformatDate,
+    reformatDateForCache,
+    safeGoto,
+    delay
 };

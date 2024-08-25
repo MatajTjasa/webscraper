@@ -1,10 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const fs = require('fs');
 const puppeteer = require('puppeteer-extra');
-const path = require('path');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
+const {safeGoto, delay} = require('../server/helpers');
+const {getCodeArriva} = require('../server/database.js');
 require('dotenv').config();
 
 // Hiding puppeteer usage
@@ -34,19 +34,21 @@ async function scrapeArrivaByUrl(departure, destination, date) {
     try {
         browser = await puppeteer.launch({
             headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
             executablePath: puppeteer.executablePath()
         });
-        const page = await browser.newPage();
+
+        const context = browser.defaultBrowserContext();
+        const page = (await context.pages())[0]
 
         console.log("Navigating to the Arriva website...");
-        await page.goto('https://arriva.si/vozni-redi/', {waitUntil: 'networkidle0'});
-
+        await safeGoto(page, 'https://arriva.si/vozni-redi/');
         await delay(3000);
 
+        // Handle accept button
         try {
             await page.waitForSelector("#CybotCookiebotDialogBodyLevelButtonAccept", {timeout: 10000});
-            console.log("Clicking on the accept button...");
+            console.log("Accepting cookies...");
 
             const acceptButton = await page.$("#CybotCookiebotDialogBodyLevelButtonAccept");
             if (acceptButton) {
@@ -61,32 +63,20 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         const formattedDeparture = formatLocation(departure);
         const formattedDestination = formatLocation(destination);
 
-        // Extract departure ID
-        await page.type('.input-departure', departure);
-        await page.waitForSelector('.departure-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', {visible: true});
-        await page.click('.departure-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item');
-        await delay(1000);
-        const departureId = await extractId(page, '#departure_id');
-        console.log('DepartureID: ', departureId);
+        const departureId = await getCodeArriva(departure);
+        const destinationId = await getCodeArriva(destination);
 
-        // Extract destination ID
-        console.log("Typing destination");
-        await page.type('.input-destination', destination);
-        console.log("Waiting for selector dropdown destination");
-        await page.waitForSelector('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item', {visible: true});
-        console.log("Clicking selector dropdown destination");
-        await page.click('.destination-input-wrapper ul.typeahead.dropdown-menu li:first-child a.dropdown-item');
-        await delay(1000);
-        console.log("Extracting destination id....");
-        const destinationId = await extractId(page, '#destination_id');
-        await delay(1000);
-        console.log('DestinationID: ', destinationId);
+        if (!departureId || !destinationId) {
+            console.log("One or both station codes could not be found in the database.");
+            await browser.close();
+            return [];
+        }
 
         console.log(`Extracted IDs - Departure ID: ${departureId}, Destination ID: ${destinationId}`);
 
         const url = `https://arriva.si/vozni-redi/?departure-123=${formattedDeparture}&departure_id=${departureId}&departure=${formattedDeparture}&destination=${formattedDestination}&destination_id=${destinationId}&trip_date=${date}`;
         console.log("Navigating to the URL:", url);
-        await page.goto(url, {waitUntil: 'networkidle0'});
+        await safeGoto(page, url);
         console.log("Current page URL:", page.url());
 
         const noDirectConnection = await page.evaluate(() => {
@@ -108,7 +98,7 @@ async function scrapeArrivaByUrl(departure, destination, date) {
             await browser.close();
         }
         console.error('Error in scrapeArrivaByUrl:', error);
-        throw error;  // Ensure the error is thrown to trigger retries
+        throw error;
     }
 }
 
@@ -127,7 +117,6 @@ const fetchConnection = async (url) => {
         $('div.connection:not(.connection-header) .connection-inner').each((index, el) => {
             const connection = $(el);
 
-            // Extract departure and arrival details
             const departureTimeElement = connection.find('.departure-arrival .departure td span');
             const departureTime = departureTimeElement.eq(0).text().trim();
             const departure = departureTimeElement.parent().next().find('span').text().trim();
@@ -136,16 +125,13 @@ const fetchConnection = async (url) => {
             const arrivalTime = arrivalTimeElement.eq(0).text().trim();
             const arrival = arrivalTimeElement.parent().next().find('span').text().trim();
 
-            // Extract duration details
             const travelDuration = connection.find('.duration .travel-duration span').text().trim();
             const prevoznik = connection.find('.duration .prevoznik span').eq(1).text().trim();
             const peron = connection.find('.duration .peron span').eq(1).text().trim();
 
-            // Extract length and price
             const length = connection.find('.length').text().trim();
             const price = connection.find('.price').text().trim();
 
-            // Push all data into connectionData array
             connectionData.push({
                 departure,
                 departureTime,
@@ -162,19 +148,9 @@ const fetchConnection = async (url) => {
         // Check if connectionData is empty
         if (connectionData.length === 0) {
             console.log("No connections found.");
+            return [];
         } else {
-            // Process connection data
             console.log(connectionData);
-
-            // Write data to a file
-            const jsonData = JSON.stringify(connectionData, null, 2); // Convert data to JSON string with indentation
-            const directory = path.resolve(__dirname, "../data/timetable");
-            if (!fs.existsSync(directory)) {
-                fs.mkdirSync(directory, {recursive: true});
-            }
-
-            fs.writeFileSync(path.resolve(directory, "arriva_byUrl.json"), jsonData, 'utf8');
-            console.log('Data has been saved to arriva_byUrl.json');
             return connectionData;
         }
     } catch (err) {
@@ -182,9 +158,5 @@ const fetchConnection = async (url) => {
         return [];
     }
 };
-
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 module.exports = {scrapeArrivaByUrl};

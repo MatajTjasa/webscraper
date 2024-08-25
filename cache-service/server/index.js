@@ -1,11 +1,11 @@
 const express = require('express');
 const redis = require('redis');
-const {scrapeAPMS} = require("../scrapers/apms");
+const {scrapeAPMSbyUrl} = require("../scrapers/apms_byUrl");
 const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
 const {scrapePrevoziByUrl} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
 const {scheduleCacheRefresh} = require('./cacheManager');
-const {retry, validateTransportSupport, getDestinationCodes, reformatDate} = require('./helpers');
+const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
@@ -14,19 +14,14 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// CORS setup
-const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:5000', 'https://webscraper-w92y.onrender.com', 'https://frontend-vmg7.onrender.com'],
-    optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
 app.use(express.json());
 
-// Rate limiting setup
+app.set('trust proxy', 1);
+
 const limiter = rateLimit({
-    windowMs: 5 * 60 * 1000, // 5 minutes
-    max: 50,
-    message: "Too many requests from this IP, please try again after 15 minutes"
+    windowMs: 5 * 60 * 1000, // 5min
+    max: 50, // limit of requests in 5min
+    message: "Too many requests from this IP, please try again after 5 minutes"
 });
 app.use(limiter);
 
@@ -48,7 +43,6 @@ redisClient.connect().then(() => {
     console.error('Redis connection error:', err);
 });
 
-// Ongoing requests management
 const ongoingRequests = new Map();
 
 function trackRequest(key, promise, controller) {
@@ -76,7 +70,7 @@ async function getCachedData(cacheKey) {
     return null;
 }
 
-// API endpoints
+// API
 app.get('/webscraper/destinations', async (req, res) => {
     const cacheKey = 'destinations';
     let destinations = await getCachedData(cacheKey);
@@ -89,11 +83,11 @@ app.get('/webscraper/destinations', async (req, res) => {
     res.json(destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj})));
 });
 
-async function handleSearch(req, res, scraperFn, transportType, formatDate = false) {
+async function handleSearch(req, res, scraperFn, transportType) {
     let {date, departure, destination} = req.body;
-    const cacheKey = `${transportType}-${departure}-${destination}-${date}`;
+    const cacheKey = `${transportType}-${departure}-${destination}-${reformatDateForCache(date)}`;
 
-    date = formatDate ? reformatDate(date) : date;
+    date = reformatDate(date, transportType);
 
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData && cachedData !== '[]') {
@@ -131,16 +125,15 @@ async function handleSearch(req, res, scraperFn, transportType, formatDate = fal
     }
 }
 
-// Setup routes
-app.post('/webscraper/searchAPMS', async (req, res) => {
-    console.log('Starting request searchAPMS.');
-    await handleSearch(req, res, scrapeAPMS, 'APMS');
-    console.log('Ending request searchAPMS.');
+app.post('/webscraper/searchAPMSbyUrl', async (req, res) => {
+    console.log('Starting request searchAPMSbyUrl.');
+    await handleSearch(req, res, scrapeAPMSbyUrl, 'APMS');
+    console.log('Ending request searchAPMSbyUrl.');
 });
 
 app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     console.log('Starting request searchArrivaByUrl.');
-    await handleSearch(req, res, scrapeArrivaByUrl, 'Arriva');
+    await handleSearch(req, res, scrapeArrivaByUrl, 'Arriva', false);
     console.log('Ending request searchArrivaByUrl.');
 });
 

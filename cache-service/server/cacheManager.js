@@ -3,6 +3,7 @@ const axios = require('axios');
 const {getCommonDestinations} = require('./database');
 
 let isTaskRunning = false;
+let heartbeatInterval = null;
 
 function getSlovenianDateString(offset = 0) {
     const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
@@ -17,7 +18,7 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
     const tasks = commonDestinations.flatMap(({departure, destination}) => [
         {
             name: 'APMS',
-            url: `/webscraper/searchAPMS`,
+            url: `/webscraper/searchAPMSbyUrl`,
             cacheKey: `APMS-${departure}-${destination}-${date}`,
             data: {departure, destination, date}
         },
@@ -51,10 +52,23 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
             console.error(`Failed to refresh cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}: ${error.message}`);
         }
 
-        await new Promise(resolve => setTimeout(resolve, 1000 * 30));  // 30s delay between each task
+        await new Promise(resolve => setTimeout(resolve, 1000 * 15));  // 15s delay between each task
     }
 
     console.log(`Cache refresh task completed for ${date}.`);
+}
+
+function startHeartbeat() {
+    heartbeatInterval = setInterval(() => {
+        console.log('Heartbeat pulse');
+    }, 60000);
+}
+
+function stopHeartbeat() {
+    if (heartbeatInterval) {
+        clearInterval(heartbeatInterval);
+        heartbeatInterval = null;
+    }
 }
 
 async function runSequentially(redisClient, PORT) {
@@ -63,6 +77,7 @@ async function runSequentially(redisClient, PORT) {
         return;
     }
 
+    stopHeartbeat();
     isTaskRunning = true;
     const startTime = Date.now();
 
@@ -78,12 +93,19 @@ async function runSequentially(redisClient, PORT) {
     }
 
     const endTime = Date.now();
-    const duration = ((endTime - startTime) / 1000).toFixed(2);
-    console.log(`Cache refresh process completed. Total duration: ${duration} seconds. Started at: ${new Date(startTime).toLocaleTimeString()}, Ended at: ${new Date(endTime).toLocaleTimeString()}.`);
+    const duration = (endTime - startTime) / 1000; // duration in seconds
+    const minutes = Math.floor(duration / 60);
+    const seconds = Math.floor(duration % 60);
+    console.log(`Cache refresh process completed. Total duration: ${minutes}:${seconds.toString().padStart(2, '0')} minutes. Started at: ${new Date(startTime).toLocaleTimeString()}, Ended at: ${new Date(endTime).toLocaleTimeString()}.`);
+
     isTaskRunning = false;
+    startHeartbeat();
 }
 
 function scheduleCacheRefresh(redisClient, PORT) {
+
+    startHeartbeat();
+
     // Schedule the refresh to run at specific intervals
     cron.schedule('*/30 * * * *', () => {
         console.log('Scheduled task started');
