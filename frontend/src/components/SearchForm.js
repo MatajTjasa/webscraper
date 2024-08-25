@@ -1,32 +1,32 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef, useContext, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import {DestinationsContext} from '../context/DestinationsContext';
 
 function SearchForm({initialDeparture, initialDestination, initialDate, errorMessage}) {
-    const API = process.env.REACT_APP_API_URL;
+    const {destinations, loading, error} = useContext(DestinationsContext);
     const [departure, setDeparture] = useState(initialDeparture || '');
+    const [date, setDate] = useState('');
     const [destination, setDestination] = useState(initialDestination || '');
-    const [date, setDate] = useState(initialDate || '');
-    const [destinations, setDestinations] = useState([]);
     const [departureDropdownActive, setDepartureDropdownActive] = useState(false);
     const [destinationDropdownActive, setDestinationDropdownActive] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [localErrorMessage, setLocalErrorMessage] = useState('');
+    const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const navigate = useNavigate();
     const departureRef = useRef(null);
     const destinationRef = useRef(null);
 
     useEffect(() => {
-        const fetchDestinations = async () => {
-            try {
-                const response = await axios.get(`${API}/webscraper/destinations`);
-                setDestinations(response.data);
-            } catch (error) {
-                console.error('Error fetching destinations:', error);
-            }
-        };
-        fetchDestinations();
-    }, [API]);
+        if (!initialDate) {
+            const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
+            const slovenianTime = new Intl.DateTimeFormat('en-GB', options).format(new Date());
+            const [day, month, year] = slovenianTime.split('/');
+            setDate(`${year}-${month}-${day}`);
+        } else {
+            setDate(initialDate);
+        }
+    }, [initialDate]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -45,19 +45,29 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
         };
     }, [departureRef, destinationRef]);
 
+    const validateInputs = () => {
+        if (!departure || !destination || !date) {
+            setLocalErrorMessage('Prosim zapolni vsa polja.');
+            return false;
+        }
+
+        const validDestination = destinations.some(dest => dest.Kraj.toLowerCase() === destination.toLowerCase());
+
+        if (!validDestination) {
+            setLocalErrorMessage('Neveljavna destinacija. Prosim izberi veljavno destinacijo.');
+            return false;
+        }
+
+        return true;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        setHasSubmitted(true);
+
         if (isSubmitting) return;
 
-        if (departure === destination) {
-            setIsSubmitting(false);
-            return;
-        }
-
-        if (!departure || !destination || !date) {
-            setIsSubmitting(false);
-            return;
-        }
+        if (!validateInputs()) return;
 
         setIsSubmitting(true);
 
@@ -68,6 +78,21 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
         }, 500);
     };
 
+    const handleSwap = () => {
+        const temp = departure;
+        setDeparture(destination);
+        setDestination(temp);
+
+        const validDestination = destinations.some(dest => dest.Kraj.toLowerCase() === destination.toLowerCase());
+
+        if (!validDestination) {
+            setLocalErrorMessage('Neveljavna destinacija. Prosim izberi veljavno destinacijo.');
+            return;
+        }
+
+        setLocalErrorMessage('');
+    };
+
     return (
         <div className="App">
             <div className="cloud" style={{top: '50px', left: '50px'}}></div>
@@ -76,7 +101,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
             <div className="container bg-white bg-opacity-80 p-8 rounded-lg shadow-lg relative z-10">
                 <header className="App-header text-center">
                     <h1 className="text-[#4682B4] mb-8 text-4xl font-semibold">Vlak, avto, bus urniki</h1>
-                    <form onSubmit={handleSubmit} className="flex flex-wrap justify-center space-x-4">
+                    <form onSubmit={handleSubmit} className="flex flex-wrap justify-center items-center space-x-4">
                         <div className="custom-dropdown-container relative w-52" ref={departureRef}>
                             <input
                                 type="text"
@@ -86,7 +111,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
                                 onClick={() => setDepartureDropdownActive(!departureDropdownActive)}
                             />
-                            {departureDropdownActive && (
+                            {departureDropdownActive && destinations.length > 0 && (
                                 <div
                                     className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
                                     {destinations
@@ -106,6 +131,16 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 </div>
                             )}
                         </div>
+
+                        {/* Swap Button */}
+                        <button
+                            type="button"
+                            onClick={handleSwap}
+                            className="swap-button mx-2 px-4 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1]"
+                        >
+                            ⇆
+                        </button>
+
                         <div className="custom-dropdown-container relative w-52" ref={destinationRef}>
                             <input
                                 type="text"
@@ -115,7 +150,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
                                 onClick={() => setDestinationDropdownActive(!destinationDropdownActive)}
                             />
-                            {destinationDropdownActive && (
+                            {destinationDropdownActive && destinations.length > 0 && (
                                 <div
                                     className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
                                     {destinations
@@ -135,6 +170,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 </div>
                             )}
                         </div>
+
                         <div className="custom-dropdown-container relative w-52">
                             <input
                                 type="date"
@@ -144,6 +180,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 className="custom-date px-4 py-2 border border-gray-300 rounded-md w-full"
                             />
                         </div>
+
                         <button
                             type="submit"
                             className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4"
@@ -152,11 +189,8 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                             {isSubmitting ? 'Iskanje...' : 'Išči'}
                         </button>
                     </form>
-                    {errorMessage && (
-                        <p className="error-message text-red-500 mt-4">
-                            {errorMessage}
-                        </p>
-                    )}
+                    {(hasSubmitted && (localErrorMessage || errorMessage || error)) &&
+                        <p className="error-message text-red-500 mt-4">{localErrorMessage || errorMessage || error}</p>}
                 </header>
             </div>
         </div>

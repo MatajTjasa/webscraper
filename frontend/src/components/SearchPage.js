@@ -1,7 +1,8 @@
-import React, {useState, useEffect, Suspense} from 'react';
+import React, {useState, useEffect, Suspense, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
 import SearchForm from '../components/SearchForm';
 import LoadingComponent from '../components/LoadingComponent';
+import {DestinationsContext} from '../context/DestinationsContext';
 import axios from 'axios';
 
 const ResultsAPMS = React.lazy(() => import('../results/ResultsAPMS'));
@@ -10,6 +11,7 @@ const ResultsTrains = React.lazy(() => import('../results/ResultsTrains'));
 const ResultsPrevozi = React.lazy(() => import('../results/ResultsPrevozi'));
 
 function SearchPage() {
+    const {destinations, loading, error} = useContext(DestinationsContext);
     const [arrivaResults, setArrivaResults] = useState(null);
     const [trainsResults, setTrainsResults] = useState(null);
     const [apmsResults, setApmsResults] = useState(null);
@@ -23,6 +25,8 @@ function SearchPage() {
     const location = useLocation();
 
     useEffect(() => {
+        if (loading || destinations.length === 0 || error) return;
+
         const queryParams = new URLSearchParams(location.search);
         const departure = queryParams.get('departure');
         const destination = queryParams.get('destination');
@@ -33,18 +37,25 @@ function SearchPage() {
         setApmsResults(null);
         setPrevoziResults(null);
 
-        if (departure === destination) {
-            setErrorMessage('Kraj odhoda in kraj prihoda ne smeta biti enaka.');
-            return;
-        }
-
         if (!departure || !destination || !date) {
             setErrorMessage('Prosim izpolnite vsa polja.');
             return;
         }
 
-        setErrorMessage('');
+        if (departure === destination) {
+            setErrorMessage('Kraj odhoda in kraj prihoda ne smeta biti enaka.');
+            return;
+        }
 
+        const validDeparture = destinations.some(dest => dest.Kraj.toLowerCase() === departure.toLowerCase());
+        const validDestination = destinations.some(dest => dest.Kraj.toLowerCase() === destination.toLowerCase());
+
+        if (!validDeparture || !validDestination) {
+            setErrorMessage('Neveljavna destinacija. Prosim izberi veljavno destinacijo.');
+            return;
+        }
+
+        setErrorMessage('');
         setLoadingArriva(true);
         setLoadingTrains(true);
         setLoadingAPMS(true);
@@ -54,7 +65,7 @@ function SearchPage() {
         fetchArrivaResults(departure, destination, date);
         fetchTrainsResults(departure, destination, date);
         fetchAPMSResults(departure, destination, date);
-    }, [location.search]);
+    }, [location.search, destinations, loading, error]);
 
     const fetchArrivaResults = async (departure, destination, date) => {
         try {
@@ -122,7 +133,7 @@ function SearchPage() {
                 initialDeparture={new URLSearchParams(location.search).get('departure')}
                 initialDestination={new URLSearchParams(location.search).get('destination')}
                 initialDate={new URLSearchParams(location.search).get('date')}
-                errorMessage={errorMessage}
+                errorMessage={errorMessage || error}  // Display context error if any
             />
             {!errorMessage && (
                 <div className="results-container mt-8 w-full">
