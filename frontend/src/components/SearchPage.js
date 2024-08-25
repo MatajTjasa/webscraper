@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Suspense, useContext} from 'react';
-import {useLocation} from 'react-router-dom';
+import {useLocation, Link} from 'react-router-dom';
 import SearchForm from '../components/SearchForm';
 import LoadingComponent from '../components/LoadingComponent';
 import {DestinationsContext} from '../context/DestinationsContext';
@@ -129,11 +129,15 @@ function SearchPage() {
 
     return (
         <div>
+            <Link to="/"
+                  className="absolute top-4 left-4 text-2xl text-gray-800 dark:text-white hover:text-blue-500">
+                🏠
+            </Link>
             <SearchForm
                 initialDeparture={new URLSearchParams(location.search).get('departure')}
                 initialDestination={new URLSearchParams(location.search).get('destination')}
                 initialDate={new URLSearchParams(location.search).get('date')}
-                errorMessage={errorMessage || error}  // Display context error if any
+                errorMessage={errorMessage || error}
             />
             {!errorMessage && (
                 <div className="results-container mt-8 w-full">
