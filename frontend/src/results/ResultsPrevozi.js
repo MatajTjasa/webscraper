@@ -37,6 +37,19 @@ function ResultsPrevozi({results}) {
                     </div>
                 </div>
             ))}
+            <footer style={{marginTop: '40px', textAlign: 'center', fontSize: '0.9rem', color: '#555'}}>
+                <p className="italic text-gray-700 dark:text-gray-300">
+                    *Za ogled telefonske številke se prijavite na uradni strani {' '}
+                    <a
+                        href="https://prevoz.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#386890] dark:text-purple-300 font-sans font-semibold hover:underline hover:text-[#4169E1] dark:hover:text-purple-500"
+                    >
+                        Prevoz.si
+                    </a>
+                </p>
+            </footer>
         </div>
     );
 }
