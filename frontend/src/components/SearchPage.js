@@ -129,10 +129,6 @@ function SearchPage() {
 
     return (
         <div>
-            <Link to="/"
-                  className="absolute top-4 left-4 text-2xl text-gray-800 dark:text-white hover:text-blue-500">
-                🏠
-            </Link>
             <SearchForm
                 initialDeparture={new URLSearchParams(location.search).get('departure')}
                 initialDestination={new URLSearchParams(location.search).get('destination')}
@@ -140,7 +136,7 @@ function SearchPage() {
                 errorMessage={errorMessage || error}
             />
             {!errorMessage && (
-                <div className="results-container mt-8 w-full">
+                <div className="results-container mt-8 w-full px-4 sm:px-0">
                     <Suspense fallback={<LoadingComponent content="Nalaganje podatkov..."/>}>
                         <ResultsAPMS results={apmsResults} isLoading={loadingAPMS}/>
                         <ResultsArriva results={arrivaResults} isLoading={loadingArriva}/>

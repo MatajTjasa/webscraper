@@ -1,21 +1,26 @@
-/* App.css */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom right, #fff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 80%, #B4ECF0);
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
     transition: background 0.5s ease, color 0.5s ease;
+    background-color: #1E8EFD;
+    background-image: linear-gradient(to bottom right, #fff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 80%, #B4ECF0);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dark body {
-    background: linear-gradient(to bottom right, #0b0c10, #092241 15%, #063569 60%, #3f0586 80%, #000);
+    background-image: linear-gradient(to bottom right, #071526 10%, #030d18 30%, #29056d 50%, #000000 80%, #000 100%);
     color: #ccc;
 }
 
@@ -51,21 +56,57 @@ body {
     top: -90px;
 }
 
-.dark .cloud {
-    background: linear-gradient(to bottom, #555 5%, #333 100%);
+@media (max-width: 768px) {
+    .cloud {
+        display: none;
+    }
+}
+
+.dark .cloud, dark .cloud:after, dark .cloud:before {
+    display: none
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.8);
+    max-width: 100%;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.6);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: background 0.5s ease, box-shadow 0.5s ease;
+    margin: 20px auto;
+    z-index: 1;
+}
+
+@media (min-width: 640px) {
+    .container {
+        max-width: 640px;
+        padding: 20px 40px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+        padding: 20px 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px;
+        padding: 20px 80px;
+    }
 }
 
 .dark .container {
-    background: rgba(50, 50, 50, 0.8);
+    background: rgba(50, 50, 50, 0.6);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
 }
 
 .loading-container {
@@ -74,21 +115,63 @@ body {
     justify-content: center;
     flex-direction: column;
     margin: 20px 0;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     min-height: 100px;
     transition: background 0.5s ease;
+    z-index: 2;
 }
 
 .dark .loading-container {
-    background: rgba(50, 50, 50, 0.8);
+    background: rgba(50, 50, 50, 0.6);
 }
 
 .loading-icon {
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+
+.stars {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 1.5s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+.star:nth-child(2n) {
+    animation-duration: 2s;
+}
+
+.star:nth-child(3n) {
+    animation-duration: 2.5s;
+}
+
+.dark .star {
+    background: white;
 }

@@ -18,7 +18,6 @@ function App() {
         document.documentElement.classList.toggle('dark', newMode);
     };
 
-    // Set the initial dark mode class based on the stored preference
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark');
@@ -26,6 +25,13 @@ function App() {
             document.documentElement.classList.remove('dark');
         }
     }, [darkMode]);
+
+    const stars = Array.from({length: 100}, (_, i) => (
+        <div key={i} className="star" style={{
+            top: `${Math.random() * 100}vh`,
+            left: `${Math.random() * 100}vw`,
+        }}></div>
+    ));
 
     return (
         <DestinationsProvider>
@@ -38,6 +44,11 @@ function App() {
                         {darkMode ? '🌙' : '☀️'}
                     </button>
                 </div>
+                {darkMode && (
+                    <div className="stars">
+                        {stars}
+                    </div>
+                )}
                 <Routes>
                     <Route path="/search" element={<SearchPage/>}/>
                     <Route path="/" element={<SearchForm/>}/>
