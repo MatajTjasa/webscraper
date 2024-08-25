@@ -98,9 +98,11 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
             <div className="cloud" style={{top: '50px', left: '50px'}}></div>
             <div className="cloud" style={{top: '100px', left: '250px'}}></div>
             <div className="cloud" style={{top: '150px', right: '50px'}}></div>
-            <div className="container bg-white bg-opacity-80 p-8 rounded-lg shadow-lg relative z-10">
+            <div
+                className="container bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-90 p-8 rounded-lg shadow-lg relative z-10">
                 <header className="App-header text-center">
-                    <h1 className="text-[#4682B4] mb-8 text-4xl font-semibold">Vlak, avto, bus urniki</h1>
+                    <h1 className="text-[#4682B4] dark:text-purple-300 mb-8 text-4xl font-semibold">Vlak, avto, bus
+                        urniki</h1>
                     <form onSubmit={handleSubmit} className="flex flex-wrap justify-center items-center space-x-4">
                         <div className="custom-dropdown-container relative w-52" ref={departureRef}>
                             <input
@@ -108,12 +110,12 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 placeholder="Kraj odhoda"
                                 value={departure}
                                 onChange={(e) => setDeparture(e.target.value)}
-                                className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
+                                className="custom-dropdown px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md w-full bg-white dark:bg-gray-700 text-black dark:text-white"
                                 onClick={() => setDepartureDropdownActive(!departureDropdownActive)}
                             />
                             {departureDropdownActive && destinations.length > 0 && (
                                 <div
-                                    className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
+                                    className="custom-dropdown-list absolute z-10 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
                                     {destinations
                                         .filter(dest => dest.Kraj.toLowerCase().includes(departure.toLowerCase()))
                                         .map((dest, index) => (
@@ -123,7 +125,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                                     setDeparture(dest.Kraj);
                                                     setDepartureDropdownActive(false);
                                                 }}
-                                                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                                                className="px-4 py-2 cursor-pointer hover:bg-blue-100 dark:hover:bg-gray-600"
                                             >
                                                 {dest.Kraj}
                                             </div>
@@ -136,7 +138,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                         <button
                             type="button"
                             onClick={handleSwap}
-                            className="swap-button mx-2 px-4 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1]"
+                            className="swap-button mx-2 px-4 py-2 bg-[#4682B4] dark:bg-purple-500 text-white rounded-md text-lg hover:bg-[#4169E1] dark:hover:bg-purple-600"
                         >
                             ⇆
                         </button>
@@ -147,12 +149,12 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 placeholder="Kraj prihoda"
                                 value={destination}
                                 onChange={(e) => setDestination(e.target.value)}
-                                className="custom-dropdown px-4 py-2 border border-gray-300 rounded-md w-full"
+                                className="custom-dropdown px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md w-full bg-white dark:bg-gray-700 text-black dark:text-white"
                                 onClick={() => setDestinationDropdownActive(!destinationDropdownActive)}
                             />
                             {destinationDropdownActive && destinations.length > 0 && (
                                 <div
-                                    className="custom-dropdown-list absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
+                                    className="custom-dropdown-list absolute z-10 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
                                     {destinations
                                         .filter(dest => dest.Kraj.toLowerCase().includes(destination.toLowerCase()))
                                         .map((dest, index) => (
@@ -162,7 +164,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                                     setDestination(dest.Kraj);
                                                     setDestinationDropdownActive(false);
                                                 }}
-                                                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                                                className="px-4 py-2 cursor-pointer hover:bg-blue-100 dark:hover:bg-gray-600"
                                             >
                                                 {dest.Kraj}
                                             </div>
@@ -177,20 +179,20 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 placeholder="Date (dd.mm.yyyy)"
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className="custom-date px-4 py-2 border border-gray-300 rounded-md w-full"
+                                className="custom-date px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md w-full bg-white dark:bg-gray-700 text-black dark:text-white"
                             />
                         </div>
 
                         <button
                             type="submit"
-                            className="px-8 py-2 bg-[#4682B4] text-white rounded-md text-lg hover:bg-[#4169E1] ml-4"
+                            className="px-8 py-2 bg-[#4682B4] dark:bg-purple-500 text-white rounded-md text-lg hover:bg-[#4169E1] dark:hover:bg-purple-600 ml-4"
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? 'Iskanje...' : 'Išči'}
                         </button>
                     </form>
                     {(hasSubmitted && (localErrorMessage || errorMessage || error)) &&
-                        <p className="error-message text-red-500 mt-4">{localErrorMessage || errorMessage || error}</p>}
+                        <p className="error-message text-red-500 dark:text-red-300 mt-4">{localErrorMessage || errorMessage || error}</p>}
                 </header>
             </div>
         </div>

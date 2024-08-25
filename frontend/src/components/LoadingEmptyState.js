@@ -19,9 +19,9 @@ function LoadingEmptyState(Component, providerName, providerUrl) {
         if (!Array.isArray(results) || results.length === 0) {
             return (
                 <div className="container result-section mb-8">
-                    <p className="text-gray-800 text-md leading-relaxed italic text-center">
+                    <p className="text-gray-800 dark:text-white text-md leading-relaxed italic text-center">
                         Iskanih rezultatov ponudnika <a href={providerUrl}
-                                                        className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1]">{providerName}</a> nismo
+                                                        className="text-[#386890] dark:text-blue-400 font-sans font-semibold hover:underline hover:text-[#4169E1] dark:hover:text-blue-500">{providerName}</a> nismo
                         našli.
                     </p>
                 </div>
