@@ -26,7 +26,7 @@ function LoadingEmptyState(Component, providerName, providerUrl) {
                             className="text-[#386890] dark:text-blue-400 font-sans font-semibold hover:underline hover:text-[#4169E1] dark:hover:text-blue-500"
                         >
                             {providerName}
-                        </a>
+                        </a>{' '}
                         nismo našli.
                     </p>
                 </div>
