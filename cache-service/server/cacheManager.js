@@ -58,10 +58,15 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
     console.log(`Cache refresh task completed for ${date}.`);
 }
 
-function startHeartbeat() {
-    heartbeatInterval = setInterval(() => {
-        console.log('Heartbeat pulse');
-    }, 60000);
+function startHeartbeat(PORT) {
+    heartbeatInterval = setInterval(async () => {
+        try {
+            await axios.get(`http://localhost:${PORT}/heartbeat`);
+            console.log('Heartbeat pulse');
+        } catch (error) {
+            console.error('Failed to send heartbeat:', error.message);
+        }
+    }, 60000); // Send heartbeat every 60 seconds
 }
 
 function stopHeartbeat() {
@@ -99,12 +104,12 @@ async function runSequentially(redisClient, PORT) {
     console.log(`Cache refresh process completed. Total duration: ${minutes}:${seconds.toString().padStart(2, '0')} minutes. Started at: ${new Date(startTime).toLocaleTimeString()}, Ended at: ${new Date(endTime).toLocaleTimeString()}.`);
 
     isTaskRunning = false;
-    startHeartbeat();
+    startHeartbeat(PORT);
 }
 
 function scheduleCacheRefresh(redisClient, PORT) {
 
-    startHeartbeat();
+    startHeartbeat(PORT);
 
     // Schedule the refresh to run at specific intervals
     cron.schedule('*/30 * * * *', () => {

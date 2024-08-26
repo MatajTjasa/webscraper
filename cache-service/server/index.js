@@ -7,7 +7,6 @@ const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice
 const {scheduleCacheRefresh} = require('./cacheManager');
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
-const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -15,15 +14,9 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
+app.use(cors());
 
 app.set('trust proxy', 1);
-
-const limiter = rateLimit({
-    windowMs: 5 * 60 * 1000, // 5min
-    max: 50, // limit of requests in 5min
-    message: "Too many requests from this IP, please try again after 5 minutes"
-});
-app.use(limiter);
 
 // Connect to Redis
 const redisClient = redis.createClient({
@@ -147,6 +140,18 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     console.log('Starting request searchPrevoziByUrl.');
     await handleSearch(req, res, scrapePrevoziByUrl, 'Prevozi', true);
     console.log('Ending request searchPrevoziByUrl.');
+});
+
+app.get('/heartbeat', (req, res) => {
+    res.status(200).send('Heart beating OK');
+});
+
+// Graceful shutdown
+process.on('SIGINT', () => {
+    redisClient.quit(() => {
+        console.log('Redis client disconnected');
+        process.exit(0);
+    });
 });
 
 // Start the server
