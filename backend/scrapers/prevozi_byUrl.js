@@ -1,6 +1,4 @@
-const fs = require('fs');
 const puppeteer = require('puppeteer-extra');
-const path = require('path');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 const {safeGoto} = require('../server/helpers');
@@ -18,14 +16,6 @@ puppeteer.use(
         visualFeedback: true
     })
 );
-
-function ensureDirectoryExistence(filePath) {
-    const dirname = path.dirname(filePath);
-    if (fs.existsSync(dirname)) {
-        return true;
-    }
-    fs.mkdirSync(dirname, {recursive: true});
-}
 
 async function scrapePrevoziByUrl(departure, destination, date) {
     const browser = await puppeteer.launch({
@@ -98,23 +88,9 @@ async function scrapePrevoziByUrl(departure, destination, date) {
 
             return data.filter(item => item !== null);
         });
-
-        // Log extracted data
-        console.log(rideShares);
-
-        const filePath = path.join(__dirname, '../data/timetable/prevozi_byUrl.json');
-
-        ensureDirectoryExistence(filePath);
-
-        fs.writeFile(filePath, JSON.stringify(rideShares, null, 2), err => {
-            if (err) {
-                console.error('Error writing file:', err);
-            } else {
-                console.log('Successfully written to prevozi_byUrl.json');
-            }
-        });
-
         await browser.close();
+
+        console.log(rideShares);
         return rideShares;
     } catch (error) {
         console.error('Error executing scrapePrevozi:', error);

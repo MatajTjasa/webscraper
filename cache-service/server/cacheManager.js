@@ -10,6 +10,11 @@ function getSlovenianDateString(offset = 0) {
     return new Date(Date.now() + offset * 86400000).toLocaleDateString('sl-SI', options).split(' ').join('');
 }
 
+function getSlovenianTimeString(date) {
+    const options = {timeZone: 'Europe/Ljubljana', hour: '2-digit', minute: '2-digit', second: '2-digit'};
+    return new Intl.DateTimeFormat('sl-SI', options).format(date);
+}
+
 async function refreshCacheForDate(redisClient, PORT, date, ttl) {
     console.log(`Starting cache refresh task for ${date}.`);
 
@@ -61,8 +66,8 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
 function startHeartbeat(PORT) {
     heartbeatInterval = setInterval(async () => {
         try {
-            await axios.get(`http://localhost:${PORT}/heartbeat`);
-            console.log('Heartbeat pulse');
+            const response = await axios.get(`http://localhost:${PORT}/heartbeat`);
+            console.log('Heartbeat response: ' + response.data);
         } catch (error) {
             console.error('Failed to send heartbeat:', error.message);
         }
@@ -101,7 +106,7 @@ async function runSequentially(redisClient, PORT) {
     const duration = (endTime - startTime) / 1000; // duration in seconds
     const minutes = Math.floor(duration / 60);
     const seconds = Math.floor(duration % 60);
-    console.log(`Cache refresh process completed. Total duration: ${minutes}:${seconds.toString().padStart(2, '0')} minutes. Started at: ${new Date(startTime).toLocaleTimeString()}, Ended at: ${new Date(endTime).toLocaleTimeString()}.`);
+    console.log(`Cache refresh process completed. Total duration: ${minutes}:${seconds.toString().padStart(2, '0')} minutes. Started at: ${getSlovenianTimeString(new Date(startTime))}, Ended at: ${getSlovenianTimeString(new Date(endTime))}.`);
 
     isTaskRunning = false;
     startHeartbeat(PORT);

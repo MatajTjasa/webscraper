@@ -4,7 +4,6 @@ const {scrapeAPMSbyUrl} = require("../scrapers/apms_byUrl");
 const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
 const {scrapePrevoziByUrl} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
-const {scheduleCacheRefresh} = require('./cacheManager');
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
 const rateLimit = require('express-rate-limit');
@@ -15,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:5000', 'https://webscraper-w92y.onrender.com', 'https://frontend-vmg7.onrender.com'],
+    origin: ['http://localhost:5000', 'https://frontend-vmg7.onrender.com'],
     optionsSuccessStatus: 200, // legacy browser support
 };
 app.use(cors(corsOptions));
