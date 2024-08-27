@@ -87,29 +87,34 @@ async function runSequentially(redisClient, PORT) {
         return;
     }
 
-    stopHeartbeat();
-    isTaskRunning = true;
-    const startTime = Date.now();
+    try {
+        stopHeartbeat();
+        isTaskRunning = true;
+        const startTime = Date.now();
 
-    const datesAndTTLs = [
-        {offset: 0, ttl: 1800},  // 30 minutes TTL for today
-        {offset: 1, ttl: 3600},  // 1 hour TTL for tomorrow
-        {offset: 2, ttl: 14400}  // 4 hours TTL for the day after tomorrow
-    ];
+        const datesAndTTLs = [
+            {offset: 0, ttl: 1800},  // 30 minutes TTL for today
+            {offset: 1, ttl: 3600},  // 1 hour TTL for tomorrow
+            {offset: 2, ttl: 14400}  // 4 hours TTL for the day after tomorrow
+        ];
 
-    for (const {offset, ttl} of datesAndTTLs) {
-        const date = getSlovenianDateString(offset);
-        await refreshCacheForDate(redisClient, PORT, date, ttl);
+        for (const {offset, ttl} of datesAndTTLs) {
+            const date = getSlovenianDateString(offset);
+            await refreshCacheForDate(redisClient, PORT, date, ttl);
+        }
+
+        const endTime = Date.now();
+        const duration = (endTime - startTime) / 1000; // duration in seconds
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        console.log(`Cache refresh process completed. Total duration: ${minutes}:${seconds.toString().padStart(2, '0')} minutes. Started at: ${getSlovenianTimeString(new Date(startTime))}, Ended at: ${getSlovenianTimeString(new Date(endTime))}.`);
+
+    } catch (error) {
+        console.error('Error occurred during task execution:', error);
+    } finally {
+        isTaskRunning = false;
+        startHeartbeat(PORT);
     }
-
-    const endTime = Date.now();
-    const duration = (endTime - startTime) / 1000; // duration in seconds
-    const minutes = Math.floor(duration / 60);
-    const seconds = Math.floor(duration % 60);
-    console.log(`Cache refresh process completed. Total duration: ${minutes}:${seconds.toString().padStart(2, '0')} minutes. Started at: ${getSlovenianTimeString(new Date(startTime))}, Ended at: ${getSlovenianTimeString(new Date(endTime))}.`);
-
-    isTaskRunning = false;
-    startHeartbeat(PORT);
 }
 
 function scheduleCacheRefresh(redisClient, PORT) {
