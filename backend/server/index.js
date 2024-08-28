@@ -152,6 +152,7 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
 });
 
 app.get('/heartbeat', async (req, res) => {
+    console.log('Heart beating OK');
     res.status(200).send('Heart beating OK');
 });
 

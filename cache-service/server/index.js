@@ -13,8 +13,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const corsOptions = {
+    origin: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cors());
 
 app.set('trust proxy', 1);
 
@@ -143,6 +146,7 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
 });
 
 app.get('/heartbeat', (req, res) => {
+    console.log('Heart beating OK')
     res.status(200).send('Heart beating OK');
 });
 
