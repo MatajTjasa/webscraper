@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: ['http://localhost:5000', 'https://frontend-vmg7.onrender.com'],
+    origin: true,//['http://localhost:5000', 'https://frontend-vmg7.onrender.com'],
     optionsSuccessStatus: 200, // legacy browser support
 };
 app.use(cors(corsOptions));
