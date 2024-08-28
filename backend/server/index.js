@@ -151,6 +151,10 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     console.log('Ending request searchPrevoziByUrl.');
 });
 
+app.get('/heartbeat', async (req, res) => {
+    res.status(200).send('Heart beating OK');
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
