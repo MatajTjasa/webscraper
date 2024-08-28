@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
-const {safeGoto, delay} = require('../server/helpers');
+const {safeGoto, delay, formatLocation} = require('../server/helpers');
 const {getCodeArriva} = require('../server/database.js');
 require('dotenv').config();
 
@@ -19,15 +19,6 @@ puppeteer.use(
         visualFeedback: true
     })
 );
-
-function formatLocation(location) {
-    return location.replace(/\s+/g, '+');
-}
-
-async function extractId(page, selector) {
-    await page.waitForSelector(selector);
-    return await page.evaluate((selector) => document.querySelector(selector).value, selector);
-}
 
 async function scrapeArrivaByUrl(departure, destination, date) {
     let browser;
@@ -46,19 +37,19 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         await delay(3000);
 
         // Handle accept button
-        try {
-            await page.waitForSelector("#CybotCookiebotDialogBodyLevelButtonAccept", {timeout: 10000});
-            console.log("Accepting cookies...");
+        /*        try {
+                    await page.waitForSelector("#CybotCookiebotDialogBodyLevelButtonAccept", {timeout: 10000});
+                    console.log("Accepting cookies...");
 
-            const acceptButton = await page.$("#CybotCookiebotDialogBodyLevelButtonAccept");
-            if (acceptButton) {
-                await acceptButton.click();
-            } else {
-                console.log("Accept button not found or already removed.");
-            }
-        } catch (error) {
-            console.log("Accept button not found within the timeout period. Proceeding with the script...");
-        }
+                    const acceptButton = await page.$("#CybotCookiebotDialogBodyLevelButtonAccept");
+                    if (acceptButton) {
+                        await acceptButton.click();
+                    } else {
+                        console.log("Accept button not found or already removed.");
+                    }
+                } catch (error) {
+                    console.log("Accept button not found within the timeout period. Proceeding with the script...");
+                }*/
 
         const formattedDeparture = formatLocation(departure);
         const formattedDestination = formatLocation(destination);
@@ -79,12 +70,12 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         await safeGoto(page, url);
         console.log("Current page URL:", page.url());
 
-        const noDirectConnection = await page.evaluate(() => {
+        const noResults = await page.evaluate(() => {
             const alertElement = document.querySelector('.alert.alert-danger');
             return alertElement ? alertElement.textContent.trim() : null;
         });
 
-        if (noDirectConnection) {
+        if (noResults) {
             console.log("No direct connections found.");
             await browser.close();
             return [];
@@ -156,7 +147,10 @@ const fetchConnection = async (url) => {
     } catch (err) {
         console.error(err);
         return [];
+    } finally {
+        if (browser) {
+            await browser.close();
+        }
     }
-};
-
+}
 module.exports = {scrapeArrivaByUrl};

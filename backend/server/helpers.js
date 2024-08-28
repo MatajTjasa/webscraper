@@ -76,6 +76,10 @@ function reformatDateForCache(date) {
     return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
 }
 
+function formatLocation(location) {
+    return location.replace(/\s+/g, '+');
+}
+
 async function safeGoto(page, url) {
     for (let i = 0; i < 3; i++) {
         try {
@@ -96,6 +100,7 @@ module.exports = {
     getDestinationCodes,
     reformatDate,
     reformatDateForCache,
+    formatLocation,
     safeGoto,
     delay
 };
