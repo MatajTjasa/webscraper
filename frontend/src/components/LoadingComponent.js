@@ -3,7 +3,7 @@ import '../App.css';
 
 function LoadingComponent({content}) {
     return (
-        <div className="loading-container">
+        <div className="container loading-container">
             <img
                 src={document.documentElement.classList.contains('dark') ? "/loading_spinner_dark.svg" : "/loading_spinner.svg"}
                 alt="Loading..."

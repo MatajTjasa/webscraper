@@ -6,25 +6,29 @@ import SearchPage from './components/SearchPage';
 import './App.css';
 
 function App() {
-    const [darkMode, setDarkMode] = useState(() => {
+    const [darkMode, setDarkMode] = useState(false);
+
+    useEffect(() => {
         const savedMode = localStorage.getItem('darkMode');
-        return savedMode === 'true' || false;
-    });
+        if (savedMode === 'true') {
+            setDarkMode(true);
+            document.documentElement.classList.add('dark');
+        } else {
+            setDarkMode(false);
+            document.documentElement.classList.remove('dark');
+        }
+    }, []);
 
     const toggleDarkMode = () => {
         const newMode = !darkMode;
         setDarkMode(newMode);
-        localStorage.setItem('darkMode', newMode);
-        document.documentElement.classList.toggle('dark', newMode);
-    };
-
-    useEffect(() => {
-        if (darkMode) {
+        localStorage.setItem('darkMode', newMode ? 'true' : 'false');
+        if (newMode) {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
         }
-    }, [darkMode]);
+    };
 
     const stars = Array.from({length: 100}, (_, i) => (
         <div key={i} className="star" style={{
@@ -53,7 +57,7 @@ function App() {
                     <Route path="/search" element={<SearchPage/>}/>
                     <Route path="/" element={<SearchForm/>}/>
                 </Routes>
-                <footer className="italic mt-8 py-4 text-center text-gray-100 text-sm">
+                <footer className="italic mt-8 py-4 text-center text-gray-100 text-base">
                     <p>
                         Vsi urniki javnega prevoza so javno dostopni. Ta stran jih le prikazuje na enem mestu.
                     </p>

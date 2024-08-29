@@ -10,7 +10,7 @@ function LoadingEmptyState(Component, providerName, providerUrl) {
                         Pridobivanje podatkov iz strani <a href={providerUrl}
                                                            target="_blank"
                                                            rel="noopener noreferrer"
-                                                           className="text-[#386890] dark:text-blue-400 font-sans font-semibold hover:underline hover:text-[#4169E1] dark:hover:text-blue-500">{providerName}</a>...
+                                                           className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1] dark:text-purple-500 dark:hover:text-purple-400">{providerName}</a>...
                     </>
                 }/>
             );
@@ -19,11 +19,11 @@ function LoadingEmptyState(Component, providerName, providerUrl) {
         if (!Array.isArray(results) || results.length === 0) {
             return (
                 <div className="container result-section mb-8">
-                    <p className="text-gray-800 dark:text-white text-md leading-relaxed italic text-center">
+                    <p className="text-gray-800 dark:text-white text-xs md:text-sm lg:text-base leading-relaxed italic text-center">
                         Iskanih rezultatov ponudnika{' '}
                         <a
                             href={providerUrl}
-                            className="text-[#386890] dark:text-blue-400 font-sans font-semibold hover:underline hover:text-[#4169E1] dark:hover:text-blue-500"
+                            className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1] dark:text-purple-500 dark:hover:text-purple-400"
                         >
                             {providerName}
                         </a>{' '}

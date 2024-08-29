@@ -12,20 +12,20 @@ function ResultsAPMS({results}) {
                     className="min-w-full table-auto rounded-md shadow-md bg-white dark:bg-gray-800">
                     <thead>
                     <tr>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm">Kraj
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm lg:text-base">Kraj
                             odhoda
                         </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm">Čas
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm lg:text-base">Čas
                             odhoda
                         </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm">Kraj
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm lg:text-base">Kraj
                             prihoda
                         </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm">Čas
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm lg:text-base">Čas
                             prihoda
                         </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm">Trajanje</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm">Dolžina</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm lg:text-base">Trajanje</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-800 text-white text-xs md:text-sm lg:text-base">km</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,12 +36,12 @@ function ResultsAPMS({results}) {
                                 index % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-900'
                             }`}
                         >
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{bus.departure}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{bus.departureTime}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{bus.arrival}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{bus.arrivalTime}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{bus.duration}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{bus.kilometers}</td>
+                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.departure}</td>
+                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.departureTime}</td>
+                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.arrival}</td>
+                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.arrivalTime}</td>
+                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.duration}</td>
+                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.kilometers}</td>
                         </tr>
                     ))}
                     </tbody>

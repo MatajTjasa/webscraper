@@ -8,15 +8,15 @@ function ResultsPrevozi({results}) {
             {results.map((route, index) => (
                 <div key={index} className="mb-8">
                     <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800 dark:text-gray-300">
-                        {route.from} to {route.to} ({route.count} trips)
+                        {route.from} ⇒ {route.to}
                     </h3>
                     <div className="overflow-x-auto rounded-lg shadow-md border border-gray-300">
                         <table className="min-w-full table-auto rounded-md shadow-md bg-white dark:bg-gray-800">
                             <thead>
                             <tr>
-                                <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm">Ura</th>
-                                <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm">Oseba</th>
-                                <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm">Cena</th>
+                                <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Ura</th>
+                                <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Oseba</th>
+                                <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Cena</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -27,9 +27,9 @@ function ResultsPrevozi({results}) {
                                         index % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-900'
                                     }`}
                                 >
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{trip.time}</td>
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{trip.description}</td>
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm text-gray-800 dark:text-gray-200">{trip.price}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{trip.time}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{trip.description}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{trip.price}</td>
                                 </tr>
                             ))}
                             </tbody>
@@ -38,13 +38,13 @@ function ResultsPrevozi({results}) {
                 </div>
             ))}
             <footer style={{marginTop: '40px', textAlign: 'center', fontSize: '0.9rem', color: '#555'}}>
-                <p className="italic text-gray-700 dark:text-gray-300">
-                    *Za ogled telefonske številke se prijavite na uradni strani {' '}
+                <p className="italic text-gray-700 dark:text-gray-300 text-xs md:text-sm lg:text-base">
+                    Za ogled telefonske številke se prijavite na uradni strani {' '}
                     <a
                         href="https://prevoz.org/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#386890] dark:text-purple-300 font-sans font-semibold hover:underline hover:text-[#4169E1] dark:hover:text-purple-500"
+                        className="text-[#386890] font-sans font-semibold hover:underline hover:text-[#4169E1] dark:text-purple-500 dark:hover:text-purple-400"
                     >
                         Prevoz.si
                     </a>

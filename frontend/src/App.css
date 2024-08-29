@@ -20,7 +20,7 @@ body {
 }
 
 .dark body {
-    background-color: #29056d;
+    background-color: #000000FF;
     background-image: linear-gradient(to bottom right, #071526 10%, #030d18 30%, #29056d 50%, #000000 80%, #000 100%);
     color: #ccc;
 }
@@ -79,6 +79,15 @@ body {
     z-index: 1;
 }
 
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    min-height: 100px;
+}
+
 @media (min-width: 640px) {
     .container {
         max-width: 640px;
@@ -108,23 +117,6 @@ body {
 .table-container {
     overflow-x: auto;
     margin-top: 20px;
-}
-
-.loading-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px auto 0 auto;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    min-height: 100px;
-    transition: background 0.5s ease;
-    z-index: 2;
-    width: 90%;
 }
 
 .dark .loading-container {

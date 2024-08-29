@@ -3,7 +3,6 @@ const axios = require('axios');
 const {getCommonDestinations} = require('./database');
 
 let isTaskRunning = false;
-let heartbeatInterval = null;
 
 function getSlovenianDateString(offset = 0) {
     const options = {timeZone: 'Europe/Ljubljana', year: 'numeric', month: '2-digit', day: '2-digit'};
@@ -63,24 +62,6 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
     console.log(`Cache refresh task completed for ${date}.`);
 }
 
-function startHeartbeat(PORT) {
-    heartbeatInterval = setInterval(async () => {
-        try {
-            const response = await axios.get(`http://localhost:${PORT}/heartbeat`);
-            console.log('Heartbeat response: ' + response.data);
-        } catch (error) {
-            console.error('Failed to send heartbeat:', error.message);
-        }
-    }, 60000); // Send heartbeat every 60 seconds
-}
-
-function stopHeartbeat() {
-    if (heartbeatInterval) {
-        clearInterval(heartbeatInterval);
-        heartbeatInterval = null;
-    }
-}
-
 async function runSequentially(redisClient, PORT) {
     if (isTaskRunning) {
         console.log('Previous task is still running. Skipping this execution.');
@@ -88,7 +69,6 @@ async function runSequentially(redisClient, PORT) {
     }
 
     try {
-        stopHeartbeat();
         isTaskRunning = true;
         const startTime = Date.now();
 
@@ -113,15 +93,11 @@ async function runSequentially(redisClient, PORT) {
         console.error('Error occurred during task execution:', error);
     } finally {
         isTaskRunning = false;
-        startHeartbeat(PORT);
     }
 }
 
 function scheduleCacheRefresh(redisClient, PORT) {
 
-    startHeartbeat(PORT);
-
-    // Schedule the refresh to run at specific intervals
     cron.schedule('*/30 * * * *', () => {
         console.log('Scheduled task started');
         runSequentially(redisClient, PORT);

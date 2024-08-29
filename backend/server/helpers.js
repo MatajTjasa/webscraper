@@ -11,6 +11,7 @@ const retry = (fn, retries = 3) => async (...args) => {
             console.warn(`Attempt ${i + 1} failed:`, error);
             if (i === retries - 1) throw error;
         }
+        await delay(1000);
     }
 };
 
