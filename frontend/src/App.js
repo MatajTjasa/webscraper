@@ -9,25 +9,16 @@ function App() {
     const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
-        const savedMode = localStorage.getItem('darkMode');
-        if (savedMode === 'true') {
-            setDarkMode(true);
-            document.documentElement.classList.add('dark');
-        } else {
-            setDarkMode(false);
-            document.documentElement.classList.remove('dark');
-        }
+        const savedMode = localStorage.getItem('darkMode') === 'true';
+        setDarkMode(savedMode);
+        document.documentElement.classList.toggle('dark', savedMode);
     }, []);
 
     const toggleDarkMode = () => {
         const newMode = !darkMode;
         setDarkMode(newMode);
         localStorage.setItem('darkMode', newMode ? 'true' : 'false');
-        if (newMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        document.documentElement.classList.toggle('dark', newMode);
     };
 
     const stars = Array.from({length: 100}, (_, i) => (
@@ -48,11 +39,7 @@ function App() {
                         {darkMode ? '🌙' : '☀️'}
                     </button>
                 </div>
-                {darkMode && (
-                    <div className="stars">
-                        {stars}
-                    </div>
-                )}
+                {darkMode && <div className="stars">{stars}</div>}
                 <Routes>
                     <Route path="/search" element={<SearchPage/>}/>
                     <Route path="/" element={<SearchForm/>}/>

@@ -58,6 +58,16 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        background-color: #1E8EFD;
+        background-image: linear-gradient(to bottom right, #fff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 80%, #B4ECF0);
+    }
+
+    .dark body {
+        background-color: #000000FF;
+        background-image: linear-gradient(to bottom right, #071526 10%, #030d18 30%, #29056d 50%, #000000 80%, #000 100%);
+    }
+
     .cloud {
         display: none;
     }
@@ -168,6 +178,10 @@ body {
 
 .dark .star {
     background: white;
+}
+
+body .stars {
+    display: none;
 }
 
 .search-container {
