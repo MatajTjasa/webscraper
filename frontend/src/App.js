@@ -53,9 +53,9 @@ function App() {
                     <Route path="/search" element={<SearchPage/>}/>
                     <Route path="/" element={<SearchForm/>}/>
                 </Routes>
-                <footer className="italic mt-8 py-4 text-center text-gray-300 text-sm">
+                <footer className="italic mt-8 py-4 text-center text-gray-100 text-sm">
                     <p>
-                        * Vsi urniki javnega prevoza so javno dostopni. Ta stran jih le prikazuje na enem mestu.
+                        Vsi urniki javnega prevoza so javno dostopni. Ta stran jih le prikazuje na enem mestu.
                     </p>
                 </footer>
             </Router>

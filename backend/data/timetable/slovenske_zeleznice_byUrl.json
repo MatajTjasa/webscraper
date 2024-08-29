@@ -145,15 +145,6 @@
   },
   {
     "departureStation": "Maribor",
-    "departureTime": "13:20",
-    "arrivalStation": "Celje",
-    "arrivalTime": "14:21",
-    "travelTime": "01:01",
-    "trainType": "LPV 2809",
-    "isActive": true
-  },
-  {
-    "departureStation": "Maribor",
     "departureTime": "13:40",
     "arrivalStation": "Celje",
     "arrivalTime": "14:29",
@@ -195,15 +186,6 @@
     "arrivalTime": "16:20",
     "travelTime": "00:45",
     "trainType": "MV 155",
-    "isActive": true
-  },
-  {
-    "departureStation": "Maribor",
-    "departureTime": "16:28",
-    "arrivalStation": "Celje",
-    "arrivalTime": "17:29",
-    "travelTime": "01:01",
-    "trainType": "LPV 2919",
     "isActive": true
   },
   {

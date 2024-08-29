@@ -94,7 +94,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
     };
 
     return (
-        <div className="App">
+        <div className="App mx-auto">
             <div className="cloud" style={{top: '50px', left: '50px'}}></div>
             <div className="cloud" style={{top: '100px', left: '250px'}}></div>
             <div className="cloud" style={{top: '150px', right: '50px'}}></div>
@@ -105,7 +105,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                 <div className="star" style={{top: '70%', left: '80%'}}></div>
                 <div className="star" style={{top: '90%', left: '10%'}}></div>
             </div>
-            <div className="container p-8 rounded-lg shadow-lg relative z-10">
+            <div className="search-container container p-8 rounded-lg shadow-lg relative z-10">
                 <header className="App-header text-center mb-8">
                     <div className="mb-5">
                         <Link to="/" className="text-[#4682B4] dark:text-purple-300 mb-10 text-3xl font-semibold">

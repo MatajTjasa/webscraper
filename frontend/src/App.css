@@ -20,6 +20,7 @@ body {
 }
 
 .dark body {
+    background-color: #29056d;
     background-image: linear-gradient(to bottom right, #071526 10%, #030d18 30%, #29056d 50%, #000000 80%, #000 100%);
     color: #ccc;
 }
@@ -88,14 +89,14 @@ body {
 @media (min-width: 768px) {
     .container {
         max-width: 768px;
-        padding: 20px 60px;
+        padding: 20px 40px;
     }
 }
 
 @media (min-width: 1024px) {
     .container {
         max-width: 1024px;
-        padding: 20px 80px;
+        padding: 20px 60px;
     }
 }
 
@@ -114,7 +115,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 20px 0;
+    margin: 20px auto 0 auto;
     background: rgba(255, 255, 255, 0.6);
     padding: 20px;
     border-radius: 10px;
@@ -123,6 +124,7 @@ body {
     min-height: 100px;
     transition: background 0.5s ease;
     z-index: 2;
+    width: 90%;
 }
 
 .dark .loading-container {
@@ -174,4 +176,21 @@ body {
 
 .dark .star {
     background: white;
+}
+
+.search-container {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.results-container {
+    width: 100vw;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr > td {
+    text-align: center;
 }
