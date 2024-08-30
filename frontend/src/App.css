@@ -180,6 +180,10 @@ body {
     background: white;
 }
 
+.dark .stars {
+    display: block;
+}
+
 body .stars {
     display: none;
 }

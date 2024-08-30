@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {DestinationsContext} from '../context/DestinationsContext';
 
 function SearchForm({initialDeparture, initialDestination, initialDate, errorMessage}) {
-    const {destinations, loading, error} = useContext(DestinationsContext);
+    const {destinations, error} = useContext(DestinationsContext);
     const [departure, setDeparture] = useState(initialDeparture || '');
     const [date, setDate] = useState('');
     const [destination, setDestination] = useState(initialDestination || '');
@@ -117,7 +117,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                         className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row justify-center items-center sm:space-x-4"
                     >
                         <div className="flex w-full sm:w-auto items-center">
-                            <div className="custom-dropdown-container relative w-full sm:w-40" ref={departureRef}>
+                            <div className="custom-dropdown-container relative w-full sm:w-44" ref={departureRef}>
                                 <input
                                     type="text"
                                     placeholder="Kraj odhoda"
@@ -151,13 +151,13 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                             <button
                                 type="button"
                                 onClick={handleSwap}
-                                className="swap-button ml-2 px-4 py-2 bg-[#4682B4] dark:bg-purple-500 text-white rounded-md text-lg hover:bg-[#4169E1] dark:hover:bg-purple-600"
+                                className="swap-button ml-3.5 px-4 py-2 bg-[#4682B4] dark:bg-purple-500 text-white rounded-md text-lg hover:bg-[#4169E1] dark:hover:bg-purple-600"
                             >
                                 ⇆
                             </button>
                         </div>
 
-                        <div className="custom-dropdown-container relative w-full sm:w-40" ref={destinationRef}>
+                        <div className="custom-dropdown-container relative w-full sm:w-44" ref={destinationRef}>
                             <input
                                 type="text"
                                 placeholder="Kraj prihoda"
@@ -189,7 +189,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                             )}
                         </div>
 
-                        <div className="custom-dropdown-container relative w-full sm:w-40">
+                        <div className="custom-dropdown-container relative w-full sm:w-48">
                             <input
                                 type="date"
                                 placeholder="Date (dd.mm.yyyy)"
@@ -208,7 +208,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                         </button>
                     </form>
                     {(hasSubmitted && (localErrorMessage || errorMessage || error)) && (
-                        <p className="error-message text-red-500 dark:text-red-300 mt-4">
+                        <p className="error-message text-red-700 dark:text-red-300 mt-4">
                             {localErrorMessage || errorMessage || error}
                         </p>
                     )}
