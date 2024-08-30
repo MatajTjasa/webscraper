@@ -73,6 +73,26 @@ body {
     }
 }
 
+@media only screen
+and (min-device-width: 390px)
+and (max-device-width: 844px)
+and (-webkit-min-device-pixel-ratio: 3) {
+    body {
+        background-color: #1E8EFD;
+        background-image: linear-gradient(to bottom right, #fff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 80%, #B4ECF0);
+    }
+
+    .dark body {
+        background-color: #000000FF;
+        background-image: linear-gradient(to bottom right, #071526 10%, #030d18 30%, #29056d 50%, #000000 80%, #000 100%);
+    }
+
+    .cloud {
+        display: none;
+    }
+}
+
+
 .dark .cloud, dark .cloud:after, dark .cloud:before {
     display: none
 }
