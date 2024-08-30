@@ -9,16 +9,25 @@ function App() {
     const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
-        const savedMode = localStorage.getItem('darkMode') === 'true';
-        setDarkMode(savedMode);
-        document.documentElement.classList.toggle('dark', savedMode);
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'true') {
+            setDarkMode(true);
+            document.documentElement.classList.add('dark');
+        } else {
+            setDarkMode(false);
+            document.documentElement.classList.remove('dark');
+        }
     }, []);
 
     const toggleDarkMode = () => {
         const newMode = !darkMode;
         setDarkMode(newMode);
         localStorage.setItem('darkMode', newMode ? 'true' : 'false');
-        document.documentElement.classList.toggle('dark', newMode);
+        if (newMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
     };
 
     const stars = Array.from({length: 100}, (_, i) => (
