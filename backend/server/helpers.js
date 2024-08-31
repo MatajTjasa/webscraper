@@ -81,6 +81,13 @@ function formatLocation(location) {
     return location.replace(/\s+/g, '+');
 }
 
+const formatPrice = (price) => {
+    if (!price.includes('€')) {
+        return `${price} €`;
+    }
+    return price;
+};
+
 async function safeGoto(page, url) {
     for (let i = 0; i < 3; i++) {
         try {
@@ -102,6 +109,7 @@ module.exports = {
     reformatDate,
     reformatDateForCache,
     formatLocation,
+    formatPrice,
     safeGoto,
     delay
 };

@@ -76,6 +76,13 @@ function reformatDateForCache(date) {
     return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
 }
 
+const formatPrice = (price) => {
+    if (!price.includes('€')) {
+        return `${price} €`;
+    }
+    return price;
+};
+
 async function safeGoto(page, url) {
     for (let i = 0; i < 3; i++) {
         try {
@@ -96,6 +103,7 @@ module.exports = {
     getDestinationCodes,
     reformatDate,
     reformatDateForCache,
+    formatPrice,
     safeGoto,
     delay
 };

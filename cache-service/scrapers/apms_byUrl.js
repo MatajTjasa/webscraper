@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const {safeGoto} = require('../server/helpers');
+const {safeGoto, formatPrice} = require('../server/helpers');
 require('dotenv').config();
 
 puppeteer.use(StealthPlugin());
@@ -43,7 +43,7 @@ async function scrapeAPMSbyUrl(departure, destination, date) {
             arrivalTime: item.prihod,
             duration: item.voznja,
             kilometers: item.km,
-            price: item.cena.trim()
+            price: formatPrice(item.cena.trim())
         }));
 
         console.log(formattedData);
