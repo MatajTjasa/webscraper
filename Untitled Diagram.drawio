@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0" border="50" scale="3" compressed="false" locked="false" version="24.7.7">
   <diagram name="Blank" id="YmL12bMKpDGza6XwsDPr">
-    <mxGraphModel dx="2644" dy="1102" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="1" shadow="0">
+    <mxGraphModel dx="2993" dy="1331" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="1" shadow="0">
       <root>
         <mxCell id="X5NqExCQtvZxIxQ7pmgY-0" />
         <mxCell id="1" parent="X5NqExCQtvZxIxQ7pmgY-0" />
@@ -156,10 +156,9 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="7NyOA-QyOS0l97fLP46v-72" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;shape=flexArrow;startArrow=block;" edge="1" parent="1" source="7NyOA-QyOS0l97fLP46v-69" target="7NyOA-QyOS0l97fLP46v-6">
+        <mxCell id="7NyOA-QyOS0l97fLP46v-72" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;shape=flexArrow;startArrow=none;startFill=0;" edge="1" parent="1" source="7NyOA-QyOS0l97fLP46v-78" target="7NyOA-QyOS0l97fLP46v-6">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="147" y="647" />
               <mxPoint x="147" y="341" />
             </Array>
           </mxGeometry>
@@ -169,6 +168,21 @@
         </mxCell>
         <mxCell id="7NyOA-QyOS0l97fLP46v-74" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;strong&gt;Heartbeat check&lt;br&gt;&lt;/strong&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fillOpacity=100;" vertex="1" parent="1">
           <mxGeometry x="-358" y="701" width="134" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="7NyOA-QyOS0l97fLP46v-77" value="&lt;font color=&quot;#ffffff&quot;&gt;&lt;b&gt;CORS&lt;/b&gt;&lt;/font&gt;" style="whiteSpace=wrap;html=1;fillColor=#76608a;strokeColor=#432D57;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="-992" y="459" width="82.25" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="7NyOA-QyOS0l97fLP46v-79" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;shape=flexArrow;startArrow=block;" edge="1" parent="1" source="7NyOA-QyOS0l97fLP46v-69" target="7NyOA-QyOS0l97fLP46v-78">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-340" y="647" as="sourcePoint" />
+            <mxPoint x="53" y="342" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="147" y="647" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7NyOA-QyOS0l97fLP46v-78" value="&lt;font color=&quot;#ffffff&quot;&gt;&lt;b&gt;CORS&lt;/b&gt;&lt;/font&gt;" style="whiteSpace=wrap;html=1;fillColor=#76608a;strokeColor=#432D57;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="108" y="459" width="82.25" height="38" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
