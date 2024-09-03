@@ -7,7 +7,9 @@ const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice
 const {scheduleCacheRefresh} = require('./cacheManager');
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
+const {checkForChanges} = require('./changeDetector');
 const cors = require('cors');
+const {readFileSync} = require("fs");
 require('dotenv').config();
 
 const app = express();
@@ -67,6 +69,21 @@ async function getCachedData(cacheKey) {
 }
 
 // API
+app.get('/check-html-structure', async (req, res) => {
+    try {
+        const htmlContent = readFileSync(__dirname + '/test.html', 'utf8');
+        await checkForChanges(htmlContent);
+        res.status(200).send('HTML structure checked successfully.');
+    } catch (error) {
+        if (error.responseCode === 535) {
+            console.error('Invalid login. Username and password not accepted.', error);
+            res.status(535).send('Invalid login. Username and password not accepted.');
+        }
+        console.error('Error checking HTML structure:', error);
+        res.status(500).send('Error checking HTML structure.');
+    }
+});
+
 app.get('/webscraper/destinations', async (req, res) => {
     const cacheKey = 'destinations';
     let destinations = await getCachedData(cacheKey);

@@ -5,6 +5,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 const {safeGoto, delay} = require('../server/helpers');
 const {getCodeArriva} = require('../server/database.js');
+const {checkForChanges} = require('../server/changeDetector');
 require('dotenv').config();
 
 // Hiding puppeteer usage
@@ -24,11 +25,6 @@ function formatLocation(location) {
     return location.replace(/\s+/g, '+');
 }
 
-async function extractId(page, selector) {
-    await page.waitForSelector(selector);
-    return await page.evaluate((selector) => document.querySelector(selector).value, selector);
-}
-
 async function scrapeArrivaByUrl(departure, destination, date) {
     let browser;
     try {
@@ -44,21 +40,6 @@ async function scrapeArrivaByUrl(departure, destination, date) {
         console.log("Navigating to the Arriva website...");
         await safeGoto(page, 'https://arriva.si/vozni-redi/');
         await delay(3000);
-
-        // Handle accept button
-        try {
-            await page.waitForSelector("#CybotCookiebotDialogBodyLevelButtonAccept", {timeout: 10000});
-            console.log("Accepting cookies...");
-
-            const acceptButton = await page.$("#CybotCookiebotDialogBodyLevelButtonAccept");
-            if (acceptButton) {
-                await acceptButton.click();
-            } else {
-                console.log("Accept button not found or already removed.");
-            }
-        } catch (error) {
-            console.log("Accept button not found within the timeout period. Proceeding with the script...");
-        }
 
         const formattedDeparture = formatLocation(departure);
         const formattedDestination = formatLocation(destination);
@@ -111,6 +92,20 @@ const fetchConnection = async (url) => {
 
         const response = await axios.get(url);
         const html = response.data;
+
+        const selectors = [
+            'div.connection:not(.connection-header) .connection-inner',
+            '.departure-arrival .departure td span',
+            '.departure-arrival .arrival td span',
+            '.duration .travel-duration span',
+            '.duration .prevoznik span',
+            '.duration .peron span',
+            '.length',
+            '.price'
+        ];
+
+        await checkForChanges(html, selectors);
+
         const $ = cheerio.load(html);
         const connectionData = [];
 
