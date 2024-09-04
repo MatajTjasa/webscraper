@@ -7,6 +7,7 @@ const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice
 const {scheduleCacheRefresh} = require('./cacheManager');
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
+const {sendPushNotification} = require('./pushNotifications');
 const {checkForChanges} = require('./changeDetector');
 const cors = require('cors');
 const {readFileSync} = require("fs");
@@ -69,21 +70,6 @@ async function getCachedData(cacheKey) {
 }
 
 // API
-app.get('/check-html-structure', async (req, res) => {
-    try {
-        const htmlContent = readFileSync(__dirname + '/test.html', 'utf8');
-        await checkForChanges(htmlContent);
-        res.status(200).send('HTML structure checked successfully.');
-    } catch (error) {
-        if (error.responseCode === 535) {
-            console.error('Invalid login. Username and password not accepted.', error);
-            res.status(535).send('Invalid login. Username and password not accepted.');
-        }
-        console.error('Error checking HTML structure:', error);
-        res.status(500).send('Error checking HTML structure.');
-    }
-});
-
 app.get('/webscraper/destinations', async (req, res) => {
     const cacheKey = 'destinations';
     let destinations = await getCachedData(cacheKey);
@@ -165,6 +151,60 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
 app.get('/heartbeat', async (req, res) => {
     console.log('Heart beating OK')
     res.status(200).send('Heart beating OK');
+});
+
+app.get('/check-html-structure', async (req, res) => {
+    try {
+        const htmlContent = readFileSync(__dirname + '/test.html', 'utf8');
+        await checkForChanges(htmlContent);
+        res.status(200).send('HTML structure checked successfully.');
+    } catch (error) {
+        if (error.responseCode === 535) {
+            console.error('Invalid login. Username and password not accepted.', error);
+            res.status(535).send('Invalid login. Username and password not accepted.');
+        }
+        console.error('Error checking HTML structure:', error);
+        res.status(500).send('Error checking HTML structure.');
+    }
+});
+
+//TODO: store in db
+app.post('/subscribe', async (req, res) => {
+    console.log("Entering subscribe API call.")
+    const subscription = req.body;
+    const subscriptionKey = `subscription:${subscription.endpoint}`;
+
+    try {
+        await redisClient.set(subscriptionKey, JSON.stringify(subscription));
+        res.status(201).json({});
+        console.log('Subscription stored in Redis: ', subscription);
+    } catch (error) {
+        console.error('Failed to store subscription in Redis: ', error);
+        res.sendStatus(500);
+    }
+    console.log("Leaving subscribe API call.")
+});
+
+app.post('/send-notification', async (req, res) => {
+    const payload = JSON.stringify({
+        title: 'VlakAvtoBus Alert',
+        body: 'One of the sites you are scraping just changed!'
+    });
+
+    try {
+        const keys = await redisClient.keys('subscription:*');
+        const subscriptions = await Promise.all(keys.map(async (key) => {
+            const subscription = await redisClient.get(key);
+            return JSON.parse(subscription);
+        }));
+
+        await Promise.all(subscriptions.map(sub => sendPushNotification(sub, payload)));
+
+        res.status(200).json({message: 'Notifications sent'});
+    } catch (error) {
+        console.error('Error sending notification:', error);
+        res.sendStatus(500);
+    }
 });
 
 // Graceful shutdown
