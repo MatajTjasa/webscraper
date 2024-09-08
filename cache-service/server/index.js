@@ -17,8 +17,14 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-    origin: true,
+    origin: ['http://localhost:3000', 'https://webscraper-w92y.onrender.com'],
+    optionsSuccessStatus: 200,
 };
+
+const corsOptions2 = {
+    origin: '*',
+};
+
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -41,6 +47,14 @@ redisClient.connect().then(() => {
 }).catch(err => {
     console.error('Redis connection error:', err);
 });
+
+setInterval(async () => {
+    try {
+        await redisClient.ping();
+    } catch (err) {
+        console.error('command error', err);
+    }
+}, 1000);
 
 const ongoingRequests = new Map();
 
@@ -148,7 +162,7 @@ app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     console.log('Ending request searchPrevoziByUrl.');
 });
 
-app.get('/heartbeat', async (req, res) => {
+app.get('/heartbeat', cors(corsOptions2), async (req, res) => {
     console.log('Heart beating OK')
     res.status(200).send('Heart beating OK');
 });
