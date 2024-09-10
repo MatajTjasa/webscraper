@@ -145,10 +145,6 @@ const fetchConnection = async (url) => {
     } catch (err) {
         console.error(err);
         return [];
-    } finally {
-        if (browser) {
-            await browser.close();
-        }
     }
 }
 module.exports = {scrapeArrivaByUrl};
