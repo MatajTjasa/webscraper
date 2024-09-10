@@ -5,8 +5,7 @@ function ResultsAPMS({results}) {
     return (
         <div
             className="container result-section mb-8 p-4 rounded-lg shadow-md">
-            <h2 className="text-xl md:text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-200">Rezultati za
-                APMS</h2>
+            <h2 className="text-xl md:text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-200">APMS</h2>
             <div className="overflow-x-auto rounded-lg shadow-md border border-gray-300">
                 <table
                     className="min-w-full table-auto rounded-md shadow-md bg-white dark:bg-gray-800">
