@@ -48,4 +48,71 @@ async function getCodeArriva(locationName) {
     return result ? result.JPOS_IJPP : null;
 }
 
-module.exports = {getDestinationsFromDatabase, getCommonDestinations, getCodeArriva};
+async function getSelectors(name) {
+    if (!mongoClient) {
+        mongoClient = new MongoClient(uri);
+        await mongoClient.connect();
+    }
+
+    const collection = database.collection('selectors');
+
+    const result = await collection.findOne({name: name});
+
+    if (result) {
+        return result.selectors;
+    } else {
+        throw new Error(`No selectors found for the name: ${name}`);
+    }
+}
+
+async function selectorsChanged(name) {
+    if (!mongoClient) {
+        mongoClient = new MongoClient(uri);
+        await mongoClient.connect();
+    }
+
+    const collection = database.collection('selectors');
+
+    const result = await collection.updateOne(
+        {name: name},
+        {$set: {changed: true}}
+    );
+
+    if (result.matchedCount === 0) {
+        throw new Error(`No selectors found for the name: ${name}`);
+    } else if (result.modifiedCount === 0) {
+        throw new Error(`Failed to update the 'changed' field for ${name}`);
+    } else {
+        console.log(`'changed' field set to true for ${name}`);
+        return result;
+    }
+}
+
+async function checkDbChanged(name) {
+    if (!mongoClient) {
+        mongoClient = new MongoClient(uri);
+        await mongoClient.connect();
+    }
+
+    const collection = database.collection('selectors');
+
+    const result = await collection.findOne(
+        {name: name},
+        {projection: {changed: 1, _id: 0}}
+    );
+
+    if (result) {
+        return result.changed;
+    } else {
+        return false;
+    }
+}
+
+module.exports = {
+    getDestinationsFromDatabase,
+    getCommonDestinations,
+    getCodeArriva,
+    getSelectors,
+    selectorsChanged,
+    checkDbChanged
+};

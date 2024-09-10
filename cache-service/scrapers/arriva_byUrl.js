@@ -32,6 +32,7 @@ async function scrapeArrivaByUrl(departure, destination, date) {
     const changed = await checkDbChanged("Arriva");
 
     if (changed) {
+        console.log('Selectors of Arriva have changed.')
         return [];
     }
 
@@ -101,16 +102,6 @@ const fetchConnection = async (url) => {
         const response = await axios.get(url);
         const html = response.data;
 
-        const selectors = [
-            'div.connection:not(.connection-header) .connection-inner',
-            '.departure-arrival .departure td span',
-            '.departure-arrival .arrival td span',
-            '.duration .travel-duration span',
-            '.duration .prevoznik span',
-            '.duration .peron span',
-            '.length',
-            '.price'
-        ];
         await checkForChanges(html, 'Arriva');
 
         const $ = cheerio.load(html);

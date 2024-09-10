@@ -4,6 +4,8 @@ const path = require('path');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 const {safeGoto} = require('../server/helpers');
+const {checkForChanges} = require("../server/changeDetector");
+const {checkDbChanged} = require("../server/database");
 require('dotenv').config();
 
 // Hiding puppeteer usage
@@ -28,6 +30,12 @@ function ensureDirectoryExistence(filePath) {
 }
 
 async function scrapePrevoziByUrl(departure, destination, date) {
+    const changed = await checkDbChanged("Prevozi");
+    if (changed) {
+        console.log('Selectors of Prevozi have changed.')
+        return [];
+    }
+
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
@@ -53,6 +61,9 @@ async function scrapePrevoziByUrl(departure, destination, date) {
             await browser.close();
             return [];
         }
+
+        const html = await page.content();
+        await checkForChanges(html, 'Prevozi');
 
         const rideShares = await page.evaluate(() => {
             const data = [];

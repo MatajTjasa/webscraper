@@ -2,6 +2,8 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 const {safeGoto} = require('../server/helpers');
+const {checkForChanges} = require("../server/changeDetector");
+const {checkDbChanged} = require("../server/database");
 require('dotenv').config();
 
 // Hiding puppeteer usage
@@ -18,6 +20,12 @@ puppeteer.use(
 );
 
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
+    const changed = await checkDbChanged("Vlak");
+    if (changed) {
+        console.log('Selectors of Slovenske železnice have changed.')
+        return [];
+    }
+
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
@@ -48,6 +56,9 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
             throw new Error('Failed to solve captcha');
         }
     }
+
+    const html = await page.content();
+    await checkForChanges(html, 'Vlak');
 
     const noConnectionsMessage = await page.evaluate(() => {
         const alertElement = document.querySelector('.alert.alert-danger');

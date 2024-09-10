@@ -37,7 +37,6 @@ async function checkArrivaHealth(redisClient, PORT, subscription) {
             '.departure-arrival .arrival td span',
             '.duration .travel-duration span',
             '.duration .prevoznik span',
-            '.duration .peron span',
             '.length',
             '.price'
         ];
@@ -97,7 +96,7 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
             console.error(`Failed to refresh cache for ${task.name} - ${task.data.departure} to ${task.data.destination} on ${date}: ${error.message}`);
         }
 
-        await new Promise(resolve => setTimeout(resolve, 1000 * 15));  // 15s delay between each task
+        await new Promise(resolve => setTimeout(resolve, 1000));  // 1s delay between each task
     }
 
     console.log(`Cache refresh task completed for ${date}.`);
