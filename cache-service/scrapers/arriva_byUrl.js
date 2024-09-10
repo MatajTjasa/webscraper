@@ -6,6 +6,7 @@ const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha');
 const {safeGoto, delay} = require('../server/helpers');
 const {getCodeArriva} = require('../server/database.js');
 const {checkForChanges} = require('../server/changeDetector');
+const {checkDbChanged} = require("../server/database");
 require('dotenv').config();
 
 // Hiding puppeteer usage
@@ -27,6 +28,13 @@ function formatLocation(location) {
 
 async function scrapeArrivaByUrl(departure, destination, date) {
     let browser;
+
+    const changed = await checkDbChanged("Arriva");
+
+    if (changed) {
+        return [];
+    }
+
     try {
         browser = await puppeteer.launch({
             headless: true,
@@ -103,8 +111,7 @@ const fetchConnection = async (url) => {
             '.length',
             '.price'
         ];
-
-        await checkForChanges(html, selectors);
+        await checkForChanges(html, 'Arriva');
 
         const $ = cheerio.load(html);
         const connectionData = [];
@@ -122,7 +129,6 @@ const fetchConnection = async (url) => {
 
             const travelDuration = connection.find('.duration .travel-duration span').text().trim();
             const prevoznik = connection.find('.duration .prevoznik span').eq(1).text().trim();
-            const peron = connection.find('.duration .peron span').eq(1).text().trim();
 
             const length = connection.find('.length').text().trim();
             const price = connection.find('.price').text().trim();
@@ -134,7 +140,6 @@ const fetchConnection = async (url) => {
                 arrivalTime,
                 travelDuration,
                 prevoznik,
-                peron,
                 length,
                 price
             });

@@ -118,7 +118,6 @@ const fetchConnection = async (url) => {
 
             const travelDuration = connection.find('.duration .travel-duration span').text().trim();
             const prevoznik = connection.find('.duration .prevoznik span').eq(1).text().trim();
-            const peron = connection.find('.duration .peron span').eq(1).text().trim();
 
             const length = connection.find('.length').text().trim();
             const price = connection.find('.price').text().trim();
@@ -130,7 +129,6 @@ const fetchConnection = async (url) => {
                 arrivalTime,
                 travelDuration,
                 prevoznik,
-                peron,
                 length,
                 price
             });
