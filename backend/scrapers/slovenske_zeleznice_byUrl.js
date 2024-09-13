@@ -28,20 +28,15 @@ function ensureDirectoryExistence(filePath) {
 }
 
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
-    //console.log('Chromium path:', puppeteer.executablePath());
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: process.env.PUPPETEER_CACHE_DIR//path.join(process.env.PUPPETEER_CACHE_DIR, 'chrome-win', 'chrome.exe')
+        executablePath: process.env.PUPPETEER_CACHE_DIR
     });
 
     const page = await browser.newPage();
 
-    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search
-                                                            &current-language=sl
-                                                            &departure-date=${date}
-                                                            &entry-station=${departureStationCode}
-                                                            &exit-station=${destinationStationCode}`;
+    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
     console.log(url);
 
     await safeGoto(page, url);
