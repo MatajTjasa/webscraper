@@ -80,12 +80,12 @@ function ResultsTrains({results}) {
                                         index % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-900'
                                     }`}
                                 >
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-400 dark:text-red-300">{train.departureStation}</td>
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-400 dark:text-red-300">{train.departureTime}</td>
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-400 dark:text-red-300">{train.arrivalStation}</td>
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-400 dark:text-red-300">{train.arrivalTime}</td>
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-400 dark:text-red-300">{train.travelTime}</td>
-                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-400 dark:text-red-300">{train.trainType}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-300">{train.departureStation}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-300">{train.departureTime}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-300">{train.arrivalStation}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-300">{train.arrivalTime}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-300">{train.travelTime}</td>
+                                    <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-red-300">{train.trainType}</td>
                                 </tr>
                             ))}
 

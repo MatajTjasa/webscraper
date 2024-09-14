@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Suspense, useContext} from 'react';
-import {useLocation, Link} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import SearchForm from '../components/SearchForm';
 import LoadingComponent from '../components/LoadingComponent';
 import {DestinationsContext} from '../context/DestinationsContext';
@@ -61,10 +61,10 @@ function SearchPage() {
         setLoadingAPMS(true);
         setLoadingPrevozi(true);
 
-        fetchPrevoziResults(departure, destination, date);
         fetchArrivaResults(departure, destination, date);
-        fetchTrainsResults(departure, destination, date);
         fetchAPMSResults(departure, destination, date);
+        fetchTrainsResults(departure, destination, date);
+        fetchPrevoziResults(departure, destination, date);
     }, [location.search, destinations, loading, error]);
 
     const fetchArrivaResults = async (departure, destination, date) => {
