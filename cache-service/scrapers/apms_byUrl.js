@@ -1,34 +1,14 @@
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const {safeGoto, formatPrice} = require('../server/helpers');
-require('dotenv').config();
-
-puppeteer.use(StealthPlugin());
+const axios = require('axios');
+const {formatPrice} = require('../server/helpers');
 
 async function scrapeAPMSbyUrl(departure, destination, date) {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
-        executablePath: puppeteer.executablePath()
-    });
-
-    const context = browser.defaultBrowserContext();
-    const page = (await context.pages())[0]
-
-    const url = `https://apms.si/response.ajax.php?com=voznired2020&task=get&datum=${encodeURIComponent(date)}&postaja_od=${encodeURIComponent(departure)}&postaja_do=${encodeURIComponent(destination)}`;
-    console.log("Navigating to URL: ", url);
-
-    await safeGoto(page, url);
-    await safeGoto(page, url);
-
     try {
-        const jsonContent = await page.evaluate(() => {
-            const preElement = document.querySelector('pre');
-            if (preElement && preElement.innerText !== 'null') {
-                return JSON.parse(preElement.innerText);
-            }
-            return null;
-        });
+        const url = `https://www.apms.si/response.ajax.php?com=voznired2020&task=get&datum=${encodeURIComponent(date)}&postaja_od=${encodeURIComponent(departure)}&postaja_do=${encodeURIComponent(destination)}`;
+        console.log("APMS API request: ", url);
+
+        const response = await axios.get(url);
+
+        const jsonContent = response.data;
 
         if (!jsonContent || jsonContent.length === 0) {
             console.log("No valid bus schedules found or incorrect destination specified.");
@@ -52,8 +32,6 @@ async function scrapeAPMSbyUrl(departure, destination, date) {
     } catch (e) {
         console.error('Error executing scrapeAPMS:', e);
         return [];
-    } finally {
-        await browser.close();
     }
 }
 
