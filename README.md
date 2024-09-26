@@ -1,4 +1,4 @@
-# webscraper
+# VlakAvtoBus
 
 Slovenian Transport Web Scraper
 
@@ -11,8 +11,6 @@ This project is a web scraper designed to collect transportation data from vario
 - Scrapes transportation data from different Slovenian transport services.
 - Caches scraped data using Redis to reduce the load on the target websites.
 - Provides an API to fetch the transportation data.
-
-## Features in the making
 - Friendly GUI using React
 - Scheduler that monitors and handles DOM changes 
 
@@ -23,6 +21,7 @@ This project is a web scraper designed to collect transportation data from vario
 - Cheerio
 - Redis
 - React
+- CORS
 
 ## Getting Started
 
@@ -59,10 +58,12 @@ This project is a web scraper designed to collect transportation data from vario
     });
     ```
 
-4. Start the server:
+4. Start the backend:
 
     ```sh
-    node index.js
+    npm start backend/server/index.js
+    npm start cache-service/server/index.js
+    npm start frontend..
     ```
 
 ## Usage
