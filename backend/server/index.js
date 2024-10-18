@@ -2,7 +2,7 @@ const express = require('express');
 const redis = require('redis');
 const {scrapeAPMSbyUrl} = require("../scrapers/apms_byUrl");
 const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
-const {scrapePrevoziByUrl} = require("../scrapers/prevozi_byUrl");
+const {fetchPrevozi} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
@@ -88,12 +88,15 @@ app.get('/webscraper/destinations', async (req, res) => {
 async function handleSearch(req, res, scraperFn, transportType) {
     let {date, departure, destination} = req.body;
     const cacheKey = `${transportType}-${departure}-${destination}-${reformatDateForCache(date)}`;
+    const startTime = Date.now();
 
     date = reformatDate(date, transportType);
 
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData && cachedData !== '[]') {
-        console.log('Retrieving data from cache.');
+        const duration = (Date.now() - startTime) / 1000;
+        const endTime = Date.now();
+        console.log(`Fetching data for ${transportType} ${date} from cache: ${duration} seconds at ${new Date(endTime).toLocaleTimeString()}.`);
         return res.json(JSON.parse(cachedData));
     }
 
@@ -113,6 +116,11 @@ async function handleSearch(req, res, scraperFn, transportType) {
         trackRequest(cacheKey, scraperPromise, controller);
 
         const results = await scraperPromise;
+
+        const endTime = Date.now();
+        const duration = (endTime - startTime) / 1000;
+        console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${new Date(endTime).toLocaleTimeString()}.`);
+
         clearRequest(cacheKey);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
         res.json(results);
@@ -147,7 +155,7 @@ app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
 
 app.post('/webscraper/searchPrevoziByUrl', async (req, res) => {
     console.log('Starting request searchPrevoziByUrl.');
-    await handleSearch(req, res, scrapePrevoziByUrl, 'Prevozi', true);
+    await handleSearch(req, res, fetchPrevozi, 'Prevozi', true);
     console.log('Ending request searchPrevoziByUrl.');
 });
 
