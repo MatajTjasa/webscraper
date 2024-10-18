@@ -5,7 +5,7 @@ async function fetchPrevozi(departure, destination, date) {
     try {
         // API URL
         const url = `https://prevoz.org/api/rides?from=${encodeURIComponent(departure)}&to=${encodeURIComponent(destination)}&date=${encodeURIComponent(date)}`;
-        console.log("Fetching data from URL:", url);
+        console.log("Prevozi URL:", url);
 
         const response = await axios.get(url);
 

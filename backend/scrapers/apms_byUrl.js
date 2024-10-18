@@ -4,7 +4,7 @@ const {formatPrice} = require('../server/helpers');
 async function scrapeAPMSbyUrl(departure, destination, date) {
     try {
         const url = `https://www.apms.si/response.ajax.php?com=voznired2020&task=get&datum=${encodeURIComponent(date)}&postaja_od=${encodeURIComponent(departure)}&postaja_do=${encodeURIComponent(destination)}`;
-        console.log("APMS API request: ", url);
+        console.log("APMS URL: ", url);
 
         const response = await axios.get(url);
 

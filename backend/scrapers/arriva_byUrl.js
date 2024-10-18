@@ -20,7 +20,7 @@ async function scrapeArrivaByUrl(departure, destination, date) {
 
         // API URL
         const url = `https://arriva.si/vozni-redi/?departure-123=${formattedDeparture}&departure_id=${departureId}&departure=${formattedDeparture}&destination=${formattedDestination}&destination_id=${destinationId}&trip_date=${encodeURIComponent(date)}`;
-        console.log("Arriva API request:", url);
+        console.log("Arriva URL:", url);
 
         const response = await axios.get(url);
 
@@ -79,7 +79,6 @@ const fetchConnectionData = (html) => {
         console.log("No connections found.");
         return [];
     } else {
-        console.log(connectionData);
         return connectionData;
     }
 }

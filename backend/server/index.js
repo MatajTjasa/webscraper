@@ -94,9 +94,9 @@ async function handleSearch(req, res, scraperFn, transportType) {
 
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData && cachedData !== '[]') {
-        const duration = (Date.now() - startTime) / 1000;
-        const endTime = Date.now();
-        console.log(`Fetching data for ${transportType} ${date} from cache: ${duration} seconds at ${new Date(endTime).toLocaleTimeString()}.`);
+        const duration = (Date.UTC() - startTime) / 1000;
+        const endTime = new Date(Date.now() + 2 * 60 * 60 * 1000).toLocaleTimeString()
+        console.log(`Fetching data for ${transportType} ${date} from cache: ${duration} seconds at ${endTime}.`);
         return res.json(JSON.parse(cachedData));
     }
 
@@ -117,9 +117,9 @@ async function handleSearch(req, res, scraperFn, transportType) {
 
         const results = await scraperPromise;
 
-        const endTime = Date.now();
+        const endTime = new Date(Date.now() + 2 * 60 * 60 * 1000).toLocaleTimeString()
         const duration = (endTime - startTime) / 1000;
-        console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${new Date(endTime).toLocaleTimeString()}.`);
+        console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${endTime}.`);
 
         clearRequest(cacheKey);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
