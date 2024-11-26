@@ -135,6 +135,98 @@ async function handleSearch(req, res, scraperFn, transportType) {
     }
 }
 
+async function handleSearchNoCache(req, res, scraperFn, transportType) {
+    let {date, departure, destination} = req.body;
+    const key = `${transportType}-${departure}-${destination}-${reformatDateForCache(date)}`;
+    const startTime = Date.now();
+
+    date = reformatDate(date, transportType);
+
+    const departureCodes = await getDestinationCodes(departure, redisClient);
+    const destinationCodes = await getDestinationCodes(destination, redisClient);
+
+    if (!validateTransportSupport(departureCodes, destinationCodes, transportType)) {
+        console.log(`${transportType} does not support this departure or destination.`);
+        return res.json({message: "Departure or destination is not supported."});
+    }
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    try {
+        const scraperPromise = retry(scraperFn)(departureCodes[transportType], destinationCodes[transportType], date, {signal});
+        const results = await scraperPromise;
+
+        const endTime = new Date(Date.now() + 2 * 60 * 60 * 1000).toLocaleTimeString()
+        const duration = (endTime - startTime) / 1000;
+        console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${endTime}.`);
+
+        res.json(results);
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.log(`Request ${key} was aborted.`);
+        } else {
+            console.error('Error during scraping:', error);
+            res.status(500).json({error: 'An error occurred while scraping data.'});
+        }
+    }
+}
+
+app.post('/webscraper/searchAll', async (req, res) => {
+    const {date, departure, destination} = req.body;
+
+    const providers = [
+        {name: 'APMS', scraperFn: scrapeAPMSbyUrl, transportType: 'APMS'},
+        {name: 'Arriva', scraperFn: scrapeArrivaByUrl, transportType: 'Arriva'},
+        {name: 'Slovenske železnice', scraperFn: scrapeSlovenskeZelezniceByUrl, transportType: 'Train'},
+        {name: 'Prevozi', scraperFn: fetchPrevozi, transportType: 'Prevozi'},
+    ];
+
+    const results = [];
+    const startTime = Date.now();
+
+    for (const provider of providers) {
+        const providerStartTime = Date.now();
+        try {
+            console.log(`Starting request for ${provider.name}.`);
+            const response = await handleSearchNoCache(
+                {body: {date, departure, destination}}, // mock `req`
+                {json: (data) => data},                  // mock `res`
+                provider.scraperFn,
+                provider.transportType
+            );
+
+            const providerEndTime = Date.now();
+            results.push({
+                provider: provider.name,
+                duration: (providerEndTime - providerStartTime) / 1000 + 's', // in seconds
+                data: response, // data returned by `handleSearchNoCache`
+                error: null,
+            });
+
+            console.log(`Ending request for ${provider.name}.`);
+        } catch (error) {
+            console.error(`Error fetching data for ${provider.name}:`, error.message);
+            results.push({
+                provider: provider.name,
+                duration: null,
+                data: null,
+                error: error.message,
+            });
+        }
+    }
+
+    const endTime = Date.now();
+    const totalDuration = (endTime - startTime) / 1000 + 's'; // in seconds
+
+    console.log(`Fetching all schedules completed. Total duration: $:${totalDuration}. Started at: ${new Date(startTime).toLocaleTimeString()}, Ended at: ${new Date(endTime).toLocaleTimeString()}.`);
+
+    res.json({
+        totalDuration,
+        results,
+    });
+});
+
 app.post('/webscraper/searchAPMSbyUrl', async (req, res) => {
     console.log('Starting request searchAPMSbyUrl.');
     await handleSearch(req, res, scrapeAPMSbyUrl, 'APMS');

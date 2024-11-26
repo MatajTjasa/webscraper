@@ -19,14 +19,6 @@ puppeteer.use(
     })
 );
 
-function ensureDirectoryExistence(filePath) {
-    const dirname = path.dirname(filePath);
-    if (fs.existsSync(dirname)) {
-        return true;
-    }
-    fs.mkdirSync(dirname, {recursive: true});
-}
-
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
     const browser = await puppeteer.launch({
         headless: true,
@@ -123,17 +115,6 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
     });
 
     console.log(trainSchedules);
-
-    const filePath = path.join(__dirname, '../data/timetable/slovenske_zeleznice_byUrl.json');
-    ensureDirectoryExistence(filePath);
-
-    fs.writeFile(filePath, JSON.stringify(trainSchedules, null, 2), err => {
-        if (err) {
-            console.error('Error writing file slovenske_zeleznice_byUrl.json:', err);
-        } else {
-            console.log('Successfully written to slovenske_zeleznice_byUrl.json.');
-        }
-    });
 
     await browser.close();
     return trainSchedules;

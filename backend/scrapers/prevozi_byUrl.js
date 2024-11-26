@@ -15,7 +15,7 @@ async function fetchPrevozi(departure, destination, date) {
         }
 
         // Formatting
-        const rideShares = response.data.map((ride, index) => ({
+        const prevozi = response.data.map((ride, index) => ({
             id: index + 1,
             from: ride.from,
             to: ride.to,
@@ -24,8 +24,8 @@ async function fetchPrevozi(departure, destination, date) {
             price: ride.price,
         }));
 
-        console.log(rideShares);
-        return rideShares;
+        console.log(prevozi);
+        return prevozi;
 
     } catch (error) {
         console.error('Error fetching ride shares:', error);
