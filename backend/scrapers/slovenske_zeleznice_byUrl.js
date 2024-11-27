@@ -81,7 +81,7 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
         };
 
         const splitInfo = (info) => {
-            const regex = /(.+?)(?:\sob\s|\nob\s)(\d{2}:\d{2})/;
+            const regex = /(.+?)\s+(?:ob\s|\nob\s)?(\d{2}:\d{2})/;
             const match = info.match(regex);
             if (match) {
                 return {

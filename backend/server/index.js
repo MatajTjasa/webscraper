@@ -137,38 +137,31 @@ async function handleSearch(req, res, scraperFn, transportType) {
 
 async function handleSearchNoCache(req, res, scraperFn, transportType) {
     let {date, departure, destination} = req.body;
-    const key = `${transportType}-${departure}-${destination}-${reformatDateForCache(date)}`;
     const startTime = Date.now();
 
-    date = reformatDate(date, transportType);
-
-    const departureCodes = await getDestinationCodes(departure, redisClient);
-    const destinationCodes = await getDestinationCodes(destination, redisClient);
-
-    if (!validateTransportSupport(departureCodes, destinationCodes, transportType)) {
-        console.log(`${transportType} does not support this departure or destination.`);
-        return res.json({message: "Departure or destination is not supported."});
-    }
-
-    const controller = new AbortController();
-    const signal = controller.signal;
-
     try {
-        const scraperPromise = retry(scraperFn)(departureCodes[transportType], destinationCodes[transportType], date, {signal});
-        const results = await scraperPromise;
+        date = reformatDate(date, transportType);
+        const departureCodes = await getDestinationCodes(departure, redisClient);
+        const destinationCodes = await getDestinationCodes(destination, redisClient);
 
-        const endTime = new Date(Date.now() + 2 * 60 * 60 * 1000).toLocaleTimeString()
-        const duration = (endTime - startTime) / 1000;
-        console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${endTime}.`);
-
-        res.json(results);
-    } catch (error) {
-        if (error.name === 'AbortError') {
-            console.log(`Request ${key} was aborted.`);
-        } else {
-            console.error('Error during scraping:', error);
-            res.status(500).json({error: 'An error occurred while scraping data.'});
+        if (!validateTransportSupport(departureCodes, destinationCodes, transportType)) {
+            console.log(`${transportType} does not support this departure or destination.`);
+            return {error: `${transportType} does not support this departure or destination.`, data: null};
         }
+
+        const results = await retry(scraperFn)(
+            departureCodes[transportType],
+            destinationCodes[transportType],
+            date
+        );
+
+        const duration = (Date.now() - startTime) / 1000 + 's';
+        console.log(`Fetching data for ${transportType} ${date} completed in ${duration}.`);
+
+        return {error: null, data: results};
+    } catch (error) {
+        console.error(`Error fetching data for ${transportType}: ${error.message}`);
+        return {error: error.message, data: null};
     }
 }
 
@@ -187,39 +180,30 @@ app.post('/webscraper/searchAll', async (req, res) => {
 
     for (const provider of providers) {
         const providerStartTime = Date.now();
-        try {
-            console.log(`Starting request for ${provider.name}.`);
-            const response = await handleSearchNoCache(
-                {body: {date, departure, destination}}, // mock `req`
-                {json: (data) => data},                  // mock `res`
-                provider.scraperFn,
-                provider.transportType
-            );
+        console.log(`Starting request for ${provider.name}.`);
 
-            const providerEndTime = Date.now();
-            results.push({
-                provider: provider.name,
-                duration: (providerEndTime - providerStartTime) / 1000 + 's', // in seconds
-                data: response, // data returned by `handleSearchNoCache`
-                error: null,
-            });
+        const {error, data} = await handleSearchNoCache(
+            {body: {date, departure, destination}},
+            res,
+            provider.scraperFn,
+            provider.transportType
+        );
 
-            console.log(`Ending request for ${provider.name}.`);
-        } catch (error) {
-            console.error(`Error fetching data for ${provider.name}:`, error.message);
-            results.push({
-                provider: provider.name,
-                duration: null,
-                data: null,
-                error: error.message,
-            });
-        }
+        const providerEndTime = Date.now();
+        results.push({
+            provider: provider.name,
+            duration: (providerEndTime - providerStartTime) / 1000 + 's',
+            data,
+            error,
+        });
+
+        console.log(`Ending request for ${provider.name}.`);
     }
 
     const endTime = Date.now();
-    const totalDuration = (endTime - startTime) / 1000 + 's'; // in seconds
+    const totalDuration = (endTime - startTime) / 1000 + 's';
 
-    console.log(`Fetching all schedules completed. Total duration: $:${totalDuration}. Started at: ${new Date(startTime).toLocaleTimeString()}, Ended at: ${new Date(endTime).toLocaleTimeString()}.`);
+    console.log(`Fetching all schedules completed. Total duration: ${totalDuration}.`);
 
     res.json({
         totalDuration,
