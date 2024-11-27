@@ -1,34 +1,56 @@
 const axios = require('axios');
+const cheerio = require('cheerio');
 
-// TODO: add a solution with cheerio here and move fetchPrevozi elsewhere?
 async function fetchPrevozi(departure, destination, date) {
     try {
-        // API URL
-        const url = `https://prevoz.org/api/rides?from=${encodeURIComponent(departure)}&to=${encodeURIComponent(destination)}&date=${encodeURIComponent(date)}`;
+        //URL
+        const url = `https://prevoz.org/prevoz/list/?fc=SI&f=${encodeURIComponent(departure)}&tc=SI&t=${encodeURIComponent(destination)}&d=${encodeURIComponent(date)}`;
         console.log("Prevozi URL:", url);
 
         const response = await axios.get(url);
 
-        if (!response.data || response.data.length === 0) {
-            console.log("No ride shares found.");
+        if (!response.data) {
+            console.log("No data returned from the request.");
             return [];
         }
 
-        // Formatting
-        const prevozi = response.data.map((ride, index) => ({
-            id: index + 1,
-            from: ride.from,
-            to: ride.to,
-            time: ride.time,
-            description: ride.description,
-            price: ride.price,
-        }));
+        const $ = cheerio.load(response.data);
+        const rideShares = [];
 
-        console.log(prevozi);
-        return prevozi;
+        $('.card').each((index, card) => {
+            const $card = $(card);
 
+            const cardBody = $card.find('.card-body');
+            if (cardBody.text().includes('Noben prevoz ne ustreza iskalnim pogojem')) {
+                console.log('No rides available.');
+                return; // Skip this card
+            }
+
+            const from = $card.find('.d-flex.fw-bolden.h4.m-0 span:first-child').text().trim();
+            const to = $card.find('.d-flex.fw-bolden.h4.m-0 span:last-child').text().trim();
+
+            const trips = [];
+            $card.find('.list-group-item.carshare-overview').each((_, item) => {
+                const $item = $(item);
+
+                const time = $item.find('.link-body').text().trim();
+                const description = $item.find('.description.small').text().trim();
+                const price = $item.find('.options .item span.h5.fw-bold.m-0').text().trim();
+
+                if (time) {
+                    trips.push({time, description, price});
+                }
+            });
+
+            if (trips.length > 0) {
+                rideShares.push({from, to, trips});
+            }
+        });
+
+        console.log(rideShares);
+        return rideShares;
     } catch (error) {
-        console.error('Error fetching ride shares:', error);
+        console.error('Error fetching prevozi:', error);
         return [];
     }
 }
