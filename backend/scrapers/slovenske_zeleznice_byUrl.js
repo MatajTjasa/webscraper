@@ -19,6 +19,55 @@ puppeteer.use(
     })
 );
 
+async function extractTrainData(page) {
+    return await page.evaluate(() => {
+        const getTextContent = (element, selector) => {
+            const foundElement = element.querySelector(selector);
+            return foundElement ? foundElement.innerText.trim() : '';
+        };
+
+        const cleanText = (text) => {
+            if (!text) return '';
+            return text.replace(/^Vlak:\s*/, '').replace(/\s+/g, ' ').trim();
+        };
+
+        const connections = Array.from(document.querySelectorAll('.connection'));
+        return connections.map((connection) => {
+            const isActive = connection.classList.contains('connection-active');
+
+            const timeAndStations = connection.querySelector('.d-flex.align-items-center.gap-1.fs-5.fw-medium');
+            const departureTime = timeAndStations?.children[0]?.innerText.trim() || '';
+            const departureStation = timeAndStations?.children[1]?.innerText.trim() || '';
+            const arrivalStation = timeAndStations?.children[5]?.innerText.trim() || '';
+            const arrivalTime = timeAndStations?.children[6]?.innerText.trim() || '';
+
+            const detailsContainer = connection.querySelector('.accordion-header.d-flex.flex-column.flex-md-row.justify-content-between.rounded-2.p-2');
+            const detailParagraphs = detailsContainer ? Array.from(detailsContainer.querySelectorAll('p')) : [];
+            const transfers = detailParagraphs[0]?.querySelector('.value')?.innerText.trim() || '0';
+            const travelTime = detailParagraphs[1]?.querySelector('.value')?.innerText.trim() || '';
+
+            const rawTrainType = getTextContent(connection, '.graphic-transit .fw-medium.fs-3.fs-4.fit-content');
+            const trainType = cleanText(rawTrainType);
+
+            const warnings = Array.from(
+                connection.querySelectorAll('.notice-wrapper .text-wrap.lh-normal')
+            ).map((warning) => warning.innerText.trim());
+
+            return {
+                isActive,
+                departureTime,
+                departureStation,
+                arrivalTime,
+                arrivalStation,
+                travelTime,
+                trainType,
+                transfers: transfers || '0',
+                warnings,
+            };
+        });
+    });
+}
+
 async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
     const browser = await puppeteer.launch({
         headless: true,
@@ -29,92 +78,13 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
     const page = await browser.newPage();
 
     const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
-    console.log(url);
+    console.log('Navigating to URL:', url);
 
-    await safeGoto(page, url);
-    console.log('Page should be fully loaded (vlak): ' + page.url());
+    await page.goto(url, {waitUntil: 'networkidle2'});
 
-    // Captcha check
-    const isCaptchaPresent = await page.evaluate(() => {
-        return document.querySelector('.g-recaptcha') !== null;
-    });
+    const trainSchedules = await extractTrainData(page);
 
-    if (isCaptchaPresent) {
-        console.log('Captcha detected, attempting to solve...');
-        const {solved, error} = await page.solveRecaptchas();
-        if (solved) {
-            console.log('Captcha solved.');
-        } else {
-            console.error('Captcha solving failed:', error);
-            await browser.close();
-            throw new Error('Failed to solve captcha');
-        }
-    }
-
-    const noConnectionsMessage = await page.evaluate(() => {
-        const alertElement = document.querySelector('.alert.alert-danger');
-        const connectionElements = document.querySelectorAll('.connection');
-        return alertElement ? alertElement.innerText.includes('Za relacijo na izbrani dan ni povezave.') : connectionElements.length === 0;
-    });
-
-    if (noConnectionsMessage) {
-        console.log('No connections found for the selected date and route.');
-        await browser.close();
-        return [];
-    }
-
-    try {
-        await page.waitForSelector('.connection.connection-active', {visible: true}); //.connection
-        console.log('.connection.connection-active selector found');
-    } catch (error) {
-        console.error('Error: .connection.connection-active selector not found:', error);
-        const content = await page.content();
-        console.log('Page content at error:', content);
-        await browser.close();
-        throw error;
-    }
-
-    const trainSchedules = await page.evaluate(() => {
-        const getTextContent = (element, selector) => {
-            const foundElement = element.querySelector(selector);
-            return foundElement ? foundElement.innerText.trim() : '';
-        };
-
-        const splitInfo = (info) => {
-            const regex = /(.+?)\s+(?:ob\s|\nob\s)?(\d{2}:\d{2})/;
-            const match = info.match(regex);
-            if (match) {
-                return {
-                    station: match[1].trim(),
-                    time: match[2].trim()
-                };
-            }
-            return {
-                station: info.trim(),
-                time: ''
-            };
-        };
-
-        const connections = Array.from(document.querySelectorAll('.connection ')); // Space after .connection added
-        return connections.map(connection => {
-            const isActive = connection.classList.contains('connection-active');
-            const departureInfo = splitInfo(getTextContent(connection, '.item.has-issues .text-wrapper .fw-medium'));
-            const arrivalInfo = splitInfo(getTextContent(connection, '.item.train-exit-station .fw-medium'));
-            const travelTime = getTextContent(connection, '.d-flex.me-md-3.mt-2.mt-md-0.flex-column.flex-md-row .value.has-white-bg.fs-5.fit-content');
-            const trainType = getTextContent(connection, '.train-list-item .train-trigger').trim();
-            return {
-                departureStation: departureInfo.station,
-                departureTime: departureInfo.time,
-                arrivalStation: arrivalInfo.station,
-                arrivalTime: arrivalInfo.time,
-                travelTime,
-                trainType,
-                isActive
-            };
-        });
-    });
-
-    console.log(trainSchedules);
+    console.log('Extracted train schedules:', trainSchedules);
 
     await browser.close();
     return trainSchedules;
@@ -122,5 +92,5 @@ async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationSt
 
 module.exports = {scrapeSlovenskeZelezniceByUrl};
 
-// Example usage with station codes
-//scrapeSlovenskeZelezniceByUrl('42300', '43400', '08.08.2024').catch(err => console.error('Error executing scrapeSlovenskeZelezniceByUrl:', err));
+// Example usage:
+//scrapeSlovenskeZelezniceByUrl('42300', '43400', '2025-01-04').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));

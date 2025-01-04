@@ -119,7 +119,7 @@ async function handleSearch(req, res, scraperFn, transportType) {
 
         const endTime = new Date(Date.now() + 2 * 60 * 60 * 1000).toLocaleTimeString()
         const duration = (endTime - startTime) / 1000;
-        console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${endTime}.`);
+        //console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${endTime}.`);
 
         clearRequest(cacheKey);
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
@@ -196,8 +196,6 @@ app.post('/webscraper/searchAll', async (req, res) => {
             data,
             error,
         });
-
-        console.log(`Ending request for ${provider.name}.`);
     }
 
     const endTime = Date.now();

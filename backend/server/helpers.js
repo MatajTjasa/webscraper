@@ -66,7 +66,7 @@ const getDestinationCodes = async (kraj, redisClient) => {
 function reformatDate(date, transportType) {
     if (transportType === 'Prevozi') {
         return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('YYYY-MM-DD');
-    } else if (transportType === 'APMS' || transportType === 'Arriva') {
+    } else if (transportType === 'APMS' || transportType === 'Arriva' || transportType === 'Train') {
         return moment(date, ['DD.MM.YYYY', 'YYYY-MM-DD']).format('DD.MM.YYYY');
     } else {
         return date;// train accepts both
