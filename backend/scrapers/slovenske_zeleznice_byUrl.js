@@ -43,7 +43,8 @@ async function extractTrainData(page) {
 
             const detailsContainer = connection.querySelector('.accordion-header.d-flex.flex-column.flex-md-row.justify-content-between.rounded-2.p-2');
             const detailParagraphs = detailsContainer ? Array.from(detailsContainer.querySelectorAll('p')) : [];
-            const transfers = detailParagraphs[0]?.querySelector('.value')?.innerText.trim() || '0';
+            let transfers = detailParagraphs[0]?.querySelector('.value')?.innerText.trim();
+            transfers = !transfers || transfers === '0' ? '/' : transfers;
             const travelTime = detailParagraphs[1]?.querySelector('.value')?.innerText.trim() || '';
 
             const rawTrainType = getTextContent(connection, '.graphic-transit .fw-medium.fs-3.fs-4.fit-content');
@@ -61,7 +62,7 @@ async function extractTrainData(page) {
                 arrivalStation,
                 travelTime,
                 trainType,
-                transfers: transfers || '0',
+                transfers,
                 warnings,
             };
         });
