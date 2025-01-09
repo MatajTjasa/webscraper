@@ -4,6 +4,8 @@ const {scrapeAPMSbyUrl} = require("../scrapers/apms_byUrl");
 const {scrapeArrivaByUrl} = require("../scrapers/arriva_byUrl");
 const {fetchPrevozi} = require("../scrapers/prevozi_byUrl");
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
+const {scrapeSlovenskeZelezniceDOM} = require("../scrapers/slovenske_zeleznice_DOM");
+const {comparePerformance} = require("./comparePerformance");
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
 const rateLimit = require('express-rate-limit');
@@ -71,6 +73,9 @@ async function getCachedData(cacheKey) {
     }
     return null;
 }
+
+// Compare Puppeteer and DOM
+comparePerformance('42300', '43400', '10.01.2025').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
 
 // API
 app.get('/webscraper/destinations', async (req, res) => {
@@ -237,6 +242,30 @@ app.get('/heartbeat', async (req, res) => {
     console.log('Heart beating OK');
     res.status(200).send('Heart beating OK');
 });
+
+app.post('/webscraper/compare', async (req, res) => {
+    const {date, departure, destination} = req.body;
+
+    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departure}&exit-station=${destination}`;
+
+    const puppeteerStart = Date.now();
+    const puppeteerData = await scrapeSlovenskeZelezniceByUrl(departure, destination, date);
+    const puppeteerDuration = (Date.now() - puppeteerStart) / 1000;
+
+    const jsdomResult = await scrapeSlovenskeZelezniceDOM(url);
+
+    res.json({
+        puppeteer: {
+            duration: puppeteerDuration,
+            data: puppeteerData,
+        },
+        jsdom: {
+            duration: jsdomResult.duration,
+            data: jsdomResult.trainData,
+        },
+    });
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
