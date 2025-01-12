@@ -1,12 +1,10 @@
-const axios = require('axios');
+const fs = require('fs').promises;
 const {JSDOM} = require("jsdom");
 
-async function scrapeSlovenskeZelezniceDOM(departureStationCode, destinationStationCode, date) {
-    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
-    console.log('Navigating to URL:', url);
-
-    const response = await axios.get(url);
-    const dom = new JSDOM(response.data);
+async function scrapeSlovenskeZelezniceDOM() {
+    const filePath = '../data/SlovenskeZelezniceStran.html';
+    const html = await fs.readFile(filePath, 'utf-8');
+    const dom = new JSDOM(html);
     const document = dom.window.document;
 
     const cleanText = (text) => text.replace(/^Vlak:\s*/, '').replace(/\s+/g, ' ').trim();
@@ -30,9 +28,7 @@ async function scrapeSlovenskeZelezniceDOM(departureStationCode, destinationStat
         const rawTrainType = connection.querySelector('.graphic-transit .fw-medium.fs-3.fs-4.fit-content')?.textContent.trim();
         const trainType = cleanText(rawTrainType || '');
 
-        const warnings = Array.from(
-            connection.querySelectorAll('.notice-wrapper .text-wrap.lh-normal')
-        ).map((warning) => warning.textContent.trim());
+        const warnings = Array.from(connection.querySelectorAll('.notice-wrapper')).map((warning) => warning.textContent.trim());
 
         return {
             isActive,

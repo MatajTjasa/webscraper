@@ -43,6 +43,10 @@ redisClient.on('error', (err) => console.error('Redis error:', err));
 
 redisClient.connect().then(() => {
     console.log('Connected to Redis');
+    scrapeSlovenskeZelezniceDOM().then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
+
+    // Compare Puppeteer and DOM
+    //comparePerformance('42300', '43400', '12.01.2025').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
 }).catch(err => {
     console.error('Redis connection error:', err);
 });
@@ -74,8 +78,6 @@ async function getCachedData(cacheKey) {
     return null;
 }
 
-// Compare Puppeteer and DOM
-comparePerformance('42300', '43400', '10.01.2025').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
 
 // API
 app.get('/webscraper/destinations', async (req, res) => {
@@ -246,13 +248,11 @@ app.get('/heartbeat', async (req, res) => {
 app.post('/webscraper/compare', async (req, res) => {
     const {date, departure, destination} = req.body;
 
-    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departure}&exit-station=${destination}`;
-
     const puppeteerStart = Date.now();
     const puppeteerData = await scrapeSlovenskeZelezniceByUrl(departure, destination, date);
     const puppeteerDuration = (Date.now() - puppeteerStart) / 1000;
 
-    const jsdomResult = await scrapeSlovenskeZelezniceDOM(url);
+    const jsdomResult = await scrapeSlovenskeZelezniceDOM();
 
     res.json({
         puppeteer: {
@@ -261,7 +261,7 @@ app.post('/webscraper/compare', async (req, res) => {
         },
         jsdom: {
             duration: jsdomResult.duration,
-            data: jsdomResult.trainData,
+            data: jsdomResult,
         },
     });
 });
@@ -270,3 +270,5 @@ app.post('/webscraper/compare', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+//scrapeSlovenskeZelezniceDOM('42300', '43400', '12.01.2025').then(data => console.log(JSON.stringify(data, null, 2)));

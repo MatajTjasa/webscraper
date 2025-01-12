@@ -10,9 +10,10 @@ async function comparePerformance(departureStationCode, destinationStationCode, 
     console.log("Puppeteer end : " + puppeteerDuration)
 
     const jsdomStart = Date.now();
-    const jsdomResult = await scrapeSlovenskeZelezniceDOM(departureStationCode, destinationStationCode, date);
+    const jsdomResult = await scrapeSlovenskeZelezniceDOM();
     const jsdomDuration = (Date.now() - jsdomStart) / 1000;
 
+    console.log("_______________________________________________________________________")
     console.log("Finish")
     console.log('Puppeteer:', {
         duration: puppeteerDuration,
@@ -23,6 +24,7 @@ async function comparePerformance(departureStationCode, destinationStationCode, 
         duration: jsdomDuration,
         data: jsdomResult,
     });
+    console.log('doneeeeeeeeeeee!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 }
 
 module.exports = {comparePerformance};
