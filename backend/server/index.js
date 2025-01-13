@@ -43,10 +43,9 @@ redisClient.on('error', (err) => console.error('Redis error:', err));
 
 redisClient.connect().then(() => {
     console.log('Connected to Redis');
-    scrapeSlovenskeZelezniceDOM().then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
-
+    //scrapeSlovenskeZelezniceDOM().then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
     // Compare Puppeteer and DOM
-    //comparePerformance('42300', '43400', '12.01.2025').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
+    comparePerformance('42300', '43400', '14.01.2025').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
 }).catch(err => {
     console.error('Redis connection error:', err);
 });

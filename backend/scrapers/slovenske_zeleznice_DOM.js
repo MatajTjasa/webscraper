@@ -1,8 +1,9 @@
 const fs = require('fs').promises;
+const path = require('path');
 const {JSDOM} = require("jsdom");
 
 async function scrapeSlovenskeZelezniceDOM() {
-    const filePath = '../data/SlovenskeZelezniceStran.html';
+    const filePath = path.join(__dirname, '../data/SlovenskeZelezniceStran.html');
     const html = await fs.readFile(filePath, 'utf-8');
     const dom = new JSDOM(html);
     const document = dom.window.document;

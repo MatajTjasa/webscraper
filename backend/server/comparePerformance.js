@@ -17,14 +17,13 @@ async function comparePerformance(departureStationCode, destinationStationCode, 
     console.log("Finish")
     console.log('Puppeteer:', {
         duration: puppeteerDuration,
-        data: puppeteerData,
+        //data: puppeteerData,
     });
 
     console.log('JSDOM:', {
         duration: jsdomDuration,
-        data: jsdomResult,
+        //data: jsdomResult,
     });
-    console.log('doneeeeeeeeeeee!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 }
 
 module.exports = {comparePerformance};
