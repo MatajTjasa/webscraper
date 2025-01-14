@@ -56,6 +56,6 @@ async function fetchPrevozi(departure, destination, date) {
 }
 
 // Example usage
-// fetchPrevozi('Ljubljana', 'Maribor', '2024-08-04').catch(err => console.error('Error:', err));
+//fetchPrevozi('Ljubljana', 'Maribor', '2025-01-14').catch(err => console.error('Error:', err));
 
 module.exports = {fetchPrevozi};
