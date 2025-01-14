@@ -1,31 +1,57 @@
 const {scrapeSlovenskeZelezniceByUrl} = require("../scrapers/slovenske_zeleznice_byUrl");
 const {scrapeSlovenskeZelezniceDOM} = require("../scrapers/slovenske_zeleznice_DOM");
+const {fetchPrevozi} = require("../scrapers/prevozi_byUrl");
+const {scrapePrevozi} = require("../scrapers/prevozi");
+const {scrapePrevoziDOM} = require("../scrapers/prevozi_DOM");
 
+async function measureAverage(scrapeFunction, iterations, ...args) {
+    let totalDuration = 0;
+    console.log()
+    for (let i = 0; i < iterations; i++) {
+        const start = Date.now();
+        await scrapeFunction(...args);
+        const duration = (Date.now() - start) / 1000;
+        console.log(`${i + 1}. ${scrapeFunction.name} took: ${duration.toFixed(3)} seconds`);
+        totalDuration += duration;
+    }
+    return totalDuration / iterations;
+}
 
-async function comparePerformance(departureStationCode, destinationStationCode, date) {
-    console.log("Puppeteer start")
-    const puppeteerStart = Date.now();
-    const puppeteerData = await scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date);
-    const puppeteerDuration = (Date.now() - puppeteerStart) / 1000;
-    console.log("Puppeteer end : " + puppeteerDuration)
+async function comparePerformance(departureStationCode, destinationStationCode, date, transportType) {
+    const iterations = 10;
 
-    const jsdomStart = Date.now();
-    const jsdomResult = await scrapeSlovenskeZelezniceDOM();
-    const jsdomDuration = (Date.now() - jsdomStart) / 1000;
+    if (transportType === 'vlak') {
+        console.log("Comparing performance for Slovenske železnice:");
 
-    console.log("_______________________________________________________________________")
-    console.log("Finish")
-    console.log('Puppeteer:', {
-        duration: puppeteerDuration,
-        //data: puppeteerData,
-    });
+        const puppeteerAverage = await measureAverage(scrapeSlovenskeZelezniceByUrl, iterations, departureStationCode, destinationStationCode, date);
+        const jsdomAverage = await measureAverage(scrapeSlovenskeZelezniceDOM, iterations);
 
-    console.log('JSDOM:', {
-        duration: jsdomDuration,
-        //data: jsdomResult,
-    });
+        console.log("_______________________________________________________________________");
+        console.log(
+            `Finish comparing for Slovenske železnice (average over ${iterations} runs):\n` +
+            `  puppeteer: ${puppeteerAverage}\n` +
+            `  jsdom: ${jsdomAverage}`
+        );
+
+    } else if (transportType === 'prevoz') {
+        console.log("Comparing performance for Prevozi:");
+
+        const puppeteerAverage = await measureAverage(scrapePrevozi, iterations, departureStationCode, destinationStationCode, date);
+        const cheerioAverage = await measureAverage(fetchPrevozi, iterations, departureStationCode, destinationStationCode, date);
+        const jsdomAverage = await measureAverage(scrapePrevoziDOM, iterations);
+
+        console.log("_______________________________________________________________________");
+        console.log(
+            `Finish comparing for Prevozi (average over ${iterations} runs):\n` +
+            `  puppeteer: ${puppeteerAverage}\n` +
+            `  cheerio: ${cheerioAverage}\n` +
+            `  jsdom: ${jsdomAverage}`
+        );
+    }
 }
 
 module.exports = {comparePerformance};
 
-//comparePerformance('42300', '43400', '2025-01-04').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
+// Example usage:
+// comparePerformance('42300', '43400', '2025-01-04', 'vlak').catch(console.error);
+// comparePerformance('Ljubljana', 'Maribor', '2025-01-14', 'prevoz').catch(console.error);
