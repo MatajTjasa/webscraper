@@ -29,8 +29,8 @@ async function comparePerformance(departureStationCode, destinationStationCode, 
         console.log("_______________________________________________________________________");
         console.log(
             `Finish comparing for Slovenske železnice (average over ${iterations} runs):\n` +
-            `  puppeteer: ${puppeteerAverage}\n` +
-            `  jsdom: ${jsdomAverage}`
+            `  puppeteer: ${puppeteerAverage.toFixed(3)}s \n` +
+            `  jsdom: ${jsdomAverage.toFixed(3)}s `
         );
 
     } else if (transportType === 'prevoz') {
@@ -43,9 +43,9 @@ async function comparePerformance(departureStationCode, destinationStationCode, 
         console.log("_______________________________________________________________________");
         console.log(
             `Finish comparing for Prevozi (average over ${iterations} runs):\n` +
-            `  puppeteer: ${puppeteerAverage}\n` +
-            `  cheerio: ${cheerioAverage}\n` +
-            `  jsdom: ${jsdomAverage}`
+            `  puppeteer: ${puppeteerAverage.toFixed(3)}s \n` +
+            `  cheerio: ${cheerioAverage.toFixed(3)}s\n` +
+            `  jsdom: ${jsdomAverage.toFixed(3)}s `
         );
     }
 }
