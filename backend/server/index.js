@@ -27,7 +27,7 @@ app.set('trust proxy', 1);
 const limiter = rateLimit({
     windowMs: 5 * 60 * 1000, // 5min
     max: 50, // limit of requests in 5min
-    message: "Too many requests from this IP, please try again after 5 minutes"
+    message: "Preveč zahtev. Prosim, poskusite znova čez 5 minut."
 });
 app.use(limiter);
 
@@ -46,7 +46,7 @@ redisClient.connect().then(() => {
     //scrapeSlovenskeZelezniceDOM().then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
     // Compare Puppeteer and DOM
     //comparePerformance('42300', '43400', '14.01.2025', 'vlak').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
-    comparePerformance('Ljubljana', 'Maribor', '2025-01-14', 'prevoz').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
+    //comparePerformance('Ljubljana', 'Maribor', '2025-01-16', 'prevoz').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
 
 }).catch(err => {
     console.error('Redis connection error:', err);
