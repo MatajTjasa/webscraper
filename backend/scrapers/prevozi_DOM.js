@@ -33,4 +33,4 @@ async function scrapePrevoziDOM() {
 
 module.exports = {scrapePrevoziDOM};
 
-scrapePrevoziDOM().then((data) => console.log(JSON.stringify(data, null, 2))).catch((error) => console.error("Error executing prevoziDOM:", error));
+//scrapePrevoziDOM().then((data) => console.log(JSON.stringify(data, null, 2))).catch((error) => console.error("Error executing prevoziDOM:", error));
