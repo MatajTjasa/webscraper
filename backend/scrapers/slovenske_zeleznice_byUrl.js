@@ -19,6 +19,28 @@ puppeteer.use(
     })
 );
 
+async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: process.env.PUPPETEER_CACHE_DIR
+    });
+
+    const page = await browser.newPage();
+
+    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
+    console.log('Navigating to URL:', url);
+
+    await page.goto(url, {waitUntil: 'networkidle2'});
+
+    const trainSchedules = await extractTrainData(page);
+
+    console.log('Extracted train schedules:', trainSchedules);
+
+    await browser.close();
+    return trainSchedules;
+}
+
 async function extractTrainData(page) {
     return await page.evaluate(() => {
         const getTextContent = (element, selector) => {
@@ -67,28 +89,6 @@ async function extractTrainData(page) {
             };
         });
     });
-}
-
-async function scrapeSlovenskeZelezniceByUrl(departureStationCode, destinationStationCode, date) {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: process.env.PUPPETEER_CACHE_DIR
-    });
-
-    const page = await browser.newPage();
-
-    const url = `https://potniski.sz.si/vozni-redi-results/?action=timetables_search&current-language=sl&departure-date=${date}&entry-station=${departureStationCode}&exit-station=${destinationStationCode}`;
-    console.log('Navigating to URL:', url);
-
-    await page.goto(url, {waitUntil: 'networkidle2'});
-
-    const trainSchedules = await extractTrainData(page);
-
-    console.log('Extracted train schedules:', trainSchedules);
-
-    await browser.close();
-    return trainSchedules;
 }
 
 module.exports = {scrapeSlovenskeZelezniceByUrl};
