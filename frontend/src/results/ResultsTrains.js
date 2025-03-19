@@ -44,14 +44,14 @@ function ResultsTrains({results}) {
                 <table className="min-w-full table-auto rounded-md shadow-md bg-white dark:bg-gray-800">
                     <thead>
                     <tr>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Kraj odhoda</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Čas odhoda</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Kraj prihoda</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Čas prihoda</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Trajanje</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Prestopi</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Vlak</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] text-white">Opozorilo</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Kraj odhoda</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Čas odhoda</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Kraj prihoda</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Čas prihoda</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Trajanje</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Prestopi</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Vlak</th>
+                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white">Opozorilo</th>
                     </tr>
                     </thead>
                     <tbody>
