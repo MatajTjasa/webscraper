@@ -3,11 +3,13 @@ const {scrapeSlovenskeZelezniceDOM} = require("../scrapers/slovenske_zeleznice_D
 const {fetchPrevozi} = require("../scrapers/prevozi_byUrl");
 const {scrapePrevozi} = require("../scrapers/prevozi");
 const {scrapePrevoziDOM} = require("../scrapers/prevozi_DOM");
+const {delay} = require("./helpers");
 
 async function measureAverage(scrapeFunction, iterations, ...args) {
     let totalDuration = 0;
     console.log()
     for (let i = 0; i < iterations; i++) {
+        await delay(60000)
         const start = Date.now();
         await scrapeFunction(...args);
         const duration = (Date.now() - start) / 1000;
@@ -17,13 +19,13 @@ async function measureAverage(scrapeFunction, iterations, ...args) {
     return totalDuration / iterations;
 }
 
-async function comparePerformance(departureStationCode, destinationStationCode, date, transportType) {
+async function comparePerformance(departure, destination, date, transportType) {
     const iterations = 10;
 
     if (transportType === 'vlak') {
         console.log("Comparing performance for Slovenske železnice:");
 
-        const puppeteerAverage = await measureAverage(scrapeSlovenskeZelezniceByUrl, iterations, departureStationCode, destinationStationCode, date);
+        const puppeteerAverage = await measureAverage(scrapeSlovenskeZelezniceByUrl, iterations, departure, destination, date);
         const jsdomAverage = await measureAverage(scrapeSlovenskeZelezniceDOM, iterations);
 
         console.log("_______________________________________________________________________");
@@ -36,9 +38,9 @@ async function comparePerformance(departureStationCode, destinationStationCode, 
     } else if (transportType === 'prevoz') {
         console.log("Comparing performance for Prevozi:");
 
-        const puppeteerAverage = await measureAverage(scrapePrevozi, iterations, departureStationCode, destinationStationCode, date);
-        const cheerioAverage = await measureAverage(fetchPrevozi, iterations, departureStationCode, destinationStationCode, date);
-        const jsdomAverage = await measureAverage(scrapePrevoziDOM, iterations);
+        const puppeteerAverage = await measureAverage(scrapePrevozi, iterations, departure, destination, date);
+        const cheerioAverage = await measureAverage(fetchPrevozi, iterations, departure, destination, date);
+        const jsdomAverage = await measureAverage(scrapePrevoziDOM, iterations, departure, destination, date);
 
         console.log("_______________________________________________________________________");
         console.log(

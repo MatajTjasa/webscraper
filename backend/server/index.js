@@ -16,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: true,//['http://localhost:5000', 'https://frontend-vmg7.onrender.com'],
+    origin: ['http://localhost:5000', 'https://frontend-vmg7.onrender.com'], //true
     optionsSuccessStatus: 200, // legacy browser support
 };
 app.use(cors(corsOptions));
@@ -46,7 +46,7 @@ redisClient.connect().then(() => {
     //scrapeSlovenskeZelezniceDOM().then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
     // Compare Puppeteer and DOM
     //comparePerformance('42300', '43400', '14.01.2025', 'vlak').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
-    //comparePerformance('Ljubljana', 'Maribor', '2025-01-16', 'prevoz').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
+    //comparePerformance('Ljubljana', 'Celje', '2025-03-28', 'prevoz').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
 
 }).catch(err => {
     console.error('Redis connection error:', err);
