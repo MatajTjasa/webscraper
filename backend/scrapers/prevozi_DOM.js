@@ -1,11 +1,12 @@
-const fs = require('fs').promises;
-const path = require('path');
 const {JSDOM} = require("jsdom");
+const axios = require("axios");
 
-async function scrapePrevoziDOM() {
-    const filePath = path.join(__dirname, '../data/PrevoziStran.html');
-    const html = await fs.readFile(filePath, 'utf-8');
-    const dom = new JSDOM(html);
+async function scrapePrevoziDOM(departure, destination, date) {
+    const url = `https://prevoz.org/prevoz/list/?fc=SI&f=${encodeURIComponent(departure)}&tc=SI&t=${encodeURIComponent(destination)}&d=${encodeURIComponent(date)}`;
+    console.log("Prevozi URL:", url);
+
+    const response = await axios.get(url);
+    const dom = new JSDOM(response.data);
     const document = dom.window.document;
 
     const cards = Array.from(document.querySelectorAll('.card'));
