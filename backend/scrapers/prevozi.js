@@ -9,10 +9,7 @@ async function scrapePrevozi(departure, destination, date) {
 
     const page = await browser.newPage();
 
-    const url = `https://prevoz.org/prevoz/list/?fc=SI
-                                                &f=${encodeURIComponent(departure)}
-                                                &tc=SI&t=${encodeURIComponent(destination)}
-                                                &d=${encodeURIComponent(date)}`;
+    const url = `https://prevoz.org/prevoz/list/?fc=SI&f=${encodeURIComponent(departure)}&tc=SI&t=${encodeURIComponent(destination)}&d=${encodeURIComponent(date)}`;
     console.log('Navigating to URL:', url);
 
     await page.goto(url, {waitUntil: 'networkidle2'});
