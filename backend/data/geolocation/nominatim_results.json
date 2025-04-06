@@ -1,0 +1,147 @@
+{
+  "Maribor": [
+    {
+      "place_id": 60926470,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 1676328,
+      "lat": "46.5576439",
+      "lon": "15.6455854",
+      "class": "boundary",
+      "type": "administrative",
+      "place_rank": 16,
+      "importance": 0.64483369180525,
+      "addresstype": "municipality",
+      "name": "Maribor",
+      "display_name": "Maribor, Slovenija",
+      "address": {
+        "municipality": "Maribor",
+        "ISO3166-2-lvl8": "SI-070",
+        "country": "Slovenija",
+        "country_code": "si"
+      },
+      "boundingbox": [
+        "46.4994068",
+        "46.6342916",
+        "15.5169925",
+        "15.7722677"
+      ]
+    }
+  ],
+  "Ljubljana": [
+    {
+      "place_id": 62114357,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 1675898,
+      "lat": "46.0500268",
+      "lon": "14.5069289",
+      "class": "boundary",
+      "type": "administrative",
+      "place_rank": 16,
+      "importance": 0.702785969731477,
+      "addresstype": "municipality",
+      "name": "Ljubljana",
+      "display_name": "Ljubljana, Upravna Enota Ljubljana, Slovenija",
+      "address": {
+        "municipality": "Ljubljana",
+        "ISO3166-2-lvl8": "SI-061",
+        "country": "Slovenija",
+        "country_code": "si"
+      },
+      "boundingbox": [
+        "45.9740637",
+        "46.1459968",
+        "14.4086170",
+        "14.7553320"
+      ]
+    }
+  ],
+  "Celje": [
+    {
+      "place_id": 61698177,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 1676306,
+      "lat": "46.2293889",
+      "lon": "15.2616828",
+      "class": "boundary",
+      "type": "administrative",
+      "place_rank": 16,
+      "importance": 0.5960746793804728,
+      "addresstype": "municipality",
+      "name": "Celje",
+      "display_name": "Celje, Slovenija",
+      "address": {
+        "municipality": "Celje",
+        "ISO3166-2-lvl8": "SI-011",
+        "country": "Slovenija",
+        "country_code": "si"
+      },
+      "boundingbox": [
+        "46.1885089",
+        "46.3210410",
+        "15.2093146",
+        "15.3529809"
+      ]
+    }
+  ],
+  "Kranj": [
+    {
+      "place_id": 62243407,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 1675676,
+      "lat": "46.2432913",
+      "lon": "14.3549353",
+      "class": "boundary",
+      "type": "administrative",
+      "place_rank": 16,
+      "importance": 0.5910778291467098,
+      "addresstype": "municipality",
+      "name": "Kranj",
+      "display_name": "Kranj, Slovenija",
+      "address": {
+        "municipality": "Kranj",
+        "ISO3166-2-lvl8": "SI-052",
+        "country": "Slovenija",
+        "country_code": "si"
+      },
+      "boundingbox": [
+        "46.1577346",
+        "46.3504352",
+        "14.1638435",
+        "14.4224828"
+      ]
+    }
+  ],
+  "Novo mesto": [
+    {
+      "place_id": 70837671,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 1685734,
+      "lat": "45.8040475",
+      "lon": "15.1696684",
+      "class": "boundary",
+      "type": "administrative",
+      "place_rank": 16,
+      "importance": 0.5696218567064038,
+      "addresstype": "municipality",
+      "name": "Novo mesto",
+      "display_name": "Novo mesto, Slovenija",
+      "address": {
+        "municipality": "Novo mesto",
+        "ISO3166-2-lvl8": "SI-085",
+        "country": "Slovenija",
+        "country_code": "si"
+      },
+      "boundingbox": [
+        "45.6845160",
+        "45.8768854",
+        "15.0928463",
+        "15.3164170"
+      ]
+    }
+  ]
+}

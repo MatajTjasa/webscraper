@@ -1,0 +1,7824 @@
+[
+  {
+    "DepartureStations": [
+      {
+        "JPOS_IJPP": 137007,
+        "POS_NAZ": "Adergas"
+      },
+      {
+        "JPOS_IJPP": 137011,
+        "POS_NAZ": "Ajdovščina"
+      },
+      {
+        "JPOS_IJPP": 137012,
+        "POS_NAZ": "Ajdovščina ribnik"
+      },
+      {
+        "JPOS_IJPP": 137017,
+        "POS_NAZ": "Andlovec"
+      },
+      {
+        "JPOS_IJPP": 137028,
+        "POS_NAZ": "Ankaran bol."
+      },
+      {
+        "JPOS_IJPP": 137029,
+        "POS_NAZ": "Ankaran K"
+      },
+      {
+        "JPOS_IJPP": 137031,
+        "POS_NAZ": "Ankaran t"
+      },
+      {
+        "JPOS_IJPP": 137038,
+        "POS_NAZ": "Apače pri Gornji Radgoni kovač K"
+      },
+      {
+        "JPOS_IJPP": 137035,
+        "POS_NAZ": "Apače/Drav.p."
+      },
+      {
+        "JPOS_IJPP": 137036,
+        "POS_NAZ": "Apače/Drav.p.K"
+      },
+      {
+        "JPOS_IJPP": 152234,
+        "POS_NAZ": "Apno"
+      },
+      {
+        "JPOS_IJPP": 137046,
+        "POS_NAZ": "Arnež"
+      },
+      {
+        "JPOS_IJPP": 901216,
+        "POS_NAZ": "Autostazione di Trieste/Trst"
+      },
+      {
+        "JPOS_IJPP": 137053,
+        "POS_NAZ": "Avber"
+      },
+      {
+        "JPOS_IJPP": 137057,
+        "POS_NAZ": "Babiči"
+      },
+      {
+        "JPOS_IJPP": 137058,
+        "POS_NAZ": "Babiči K"
+      },
+      {
+        "JPOS_IJPP": 137065,
+        "POS_NAZ": "Bakovnik Lidl"
+      },
+      {
+        "JPOS_IJPP": 150196,
+        "POS_NAZ": "Bakovnik Pošta"
+      },
+      {
+        "JPOS_IJPP": 137073,
+        "POS_NAZ": "Baredi"
+      },
+      {
+        "JPOS_IJPP": 135771,
+        "POS_NAZ": "Barka"
+      },
+      {
+        "JPOS_IJPP": 137076,
+        "POS_NAZ": "Bašelj"
+      },
+      {
+        "JPOS_IJPP": 135822,
+        "POS_NAZ": "Bauimex"
+      },
+      {
+        "JPOS_IJPP": 137080,
+        "POS_NAZ": "Bazara"
+      },
+      {
+        "JPOS_IJPP": 165538,
+        "POS_NAZ": "Beblerjeva ulica"
+      },
+      {
+        "JPOS_IJPP": 165539,
+        "POS_NAZ": "Beblerjeva ulica K"
+      },
+      {
+        "JPOS_IJPP": 137084,
+        "POS_NAZ": "Begunje na Gor."
+      },
+      {
+        "JPOS_IJPP": 137085,
+        "POS_NAZ": "Begunje na Gor.Elan"
+      },
+      {
+        "JPOS_IJPP": 137086,
+        "POS_NAZ": "Begunje na Gor.žaga"
+      },
+      {
+        "JPOS_IJPP": 137090,
+        "POS_NAZ": "Bela/Motniku"
+      },
+      {
+        "JPOS_IJPP": 137091,
+        "POS_NAZ": "Bela/Špitaliču"
+      },
+      {
+        "JPOS_IJPP": 137092,
+        "POS_NAZ": "Belca"
+      },
+      {
+        "JPOS_IJPP": 137093,
+        "POS_NAZ": "Belca pri mostu"
+      },
+      {
+        "JPOS_IJPP": 137106,
+        "POS_NAZ": "Belvedere"
+      },
+      {
+        "JPOS_IJPP": 137107,
+        "POS_NAZ": "Belvedur"
+      },
+      {
+        "JPOS_IJPP": 137109,
+        "POS_NAZ": "Benedikt v Sl.G."
+      },
+      {
+        "JPOS_IJPP": 165273,
+        "POS_NAZ": "Beričevo"
+      },
+      {
+        "JPOS_IJPP": 137115,
+        "POS_NAZ": "Bertoki P"
+      },
+      {
+        "JPOS_IJPP": 137116,
+        "POS_NAZ": "Bertoki ZAD"
+      },
+      {
+        "JPOS_IJPP": 137120,
+        "POS_NAZ": "Bezena"
+      },
+      {
+        "JPOS_IJPP": 137121,
+        "POS_NAZ": "Bezena Robič"
+      },
+      {
+        "JPOS_IJPP": 137127,
+        "POS_NAZ": "Bezovica"
+      },
+      {
+        "JPOS_IJPP": 137131,
+        "POS_NAZ": "Bilje"
+      },
+      {
+        "JPOS_IJPP": 137132,
+        "POS_NAZ": "Bilje bife"
+      },
+      {
+        "JPOS_IJPP": 137133,
+        "POS_NAZ": "Bilje K"
+      },
+      {
+        "JPOS_IJPP": 137134,
+        "POS_NAZ": "Bilje opekarna"
+      },
+      {
+        "JPOS_IJPP": 137141,
+        "POS_NAZ": "Bistrica ob Dravi"
+      },
+      {
+        "JPOS_IJPP": 137143,
+        "POS_NAZ": "Bistrica pri Limbušu"
+      },
+      {
+        "JPOS_IJPP": 137144,
+        "POS_NAZ": "Bistrica pri Trž.bloki"
+      },
+      {
+        "JPOS_IJPP": 137145,
+        "POS_NAZ": "Bistrica pri Trž.K"
+      },
+      {
+        "JPOS_IJPP": 137146,
+        "POS_NAZ": "Bistrica pri Tržiču"
+      },
+      {
+        "JPOS_IJPP": 137147,
+        "POS_NAZ": "Bistrica/Kr."
+      },
+      {
+        "JPOS_IJPP": 137150,
+        "POS_NAZ": "Bistrica/Selnici"
+      },
+      {
+        "JPOS_IJPP": 137151,
+        "POS_NAZ": "Bistrica/Selnici K"
+      },
+      {
+        "JPOS_IJPP": 137152,
+        "POS_NAZ": "Bistrica/Selnici Škrabl"
+      },
+      {
+        "JPOS_IJPP": 137153,
+        "POS_NAZ": "Bistrica/Vranskem"
+      },
+      {
+        "JPOS_IJPP": 137137,
+        "POS_NAZ": "Biš"
+      },
+      {
+        "JPOS_IJPP": 165190,
+        "POS_NAZ": "Bitnje v Bohinju"
+      },
+      {
+        "JPOS_IJPP": 137163,
+        "POS_NAZ": "Blagovica"
+      },
+      {
+        "JPOS_IJPP": 137171,
+        "POS_NAZ": "Bled"
+      },
+      {
+        "JPOS_IJPP": 137172,
+        "POS_NAZ": "Bled Gmajna"
+      },
+      {
+        "JPOS_IJPP": 137174,
+        "POS_NAZ": "Bled Mlino"
+      },
+      {
+        "JPOS_IJPP": 137175,
+        "POS_NAZ": "Bled Petrol"
+      },
+      {
+        "JPOS_IJPP": 137177,
+        "POS_NAZ": "Bled Union"
+      },
+      {
+        "JPOS_IJPP": 135726,
+        "POS_NAZ": "Blejska Dobrava K"
+      },
+      {
+        "JPOS_IJPP": 135728,
+        "POS_NAZ": "Blejska Dobrava trgovina"
+      },
+      {
+        "JPOS_IJPP": 137179,
+        "POS_NAZ": "Blekova vas"
+      },
+      {
+        "JPOS_IJPP": 135829,
+        "POS_NAZ": "Bobovek"
+      },
+      {
+        "JPOS_IJPP": 164804,
+        "POS_NAZ": "Bobovek bloki"
+      },
+      {
+        "JPOS_IJPP": 137183,
+        "POS_NAZ": "Bodešče"
+      },
+      {
+        "JPOS_IJPP": 137189,
+        "POS_NAZ": "Bogo"
+      },
+      {
+        "JPOS_IJPP": 165191,
+        "POS_NAZ": "Bohinj Ukanc"
+      },
+      {
+        "JPOS_IJPP": 137201,
+        "POS_NAZ": "Bohinjska Bela"
+      },
+      {
+        "JPOS_IJPP": 137202,
+        "POS_NAZ": "Bohinjska Bela vojašnica"
+      },
+      {
+        "JPOS_IJPP": 165390,
+        "POS_NAZ": "Bohinjska Bistrica"
+      },
+      {
+        "JPOS_IJPP": 165192,
+        "POS_NAZ": "Bohinjska Bistrica ŽP/RS"
+      },
+      {
+        "JPOS_IJPP": 165193,
+        "POS_NAZ": "Bohinjska Češnjica"
+      },
+      {
+        "JPOS_IJPP": 165194,
+        "POS_NAZ": "Bohinjsko jezero/lake"
+      },
+      {
+        "JPOS_IJPP": 137203,
+        "POS_NAZ": "Bohova"
+      },
+      {
+        "JPOS_IJPP": 150664,
+        "POS_NAZ": "Bojtina"
+      },
+      {
+        "JPOS_IJPP": 135724,
+        "POS_NAZ": "Bol.Izola"
+      },
+      {
+        "JPOS_IJPP": 137209,
+        "POS_NAZ": "Bolečka vas"
+      },
+      {
+        "JPOS_IJPP": 137211,
+        "POS_NAZ": "Bolk"
+      },
+      {
+        "JPOS_IJPP": 137212,
+        "POS_NAZ": "Bonifika K"
+      },
+      {
+        "JPOS_IJPP": 137220,
+        "POS_NAZ": "Borl"
+      },
+      {
+        "JPOS_IJPP": 137221,
+        "POS_NAZ": "Borovci"
+      },
+      {
+        "JPOS_IJPP": 137228,
+        "POS_NAZ": "Boršt/Marez."
+      },
+      {
+        "JPOS_IJPP": 141675,
+        "POS_NAZ": "Boršt/Marez. 3D"
+      },
+      {
+        "JPOS_IJPP": 141676,
+        "POS_NAZ": "Boršt/Marez. Baratali"
+      },
+      {
+        "JPOS_IJPP": 165542,
+        "POS_NAZ": "Bošamarin Kapelca"
+      },
+      {
+        "JPOS_IJPP": 137239,
+        "POS_NAZ": "Božiči"
+      },
+      {
+        "JPOS_IJPP": 137242,
+        "POS_NAZ": "Brageti"
+      },
+      {
+        "JPOS_IJPP": 137244,
+        "POS_NAZ": "Branik"
+      },
+      {
+        "JPOS_IJPP": 137245,
+        "POS_NAZ": "Branik Birsi"
+      },
+      {
+        "JPOS_IJPP": 137246,
+        "POS_NAZ": "Branik Polje"
+      },
+      {
+        "JPOS_IJPP": 137247,
+        "POS_NAZ": "Branoslavci"
+      },
+      {
+        "JPOS_IJPP": 137249,
+        "POS_NAZ": "Bratislavci Hojnik"
+      },
+      {
+        "JPOS_IJPP": 137250,
+        "POS_NAZ": "Bratislavci Kovač"
+      },
+      {
+        "JPOS_IJPP": 164820,
+        "POS_NAZ": "Bratje Reš"
+      },
+      {
+        "JPOS_IJPP": 137253,
+        "POS_NAZ": "Bratonečice"
+      },
+      {
+        "JPOS_IJPP": 135831,
+        "POS_NAZ": "Brdo/Kr."
+      },
+      {
+        "JPOS_IJPP": 137258,
+        "POS_NAZ": "Brebovnica"
+      },
+      {
+        "JPOS_IJPP": 135833,
+        "POS_NAZ": "Breg ob Savi"
+      },
+      {
+        "JPOS_IJPP": 165613,
+        "POS_NAZ": "Breg ob Savi Aleš"
+      },
+      {
+        "JPOS_IJPP": 137268,
+        "POS_NAZ": "Breg/Žirov.nov"
+      },
+      {
+        "JPOS_IJPP": 137269,
+        "POS_NAZ": "Breg/Žirov.star"
+      },
+      {
+        "JPOS_IJPP": 137273,
+        "POS_NAZ": "Brekovice"
+      },
+      {
+        "JPOS_IJPP": 137274,
+        "POS_NAZ": "Brengova"
+      },
+      {
+        "JPOS_IJPP": 137275,
+        "POS_NAZ": "Brengova Ploj"
+      },
+      {
+        "JPOS_IJPP": 137276,
+        "POS_NAZ": "Brengova tran."
+      },
+      {
+        "JPOS_IJPP": 137277,
+        "POS_NAZ": "Bresnica K"
+      },
+      {
+        "JPOS_IJPP": 137278,
+        "POS_NAZ": "Bresnica trg."
+      },
+      {
+        "JPOS_IJPP": 165438,
+        "POS_NAZ": "Bresternica - rondo"
+      },
+      {
+        "JPOS_IJPP": 165467,
+        "POS_NAZ": "Bresternica Marib.otok HE"
+      },
+      {
+        "JPOS_IJPP": 137300,
+        "POS_NAZ": "Brezje pri Dobu"
+      },
+      {
+        "JPOS_IJPP": 150493,
+        "POS_NAZ": "Brezje pri Poljčanah"
+      },
+      {
+        "JPOS_IJPP": 150340,
+        "POS_NAZ": "Brezje pri Rogatcu"
+      },
+      {
+        "JPOS_IJPP": 137302,
+        "POS_NAZ": "Brezje pri Trž."
+      },
+      {
+        "JPOS_IJPP": 137303,
+        "POS_NAZ": "Brezje/Dobrepolju"
+      },
+      {
+        "JPOS_IJPP": 137306,
+        "POS_NAZ": "Brezje/Sv.Jurij ob Ščavn."
+      },
+      {
+        "JPOS_IJPP": 137309,
+        "POS_NAZ": "Breznica"
+      },
+      {
+        "JPOS_IJPP": 137317,
+        "POS_NAZ": "Brezovci K"
+      },
+      {
+        "JPOS_IJPP": 137318,
+        "POS_NAZ": "Brezovec pri Rogatcu"
+      },
+      {
+        "JPOS_IJPP": 137319,
+        "POS_NAZ": "Brezovec/Cirkulanah"
+      },
+      {
+        "JPOS_IJPP": 137320,
+        "POS_NAZ": "Brezovec/Cirkulanah 40"
+      },
+      {
+        "JPOS_IJPP": 137324,
+        "POS_NAZ": "Brezovica pri Gradinu"
+      },
+      {
+        "JPOS_IJPP": 137329,
+        "POS_NAZ": "Brezula 27"
+      },
+      {
+        "JPOS_IJPP": 137330,
+        "POS_NAZ": "Brezula Mlakar"
+      },
+      {
+        "JPOS_IJPP": 165274,
+        "POS_NAZ": "Brinje"
+      },
+      {
+        "JPOS_IJPP": 135834,
+        "POS_NAZ": "Britof/Kr."
+      },
+      {
+        "JPOS_IJPP": 135835,
+        "POS_NAZ": "Britof/Kr.Johanca"
+      },
+      {
+        "JPOS_IJPP": 165634,
+        "POS_NAZ": "Britof/Kr.K"
+      },
+      {
+        "JPOS_IJPP": 137339,
+        "POS_NAZ": "Brje pri Komnu"
+      },
+      {
+        "JPOS_IJPP": 152284,
+        "POS_NAZ": "Brnik PC zahod"
+      },
+      {
+        "JPOS_IJPP": 165195,
+        "POS_NAZ": "Brnik/airport Ljubljana"
+      },
+      {
+        "JPOS_IJPP": 137341,
+        "POS_NAZ": "Brode/Šk.Loki"
+      },
+      {
+        "JPOS_IJPP": 137345,
+        "POS_NAZ": "Bruhanja vas"
+      },
+      {
+        "JPOS_IJPP": 137348,
+        "POS_NAZ": "Brunšvik obr."
+      },
+      {
+        "JPOS_IJPP": 165788,
+        "POS_NAZ": "Brunšvik vzhod"
+      },
+      {
+        "JPOS_IJPP": 137353,
+        "POS_NAZ": "Bubno"
+      },
+      {
+        "JPOS_IJPP": 137354,
+        "POS_NAZ": "Buč"
+      },
+      {
+        "JPOS_IJPP": 137355,
+        "POS_NAZ": "Buč Hruševka"
+      },
+      {
+        "JPOS_IJPP": 137356,
+        "POS_NAZ": "Bučaji"
+      },
+      {
+        "JPOS_IJPP": 137365,
+        "POS_NAZ": "Bukovci"
+      },
+      {
+        "JPOS_IJPP": 150496,
+        "POS_NAZ": "Bukovica/Renčah"
+      },
+      {
+        "JPOS_IJPP": 137368,
+        "POS_NAZ": "Bukovica/Renčah K"
+      },
+      {
+        "JPOS_IJPP": 137369,
+        "POS_NAZ": "Bukovica/Renčah uprava"
+      },
+      {
+        "JPOS_IJPP": 137370,
+        "POS_NAZ": "Bukovica/Selščici"
+      },
+      {
+        "JPOS_IJPP": 137375,
+        "POS_NAZ": "Bukovščica"
+      },
+      {
+        "JPOS_IJPP": 137381,
+        "POS_NAZ": "Butari"
+      },
+      {
+        "JPOS_IJPP": 137446,
+        "POS_NAZ": "Cerkljanska Dobrava"
+      },
+      {
+        "JPOS_IJPP": 137447,
+        "POS_NAZ": "Cerklje na Gorenjskem"
+      },
+      {
+        "JPOS_IJPP": 137448,
+        "POS_NAZ": "Cerklje na Gorenjskem OB"
+      },
+      {
+        "JPOS_IJPP": 137453,
+        "POS_NAZ": "Cerkno"
+      },
+      {
+        "JPOS_IJPP": 137454,
+        "POS_NAZ": "Cerkno Nova ETA"
+      },
+      {
+        "JPOS_IJPP": 137458,
+        "POS_NAZ": "Cerkvenjak"
+      },
+      {
+        "JPOS_IJPP": 150387,
+        "POS_NAZ": "Ceršak"
+      },
+      {
+        "JPOS_IJPP": 137473,
+        "POS_NAZ": "Ceršak K"
+      },
+      {
+        "JPOS_IJPP": 137474,
+        "POS_NAZ": "Ceršak tov."
+      },
+      {
+        "JPOS_IJPP": 137484,
+        "POS_NAZ": "Ceste K"
+      },
+      {
+        "JPOS_IJPP": 137486,
+        "POS_NAZ": "Cetore"
+      },
+      {
+        "JPOS_IJPP": 150229,
+        "POS_NAZ": "Cezanjevci"
+      },
+      {
+        "JPOS_IJPP": 137492,
+        "POS_NAZ": "Ciglence"
+      },
+      {
+        "JPOS_IJPP": 137494,
+        "POS_NAZ": "Ciglence Kogolšek"
+      },
+      {
+        "JPOS_IJPP": 137496,
+        "POS_NAZ": "Cigonca"
+      },
+      {
+        "JPOS_IJPP": 164883,
+        "POS_NAZ": "Cimos P\u0026R"
+      },
+      {
+        "JPOS_IJPP": 137499,
+        "POS_NAZ": "Cirknica posestvo"
+      },
+      {
+        "JPOS_IJPP": 137500,
+        "POS_NAZ": "Cirknica Švajncer"
+      },
+      {
+        "JPOS_IJPP": 137501,
+        "POS_NAZ": "Cirkovce/Drav.p."
+      },
+      {
+        "JPOS_IJPP": 137505,
+        "POS_NAZ": "Cirkulane"
+      },
+      {
+        "JPOS_IJPP": 137506,
+        "POS_NAZ": "Cirkulane K"
+      },
+      {
+        "JPOS_IJPP": 137508,
+        "POS_NAZ": "Cogetinci"
+      },
+      {
+        "JPOS_IJPP": 137568,
+        "POS_NAZ": "Cunkovci"
+      },
+      {
+        "JPOS_IJPP": 137572,
+        "POS_NAZ": "Cvetkovci"
+      },
+      {
+        "JPOS_IJPP": 137383,
+        "POS_NAZ": "Čadovlje pri Tržiču"
+      },
+      {
+        "JPOS_IJPP": 137384,
+        "POS_NAZ": "Čadovlje/Golniku"
+      },
+      {
+        "JPOS_IJPP": 137385,
+        "POS_NAZ": "Čadram"
+      },
+      {
+        "JPOS_IJPP": 137387,
+        "POS_NAZ": "Čakova"
+      },
+      {
+        "JPOS_IJPP": 135775,
+        "POS_NAZ": "Čebelnjak"
+      },
+      {
+        "JPOS_IJPP": 137399,
+        "POS_NAZ": "Čehovini"
+      },
+      {
+        "JPOS_IJPP": 137433,
+        "POS_NAZ": "Čentur K"
+      },
+      {
+        "JPOS_IJPP": 137439,
+        "POS_NAZ": "Čeplez"
+      },
+      {
+        "JPOS_IJPP": 137440,
+        "POS_NAZ": "Čeplez sp."
+      },
+      {
+        "JPOS_IJPP": 137444,
+        "POS_NAZ": "Čepulje"
+      },
+      {
+        "JPOS_IJPP": 137460,
+        "POS_NAZ": "Čermožiše vrh"
+      },
+      {
+        "JPOS_IJPP": 137476,
+        "POS_NAZ": "Češenjski most"
+      },
+      {
+        "JPOS_IJPP": 137477,
+        "POS_NAZ": "Češnjevek"
+      },
+      {
+        "JPOS_IJPP": 137485,
+        "POS_NAZ": "Četež"
+      },
+      {
+        "JPOS_IJPP": 137488,
+        "POS_NAZ": "Čežarji"
+      },
+      {
+        "JPOS_IJPP": 137520,
+        "POS_NAZ": "Črešnjevec pri Slovenski Bistrici"
+      },
+      {
+        "JPOS_IJPP": 137521,
+        "POS_NAZ": "Črešnjevec pri Slovenski Bistrici Jurič"
+      },
+      {
+        "JPOS_IJPP": 137529,
+        "POS_NAZ": "Črna pri Kamniku N.Jašek"
+      },
+      {
+        "JPOS_IJPP": 137530,
+        "POS_NAZ": "Črna pri Kamniku Petek"
+      },
+      {
+        "JPOS_IJPP": 137531,
+        "POS_NAZ": "Črna pri Kamniku rudnik"
+      },
+      {
+        "JPOS_IJPP": 137539,
+        "POS_NAZ": "Črnevšek"
+      },
+      {
+        "JPOS_IJPP": 137540,
+        "POS_NAZ": "Črni Kal sp."
+      },
+      {
+        "JPOS_IJPP": 137541,
+        "POS_NAZ": "Črni Kal zg."
+      },
+      {
+        "JPOS_IJPP": 137542,
+        "POS_NAZ": "Črni les"
+      },
+      {
+        "JPOS_IJPP": 137548,
+        "POS_NAZ": "Črnivec nad Kamnikom"
+      },
+      {
+        "JPOS_IJPP": 137549,
+        "POS_NAZ": "Črnivec/Rad."
+      },
+      {
+        "JPOS_IJPP": 137566,
+        "POS_NAZ": "Črnotiče"
+      },
+      {
+        "JPOS_IJPP": 137601,
+        "POS_NAZ": "D.Počehova"
+      },
+      {
+        "JPOS_IJPP": 150267,
+        "POS_NAZ": "D.Počehova kombinat"
+      },
+      {
+        "JPOS_IJPP": 137604,
+        "POS_NAZ": "D.Poljana"
+      },
+      {
+        "JPOS_IJPP": 137625,
+        "POS_NAZ": "D.vas/Senožečah"
+      },
+      {
+        "JPOS_IJPP": 137632,
+        "POS_NAZ": "Dane/Sežani"
+      },
+      {
+        "JPOS_IJPP": 137636,
+        "POS_NAZ": "Davški most"
+      },
+      {
+        "JPOS_IJPP": 137637,
+        "POS_NAZ": "Debeli Rtič"
+      },
+      {
+        "JPOS_IJPP": 137638,
+        "POS_NAZ": "Debeli Rtič 59"
+      },
+      {
+        "JPOS_IJPP": 137647,
+        "POS_NAZ": "Dekani"
+      },
+      {
+        "JPOS_IJPP": 137652,
+        "POS_NAZ": "Delnice"
+      },
+      {
+        "JPOS_IJPP": 137653,
+        "POS_NAZ": "Delnice K"
+      },
+      {
+        "JPOS_IJPP": 137656,
+        "POS_NAZ": "Desenci K"
+      },
+      {
+        "JPOS_IJPP": 137660,
+        "POS_NAZ": "Destrnik"
+      },
+      {
+        "JPOS_IJPP": 150095,
+        "POS_NAZ": "Destrnik ZD"
+      },
+      {
+        "JPOS_IJPP": 137661,
+        "POS_NAZ": "Devina"
+      },
+      {
+        "JPOS_IJPP": 137662,
+        "POS_NAZ": "Devina 7"
+      },
+      {
+        "JPOS_IJPP": 152275,
+        "POS_NAZ": "Dežno pri Podlehniku"
+      },
+      {
+        "JPOS_IJPP": 137664,
+        "POS_NAZ": "Divača"
+      },
+      {
+        "JPOS_IJPP": 165252,
+        "POS_NAZ": "Dob 2/Domžalah"
+      },
+      {
+        "JPOS_IJPP": 137666,
+        "POS_NAZ": "Dob/Domžalah"
+      },
+      {
+        "JPOS_IJPP": 137675,
+        "POS_NAZ": "Dobje/Šk.Loki"
+      },
+      {
+        "JPOS_IJPP": 137686,
+        "POS_NAZ": "Dobračeva"
+      },
+      {
+        "JPOS_IJPP": 137695,
+        "POS_NAZ": "Dobrava pri Slovenski Bistrici"
+      },
+      {
+        "JPOS_IJPP": 137691,
+        "POS_NAZ": "Dobrava/Moravčah"
+      },
+      {
+        "JPOS_IJPP": 137692,
+        "POS_NAZ": "Dobrava/Šk.Loko"
+      },
+      {
+        "JPOS_IJPP": 137693,
+        "POS_NAZ": "Dobrava/Šk.Loko II"
+      },
+      {
+        "JPOS_IJPP": 137698,
+        "POS_NAZ": "Dobravlje/Avberju"
+      },
+      {
+        "JPOS_IJPP": 137700,
+        "POS_NAZ": "Dobrina/Žetalah"
+      },
+      {
+        "JPOS_IJPP": 137710,
+        "POS_NAZ": "Dobro Polje/Rad."
+      },
+      {
+        "JPOS_IJPP": 152268,
+        "POS_NAZ": "Dobrovce jug"
+      },
+      {
+        "JPOS_IJPP": 165724,
+        "POS_NAZ": "Dobrovce Mejna"
+      },
+      {
+        "JPOS_IJPP": 152265,
+        "POS_NAZ": "Dobrovce sever"
+      },
+      {
+        "JPOS_IJPP": 152266,
+        "POS_NAZ": "Dobrovce šola"
+      },
+      {
+        "JPOS_IJPP": 165196,
+        "POS_NAZ": "Dobrovce vrtec"
+      },
+      {
+        "JPOS_IJPP": 165439,
+        "POS_NAZ": "Dogoše - Gasilski dom"
+      },
+      {
+        "JPOS_IJPP": 137724,
+        "POS_NAZ": "Doklece"
+      },
+      {
+        "JPOS_IJPP": 137730,
+        "POS_NAZ": "Dol pri Hrastovljah"
+      },
+      {
+        "JPOS_IJPP": 137731,
+        "POS_NAZ": "Dol pri Ljubljani"
+      },
+      {
+        "JPOS_IJPP": 150382,
+        "POS_NAZ": "Dol pri Vogljah"
+      },
+      {
+        "JPOS_IJPP": 137733,
+        "POS_NAZ": "Dol.Brdo"
+      },
+      {
+        "JPOS_IJPP": 137734,
+        "POS_NAZ": "Dol.Njive Domiter"
+      },
+      {
+        "JPOS_IJPP": 137738,
+        "POS_NAZ": "Dol/G.Gradu"
+      },
+      {
+        "JPOS_IJPP": 137739,
+        "POS_NAZ": "Dol/G.Gradu Rogačnik"
+      },
+      {
+        "JPOS_IJPP": 137743,
+        "POS_NAZ": "Dolane/Cirkulanah"
+      },
+      {
+        "JPOS_IJPP": 137744,
+        "POS_NAZ": "Dolane/Cirkulanah Kokol"
+      },
+      {
+        "JPOS_IJPP": 137747,
+        "POS_NAZ": "Dolani"
+      },
+      {
+        "JPOS_IJPP": 137752,
+        "POS_NAZ": "Dolena Avguštin"
+      },
+      {
+        "JPOS_IJPP": 137758,
+        "POS_NAZ": "Dolenčice"
+      },
+      {
+        "JPOS_IJPP": 137759,
+        "POS_NAZ": "Dolenja vas pri Želez."
+      },
+      {
+        "JPOS_IJPP": 137764,
+        "POS_NAZ": "Dolenje/Radomljah"
+      },
+      {
+        "JPOS_IJPP": 137765,
+        "POS_NAZ": "Dolenje/Štjaku"
+      },
+      {
+        "JPOS_IJPP": 165635,
+        "POS_NAZ": "Dolge Njive"
+      },
+      {
+        "JPOS_IJPP": 137768,
+        "POS_NAZ": "Dolge Njive Novak"
+      },
+      {
+        "JPOS_IJPP": 137771,
+        "POS_NAZ": "Dolič/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 137775,
+        "POS_NAZ": "Dolina/Trž."
+      },
+      {
+        "JPOS_IJPP": 135776,
+        "POS_NAZ": "Dolinska"
+      },
+      {
+        "JPOS_IJPP": 137778,
+        "POS_NAZ": "Dolsko"
+      },
+      {
+        "JPOS_IJPP": 164817,
+        "POS_NAZ": "Dom upokojencev Ptuj"
+      },
+      {
+        "JPOS_IJPP": 137785,
+        "POS_NAZ": "Domžale"
+      },
+      {
+        "JPOS_IJPP": 137787,
+        "POS_NAZ": "Domžale Petrol"
+      },
+      {
+        "JPOS_IJPP": 137788,
+        "POS_NAZ": "Domžale Univ."
+      },
+      {
+        "JPOS_IJPP": 137789,
+        "POS_NAZ": "Dorfarje"
+      },
+      {
+        "JPOS_IJPP": 137790,
+        "POS_NAZ": "Dornava"
+      },
+      {
+        "JPOS_IJPP": 137791,
+        "POS_NAZ": "Dornava dom"
+      },
+      {
+        "JPOS_IJPP": 137792,
+        "POS_NAZ": "Dornberk"
+      },
+      {
+        "JPOS_IJPP": 137794,
+        "POS_NAZ": "Doslovče"
+      },
+      {
+        "JPOS_IJPP": 137806,
+        "POS_NAZ": "Draga/Sori"
+      },
+      {
+        "JPOS_IJPP": 137808,
+        "POS_NAZ": "Dragočajna"
+      },
+      {
+        "JPOS_IJPP": 137809,
+        "POS_NAZ": "Dragomelj"
+      },
+      {
+        "JPOS_IJPP": 137811,
+        "POS_NAZ": "Dragonja"
+      },
+      {
+        "JPOS_IJPP": 137812,
+        "POS_NAZ": "Dragonja G"
+      },
+      {
+        "JPOS_IJPP": 137813,
+        "POS_NAZ": "Dragonja K"
+      },
+      {
+        "JPOS_IJPP": 137815,
+        "POS_NAZ": "Dragučova"
+      },
+      {
+        "JPOS_IJPP": 137816,
+        "POS_NAZ": "Drakovci"
+      },
+      {
+        "JPOS_IJPP": 137817,
+        "POS_NAZ": "Drakovci kovač"
+      },
+      {
+        "JPOS_IJPP": 137831,
+        "POS_NAZ": "Dravski Dvor"
+      },
+      {
+        "JPOS_IJPP": 165197,
+        "POS_NAZ": "Dravski Dvor KS"
+      },
+      {
+        "JPOS_IJPP": 137835,
+        "POS_NAZ": "Dražen Vrh"
+      },
+      {
+        "JPOS_IJPP": 137836,
+        "POS_NAZ": "Draženci"
+      },
+      {
+        "JPOS_IJPP": 137837,
+        "POS_NAZ": "Draženci farma"
+      },
+      {
+        "JPOS_IJPP": 164834,
+        "POS_NAZ": "Draženska cesta 14"
+      },
+      {
+        "JPOS_IJPP": 137839,
+        "POS_NAZ": "Dražgoše"
+      },
+      {
+        "JPOS_IJPP": 137840,
+        "POS_NAZ": "Drbetinci 9"
+      },
+      {
+        "JPOS_IJPP": 137841,
+        "POS_NAZ": "Drbetinci KZ"
+      },
+      {
+        "JPOS_IJPP": 137846,
+        "POS_NAZ": "Drenovec/Zavrču"
+      },
+      {
+        "JPOS_IJPP": 137855,
+        "POS_NAZ": "Drskovče"
+      },
+      {
+        "JPOS_IJPP": 137856,
+        "POS_NAZ": "Drstelja"
+      },
+      {
+        "JPOS_IJPP": 137857,
+        "POS_NAZ": "Drstelja 15"
+      },
+      {
+        "JPOS_IJPP": 137858,
+        "POS_NAZ": "Drstelja K"
+      },
+      {
+        "JPOS_IJPP": 137859,
+        "POS_NAZ": "Drtija K"
+      },
+      {
+        "JPOS_IJPP": 137860,
+        "POS_NAZ": "Drumlažno"
+      },
+      {
+        "JPOS_IJPP": 137863,
+        "POS_NAZ": "Duplica"
+      },
+      {
+        "JPOS_IJPP": 137864,
+        "POS_NAZ": "Duplica Stol N O"
+      },
+      {
+        "JPOS_IJPP": 137865,
+        "POS_NAZ": "Duplje/Trž."
+      },
+      {
+        "JPOS_IJPP": 137868,
+        "POS_NAZ": "Dutovlje"
+      },
+      {
+        "JPOS_IJPP": 150383,
+        "POS_NAZ": "Dutovlje OŠ"
+      },
+      {
+        "JPOS_IJPP": 137869,
+        "POS_NAZ": "Dutovlje Š"
+      },
+      {
+        "JPOS_IJPP": 137870,
+        "POS_NAZ": "Dutovlje ŽP"
+      },
+      {
+        "JPOS_IJPP": 137876,
+        "POS_NAZ": "Dvori/Kopru"
+      },
+      {
+        "JPOS_IJPP": 137877,
+        "POS_NAZ": "Dvorjane"
+      },
+      {
+        "JPOS_IJPP": 137878,
+        "POS_NAZ": "Dvorjane 46"
+      },
+      {
+        "JPOS_IJPP": 137879,
+        "POS_NAZ": "Dvorjane cerkev"
+      },
+      {
+        "JPOS_IJPP": 137880,
+        "POS_NAZ": "Dvorje"
+      },
+      {
+        "JPOS_IJPP": 137881,
+        "POS_NAZ": "Elerji"
+      },
+      {
+        "JPOS_IJPP": 137882,
+        "POS_NAZ": "Elerji K"
+      },
+      {
+        "JPOS_IJPP": 137884,
+        "POS_NAZ": "Fajti"
+      },
+      {
+        "JPOS_IJPP": 137885,
+        "POS_NAZ": "Fajti vas"
+      },
+      {
+        "JPOS_IJPP": 137886,
+        "POS_NAZ": "Fala grad"
+      },
+      {
+        "JPOS_IJPP": 137887,
+        "POS_NAZ": "Fala HE"
+      },
+      {
+        "JPOS_IJPP": 137888,
+        "POS_NAZ": "Falenti Š"
+      },
+      {
+        "JPOS_IJPP": 137890,
+        "POS_NAZ": "Farančan"
+      },
+      {
+        "JPOS_IJPP": 137892,
+        "POS_NAZ": "Fela"
+      },
+      {
+        "JPOS_IJPP": 135838,
+        "POS_NAZ": "Flora"
+      },
+      {
+        "JPOS_IJPP": 137909,
+        "POS_NAZ": "Forme"
+      },
+      {
+        "JPOS_IJPP": 137910,
+        "POS_NAZ": "Formin"
+      },
+      {
+        "JPOS_IJPP": 137914,
+        "POS_NAZ": "Fram K"
+      },
+      {
+        "JPOS_IJPP": 137917,
+        "POS_NAZ": "Fužine/Jezerskem"
+      },
+      {
+        "JPOS_IJPP": 137918,
+        "POS_NAZ": "Fužine/Trebiji"
+      },
+      {
+        "JPOS_IJPP": 137919,
+        "POS_NAZ": "Fužine/Trebiji I"
+      },
+      {
+        "JPOS_IJPP": 137920,
+        "POS_NAZ": "Fužine/Trebiji II"
+      },
+      {
+        "JPOS_IJPP": 137947,
+        "POS_NAZ": "G.Ključarovci"
+      },
+      {
+        "JPOS_IJPP": 137948,
+        "POS_NAZ": "G.Ključarovci K"
+      },
+      {
+        "JPOS_IJPP": 137953,
+        "POS_NAZ": "G.Log"
+      },
+      {
+        "JPOS_IJPP": 165742,
+        "POS_NAZ": "Gabrče"
+      },
+      {
+        "JPOS_IJPP": 137990,
+        "POS_NAZ": "Gabrje/Rogatcu"
+      },
+      {
+        "JPOS_IJPP": 137992,
+        "POS_NAZ": "Gabrk"
+      },
+      {
+        "JPOS_IJPP": 137993,
+        "POS_NAZ": "Gabrnik sp."
+      },
+      {
+        "JPOS_IJPP": 150667,
+        "POS_NAZ": "Gabrnik zg."
+      },
+      {
+        "JPOS_IJPP": 137994,
+        "POS_NAZ": "Gabrnik/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 137995,
+        "POS_NAZ": "Gabrnik/Ptuju Šošterič"
+      },
+      {
+        "JPOS_IJPP": 137997,
+        "POS_NAZ": "Gabrovica pri Čr.Kalu"
+      },
+      {
+        "JPOS_IJPP": 138000,
+        "POS_NAZ": "Gaj nad Mar.Zg.Kovač K"
+      },
+      {
+        "JPOS_IJPP": 150203,
+        "POS_NAZ": "Gaj/Pragerskem"
+      },
+      {
+        "JPOS_IJPP": 138001,
+        "POS_NAZ": "Gajevci"
+      },
+      {
+        "JPOS_IJPP": 138002,
+        "POS_NAZ": "Galantiči"
+      },
+      {
+        "JPOS_IJPP": 138009,
+        "POS_NAZ": "Gažon"
+      },
+      {
+        "JPOS_IJPP": 165158,
+        "POS_NAZ": "Gibina mlekarna"
+      },
+      {
+        "JPOS_IJPP": 138015,
+        "POS_NAZ": "Gladomes"
+      },
+      {
+        "JPOS_IJPP": 138017,
+        "POS_NAZ": "Glem K"
+      },
+      {
+        "JPOS_IJPP": 138020,
+        "POS_NAZ": "Glinek/Škofljici"
+      },
+      {
+        "JPOS_IJPP": 138021,
+        "POS_NAZ": "Glinje"
+      },
+      {
+        "JPOS_IJPP": 138032,
+        "POS_NAZ": "Globoko/Makolah"
+      },
+      {
+        "JPOS_IJPP": 138037,
+        "POS_NAZ": "Gobovce"
+      },
+      {
+        "JPOS_IJPP": 150263,
+        "POS_NAZ": "Gobovce vas"
+      },
+      {
+        "JPOS_IJPP": 138039,
+        "POS_NAZ": "Goče K"
+      },
+      {
+        "JPOS_IJPP": 138040,
+        "POS_NAZ": "Gočova"
+      },
+      {
+        "JPOS_IJPP": 138041,
+        "POS_NAZ": "Godeninci"
+      },
+      {
+        "JPOS_IJPP": 138042,
+        "POS_NAZ": "Godešič"
+      },
+      {
+        "JPOS_IJPP": 138043,
+        "POS_NAZ": "Godič"
+      },
+      {
+        "JPOS_IJPP": 138049,
+        "POS_NAZ": "Goli Vrh/Podlehniku K"
+      },
+      {
+        "JPOS_IJPP": 138051,
+        "POS_NAZ": "Golice"
+      },
+      {
+        "JPOS_IJPP": 138052,
+        "POS_NAZ": "Golnik"
+      },
+      {
+        "JPOS_IJPP": 138053,
+        "POS_NAZ": "Golnik bloki"
+      },
+      {
+        "JPOS_IJPP": 138054,
+        "POS_NAZ": "Golnik Malijevo"
+      },
+      {
+        "JPOS_IJPP": 138057,
+        "POS_NAZ": "Gomarenci"
+      },
+      {
+        "JPOS_IJPP": 138058,
+        "POS_NAZ": "Gomila pri Kogu Bajzek"
+      },
+      {
+        "JPOS_IJPP": 138059,
+        "POS_NAZ": "Gomila pri Kogu K"
+      },
+      {
+        "JPOS_IJPP": 138060,
+        "POS_NAZ": "Gomila pri Kogu Pukšič"
+      },
+      {
+        "JPOS_IJPP": 138061,
+        "POS_NAZ": "Gomila/Jiršovcih K"
+      },
+      {
+        "JPOS_IJPP": 138062,
+        "POS_NAZ": "Gomila/Juršincih"
+      },
+      {
+        "JPOS_IJPP": 138064,
+        "POS_NAZ": "Gomilci"
+      },
+      {
+        "JPOS_IJPP": 138069,
+        "POS_NAZ": "Gora pri Pečah"
+      },
+      {
+        "JPOS_IJPP": 165198,
+        "POS_NAZ": "Gorenja vas"
+      },
+      {
+        "JPOS_IJPP": 150112,
+        "POS_NAZ": "Gorenja vas Na blatih"
+      },
+      {
+        "JPOS_IJPP": 138080,
+        "POS_NAZ": "Gorenje/Divači"
+      },
+      {
+        "JPOS_IJPP": 138091,
+        "POS_NAZ": "Gorica/Moravčah"
+      },
+      {
+        "JPOS_IJPP": 138094,
+        "POS_NAZ": "Goričak"
+      },
+      {
+        "JPOS_IJPP": 138095,
+        "POS_NAZ": "Goričane"
+      },
+      {
+        "JPOS_IJPP": 138097,
+        "POS_NAZ": "Goriče/Golniku"
+      },
+      {
+        "JPOS_IJPP": 138101,
+        "POS_NAZ": "Gorišnica"
+      },
+      {
+        "JPOS_IJPP": 138102,
+        "POS_NAZ": "Gorjansko"
+      },
+      {
+        "JPOS_IJPP": 138104,
+        "POS_NAZ": "Gorjuše"
+      },
+      {
+        "JPOS_IJPP": 137965,
+        "POS_NAZ": "Gornja Radgona"
+      },
+      {
+        "JPOS_IJPP": 137934,
+        "POS_NAZ": "Gornji Grad"
+      },
+      {
+        "JPOS_IJPP": 138109,
+        "POS_NAZ": "Gosteče"
+      },
+      {
+        "JPOS_IJPP": 138113,
+        "POS_NAZ": "Gozd Martuljek Sp.Rute"
+      },
+      {
+        "JPOS_IJPP": 138114,
+        "POS_NAZ": "Gozd Martuljek Zg.Rute"
+      },
+      {
+        "JPOS_IJPP": 138117,
+        "POS_NAZ": "Grabe/Središču ob D."
+      },
+      {
+        "JPOS_IJPP": 138118,
+        "POS_NAZ": "Grabe/Tratah"
+      },
+      {
+        "JPOS_IJPP": 138119,
+        "POS_NAZ": "Grabonoš"
+      },
+      {
+        "JPOS_IJPP": 138120,
+        "POS_NAZ": "Grabonoški Vrh"
+      },
+      {
+        "JPOS_IJPP": 138121,
+        "POS_NAZ": "Grabšinci K"
+      },
+      {
+        "JPOS_IJPP": 138122,
+        "POS_NAZ": "Grabšinski breg"
+      },
+      {
+        "JPOS_IJPP": 138125,
+        "POS_NAZ": "Gračišče"
+      },
+      {
+        "JPOS_IJPP": 138129,
+        "POS_NAZ": "Grad/Cerkljah"
+      },
+      {
+        "JPOS_IJPP": 138133,
+        "POS_NAZ": "Gradec"
+      },
+      {
+        "JPOS_IJPP": 138135,
+        "POS_NAZ": "Gradin"
+      },
+      {
+        "JPOS_IJPP": 138137,
+        "POS_NAZ": "Gradišče na Kozjak.Krajnc"
+      },
+      {
+        "JPOS_IJPP": 138138,
+        "POS_NAZ": "Gradišče na Kozjaku"
+      },
+      {
+        "JPOS_IJPP": 138139,
+        "POS_NAZ": "Gradišče nad Pijavo G."
+      },
+      {
+        "JPOS_IJPP": 150285,
+        "POS_NAZ": "Grajena"
+      },
+      {
+        "JPOS_IJPP": 150286,
+        "POS_NAZ": "Grajenščak"
+      },
+      {
+        "JPOS_IJPP": 150287,
+        "POS_NAZ": "Grajenščak 45"
+      },
+      {
+        "JPOS_IJPP": 150288,
+        "POS_NAZ": "Grajenščak kapela"
+      },
+      {
+        "JPOS_IJPP": 138155,
+        "POS_NAZ": "Grčarevec"
+      },
+      {
+        "JPOS_IJPP": 165725,
+        "POS_NAZ": "Grčarevski Vrh"
+      },
+      {
+        "JPOS_IJPP": 138156,
+        "POS_NAZ": "Grdina"
+      },
+      {
+        "JPOS_IJPP": 138157,
+        "POS_NAZ": "Gregoriči"
+      },
+      {
+        "JPOS_IJPP": 150233,
+        "POS_NAZ": "Gresovščak"
+      },
+      {
+        "JPOS_IJPP": 138167,
+        "POS_NAZ": "Griže/Sežani"
+      },
+      {
+        "JPOS_IJPP": 138189,
+        "POS_NAZ": "Grušena"
+      },
+      {
+        "JPOS_IJPP": 136857,
+        "POS_NAZ": "Hajdina"
+      },
+      {
+        "JPOS_IJPP": 138194,
+        "POS_NAZ": "Hajdoše"
+      },
+      {
+        "JPOS_IJPP": 138195,
+        "POS_NAZ": "Hajdoše Žerak"
+      },
+      {
+        "JPOS_IJPP": 138198,
+        "POS_NAZ": "Haložan/Ožbaltu"
+      },
+      {
+        "JPOS_IJPP": 138203,
+        "POS_NAZ": "Hinje"
+      },
+      {
+        "JPOS_IJPP": 138205,
+        "POS_NAZ": "Hlaponci 22"
+      },
+      {
+        "JPOS_IJPP": 138206,
+        "POS_NAZ": "Hlaponci Kapela"
+      },
+      {
+        "JPOS_IJPP": 138207,
+        "POS_NAZ": "Hlebce"
+      },
+      {
+        "JPOS_IJPP": 138208,
+        "POS_NAZ": "Hobovše pri St.Oselici"
+      },
+      {
+        "JPOS_IJPP": 152270,
+        "POS_NAZ": "Hoče Magna"
+      },
+      {
+        "JPOS_IJPP": 138210,
+        "POS_NAZ": "Hočko Pohorje bolnica tbc"
+      },
+      {
+        "JPOS_IJPP": 138211,
+        "POS_NAZ": "Hočko Pohorje g.Gale"
+      },
+      {
+        "JPOS_IJPP": 138212,
+        "POS_NAZ": "Hočko Pohorje g.Klinc"
+      },
+      {
+        "JPOS_IJPP": 138213,
+        "POS_NAZ": "Hočko Pohorje kapela"
+      },
+      {
+        "JPOS_IJPP": 138214,
+        "POS_NAZ": "Hočko Pohorje most"
+      },
+      {
+        "JPOS_IJPP": 138218,
+        "POS_NAZ": "Homec"
+      },
+      {
+        "JPOS_IJPP": 138220,
+        "POS_NAZ": "Hosta"
+      },
+      {
+        "JPOS_IJPP": 138221,
+        "POS_NAZ": "Hotavlje"
+      },
+      {
+        "JPOS_IJPP": 138224,
+        "POS_NAZ": "Hotemaže"
+      },
+      {
+        "JPOS_IJPP": 138227,
+        "POS_NAZ": "Hotič sp."
+      },
+      {
+        "JPOS_IJPP": 138228,
+        "POS_NAZ": "Hotič zg."
+      },
+      {
+        "JPOS_IJPP": 138230,
+        "POS_NAZ": "Hotinja vas"
+      },
+      {
+        "JPOS_IJPP": 138231,
+        "POS_NAZ": "Hotinja vas K"
+      },
+      {
+        "JPOS_IJPP": 138232,
+        "POS_NAZ": "Hotinja vas Keršič"
+      },
+      {
+        "JPOS_IJPP": 138238,
+        "POS_NAZ": "Hranjigovci"
+      },
+      {
+        "JPOS_IJPP": 135842,
+        "POS_NAZ": "Hrastje/Kr."
+      },
+      {
+        "JPOS_IJPP": 135844,
+        "POS_NAZ": "Hrastje/Kr. II"
+      },
+      {
+        "JPOS_IJPP": 138260,
+        "POS_NAZ": "Hrastovec v Sl.G."
+      },
+      {
+        "JPOS_IJPP": 138266,
+        "POS_NAZ": "Hrastovlje"
+      },
+      {
+        "JPOS_IJPP": 138239,
+        "POS_NAZ": "Hrašče"
+      },
+      {
+        "JPOS_IJPP": 138240,
+        "POS_NAZ": "Hraše center"
+      },
+      {
+        "JPOS_IJPP": 150257,
+        "POS_NAZ": "Hraše vzhod"
+      },
+      {
+        "JPOS_IJPP": 150258,
+        "POS_NAZ": "Hraše zahod"
+      },
+      {
+        "JPOS_IJPP": 138271,
+        "POS_NAZ": "Hruševje"
+      },
+      {
+        "JPOS_IJPP": 135733,
+        "POS_NAZ": "Hrušica Belo Polje"
+      },
+      {
+        "JPOS_IJPP": 165749,
+        "POS_NAZ": "Hrušica Dobršnik"
+      },
+      {
+        "JPOS_IJPP": 135735,
+        "POS_NAZ": "Hrušica K"
+      },
+      {
+        "JPOS_IJPP": 135736,
+        "POS_NAZ": "Hrušica/Jes."
+      },
+      {
+        "JPOS_IJPP": 138276,
+        "POS_NAZ": "Hrvatini"
+      },
+      {
+        "JPOS_IJPP": 138277,
+        "POS_NAZ": "Hrvatini K"
+      },
+      {
+        "JPOS_IJPP": 150801,
+        "POS_NAZ": "Hrvatini pokopališče"
+      },
+      {
+        "JPOS_IJPP": 138278,
+        "POS_NAZ": "Hrvoji"
+      },
+      {
+        "JPOS_IJPP": 138280,
+        "POS_NAZ": "Hudi Graben"
+      },
+      {
+        "JPOS_IJPP": 138284,
+        "POS_NAZ": "Hudo Polje"
+      },
+      {
+        "JPOS_IJPP": 138285,
+        "POS_NAZ": "Hum pri Ormožu"
+      },
+      {
+        "JPOS_IJPP": 165199,
+        "POS_NAZ": "Hvaletinci kapela"
+      },
+      {
+        "JPOS_IJPP": 138300,
+        "POS_NAZ": "Ihan Emona"
+      },
+      {
+        "JPOS_IJPP": 138301,
+        "POS_NAZ": "Ihan farma"
+      },
+      {
+        "JPOS_IJPP": 138302,
+        "POS_NAZ": "Ihan Flerin"
+      },
+      {
+        "JPOS_IJPP": 138303,
+        "POS_NAZ": "Ihan Termit"
+      },
+      {
+        "JPOS_IJPP": 138304,
+        "POS_NAZ": "Ihova"
+      },
+      {
+        "JPOS_IJPP": 138305,
+        "POS_NAZ": "Il.Bistrica"
+      },
+      {
+        "JPOS_IJPP": 165612,
+        "POS_NAZ": "Ilovka Bobovek K"
+      },
+      {
+        "JPOS_IJPP": 138325,
+        "POS_NAZ": "Ivanji Grad"
+      },
+      {
+        "JPOS_IJPP": 138326,
+        "POS_NAZ": "Ivanjkovci"
+      },
+      {
+        "JPOS_IJPP": 902239,
+        "POS_NAZ": "Izletniška"
+      },
+      {
+        "JPOS_IJPP": 138335,
+        "POS_NAZ": "Izola"
+      },
+      {
+        "JPOS_IJPP": 150190,
+        "POS_NAZ": "Izola Livade OŠ"
+      },
+      {
+        "JPOS_IJPP": 138341,
+        "POS_NAZ": "Izola Mehano"
+      },
+      {
+        "JPOS_IJPP": 150191,
+        "POS_NAZ": "Izola Prešernova OŠ"
+      },
+      {
+        "JPOS_IJPP": 138342,
+        "POS_NAZ": "Izola reš.pos."
+      },
+      {
+        "JPOS_IJPP": 138343,
+        "POS_NAZ": "Izola TC"
+      },
+      {
+        "JPOS_IJPP": 138352,
+        "POS_NAZ": "Jakob"
+      },
+      {
+        "JPOS_IJPP": 135846,
+        "POS_NAZ": "Jama/Prašah"
+      },
+      {
+        "JPOS_IJPP": 138356,
+        "POS_NAZ": "Jamna"
+      },
+      {
+        "JPOS_IJPP": 138357,
+        "POS_NAZ": "Jamna Kocbek"
+      },
+      {
+        "JPOS_IJPP": 138359,
+        "POS_NAZ": "Jamnik"
+      },
+      {
+        "JPOS_IJPP": 138361,
+        "POS_NAZ": "Janežovci"
+      },
+      {
+        "JPOS_IJPP": 138363,
+        "POS_NAZ": "Janežovski Vrh"
+      },
+      {
+        "JPOS_IJPP": 138368,
+        "POS_NAZ": "Janževa Gora"
+      },
+      {
+        "JPOS_IJPP": 138372,
+        "POS_NAZ": "Jarenina"
+      },
+      {
+        "JPOS_IJPP": 138373,
+        "POS_NAZ": "Jarenina K"
+      },
+      {
+        "JPOS_IJPP": 138374,
+        "POS_NAZ": "Jareninski Dol K"
+      },
+      {
+        "JPOS_IJPP": 138375,
+        "POS_NAZ": "Jareninski Dol pri Križu"
+      },
+      {
+        "JPOS_IJPP": 138376,
+        "POS_NAZ": "Jareninski Dol Repa"
+      },
+      {
+        "JPOS_IJPP": 138377,
+        "POS_NAZ": "Jareninski Dvor"
+      },
+      {
+        "JPOS_IJPP": 165277,
+        "POS_NAZ": "Jarše pri Domžalah"
+      },
+      {
+        "JPOS_IJPP": 138381,
+        "POS_NAZ": "Jastrebci"
+      },
+      {
+        "JPOS_IJPP": 138382,
+        "POS_NAZ": "Jastroblje"
+      },
+      {
+        "JPOS_IJPP": 138384,
+        "POS_NAZ": "Javorje/Delnicah"
+      },
+      {
+        "JPOS_IJPP": 138387,
+        "POS_NAZ": "Javornik/Kr."
+      },
+      {
+        "JPOS_IJPP": 138391,
+        "POS_NAZ": "Jedlovnik"
+      },
+      {
+        "JPOS_IJPP": 138392,
+        "POS_NAZ": "Jelendol"
+      },
+      {
+        "JPOS_IJPP": 138405,
+        "POS_NAZ": "Jeprca"
+      },
+      {
+        "JPOS_IJPP": 138406,
+        "POS_NAZ": "Jereka"
+      },
+      {
+        "JPOS_IJPP": 141709,
+        "POS_NAZ": "Jeriše"
+      },
+      {
+        "JPOS_IJPP": 150234,
+        "POS_NAZ": "Jeruzalem"
+      },
+      {
+        "JPOS_IJPP": 135740,
+        "POS_NAZ": "Jesenice bolnica"
+      },
+      {
+        "JPOS_IJPP": 135741,
+        "POS_NAZ": "Jesenice Gimnazija"
+      },
+      {
+        "JPOS_IJPP": 135742,
+        "POS_NAZ": "Jesenice Integral"
+      },
+      {
+        "JPOS_IJPP": 135743,
+        "POS_NAZ": "Jesenice občina"
+      },
+      {
+        "JPOS_IJPP": 135744,
+        "POS_NAZ": "Jesenice Senožeti"
+      },
+      {
+        "JPOS_IJPP": 135745,
+        "POS_NAZ": "Jesenice ZD"
+      },
+      {
+        "JPOS_IJPP": 135746,
+        "POS_NAZ": "Jesenice ŽP"
+      },
+      {
+        "JPOS_IJPP": 141710,
+        "POS_NAZ": "Jesenje K"
+      },
+      {
+        "JPOS_IJPP": 138419,
+        "POS_NAZ": "Jesenovec"
+      },
+      {
+        "JPOS_IJPP": 138420,
+        "POS_NAZ": "Jesenovec I"
+      },
+      {
+        "JPOS_IJPP": 138429,
+        "POS_NAZ": "Jezersko Bajte"
+      },
+      {
+        "JPOS_IJPP": 138430,
+        "POS_NAZ": "Jezersko Grabnar"
+      },
+      {
+        "JPOS_IJPP": 138431,
+        "POS_NAZ": "Jezersko Jezero K"
+      },
+      {
+        "JPOS_IJPP": 138432,
+        "POS_NAZ": "Jezersko Kanonir"
+      },
+      {
+        "JPOS_IJPP": 138433,
+        "POS_NAZ": "Jezersko Kazina"
+      },
+      {
+        "JPOS_IJPP": 138434,
+        "POS_NAZ": "Jezersko Štular"
+      },
+      {
+        "JPOS_IJPP": 138435,
+        "POS_NAZ": "Jiršovci"
+      },
+      {
+        "JPOS_IJPP": 138436,
+        "POS_NAZ": "Jiršovci K"
+      },
+      {
+        "JPOS_IJPP": 138437,
+        "POS_NAZ": "Jodl Činžat"
+      },
+      {
+        "JPOS_IJPP": 138441,
+        "POS_NAZ": "Jožef pri Slovenski Bistrici"
+      },
+      {
+        "JPOS_IJPP": 138443,
+        "POS_NAZ": "Jurij MP"
+      },
+      {
+        "JPOS_IJPP": 138444,
+        "POS_NAZ": "Jurij ob Pesnici"
+      },
+      {
+        "JPOS_IJPP": 138447,
+        "POS_NAZ": "Jurjevski dol 8 šef"
+      },
+      {
+        "JPOS_IJPP": 138448,
+        "POS_NAZ": "Jurjov most"
+      },
+      {
+        "JPOS_IJPP": 138454,
+        "POS_NAZ": "Jurovci"
+      },
+      {
+        "JPOS_IJPP": 138455,
+        "POS_NAZ": "Jurovski Dol"
+      },
+      {
+        "JPOS_IJPP": 138456,
+        "POS_NAZ": "Jurovski Dol Grubar"
+      },
+      {
+        "JPOS_IJPP": 138457,
+        "POS_NAZ": "Jurovski Dol K"
+      },
+      {
+        "JPOS_IJPP": 138458,
+        "POS_NAZ": "Jurovski Dol Ketiš"
+      },
+      {
+        "JPOS_IJPP": 138459,
+        "POS_NAZ": "Jurovski Dol Kraner"
+      },
+      {
+        "JPOS_IJPP": 138460,
+        "POS_NAZ": "Jurovski Dol Krempl"
+      },
+      {
+        "JPOS_IJPP": 138461,
+        "POS_NAZ": "Jurovski Dol Sp.Gaster.K"
+      },
+      {
+        "JPOS_IJPP": 138462,
+        "POS_NAZ": "Juršinci"
+      },
+      {
+        "JPOS_IJPP": 138463,
+        "POS_NAZ": "Juršinci Podhostnik"
+      },
+      {
+        "JPOS_IJPP": 138464,
+        "POS_NAZ": "Juršinci Vodol"
+      },
+      {
+        "JPOS_IJPP": 138465,
+        "POS_NAZ": "Juršnik"
+      },
+      {
+        "JPOS_IJPP": 138466,
+        "POS_NAZ": "Kačiče"
+      },
+      {
+        "JPOS_IJPP": 138467,
+        "POS_NAZ": "Kajžar"
+      },
+      {
+        "JPOS_IJPP": 138475,
+        "POS_NAZ": "Kalce/Logatcu"
+      },
+      {
+        "JPOS_IJPP": 165744,
+        "POS_NAZ": "Kališe"
+      },
+      {
+        "JPOS_IJPP": 138484,
+        "POS_NAZ": "Kamna Gorica I"
+      },
+      {
+        "JPOS_IJPP": 165278,
+        "POS_NAZ": "Kamna Gorica II"
+      },
+      {
+        "JPOS_IJPP": 165200,
+        "POS_NAZ": "Kamna Gorica Pr Kozjek"
+      },
+      {
+        "JPOS_IJPP": 138486,
+        "POS_NAZ": "Kamne"
+      },
+      {
+        "JPOS_IJPP": 165441,
+        "POS_NAZ": "Kamnica - križišče"
+      },
+      {
+        "JPOS_IJPP": 138488,
+        "POS_NAZ": "Kamnik"
+      },
+      {
+        "JPOS_IJPP": 138490,
+        "POS_NAZ": "Kamnik KIK"
+      },
+      {
+        "JPOS_IJPP": 138489,
+        "POS_NAZ": "Kamnik Mercator"
+      },
+      {
+        "JPOS_IJPP": 138491,
+        "POS_NAZ": "Kamnik Metalka"
+      },
+      {
+        "JPOS_IJPP": 138492,
+        "POS_NAZ": "Kamnik Svetilnik"
+      },
+      {
+        "JPOS_IJPP": 141669,
+        "POS_NAZ": "Kamnik ŠCRM"
+      },
+      {
+        "JPOS_IJPP": 138495,
+        "POS_NAZ": "Kamnik ŽP"
+      },
+      {
+        "JPOS_IJPP": 138497,
+        "POS_NAZ": "Kamniška Bistrica"
+      },
+      {
+        "JPOS_IJPP": 165201,
+        "POS_NAZ": "Kamnje v Bohinju"
+      },
+      {
+        "JPOS_IJPP": 138501,
+        "POS_NAZ": "Kamnolom Rovte"
+      },
+      {
+        "JPOS_IJPP": 141712,
+        "POS_NAZ": "Kampel Brda"
+      },
+      {
+        "JPOS_IJPP": 138503,
+        "POS_NAZ": "Kampel Novaki K"
+      },
+      {
+        "JPOS_IJPP": 138509,
+        "POS_NAZ": "Kandrše"
+      },
+      {
+        "JPOS_IJPP": 138510,
+        "POS_NAZ": "Kaniža 25"
+      },
+      {
+        "JPOS_IJPP": 138511,
+        "POS_NAZ": "Kaniža Kovačič"
+      },
+      {
+        "JPOS_IJPP": 138512,
+        "POS_NAZ": "Kaniža Šraj"
+      },
+      {
+        "JPOS_IJPP": 138528,
+        "POS_NAZ": "Kastelec"
+      },
+      {
+        "JPOS_IJPP": 138529,
+        "POS_NAZ": "Kastelec K"
+      },
+      {
+        "JPOS_IJPP": 138531,
+        "POS_NAZ": "Kavaliči"
+      },
+      {
+        "JPOS_IJPP": 138533,
+        "POS_NAZ": "Kazlje"
+      },
+      {
+        "JPOS_IJPP": 138534,
+        "POS_NAZ": "Kebelj"
+      },
+      {
+        "JPOS_IJPP": 150289,
+        "POS_NAZ": "Kicar 1"
+      },
+      {
+        "JPOS_IJPP": 150290,
+        "POS_NAZ": "Kicar 112b"
+      },
+      {
+        "JPOS_IJPP": 150291,
+        "POS_NAZ": "Kicar 118b"
+      },
+      {
+        "JPOS_IJPP": 150292,
+        "POS_NAZ": "Kicar 48b"
+      },
+      {
+        "JPOS_IJPP": 150293,
+        "POS_NAZ": "Kicar 66c"
+      },
+      {
+        "JPOS_IJPP": 150295,
+        "POS_NAZ": "Kicar Gernice"
+      },
+      {
+        "JPOS_IJPP": 165735,
+        "POS_NAZ": "Kicar K"
+      },
+      {
+        "JPOS_IJPP": 138536,
+        "POS_NAZ": "Kicar Nova vas K"
+      },
+      {
+        "JPOS_IJPP": 138537,
+        "POS_NAZ": "Kidričevo"
+      },
+      {
+        "JPOS_IJPP": 150622,
+        "POS_NAZ": "Kidričevo farma"
+      },
+      {
+        "JPOS_IJPP": 138538,
+        "POS_NAZ": "Kidričevo Š"
+      },
+      {
+        "JPOS_IJPP": 138539,
+        "POS_NAZ": "Kidričevo Talum"
+      },
+      {
+        "JPOS_IJPP": 135847,
+        "POS_NAZ": "Kitajska restavracija"
+      },
+      {
+        "JPOS_IJPP": 138542,
+        "POS_NAZ": "Kladje/Cerknem"
+      },
+      {
+        "JPOS_IJPP": 138546,
+        "POS_NAZ": "Kleče pri Dolu"
+      },
+      {
+        "JPOS_IJPP": 138557,
+        "POS_NAZ": "Klopce pri Slovenski Bistrici"
+      },
+      {
+        "JPOS_IJPP": 138559,
+        "POS_NAZ": "Knape"
+      },
+      {
+        "JPOS_IJPP": 138562,
+        "POS_NAZ": "Knežak"
+      },
+      {
+        "JPOS_IJPP": 138569,
+        "POS_NAZ": "Kobdilj"
+      },
+      {
+        "JPOS_IJPP": 138570,
+        "POS_NAZ": "Kobdilj K"
+      },
+      {
+        "JPOS_IJPP": 138575,
+        "POS_NAZ": "Kobjeglava"
+      },
+      {
+        "JPOS_IJPP": 135747,
+        "POS_NAZ": "Kočna"
+      },
+      {
+        "JPOS_IJPP": 138586,
+        "POS_NAZ": "Kočno ob Ložnici"
+      },
+      {
+        "JPOS_IJPP": 138588,
+        "POS_NAZ": "Kog"
+      },
+      {
+        "JPOS_IJPP": 138591,
+        "POS_NAZ": "Kojuhovje"
+      },
+      {
+        "JPOS_IJPP": 138594,
+        "POS_NAZ": "Kokra Kamnolom"
+      },
+      {
+        "JPOS_IJPP": 138595,
+        "POS_NAZ": "Kokra Povšnar"
+      },
+      {
+        "JPOS_IJPP": 135848,
+        "POS_NAZ": "Kokrica"
+      },
+      {
+        "JPOS_IJPP": 135849,
+        "POS_NAZ": "Kokrica žaga"
+      },
+      {
+        "JPOS_IJPP": 138596,
+        "POS_NAZ": "Kolarjeva raven Sršen"
+      },
+      {
+        "JPOS_IJPP": 138597,
+        "POS_NAZ": "Količevo"
+      },
+      {
+        "JPOS_IJPP": 138599,
+        "POS_NAZ": "Količevo samopost."
+      },
+      {
+        "JPOS_IJPP": 138600,
+        "POS_NAZ": "Kolomban"
+      },
+      {
+        "JPOS_IJPP": 138603,
+        "POS_NAZ": "Komen"
+      },
+      {
+        "JPOS_IJPP": 152218,
+        "POS_NAZ": "Komenda PC pod bori"
+      },
+      {
+        "JPOS_IJPP": 152219,
+        "POS_NAZ": "Komenda PC pod gabri"
+      },
+      {
+        "JPOS_IJPP": 152217,
+        "POS_NAZ": "Komenda PC pod lipami"
+      },
+      {
+        "JPOS_IJPP": 138605,
+        "POS_NAZ": "Komenda Š"
+      },
+      {
+        "JPOS_IJPP": 138606,
+        "POS_NAZ": "Komenda vas"
+      },
+      {
+        "JPOS_IJPP": 138609,
+        "POS_NAZ": "Kompolje/Dobrepolju"
+      },
+      {
+        "JPOS_IJPP": 138610,
+        "POS_NAZ": "Kompolje/Lukovici"
+      },
+      {
+        "JPOS_IJPP": 135768,
+        "POS_NAZ": "Koper"
+      },
+      {
+        "JPOS_IJPP": 135769,
+        "POS_NAZ": "Koper Banka"
+      },
+      {
+        "JPOS_IJPP": 152105,
+        "POS_NAZ": "Koper Ford nova"
+      },
+      {
+        "JPOS_IJPP": 135787,
+        "POS_NAZ": "Koper Luka"
+      },
+      {
+        "JPOS_IJPP": 152179,
+        "POS_NAZ": "Koper Mandrač"
+      },
+      {
+        "JPOS_IJPP": 165089,
+        "POS_NAZ": "Koper Sv. Ana V.n."
+      },
+      {
+        "JPOS_IJPP": 165565,
+        "POS_NAZ": "Koper Šalara market"
+      },
+      {
+        "JPOS_IJPP": 135812,
+        "POS_NAZ": "Koper Tomos"
+      },
+      {
+        "JPOS_IJPP": 152245,
+        "POS_NAZ": "Koper Tržnica"
+      },
+      {
+        "JPOS_IJPP": 152246,
+        "POS_NAZ": "Koper Zeleni park"
+      },
+      {
+        "JPOS_IJPP": 138617,
+        "POS_NAZ": "Kopišča"
+      },
+      {
+        "JPOS_IJPP": 138618,
+        "POS_NAZ": "Kopriva"
+      },
+      {
+        "JPOS_IJPP": 165202,
+        "POS_NAZ": "Koprivnik v Bohinju"
+      },
+      {
+        "JPOS_IJPP": 138621,
+        "POS_NAZ": "Koprivnik/Sovodnju"
+      },
+      {
+        "JPOS_IJPP": 138624,
+        "POS_NAZ": "Koračice GD"
+      },
+      {
+        "JPOS_IJPP": 138631,
+        "POS_NAZ": "Koritno/Bledu"
+      },
+      {
+        "JPOS_IJPP": 138632,
+        "POS_NAZ": "Koromači"
+      },
+      {
+        "JPOS_IJPP": 138633,
+        "POS_NAZ": "Koroška Bela"
+      },
+      {
+        "JPOS_IJPP": 141670,
+        "POS_NAZ": "Koroška Bela Acroni"
+      },
+      {
+        "JPOS_IJPP": 135749,
+        "POS_NAZ": "Koroška Bela K"
+      },
+      {
+        "JPOS_IJPP": 135750,
+        "POS_NAZ": "Koroška Bela trgovina"
+      },
+      {
+        "JPOS_IJPP": 138636,
+        "POS_NAZ": "Korte"
+      },
+      {
+        "JPOS_IJPP": 150192,
+        "POS_NAZ": "Korte šola"
+      },
+      {
+        "JPOS_IJPP": 150193,
+        "POS_NAZ": "Korte vas"
+      },
+      {
+        "JPOS_IJPP": 138637,
+        "POS_NAZ": "Kortine"
+      },
+      {
+        "JPOS_IJPP": 138645,
+        "POS_NAZ": "Kosovelje K"
+      },
+      {
+        "JPOS_IJPP": 165545,
+        "POS_NAZ": "Kosovelov trg"
+      },
+      {
+        "JPOS_IJPP": 138648,
+        "POS_NAZ": "Kostanjevec pri Slovenski Bistrici"
+      },
+      {
+        "JPOS_IJPP": 138649,
+        "POS_NAZ": "Kostanjevec pri Slovenski Bistrici K"
+      },
+      {
+        "JPOS_IJPP": 150207,
+        "POS_NAZ": "Koštabona"
+      },
+      {
+        "JPOS_IJPP": 138646,
+        "POS_NAZ": "Koštabona obr."
+      },
+      {
+        "JPOS_IJPP": 138667,
+        "POS_NAZ": "Kovor"
+      },
+      {
+        "JPOS_IJPP": 138672,
+        "POS_NAZ": "Kozina"
+      },
+      {
+        "JPOS_IJPP": 138673,
+        "POS_NAZ": "Kozina pošta"
+      },
+      {
+        "JPOS_IJPP": 138674,
+        "POS_NAZ": "Kozjak pri Ceršaku K"
+      },
+      {
+        "JPOS_IJPP": 165546,
+        "POS_NAZ": "Kozlovičeva ulica"
+      },
+      {
+        "JPOS_IJPP": 138683,
+        "POS_NAZ": "Kozloviči"
+      },
+      {
+        "JPOS_IJPP": 138684,
+        "POS_NAZ": "Kozminci"
+      },
+      {
+        "JPOS_IJPP": 141694,
+        "POS_NAZ": "Kozminci K"
+      },
+      {
+        "JPOS_IJPP": 138689,
+        "POS_NAZ": "Krajna vas"
+      },
+      {
+        "JPOS_IJPP": 138690,
+        "POS_NAZ": "Kraljevci"
+      },
+      {
+        "JPOS_IJPP": 135850,
+        "POS_NAZ": "Kranj AP"
+      },
+      {
+        "JPOS_IJPP": 135851,
+        "POS_NAZ": "Kranj C.Kokrškega Odreda"
+      },
+      {
+        "JPOS_IJPP": 165614,
+        "POS_NAZ": "Kranj Čirče"
+      },
+      {
+        "JPOS_IJPP": 135852,
+        "POS_NAZ": "Kranj Dijaški dom"
+      },
+      {
+        "JPOS_IJPP": 165615,
+        "POS_NAZ": "Kranj Drulovka"
+      },
+      {
+        "JPOS_IJPP": 165616,
+        "POS_NAZ": "Kranj Drulovka cerkev"
+      },
+      {
+        "JPOS_IJPP": 135854,
+        "POS_NAZ": "Kranj Globus"
+      },
+      {
+        "JPOS_IJPP": 165617,
+        "POS_NAZ": "Kranj Gorenja Sava"
+      },
+      {
+        "JPOS_IJPP": 165618,
+        "POS_NAZ": "Kranj Gorenja Sava skakal"
+      },
+      {
+        "JPOS_IJPP": 165619,
+        "POS_NAZ": "Kranj Gorenje"
+      },
+      {
+        "JPOS_IJPP": 135853,
+        "POS_NAZ": "Kranj Gorenjska oblačila"
+      },
+      {
+        "JPOS_IJPP": 165620,
+        "POS_NAZ": "Kranj Hrastje I"
+      },
+      {
+        "JPOS_IJPP": 135855,
+        "POS_NAZ": "Kranj Iskra Labore"
+      },
+      {
+        "JPOS_IJPP": 135856,
+        "POS_NAZ": "Kranj Iskra sp."
+      },
+      {
+        "JPOS_IJPP": 135857,
+        "POS_NAZ": "Kranj kolodvor"
+      },
+      {
+        "JPOS_IJPP": 135858,
+        "POS_NAZ": "Kranj Labore"
+      },
+      {
+        "JPOS_IJPP": 135859,
+        "POS_NAZ": "Kranj Labore Draksler"
+      },
+      {
+        "JPOS_IJPP": 135860,
+        "POS_NAZ": "Kranj Labore Šk.C."
+      },
+      {
+        "JPOS_IJPP": 135861,
+        "POS_NAZ": "Kranj Likozarjeva"
+      },
+      {
+        "JPOS_IJPP": 135862,
+        "POS_NAZ": "Kranj Novi dom"
+      },
+      {
+        "JPOS_IJPP": 138692,
+        "POS_NAZ": "Kranj Orehek"
+      },
+      {
+        "JPOS_IJPP": 150223,
+        "POS_NAZ": "Kranj Orehek nadvoz"
+      },
+      {
+        "JPOS_IJPP": 135863,
+        "POS_NAZ": "Kranj Orehek nas."
+      },
+      {
+        "JPOS_IJPP": 135864,
+        "POS_NAZ": "Kranj Orehek trg."
+      },
+      {
+        "JPOS_IJPP": 135865,
+        "POS_NAZ": "Kranj OŠ S.Jenko"
+      },
+      {
+        "JPOS_IJPP": 135866,
+        "POS_NAZ": "Kranj OŠ S.Žagar"
+      },
+      {
+        "JPOS_IJPP": 135867,
+        "POS_NAZ": "Kranj Planika"
+      },
+      {
+        "JPOS_IJPP": 135868,
+        "POS_NAZ": "Kranj Planina otok"
+      },
+      {
+        "JPOS_IJPP": 135869,
+        "POS_NAZ": "Kranj Plinarna"
+      },
+      {
+        "JPOS_IJPP": 135870,
+        "POS_NAZ": "Kranj Pokopališče"
+      },
+      {
+        "JPOS_IJPP": 135871,
+        "POS_NAZ": "Kranj Primskovo"
+      },
+      {
+        "JPOS_IJPP": 135872,
+        "POS_NAZ": "Kranj Primskovo GD"
+      },
+      {
+        "JPOS_IJPP": 165623,
+        "POS_NAZ": "Kranj Primskovo na Klancu"
+      },
+      {
+        "JPOS_IJPP": 135873,
+        "POS_NAZ": "Kranj Primskovo ZD"
+      },
+      {
+        "JPOS_IJPP": 135874,
+        "POS_NAZ": "Kranj Qlandia"
+      },
+      {
+        "JPOS_IJPP": 135875,
+        "POS_NAZ": "Kranj Ručigajeva K"
+      },
+      {
+        "JPOS_IJPP": 135876,
+        "POS_NAZ": "Kranj Savska cesta"
+      },
+      {
+        "JPOS_IJPP": 135877,
+        "POS_NAZ": "Kranj Stolpnice"
+      },
+      {
+        "JPOS_IJPP": 135878,
+        "POS_NAZ": "Kranj Stražišče DD"
+      },
+      {
+        "JPOS_IJPP": 135879,
+        "POS_NAZ": "Kranj Stražišče Ješe"
+      },
+      {
+        "JPOS_IJPP": 135880,
+        "POS_NAZ": "Kranj Stražišče Pražarna"
+      },
+      {
+        "JPOS_IJPP": 135881,
+        "POS_NAZ": "Kranj Stražišče PTT"
+      },
+      {
+        "JPOS_IJPP": 135882,
+        "POS_NAZ": "Kranj Stražišče Š"
+      },
+      {
+        "JPOS_IJPP": 165509,
+        "POS_NAZ": "Kranj Supernova"
+      },
+      {
+        "JPOS_IJPP": 135883,
+        "POS_NAZ": "Kranj Tiskanina"
+      },
+      {
+        "JPOS_IJPP": 135884,
+        "POS_NAZ": "Kranj V.hrib"
+      },
+      {
+        "JPOS_IJPP": 165621,
+        "POS_NAZ": "Kranj Vodovodni stolp"
+      },
+      {
+        "JPOS_IJPP": 135886,
+        "POS_NAZ": "Kranj ZD"
+      },
+      {
+        "JPOS_IJPP": 135887,
+        "POS_NAZ": "Kranj ŽP"
+      },
+      {
+        "JPOS_IJPP": 138693,
+        "POS_NAZ": "Kranjska Gora"
+      },
+      {
+        "JPOS_IJPP": 138694,
+        "POS_NAZ": "Krašce/Moravčah"
+      },
+      {
+        "JPOS_IJPP": 138700,
+        "POS_NAZ": "Krašnja"
+      },
+      {
+        "JPOS_IJPP": 150299,
+        "POS_NAZ": "Krčevina 37"
+      },
+      {
+        "JPOS_IJPP": 150300,
+        "POS_NAZ": "Krčevina 41"
+      },
+      {
+        "JPOS_IJPP": 150306,
+        "POS_NAZ": "Krčevina Damjak"
+      },
+      {
+        "JPOS_IJPP": 150307,
+        "POS_NAZ": "Krčevina EKO"
+      },
+      {
+        "JPOS_IJPP": 150308,
+        "POS_NAZ": "Krčevina kapela"
+      },
+      {
+        "JPOS_IJPP": 150309,
+        "POS_NAZ": "Krčevina pri Vurb.most"
+      },
+      {
+        "JPOS_IJPP": 150310,
+        "POS_NAZ": "Krčevina pri Vurberku"
+      },
+      {
+        "JPOS_IJPP": 150311,
+        "POS_NAZ": "Krčevina Sužnik"
+      },
+      {
+        "JPOS_IJPP": 150312,
+        "POS_NAZ": "Krčevina Toplak"
+      },
+      {
+        "JPOS_IJPP": 138702,
+        "POS_NAZ": "Krčevina/Ormožu K"
+      },
+      {
+        "JPOS_IJPP": 138703,
+        "POS_NAZ": "Krčevina/Ormožu Polak"
+      },
+      {
+        "JPOS_IJPP": 150313,
+        "POS_NAZ": "Krčevina/Vurberku 90"
+      },
+      {
+        "JPOS_IJPP": 138706,
+        "POS_NAZ": "Kreplje"
+      },
+      {
+        "JPOS_IJPP": 141711,
+        "POS_NAZ": "Kresnice K"
+      },
+      {
+        "JPOS_IJPP": 138710,
+        "POS_NAZ": "Križ/Kamniku"
+      },
+      {
+        "JPOS_IJPP": 138711,
+        "POS_NAZ": "Križ/Sežani"
+      },
+      {
+        "JPOS_IJPP": 138715,
+        "POS_NAZ": "Križe/Trž."
+      },
+      {
+        "JPOS_IJPP": 138716,
+        "POS_NAZ": "Križe/Trž.K"
+      },
+      {
+        "JPOS_IJPP": 138723,
+        "POS_NAZ": "Križni Vrh"
+      },
+      {
+        "JPOS_IJPP": 150385,
+        "POS_NAZ": "Križni Vrh 8"
+      },
+      {
+        "JPOS_IJPP": 150386,
+        "POS_NAZ": "Križni Vrh 90"
+      },
+      {
+        "JPOS_IJPP": 150208,
+        "POS_NAZ": "Krkavče"
+      },
+      {
+        "JPOS_IJPP": 138727,
+        "POS_NAZ": "Krkavče K"
+      },
+      {
+        "JPOS_IJPP": 138726,
+        "POS_NAZ": "Krkavče obr."
+      },
+      {
+        "JPOS_IJPP": 138731,
+        "POS_NAZ": "Krnica"
+      },
+      {
+        "JPOS_IJPP": 138738,
+        "POS_NAZ": "Kropa/Rad."
+      },
+      {
+        "JPOS_IJPP": 138747,
+        "POS_NAZ": "Krtina/Dobu"
+      },
+      {
+        "JPOS_IJPP": 138752,
+        "POS_NAZ": "Kružiči"
+      },
+      {
+        "JPOS_IJPP": 138753,
+        "POS_NAZ": "Kružiči K"
+      },
+      {
+        "JPOS_IJPP": 138760,
+        "POS_NAZ": "Kubed"
+      },
+      {
+        "JPOS_IJPP": 138764,
+        "POS_NAZ": "Kumen"
+      },
+      {
+        "JPOS_IJPP": 138765,
+        "POS_NAZ": "Kungota pri Ptuju"
+      },
+      {
+        "JPOS_IJPP": 138766,
+        "POS_NAZ": "Kungota pri Ptuju cerkev"
+      },
+      {
+        "JPOS_IJPP": 138773,
+        "POS_NAZ": "Kurja vas"
+      },
+      {
+        "JPOS_IJPP": 138787,
+        "POS_NAZ": "Labor"
+      },
+      {
+        "JPOS_IJPP": 138788,
+        "POS_NAZ": "Lačaves"
+      },
+      {
+        "JPOS_IJPP": 138801,
+        "POS_NAZ": "Lahovče"
+      },
+      {
+        "JPOS_IJPP": 150090,
+        "POS_NAZ": "Lahovče vas"
+      },
+      {
+        "JPOS_IJPP": 138802,
+        "POS_NAZ": "Lancova vas"
+      },
+      {
+        "JPOS_IJPP": 138803,
+        "POS_NAZ": "Laporje"
+      },
+      {
+        "JPOS_IJPP": 138804,
+        "POS_NAZ": "Laporje K"
+      },
+      {
+        "JPOS_IJPP": 138806,
+        "POS_NAZ": "Lasigovci 19"
+      },
+      {
+        "JPOS_IJPP": 141671,
+        "POS_NAZ": "Laški Rovt"
+      },
+      {
+        "JPOS_IJPP": 136688,
+        "POS_NAZ": "Lavrica"
+      },
+      {
+        "JPOS_IJPP": 165272,
+        "POS_NAZ": "Lavrica Pod Hribom"
+      },
+      {
+        "JPOS_IJPP": 136687,
+        "POS_NAZ": "Lavrica pri Malči"
+      },
+      {
+        "JPOS_IJPP": 138816,
+        "POS_NAZ": "Lazaret meja"
+      },
+      {
+        "JPOS_IJPP": 138819,
+        "POS_NAZ": "Laze v Tuhinju"
+      },
+      {
+        "JPOS_IJPP": 138826,
+        "POS_NAZ": "Laznica"
+      },
+      {
+        "JPOS_IJPP": 138817,
+        "POS_NAZ": "Laže K"
+      },
+      {
+        "JPOS_IJPP": 141716,
+        "POS_NAZ": "Ledenica/Kačičah"
+      },
+      {
+        "JPOS_IJPP": 138831,
+        "POS_NAZ": "Ledinek"
+      },
+      {
+        "JPOS_IJPP": 138837,
+        "POS_NAZ": "Lenart v Sl.G."
+      },
+      {
+        "JPOS_IJPP": 138838,
+        "POS_NAZ": "Lenart v Sl.G.Paluc"
+      },
+      {
+        "JPOS_IJPP": 165733,
+        "POS_NAZ": "Lepence"
+      },
+      {
+        "JPOS_IJPP": 138847,
+        "POS_NAZ": "Lesce"
+      },
+      {
+        "JPOS_IJPP": 138849,
+        "POS_NAZ": "Lesce ŽP"
+      },
+      {
+        "JPOS_IJPP": 138860,
+        "POS_NAZ": "Leskovec/Prager.St.Log K"
+      },
+      {
+        "JPOS_IJPP": 138861,
+        "POS_NAZ": "Leskovec/Pragerskem 23"
+      },
+      {
+        "JPOS_IJPP": 135786,
+        "POS_NAZ": "Lesnina"
+      },
+      {
+        "JPOS_IJPP": 138851,
+        "POS_NAZ": "Leše/Trž."
+      },
+      {
+        "JPOS_IJPP": 138852,
+        "POS_NAZ": "Leše/Trž.K"
+      },
+      {
+        "JPOS_IJPP": 138863,
+        "POS_NAZ": "Lešnica/Ormožu K"
+      },
+      {
+        "JPOS_IJPP": 138864,
+        "POS_NAZ": "Lešnica/Ormožu sp."
+      },
+      {
+        "JPOS_IJPP": 138865,
+        "POS_NAZ": "Lešnica/Ormožu zg."
+      },
+      {
+        "JPOS_IJPP": 138868,
+        "POS_NAZ": "Letence K"
+      },
+      {
+        "JPOS_IJPP": 138872,
+        "POS_NAZ": "Levanjci"
+      },
+      {
+        "JPOS_IJPP": 138876,
+        "POS_NAZ": "Leženčeva ravna"
+      },
+      {
+        "JPOS_IJPP": 138877,
+        "POS_NAZ": "Libanja Litmerk"
+      },
+      {
+        "JPOS_IJPP": 138878,
+        "POS_NAZ": "Libanja Mihalovci"
+      },
+      {
+        "JPOS_IJPP": 138884,
+        "POS_NAZ": "Limbuš"
+      },
+      {
+        "JPOS_IJPP": 165444,
+        "POS_NAZ": "Limbuš Marles"
+      },
+      {
+        "JPOS_IJPP": 135751,
+        "POS_NAZ": "Lipce"
+      },
+      {
+        "JPOS_IJPP": 138888,
+        "POS_NAZ": "Lipica"
+      },
+      {
+        "JPOS_IJPP": 141717,
+        "POS_NAZ": "Liplje"
+      },
+      {
+        "JPOS_IJPP": 138891,
+        "POS_NAZ": "Lipnica Iskra"
+      },
+      {
+        "JPOS_IJPP": 165204,
+        "POS_NAZ": "Lipnica Š"
+      },
+      {
+        "JPOS_IJPP": 138893,
+        "POS_NAZ": "Lipnica z"
+      },
+      {
+        "JPOS_IJPP": 138894,
+        "POS_NAZ": "Lipno"
+      },
+      {
+        "JPOS_IJPP": 138902,
+        "POS_NAZ": "Litija kegljišče"
+      },
+      {
+        "JPOS_IJPP": 165090,
+        "POS_NAZ": "Litija ŽP"
+      },
+      {
+        "JPOS_IJPP": 165393,
+        "POS_NAZ": "Ljubljana AMZS"
+      },
+      {
+        "JPOS_IJPP": 138922,
+        "POS_NAZ": "Ljubljana AP"
+      },
+      {
+        "JPOS_IJPP": 165394,
+        "POS_NAZ": "Ljubljana Belinka"
+      },
+      {
+        "JPOS_IJPP": 165392,
+        "POS_NAZ": "Ljubljana Dobrava/Črnučah"
+      },
+      {
+        "JPOS_IJPP": 165401,
+        "POS_NAZ": "Ljubljana Hajdrihova"
+      },
+      {
+        "JPOS_IJPP": 165402,
+        "POS_NAZ": "Ljubljana Hrastje"
+      },
+      {
+        "JPOS_IJPP": 165403,
+        "POS_NAZ": "Ljubljana Kino Šiška"
+      },
+      {
+        "JPOS_IJPP": 165404,
+        "POS_NAZ": "Ljubljana Kodrova"
+      },
+      {
+        "JPOS_IJPP": 165407,
+        "POS_NAZ": "Ljubljana Nadgorica"
+      },
+      {
+        "JPOS_IJPP": 165408,
+        "POS_NAZ": "Ljubljana Podgorica"
+      },
+      {
+        "JPOS_IJPP": 165409,
+        "POS_NAZ": "Ljubljana Rakovnik"
+      },
+      {
+        "JPOS_IJPP": 165410,
+        "POS_NAZ": "Ljubljana Remiza"
+      },
+      {
+        "JPOS_IJPP": 165395,
+        "POS_NAZ": "Ljubljana Rogovilc"
+      },
+      {
+        "JPOS_IJPP": 165411,
+        "POS_NAZ": "Ljubljana Rudnik"
+      },
+      {
+        "JPOS_IJPP": 165412,
+        "POS_NAZ": "Ljubljana Ruski car"
+      },
+      {
+        "JPOS_IJPP": 165413,
+        "POS_NAZ": "Ljubljana Slovenija avto"
+      },
+      {
+        "JPOS_IJPP": 165414,
+        "POS_NAZ": "Ljubljana Sneberje"
+      },
+      {
+        "JPOS_IJPP": 165415,
+        "POS_NAZ": "Ljubljana Spodnji Rudnik"
+      },
+      {
+        "JPOS_IJPP": 165416,
+        "POS_NAZ": "Ljubljana Središka"
+      },
+      {
+        "JPOS_IJPP": 165417,
+        "POS_NAZ": "Ljubljana Stadion"
+      },
+      {
+        "JPOS_IJPP": 165418,
+        "POS_NAZ": "Ljubljana Strelišče"
+      },
+      {
+        "JPOS_IJPP": 165419,
+        "POS_NAZ": "Ljubljana Šentjakob"
+      },
+      {
+        "JPOS_IJPP": 165420,
+        "POS_NAZ": "Ljubljana Šentvid"
+      },
+      {
+        "JPOS_IJPP": 165421,
+        "POS_NAZ": "Ljubljana Tivoli"
+      },
+      {
+        "JPOS_IJPP": 136165,
+        "POS_NAZ": "Ljubljana Tivolska"
+      },
+      {
+        "JPOS_IJPP": 165422,
+        "POS_NAZ": "Ljubljana Tobačna"
+      },
+      {
+        "JPOS_IJPP": 165423,
+        "POS_NAZ": "Ljubljana Trata"
+      },
+      {
+        "JPOS_IJPP": 165424,
+        "POS_NAZ": "Ljubljana Viadukt"
+      },
+      {
+        "JPOS_IJPP": 165426,
+        "POS_NAZ": "Ljubljana Zmajski most"
+      },
+      {
+        "JPOS_IJPP": 138931,
+        "POS_NAZ": "Ljutomer"
+      },
+      {
+        "JPOS_IJPP": 138932,
+        "POS_NAZ": "Ljutomer Tehnostroj"
+      },
+      {
+        "JPOS_IJPP": 138941,
+        "POS_NAZ": "Ločica pri Vranskem"
+      },
+      {
+        "JPOS_IJPP": 138939,
+        "POS_NAZ": "Ločič"
+      },
+      {
+        "JPOS_IJPP": 150343,
+        "POS_NAZ": "Log 2"
+      },
+      {
+        "JPOS_IJPP": 150344,
+        "POS_NAZ": "Log 83"
+      },
+      {
+        "JPOS_IJPP": 138946,
+        "POS_NAZ": "Log nad Šk.Loko"
+      },
+      {
+        "JPOS_IJPP": 150345,
+        "POS_NAZ": "Log obračališče"
+      },
+      {
+        "JPOS_IJPP": 165205,
+        "POS_NAZ": "Log v Bohinju"
+      },
+      {
+        "JPOS_IJPP": 138954,
+        "POS_NAZ": "Log/Kr.Gori"
+      },
+      {
+        "JPOS_IJPP": 138955,
+        "POS_NAZ": "Log/Kr.Gori Petrol"
+      },
+      {
+        "JPOS_IJPP": 138956,
+        "POS_NAZ": "Log/Preddvoru"
+      },
+      {
+        "JPOS_IJPP": 138957,
+        "POS_NAZ": "Log/Vipavi"
+      },
+      {
+        "JPOS_IJPP": 138958,
+        "POS_NAZ": "Log/Zavratec"
+      },
+      {
+        "JPOS_IJPP": 138961,
+        "POS_NAZ": "Logatec"
+      },
+      {
+        "JPOS_IJPP": 138963,
+        "POS_NAZ": "Logatec Krpan"
+      },
+      {
+        "JPOS_IJPP": 138967,
+        "POS_NAZ": "Loka pri Mengšu"
+      },
+      {
+        "JPOS_IJPP": 138969,
+        "POS_NAZ": "Loka/Drav.p."
+      },
+      {
+        "JPOS_IJPP": 138970,
+        "POS_NAZ": "Loka/Drav.p.52"
+      },
+      {
+        "JPOS_IJPP": 138971,
+        "POS_NAZ": "Loka/Kopru"
+      },
+      {
+        "JPOS_IJPP": 138972,
+        "POS_NAZ": "Loka/Tržiču"
+      },
+      {
+        "JPOS_IJPP": 138975,
+        "POS_NAZ": "Lokanja vas"
+      },
+      {
+        "JPOS_IJPP": 138979,
+        "POS_NAZ": "Lokavec/Tratah K"
+      },
+      {
+        "JPOS_IJPP": 138980,
+        "POS_NAZ": "Lokavec/Tratah trg."
+      },
+      {
+        "JPOS_IJPP": 138981,
+        "POS_NAZ": "Loke v Tuhinju"
+      },
+      {
+        "JPOS_IJPP": 138984,
+        "POS_NAZ": "Lokev"
+      },
+      {
+        "JPOS_IJPP": 150512,
+        "POS_NAZ": "Lokev sp.vas"
+      },
+      {
+        "JPOS_IJPP": 138999,
+        "POS_NAZ": "Lom pod Storžičem"
+      },
+      {
+        "JPOS_IJPP": 139000,
+        "POS_NAZ": "Lomanoše 5"
+      },
+      {
+        "JPOS_IJPP": 139001,
+        "POS_NAZ": "Lomanoše bistro"
+      },
+      {
+        "JPOS_IJPP": 139005,
+        "POS_NAZ": "Lopar"
+      },
+      {
+        "JPOS_IJPP": 139009,
+        "POS_NAZ": "Loperšice"
+      },
+      {
+        "JPOS_IJPP": 139010,
+        "POS_NAZ": "Lormanje"
+      },
+      {
+        "JPOS_IJPP": 139011,
+        "POS_NAZ": "Lormanje K"
+      },
+      {
+        "JPOS_IJPP": 139014,
+        "POS_NAZ": "Lovnik"
+      },
+      {
+        "JPOS_IJPP": 139015,
+        "POS_NAZ": "Lovran"
+      },
+      {
+        "JPOS_IJPP": 139017,
+        "POS_NAZ": "Lovrenc na Poh.GD"
+      },
+      {
+        "JPOS_IJPP": 150480,
+        "POS_NAZ": "Lovrenc na Poh.pokop."
+      },
+      {
+        "JPOS_IJPP": 139018,
+        "POS_NAZ": "Lovrenc na Poh.Tov.kos"
+      },
+      {
+        "JPOS_IJPP": 141719,
+        "POS_NAZ": "Lovrenc na Poh.trg"
+      },
+      {
+        "JPOS_IJPP": 139019,
+        "POS_NAZ": "Lovrenc na Poh.ZD"
+      },
+      {
+        "JPOS_IJPP": 139020,
+        "POS_NAZ": "Lovrenc/Drav.p."
+      },
+      {
+        "JPOS_IJPP": 136635,
+        "POS_NAZ": "Lucija"
+      },
+      {
+        "JPOS_IJPP": 150666,
+        "POS_NAZ": "Lucija podvozna"
+      },
+      {
+        "JPOS_IJPP": 136639,
+        "POS_NAZ": "Lucija Š"
+      },
+      {
+        "JPOS_IJPP": 136637,
+        "POS_NAZ": "Lucija TPC"
+      },
+      {
+        "JPOS_IJPP": 165532,
+        "POS_NAZ": "Lucija Valeta"
+      },
+      {
+        "JPOS_IJPP": 139031,
+        "POS_NAZ": "Lučine"
+      },
+      {
+        "JPOS_IJPP": 139034,
+        "POS_NAZ": "Lukini"
+      },
+      {
+        "JPOS_IJPP": 139035,
+        "POS_NAZ": "Lukovec/Štanjelu"
+      },
+      {
+        "JPOS_IJPP": 139037,
+        "POS_NAZ": "Lukovica pri Domžalah"
+      },
+      {
+        "JPOS_IJPP": 139039,
+        "POS_NAZ": "Luša sp."
+      },
+      {
+        "JPOS_IJPP": 139040,
+        "POS_NAZ": "Luša zg."
+      },
+      {
+        "JPOS_IJPP": 139046,
+        "POS_NAZ": "Luže"
+      },
+      {
+        "JPOS_IJPP": 139065,
+        "POS_NAZ": "M.Ločnik/Turjaku"
+      },
+      {
+        "JPOS_IJPP": 139075,
+        "POS_NAZ": "M.Nedelja"
+      },
+      {
+        "JPOS_IJPP": 139076,
+        "POS_NAZ": "M.Nedelja K"
+      },
+      {
+        "JPOS_IJPP": 139079,
+        "POS_NAZ": "M.Otok"
+      },
+      {
+        "JPOS_IJPP": 139088,
+        "POS_NAZ": "M.Tinje"
+      },
+      {
+        "JPOS_IJPP": 139091,
+        "POS_NAZ": "M.Varnica"
+      },
+      {
+        "JPOS_IJPP": 139092,
+        "POS_NAZ": "M.Varnica 1"
+      },
+      {
+        "JPOS_IJPP": 139094,
+        "POS_NAZ": "M.vas/Muretincih"
+      },
+      {
+        "JPOS_IJPP": 139098,
+        "POS_NAZ": "M.Zimica"
+      },
+      {
+        "JPOS_IJPP": 139102,
+        "POS_NAZ": "Mačkovec/Postojni"
+      },
+      {
+        "JPOS_IJPP": 139103,
+        "POS_NAZ": "Mahniči"
+      },
+      {
+        "JPOS_IJPP": 139104,
+        "POS_NAZ": "Majcni"
+      },
+      {
+        "JPOS_IJPP": 139105,
+        "POS_NAZ": "Majski vrh K"
+      },
+      {
+        "JPOS_IJPP": 139106,
+        "POS_NAZ": "Majšperk"
+      },
+      {
+        "JPOS_IJPP": 139107,
+        "POS_NAZ": "Majšperk Breg"
+      },
+      {
+        "JPOS_IJPP": 150251,
+        "POS_NAZ": "Majšperk K"
+      },
+      {
+        "JPOS_IJPP": 139108,
+        "POS_NAZ": "Makole"
+      },
+      {
+        "JPOS_IJPP": 139109,
+        "POS_NAZ": "Makole Marof"
+      },
+      {
+        "JPOS_IJPP": 139114,
+        "POS_NAZ": "Malija"
+      },
+      {
+        "JPOS_IJPP": 139118,
+        "POS_NAZ": "Malna Draškovič"
+      },
+      {
+        "JPOS_IJPP": 139119,
+        "POS_NAZ": "Malna Rotar"
+      },
+      {
+        "JPOS_IJPP": 139122,
+        "POS_NAZ": "Manče"
+      },
+      {
+        "JPOS_IJPP": 139125,
+        "POS_NAZ": "Marezige"
+      },
+      {
+        "JPOS_IJPP": 139126,
+        "POS_NAZ": "Marezige Plahuti K"
+      },
+      {
+        "JPOS_IJPP": 139129,
+        "POS_NAZ": "Maribor AP"
+      },
+      {
+        "JPOS_IJPP": 165470,
+        "POS_NAZ": "Maribor Brezje"
+      },
+      {
+        "JPOS_IJPP": 165448,
+        "POS_NAZ": "Maribor C. XIV.divizije"
+      },
+      {
+        "JPOS_IJPP": 165447,
+        "POS_NAZ": "Maribor Čufarjeva - DSO"
+      },
+      {
+        "JPOS_IJPP": 165463,
+        "POS_NAZ": "Maribor Čufarjeva TVD Par"
+      },
+      {
+        "JPOS_IJPP": 165469,
+        "POS_NAZ": "Maribor Dupleška- Jarčeva"
+      },
+      {
+        "JPOS_IJPP": 165459,
+        "POS_NAZ": "Maribor Dupleška Tezenska"
+      },
+      {
+        "JPOS_IJPP": 136481,
+        "POS_NAZ": "Maribor ELKO"
+      },
+      {
+        "JPOS_IJPP": 165449,
+        "POS_NAZ": "Maribor Erjavčeva - ZD"
+      },
+      {
+        "JPOS_IJPP": 165452,
+        "POS_NAZ": "Maribor Greenwich"
+      },
+      {
+        "JPOS_IJPP": 165442,
+        "POS_NAZ": "Maribor Košaki Kos"
+      },
+      {
+        "JPOS_IJPP": 165443,
+        "POS_NAZ": "Maribor Košaki Opekarna"
+      },
+      {
+        "JPOS_IJPP": 165454,
+        "POS_NAZ": "Maribor Limbuška Lesarska"
+      },
+      {
+        "JPOS_IJPP": 165726,
+        "POS_NAZ": "Maribor Na Poljanah Tuš"
+      },
+      {
+        "JPOS_IJPP": 165450,
+        "POS_NAZ": "Maribor Pobreška Europark"
+      },
+      {
+        "JPOS_IJPP": 165456,
+        "POS_NAZ": "Maribor Pokop. Dobrava K"
+      },
+      {
+        "JPOS_IJPP": 165461,
+        "POS_NAZ": "Maribor Ptujska - Kovinar"
+      },
+      {
+        "JPOS_IJPP": 165462,
+        "POS_NAZ": "Maribor Ptujska - TAM"
+      },
+      {
+        "JPOS_IJPP": 165460,
+        "POS_NAZ": "Maribor Ptujska - Tržaška"
+      },
+      {
+        "JPOS_IJPP": 165468,
+        "POS_NAZ": "Maribor Šentiljska veteri"
+      },
+      {
+        "JPOS_IJPP": 165451,
+        "POS_NAZ": "Maribor Terme Fontana"
+      },
+      {
+        "JPOS_IJPP": 165457,
+        "POS_NAZ": "Maribor Titova - Nasipna"
+      },
+      {
+        "JPOS_IJPP": 165458,
+        "POS_NAZ": "Maribor TPC City"
+      },
+      {
+        "JPOS_IJPP": 165464,
+        "POS_NAZ": "Maribor Ul.Pariške komune"
+      },
+      {
+        "JPOS_IJPP": 165445,
+        "POS_NAZ": "Maribor Ul.V.Vlahović S31"
+      },
+      {
+        "JPOS_IJPP": 165440,
+        "POS_NAZ": "Maribor Ul.V.Vlahović TUŠ"
+      },
+      {
+        "JPOS_IJPP": 136507,
+        "POS_NAZ": "Maribor ŽP"
+      },
+      {
+        "JPOS_IJPP": 139137,
+        "POS_NAZ": "Marjeta na Drav.p."
+      },
+      {
+        "JPOS_IJPP": 139138,
+        "POS_NAZ": "Marjeta na Drav.p.G"
+      },
+      {
+        "JPOS_IJPP": 139144,
+        "POS_NAZ": "Markovci/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 165581,
+        "POS_NAZ": "Markovec-Center Za Gradom"
+      },
+      {
+        "JPOS_IJPP": 135789,
+        "POS_NAZ": "Markovec"
+      },
+      {
+        "JPOS_IJPP": 135791,
+        "POS_NAZ": "Markovec Š"
+      },
+      {
+        "JPOS_IJPP": 139148,
+        "POS_NAZ": "Markovo Kavran"
+      },
+      {
+        "JPOS_IJPP": 139154,
+        "POS_NAZ": "Marof/Vurberku"
+      },
+      {
+        "JPOS_IJPP": 139165,
+        "POS_NAZ": "Matenja vas"
+      },
+      {
+        "JPOS_IJPP": 152281,
+        "POS_NAZ": "Mavčiče pokopališče"
+      },
+      {
+        "JPOS_IJPP": 165206,
+        "POS_NAZ": "Mavčiče šola"
+      },
+      {
+        "JPOS_IJPP": 165428,
+        "POS_NAZ": "Medno"
+      },
+      {
+        "JPOS_IJPP": 139173,
+        "POS_NAZ": "Medno g.Tome"
+      },
+      {
+        "JPOS_IJPP": 139174,
+        "POS_NAZ": "Medoši"
+      },
+      {
+        "JPOS_IJPP": 139175,
+        "POS_NAZ": "Medribnik"
+      },
+      {
+        "JPOS_IJPP": 139176,
+        "POS_NAZ": "Medribnik Kolednik"
+      },
+      {
+        "JPOS_IJPP": 150252,
+        "POS_NAZ": "Medvedce"
+      },
+      {
+        "JPOS_IJPP": 136510,
+        "POS_NAZ": "Medvode"
+      },
+      {
+        "JPOS_IJPP": 139179,
+        "POS_NAZ": "Medvode na klancu"
+      },
+      {
+        "JPOS_IJPP": 139180,
+        "POS_NAZ": "Meja/Kr."
+      },
+      {
+        "JPOS_IJPP": 139181,
+        "POS_NAZ": "Mekinje"
+      },
+      {
+        "JPOS_IJPP": 139185,
+        "POS_NAZ": "Mengeš Lek"
+      },
+      {
+        "JPOS_IJPP": 139186,
+        "POS_NAZ": "Mengeš Lovec"
+      },
+      {
+        "JPOS_IJPP": 139187,
+        "POS_NAZ": "Mengeš Pavovec"
+      },
+      {
+        "JPOS_IJPP": 139188,
+        "POS_NAZ": "Mengeš Petrol"
+      },
+      {
+        "JPOS_IJPP": 135792,
+        "POS_NAZ": "Mercator"
+      },
+      {
+        "JPOS_IJPP": 139190,
+        "POS_NAZ": "Merče"
+      },
+      {
+        "JPOS_IJPP": 900559,
+        "POS_NAZ": "Mestna knjižnica Kranj"
+      },
+      {
+        "JPOS_IJPP": 139195,
+        "POS_NAZ": "Mestni Vrh"
+      },
+      {
+        "JPOS_IJPP": 139196,
+        "POS_NAZ": "Mestni Vrh 61"
+      },
+      {
+        "JPOS_IJPP": 139197,
+        "POS_NAZ": "Mestni Vrh K"
+      },
+      {
+        "JPOS_IJPP": 139198,
+        "POS_NAZ": "Mestni Vrh Urek"
+      },
+      {
+        "JPOS_IJPP": 139210,
+        "POS_NAZ": "Mihovce/Drav.p."
+      },
+      {
+        "JPOS_IJPP": 150778,
+        "POS_NAZ": "Mihovci pri V.Ned."
+      },
+      {
+        "JPOS_IJPP": 139212,
+        "POS_NAZ": "Mihovci pri V.Ned.trg."
+      },
+      {
+        "JPOS_IJPP": 165207,
+        "POS_NAZ": "Miklavž center"
+      },
+      {
+        "JPOS_IJPP": 165208,
+        "POS_NAZ": "Miklavž Gomile"
+      },
+      {
+        "JPOS_IJPP": 165209,
+        "POS_NAZ": "Miklavž Gradišnikova"
+      },
+      {
+        "JPOS_IJPP": 902067,
+        "POS_NAZ": "Miklavž kanal"
+      },
+      {
+        "JPOS_IJPP": 139219,
+        "POS_NAZ": "Miklavž pri Ormožu"
+      },
+      {
+        "JPOS_IJPP": 165210,
+        "POS_NAZ": "Miklavž Ruprova"
+      },
+      {
+        "JPOS_IJPP": 165211,
+        "POS_NAZ": "Miklavž šola"
+      },
+      {
+        "JPOS_IJPP": 165212,
+        "POS_NAZ": "Miklavž Vauhnik"
+      },
+      {
+        "JPOS_IJPP": 139220,
+        "POS_NAZ": "Milhar"
+      },
+      {
+        "JPOS_IJPP": 139222,
+        "POS_NAZ": "Milje"
+      },
+      {
+        "JPOS_IJPP": 165622,
+        "POS_NAZ": "Mlaka pri Kranju"
+      },
+      {
+        "JPOS_IJPP": 139242,
+        "POS_NAZ": "Mlin/Rovtah"
+      },
+      {
+        "JPOS_IJPP": 139243,
+        "POS_NAZ": "Mlini most"
+      },
+      {
+        "JPOS_IJPP": 139244,
+        "POS_NAZ": "Mlinše"
+      },
+      {
+        "JPOS_IJPP": 139245,
+        "POS_NAZ": "Močna"
+      },
+      {
+        "JPOS_IJPP": 150494,
+        "POS_NAZ": "Modraže"
+      },
+      {
+        "JPOS_IJPP": 139247,
+        "POS_NAZ": "Modrič"
+      },
+      {
+        "JPOS_IJPP": 139249,
+        "POS_NAZ": "Mojstrana"
+      },
+      {
+        "JPOS_IJPP": 139250,
+        "POS_NAZ": "Mojstrana Dovje"
+      },
+      {
+        "JPOS_IJPP": 139251,
+        "POS_NAZ": "Mojstrana Podkepa"
+      },
+      {
+        "JPOS_IJPP": 139256,
+        "POS_NAZ": "Moravče"
+      },
+      {
+        "JPOS_IJPP": 139260,
+        "POS_NAZ": "Moretini"
+      },
+      {
+        "JPOS_IJPP": 139261,
+        "POS_NAZ": "Morgani"
+      },
+      {
+        "JPOS_IJPP": 139262,
+        "POS_NAZ": "Morje"
+      },
+      {
+        "JPOS_IJPP": 139264,
+        "POS_NAZ": "Morski Jarek K"
+      },
+      {
+        "JPOS_IJPP": 139273,
+        "POS_NAZ": "Moste GD"
+      },
+      {
+        "JPOS_IJPP": 150662,
+        "POS_NAZ": "Moste Petrol"
+      },
+      {
+        "JPOS_IJPP": 139275,
+        "POS_NAZ": "Moste/Žirov.bloki"
+      },
+      {
+        "JPOS_IJPP": 139277,
+        "POS_NAZ": "Mostečno"
+      },
+      {
+        "JPOS_IJPP": 139278,
+        "POS_NAZ": "Mostičje"
+      },
+      {
+        "JPOS_IJPP": 139283,
+        "POS_NAZ": "Mostje/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 139284,
+        "POS_NAZ": "Mostje/Ptuju K"
+      },
+      {
+        "JPOS_IJPP": 139268,
+        "POS_NAZ": "Moše"
+      },
+      {
+        "JPOS_IJPP": 139269,
+        "POS_NAZ": "Moškanjci"
+      },
+      {
+        "JPOS_IJPP": 139270,
+        "POS_NAZ": "Mošnje"
+      },
+      {
+        "JPOS_IJPP": 139285,
+        "POS_NAZ": "Motnik"
+      },
+      {
+        "JPOS_IJPP": 139286,
+        "POS_NAZ": "Motnik zg."
+      },
+      {
+        "JPOS_IJPP": 139291,
+        "POS_NAZ": "Movraž"
+      },
+      {
+        "JPOS_IJPP": 139304,
+        "POS_NAZ": "Muretinci"
+      },
+      {
+        "JPOS_IJPP": 139317,
+        "POS_NAZ": "Murski Dvor"
+      },
+      {
+        "JPOS_IJPP": 139323,
+        "POS_NAZ": "Na Logu"
+      },
+      {
+        "JPOS_IJPP": 139324,
+        "POS_NAZ": "Na Luši K"
+      },
+      {
+        "JPOS_IJPP": 165552,
+        "POS_NAZ": "Nad Dolinsko cesto"
+      },
+      {
+        "JPOS_IJPP": 139329,
+        "POS_NAZ": "Nadlog"
+      },
+      {
+        "JPOS_IJPP": 139332,
+        "POS_NAZ": "Naklo/Kr."
+      },
+      {
+        "JPOS_IJPP": 139333,
+        "POS_NAZ": "Naklo/Kr.Š"
+      },
+      {
+        "JPOS_IJPP": 139334,
+        "POS_NAZ": "Naklo/Kr.vas"
+      },
+      {
+        "JPOS_IJPP": 139335,
+        "POS_NAZ": "Naklo/Kr.ZD"
+      },
+      {
+        "JPOS_IJPP": 139339,
+        "POS_NAZ": "Nasovče"
+      },
+      {
+        "JPOS_IJPP": 139353,
+        "POS_NAZ": "Nemilje"
+      },
+      {
+        "JPOS_IJPP": 139354,
+        "POS_NAZ": "Nemilje I"
+      },
+      {
+        "JPOS_IJPP": 139363,
+        "POS_NAZ": "Njivica/Kr."
+      },
+      {
+        "JPOS_IJPP": 139366,
+        "POS_NAZ": "Nomenj"
+      },
+      {
+        "JPOS_IJPP": 139369,
+        "POS_NAZ": "Nova Cerkev"
+      },
+      {
+        "JPOS_IJPP": 139373,
+        "POS_NAZ": "Nova Gorica AP"
+      },
+      {
+        "JPOS_IJPP": 136553,
+        "POS_NAZ": "Nova Gorica Grčna"
+      },
+      {
+        "JPOS_IJPP": 139379,
+        "POS_NAZ": "Nova vas Kortina"
+      },
+      {
+        "JPOS_IJPP": 139380,
+        "POS_NAZ": "Nova vas nad Dragonjo"
+      },
+      {
+        "JPOS_IJPP": 139381,
+        "POS_NAZ": "Nova vas pri Lescah"
+      },
+      {
+        "JPOS_IJPP": 139385,
+        "POS_NAZ": "Nova vas/Markovcih K"
+      },
+      {
+        "JPOS_IJPP": 139389,
+        "POS_NAZ": "Novake"
+      },
+      {
+        "JPOS_IJPP": 139393,
+        "POS_NAZ": "Novi Jork"
+      },
+      {
+        "JPOS_IJPP": 165213,
+        "POS_NAZ": "Novince"
+      },
+      {
+        "JPOS_IJPP": 165975,
+        "POS_NAZ": "Novinci pod Košarjakom"
+      },
+      {
+        "JPOS_IJPP": 139402,
+        "POS_NAZ": "Nožice"
+      },
+      {
+        "JPOS_IJPP": 164828,
+        "POS_NAZ": "Ob Dravi"
+      },
+      {
+        "JPOS_IJPP": 139406,
+        "POS_NAZ": "Oblaki"
+      },
+      {
+        "JPOS_IJPP": 139410,
+        "POS_NAZ": "Obrezija"
+      },
+      {
+        "JPOS_IJPP": 139408,
+        "POS_NAZ": "Obrež Bobot"
+      },
+      {
+        "JPOS_IJPP": 139409,
+        "POS_NAZ": "Obrež GD"
+      },
+      {
+        "JPOS_IJPP": 139414,
+        "POS_NAZ": "Obrne"
+      },
+      {
+        "JPOS_IJPP": 139424,
+        "POS_NAZ": "Okroglica"
+      },
+      {
+        "JPOS_IJPP": 152278,
+        "POS_NAZ": "Okroglo"
+      },
+      {
+        "JPOS_IJPP": 165555,
+        "POS_NAZ": "Oljčna pot Lantana"
+      },
+      {
+        "JPOS_IJPP": 135799,
+        "POS_NAZ": "Olmo"
+      },
+      {
+        "JPOS_IJPP": 164894,
+        "POS_NAZ": "Olmo Eden"
+      },
+      {
+        "JPOS_IJPP": 135800,
+        "POS_NAZ": "Olmo K"
+      },
+      {
+        "JPOS_IJPP": 139428,
+        "POS_NAZ": "Olševek"
+      },
+      {
+        "JPOS_IJPP": 139432,
+        "POS_NAZ": "Oplotnica"
+      },
+      {
+        "JPOS_IJPP": 139436,
+        "POS_NAZ": "Orehova vas 17"
+      },
+      {
+        "JPOS_IJPP": 139456,
+        "POS_NAZ": "Ormož"
+      },
+      {
+        "JPOS_IJPP": 165257,
+        "POS_NAZ": "Ormož bolnica"
+      },
+      {
+        "JPOS_IJPP": 139457,
+        "POS_NAZ": "Ormož tov."
+      },
+      {
+        "JPOS_IJPP": 139461,
+        "POS_NAZ": "Osek/Sl.G."
+      },
+      {
+        "JPOS_IJPP": 139465,
+        "POS_NAZ": "Osluševci"
+      },
+      {
+        "JPOS_IJPP": 150779,
+        "POS_NAZ": "Osluševci K"
+      },
+      {
+        "JPOS_IJPP": 139468,
+        "POS_NAZ": "Osp"
+      },
+      {
+        "JPOS_IJPP": 900654,
+        "POS_NAZ": "OŠ Bohinj Bistrica"
+      },
+      {
+        "JPOS_IJPP": 164838,
+        "POS_NAZ": "OŠ Breg"
+      },
+      {
+        "JPOS_IJPP": 164827,
+        "POS_NAZ": "OŠ Olge Meglič"
+      },
+      {
+        "JPOS_IJPP": 139493,
+        "POS_NAZ": "Ožbalt"
+      },
+      {
+        "JPOS_IJPP": 139494,
+        "POS_NAZ": "Ožbalt HE"
+      },
+      {
+        "JPOS_IJPP": 139496,
+        "POS_NAZ": "Pacinje"
+      },
+      {
+        "JPOS_IJPP": 165215,
+        "POS_NAZ": "Pacinje K"
+      },
+      {
+        "JPOS_IJPP": 139497,
+        "POS_NAZ": "Paderna"
+      },
+      {
+        "JPOS_IJPP": 139501,
+        "POS_NAZ": "Padna"
+      },
+      {
+        "JPOS_IJPP": 139502,
+        "POS_NAZ": "Padna K"
+      },
+      {
+        "JPOS_IJPP": 139515,
+        "POS_NAZ": "Pangršica K"
+      },
+      {
+        "JPOS_IJPP": 139518,
+        "POS_NAZ": "Parecag"
+      },
+      {
+        "JPOS_IJPP": 139520,
+        "POS_NAZ": "Parje"
+      },
+      {
+        "JPOS_IJPP": 165556,
+        "POS_NAZ": "Partizanska ulica"
+      },
+      {
+        "JPOS_IJPP": 164884,
+        "POS_NAZ": "Pasarela"
+      },
+      {
+        "JPOS_IJPP": 139523,
+        "POS_NAZ": "Pavlovci 8"
+      },
+      {
+        "JPOS_IJPP": 139524,
+        "POS_NAZ": "Pavlovci K"
+      },
+      {
+        "JPOS_IJPP": 139525,
+        "POS_NAZ": "PD Planinka Kop K"
+      },
+      {
+        "JPOS_IJPP": 139531,
+        "POS_NAZ": "Peče"
+      },
+      {
+        "JPOS_IJPP": 139533,
+        "POS_NAZ": "Peče K"
+      },
+      {
+        "JPOS_IJPP": 139534,
+        "POS_NAZ": "Pečica"
+      },
+      {
+        "JPOS_IJPP": 139539,
+        "POS_NAZ": "Pečke"
+      },
+      {
+        "JPOS_IJPP": 135890,
+        "POS_NAZ": "Perivnik"
+      },
+      {
+        "JPOS_IJPP": 139541,
+        "POS_NAZ": "Pernica"
+      },
+      {
+        "JPOS_IJPP": 139542,
+        "POS_NAZ": "Pernica jezero"
+      },
+      {
+        "JPOS_IJPP": 139551,
+        "POS_NAZ": "Pesnica pri Mar."
+      },
+      {
+        "JPOS_IJPP": 141721,
+        "POS_NAZ": "Pesnica pri Mar.S4"
+      },
+      {
+        "JPOS_IJPP": 150268,
+        "POS_NAZ": "Pesnica rondo"
+      },
+      {
+        "JPOS_IJPP": 139552,
+        "POS_NAZ": "Pesniški Dvor"
+      },
+      {
+        "JPOS_IJPP": 139553,
+        "POS_NAZ": "Pestike"
+      },
+      {
+        "JPOS_IJPP": 139557,
+        "POS_NAZ": "Petelinje"
+      },
+      {
+        "JPOS_IJPP": 139558,
+        "POS_NAZ": "Petelinjek/Blagovici"
+      },
+      {
+        "JPOS_IJPP": 139563,
+        "POS_NAZ": "Petkovec"
+      },
+      {
+        "JPOS_IJPP": 139564,
+        "POS_NAZ": "Petkovec Zavčan"
+      },
+      {
+        "JPOS_IJPP": 139566,
+        "POS_NAZ": "Petrinje"
+      },
+      {
+        "JPOS_IJPP": 165709,
+        "POS_NAZ": "PH Sonce"
+      },
+      {
+        "JPOS_IJPP": 139569,
+        "POS_NAZ": "Pijava Gorica"
+      },
+      {
+        "JPOS_IJPP": 139571,
+        "POS_NAZ": "Pilovc"
+      },
+      {
+        "JPOS_IJPP": 136642,
+        "POS_NAZ": "Piran"
+      },
+      {
+        "JPOS_IJPP": 165529,
+        "POS_NAZ": "Piran Bernardin K"
+      },
+      {
+        "JPOS_IJPP": 139579,
+        "POS_NAZ": "Pivka"
+      },
+      {
+        "JPOS_IJPP": 139580,
+        "POS_NAZ": "Pivola"
+      },
+      {
+        "JPOS_IJPP": 139582,
+        "POS_NAZ": "Placar 42"
+      },
+      {
+        "JPOS_IJPP": 139583,
+        "POS_NAZ": "Placar KZ"
+      },
+      {
+        "JPOS_IJPP": 139584,
+        "POS_NAZ": "Placerovci"
+      },
+      {
+        "JPOS_IJPP": 139581,
+        "POS_NAZ": "Plač"
+      },
+      {
+        "JPOS_IJPP": 139585,
+        "POS_NAZ": "Planica/Kr."
+      },
+      {
+        "JPOS_IJPP": 139591,
+        "POS_NAZ": "Planina pod Šumikom"
+      },
+      {
+        "JPOS_IJPP": 139592,
+        "POS_NAZ": "Planina pri Cerknem"
+      },
+      {
+        "JPOS_IJPP": 139593,
+        "POS_NAZ": "Planina/Rakeku"
+      },
+      {
+        "JPOS_IJPP": 139604,
+        "POS_NAZ": "Ples"
+      },
+      {
+        "JPOS_IJPP": 139605,
+        "POS_NAZ": "Pleš"
+      },
+      {
+        "JPOS_IJPP": 139616,
+        "POS_NAZ": "Pleterje/Drav.p."
+      },
+      {
+        "JPOS_IJPP": 139620,
+        "POS_NAZ": "Pliskovica"
+      },
+      {
+        "JPOS_IJPP": 139621,
+        "POS_NAZ": "Plitvički Vrh"
+      },
+      {
+        "JPOS_IJPP": 139623,
+        "POS_NAZ": "Ploderšnica"
+      },
+      {
+        "JPOS_IJPP": 139624,
+        "POS_NAZ": "Ploderšnica Savernik"
+      },
+      {
+        "JPOS_IJPP": 139625,
+        "POS_NAZ": "Ploderšnica Špindler"
+      },
+      {
+        "JPOS_IJPP": 139628,
+        "POS_NAZ": "Pobegi"
+      },
+      {
+        "JPOS_IJPP": 139629,
+        "POS_NAZ": "Pobegi P"
+      },
+      {
+        "JPOS_IJPP": 139631,
+        "POS_NAZ": "Pobrežje/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 139632,
+        "POS_NAZ": "Pobrežje/Ptuju trg."
+      },
+      {
+        "JPOS_IJPP": 139635,
+        "POS_NAZ": "Pod Voglom"
+      },
+      {
+        "JPOS_IJPP": 139637,
+        "POS_NAZ": "Podblica"
+      },
+      {
+        "JPOS_IJPP": 139643,
+        "POS_NAZ": "Podbrezje"
+      },
+      {
+        "JPOS_IJPP": 139649,
+        "POS_NAZ": "Podgora/Dobrepolju K"
+      },
+      {
+        "JPOS_IJPP": 139652,
+        "POS_NAZ": "Podgora/Šk.Loki"
+      },
+      {
+        "JPOS_IJPP": 139654,
+        "POS_NAZ": "Podgorci 60"
+      },
+      {
+        "JPOS_IJPP": 139655,
+        "POS_NAZ": "Podgorci Bombek"
+      },
+      {
+        "JPOS_IJPP": 150200,
+        "POS_NAZ": "Podgorje Slavka"
+      },
+      {
+        "JPOS_IJPP": 165636,
+        "POS_NAZ": "Podgorje/Kamniku I"
+      },
+      {
+        "JPOS_IJPP": 165637,
+        "POS_NAZ": "Podgorje/Kamniku II"
+      },
+      {
+        "JPOS_IJPP": 139661,
+        "POS_NAZ": "Podgorje/P.Krasu"
+      },
+      {
+        "JPOS_IJPP": 139662,
+        "POS_NAZ": "Podgorje/P.Krasu ŽP"
+      },
+      {
+        "JPOS_IJPP": 139668,
+        "POS_NAZ": "Podgrad pri Gornji Radgoni"
+      },
+      {
+        "JPOS_IJPP": 139669,
+        "POS_NAZ": "Podgrad/Izlakah"
+      },
+      {
+        "JPOS_IJPP": 150238,
+        "POS_NAZ": "Podgradje"
+      },
+      {
+        "JPOS_IJPP": 139677,
+        "POS_NAZ": "Podhom"
+      },
+      {
+        "JPOS_IJPP": 139679,
+        "POS_NAZ": "Podhrib"
+      },
+      {
+        "JPOS_IJPP": 139680,
+        "POS_NAZ": "Podhruška"
+      },
+      {
+        "JPOS_IJPP": 139681,
+        "POS_NAZ": "Podigrac trg."
+      },
+      {
+        "JPOS_IJPP": 139682,
+        "POS_NAZ": "Podjelovo Brdo"
+      },
+      {
+        "JPOS_IJPP": 139688,
+        "POS_NAZ": "Podklanec/Žireh"
+      },
+      {
+        "JPOS_IJPP": 135755,
+        "POS_NAZ": "Podkočna"
+      },
+      {
+        "JPOS_IJPP": 139689,
+        "POS_NAZ": "Podkoren"
+      },
+      {
+        "JPOS_IJPP": 139693,
+        "POS_NAZ": "Podkuže"
+      },
+      {
+        "JPOS_IJPP": 139696,
+        "POS_NAZ": "Podlanišče"
+      },
+      {
+        "JPOS_IJPP": 139697,
+        "POS_NAZ": "Podlehnik"
+      },
+      {
+        "JPOS_IJPP": 139698,
+        "POS_NAZ": "Podlehnik ambulanta"
+      },
+      {
+        "JPOS_IJPP": 139711,
+        "POS_NAZ": "Podljubelj"
+      },
+      {
+        "JPOS_IJPP": 139712,
+        "POS_NAZ": "Podljubelj I"
+      },
+      {
+        "JPOS_IJPP": 165743,
+        "POS_NAZ": "Podlom"
+      },
+      {
+        "JPOS_IJPP": 165745,
+        "POS_NAZ": "Podlom Osovnik"
+      },
+      {
+        "JPOS_IJPP": 150253,
+        "POS_NAZ": "Podlože"
+      },
+      {
+        "JPOS_IJPP": 139970,
+        "POS_NAZ": "Podlože K"
+      },
+      {
+        "JPOS_IJPP": 136677,
+        "POS_NAZ": "Podlubnik"
+      },
+      {
+        "JPOS_IJPP": 139717,
+        "POS_NAZ": "Podmilj"
+      },
+      {
+        "JPOS_IJPP": 139719,
+        "POS_NAZ": "Podnart"
+      },
+      {
+        "JPOS_IJPP": 139720,
+        "POS_NAZ": "Podnart pri Kovaču"
+      },
+      {
+        "JPOS_IJPP": 139721,
+        "POS_NAZ": "Podobeno"
+      },
+      {
+        "JPOS_IJPP": 139723,
+        "POS_NAZ": "Podova Lašič"
+      },
+      {
+        "JPOS_IJPP": 139724,
+        "POS_NAZ": "Podpadna"
+      },
+      {
+        "JPOS_IJPP": 139725,
+        "POS_NAZ": "Podpeč/Kopru obr."
+      },
+      {
+        "JPOS_IJPP": 139727,
+        "POS_NAZ": "Podplat"
+      },
+      {
+        "JPOS_IJPP": 139729,
+        "POS_NAZ": "Podpulfrca"
+      },
+      {
+        "JPOS_IJPP": 135891,
+        "POS_NAZ": "Podreča"
+      },
+      {
+        "JPOS_IJPP": 150226,
+        "POS_NAZ": "Podreča maln"
+      },
+      {
+        "JPOS_IJPP": 139733,
+        "POS_NAZ": "Podrošt"
+      },
+      {
+        "JPOS_IJPP": 139749,
+        "POS_NAZ": "Podvasca"
+      },
+      {
+        "JPOS_IJPP": 139752,
+        "POS_NAZ": "Podvin/Rad."
+      },
+      {
+        "JPOS_IJPP": 165265,
+        "POS_NAZ": "Podvinci"
+      },
+      {
+        "JPOS_IJPP": 165374,
+        "POS_NAZ": "Podvinci 1"
+      },
+      {
+        "JPOS_IJPP": 150320,
+        "POS_NAZ": "Podvinci 70"
+      },
+      {
+        "JPOS_IJPP": 139754,
+        "POS_NAZ": "Podvinci GD"
+      },
+      {
+        "JPOS_IJPP": 165217,
+        "POS_NAZ": "Podvinci igrišče"
+      },
+      {
+        "JPOS_IJPP": 139759,
+        "POS_NAZ": "Pohorje/Cirkulanah"
+      },
+      {
+        "JPOS_IJPP": 139760,
+        "POS_NAZ": "Pohorski dvor bloki"
+      },
+      {
+        "JPOS_IJPP": 139761,
+        "POS_NAZ": "Pohorski dvor obr."
+      },
+      {
+        "JPOS_IJPP": 139765,
+        "POS_NAZ": "Pokoše"
+      },
+      {
+        "JPOS_IJPP": 139766,
+        "POS_NAZ": "Polačice"
+      },
+      {
+        "JPOS_IJPP": 139767,
+        "POS_NAZ": "Polačice K"
+      },
+      {
+        "JPOS_IJPP": 150279,
+        "POS_NAZ": "Polana/Preddvoru"
+      },
+      {
+        "JPOS_IJPP": 139771,
+        "POS_NAZ": "Polana/Sliv.P."
+      },
+      {
+        "JPOS_IJPP": 139774,
+        "POS_NAZ": "Polenšak"
+      },
+      {
+        "JPOS_IJPP": 139779,
+        "POS_NAZ": "Polica/Kr."
+      },
+      {
+        "JPOS_IJPP": 139783,
+        "POS_NAZ": "Poljane nad Šk.Loko"
+      },
+      {
+        "JPOS_IJPP": 139784,
+        "POS_NAZ": "Poljane pri Štjaku K"
+      },
+      {
+        "JPOS_IJPP": 139786,
+        "POS_NAZ": "Poljane/Kočni"
+      },
+      {
+        "JPOS_IJPP": 139787,
+        "POS_NAZ": "Poljčane ŽP"
+      },
+      {
+        "JPOS_IJPP": 139788,
+        "POS_NAZ": "Poljče"
+      },
+      {
+        "JPOS_IJPP": 165218,
+        "POS_NAZ": "Polje v Bohinju"
+      },
+      {
+        "JPOS_IJPP": 139792,
+        "POS_NAZ": "Polje/Izlakah"
+      },
+      {
+        "JPOS_IJPP": 164835,
+        "POS_NAZ": "Poljska cesta 1"
+      },
+      {
+        "JPOS_IJPP": 164837,
+        "POS_NAZ": "Poljska cesta 3"
+      },
+      {
+        "JPOS_IJPP": 139802,
+        "POS_NAZ": "Pomjan"
+      },
+      {
+        "JPOS_IJPP": 139804,
+        "POS_NAZ": "Pongrce"
+      },
+      {
+        "JPOS_IJPP": 139808,
+        "POS_NAZ": "Ponikve/Avberju"
+      },
+      {
+        "JPOS_IJPP": 139811,
+        "POS_NAZ": "Ponikve/Dobrepolju"
+      },
+      {
+        "JPOS_IJPP": 139810,
+        "POS_NAZ": "Ponikve/Dobrepolju Inv.d."
+      },
+      {
+        "JPOS_IJPP": 139816,
+        "POS_NAZ": "Popetre K"
+      },
+      {
+        "JPOS_IJPP": 139817,
+        "POS_NAZ": "Popovci"
+      },
+      {
+        "JPOS_IJPP": 136645,
+        "POS_NAZ": "Portorož"
+      },
+      {
+        "JPOS_IJPP": 165530,
+        "POS_NAZ": "Portorož Fizine"
+      },
+      {
+        "JPOS_IJPP": 136646,
+        "POS_NAZ": "Portorož H"
+      },
+      {
+        "JPOS_IJPP": 165531,
+        "POS_NAZ": "Portorož Lucija H"
+      },
+      {
+        "JPOS_IJPP": 139819,
+        "POS_NAZ": "Posavec"
+      },
+      {
+        "JPOS_IJPP": 139821,
+        "POS_NAZ": "Postojna"
+      },
+      {
+        "JPOS_IJPP": 136669,
+        "POS_NAZ": "Postojna LIV"
+      },
+      {
+        "JPOS_IJPP": 139822,
+        "POS_NAZ": "Postojna SŠC"
+      },
+      {
+        "JPOS_IJPP": 139823,
+        "POS_NAZ": "Potiskavec"
+      },
+      {
+        "JPOS_IJPP": 165557,
+        "POS_NAZ": "Potniški terminal"
+      },
+      {
+        "JPOS_IJPP": 139825,
+        "POS_NAZ": "Potoče/Preddvoru"
+      },
+      {
+        "JPOS_IJPP": 139826,
+        "POS_NAZ": "Potoče/Senožečah"
+      },
+      {
+        "JPOS_IJPP": 139828,
+        "POS_NAZ": "Potok/Tuhinju"
+      },
+      {
+        "JPOS_IJPP": 139829,
+        "POS_NAZ": "Potoki/Jes."
+      },
+      {
+        "JPOS_IJPP": 139831,
+        "POS_NAZ": "Povir"
+      },
+      {
+        "JPOS_IJPP": 150224,
+        "POS_NAZ": "Povlje K"
+      },
+      {
+        "JPOS_IJPP": 139834,
+        "POS_NAZ": "Poženk"
+      },
+      {
+        "JPOS_IJPP": 139838,
+        "POS_NAZ": "Prade"
+      },
+      {
+        "JPOS_IJPP": 139839,
+        "POS_NAZ": "Pragersko marof"
+      },
+      {
+        "JPOS_IJPP": 139840,
+        "POS_NAZ": "Pragersko ŽP"
+      },
+      {
+        "JPOS_IJPP": 139848,
+        "POS_NAZ": "Praproče/P.Krasu K"
+      },
+      {
+        "JPOS_IJPP": 139849,
+        "POS_NAZ": "Praprotna Polica"
+      },
+      {
+        "JPOS_IJPP": 139850,
+        "POS_NAZ": "Praprotno/Selščici"
+      },
+      {
+        "JPOS_IJPP": 135892,
+        "POS_NAZ": "Praše"
+      },
+      {
+        "JPOS_IJPP": 139851,
+        "POS_NAZ": "Prebačevo"
+      },
+      {
+        "JPOS_IJPP": 139852,
+        "POS_NAZ": "Prebačevo I"
+      },
+      {
+        "JPOS_IJPP": 139859,
+        "POS_NAZ": "Preddvor bloki"
+      },
+      {
+        "JPOS_IJPP": 150663,
+        "POS_NAZ": "Preddvor Križnar"
+      },
+      {
+        "JPOS_IJPP": 139860,
+        "POS_NAZ": "Preddvor pri Zupancu"
+      },
+      {
+        "JPOS_IJPP": 139858,
+        "POS_NAZ": "Preddvor trgovina"
+      },
+      {
+        "JPOS_IJPP": 139864,
+        "POS_NAZ": "Predloka"
+      },
+      {
+        "JPOS_IJPP": 135893,
+        "POS_NAZ": "Predoslje"
+      },
+      {
+        "JPOS_IJPP": 164802,
+        "POS_NAZ": "Predoslje GD"
+      },
+      {
+        "JPOS_IJPP": 135894,
+        "POS_NAZ": "Predoslje Š"
+      },
+      {
+        "JPOS_IJPP": 139867,
+        "POS_NAZ": "Predstruge"
+      },
+      {
+        "JPOS_IJPP": 139868,
+        "POS_NAZ": "Pregara"
+      },
+      {
+        "JPOS_IJPP": 150211,
+        "POS_NAZ": "Pregara Hrib"
+      },
+      {
+        "JPOS_IJPP": 150212,
+        "POS_NAZ": "Pregara pred vasjo"
+      },
+      {
+        "JPOS_IJPP": 139878,
+        "POS_NAZ": "Prelog"
+      },
+      {
+        "JPOS_IJPP": 139879,
+        "POS_NAZ": "Prelog Magan"
+      },
+      {
+        "JPOS_IJPP": 139887,
+        "POS_NAZ": "Prepolje/Drav.p."
+      },
+      {
+        "JPOS_IJPP": 139888,
+        "POS_NAZ": "Prepolje/Drav.p.G"
+      },
+      {
+        "JPOS_IJPP": 139889,
+        "POS_NAZ": "Prerad K"
+      },
+      {
+        "JPOS_IJPP": 139892,
+        "POS_NAZ": "Preserje pri Radomljah"
+      },
+      {
+        "JPOS_IJPP": 139893,
+        "POS_NAZ": "Preserje/Komnu"
+      },
+      {
+        "JPOS_IJPP": 139896,
+        "POS_NAZ": "Preska pri Medvodah"
+      },
+      {
+        "JPOS_IJPP": 139897,
+        "POS_NAZ": "Preska pri Tržiču"
+      },
+      {
+        "JPOS_IJPP": 139900,
+        "POS_NAZ": "Prestranek"
+      },
+      {
+        "JPOS_IJPP": 139890,
+        "POS_NAZ": "Preša"
+      },
+      {
+        "JPOS_IJPP": 139902,
+        "POS_NAZ": "Pretrež"
+      },
+      {
+        "JPOS_IJPP": 139910,
+        "POS_NAZ": "Prevoje"
+      },
+      {
+        "JPOS_IJPP": 139911,
+        "POS_NAZ": "Prevole"
+      },
+      {
+        "JPOS_IJPP": 139914,
+        "POS_NAZ": "Pri Amru"
+      },
+      {
+        "JPOS_IJPP": 139915,
+        "POS_NAZ": "Pri Barbi"
+      },
+      {
+        "JPOS_IJPP": 139916,
+        "POS_NAZ": "Pri Barbi Pavelnu"
+      },
+      {
+        "JPOS_IJPP": 139918,
+        "POS_NAZ": "Pri cerkvi"
+      },
+      {
+        "JPOS_IJPP": 139919,
+        "POS_NAZ": "Pri Klusu"
+      },
+      {
+        "JPOS_IJPP": 165511,
+        "POS_NAZ": "Primskovo Dolnov"
+      },
+      {
+        "JPOS_IJPP": 135895,
+        "POS_NAZ": "Primskovo Mercator"
+      },
+      {
+        "JPOS_IJPP": 135802,
+        "POS_NAZ": "Prisoje"
+      },
+      {
+        "JPOS_IJPP": 165558,
+        "POS_NAZ": "Prisoje pod garažo"
+      },
+      {
+        "JPOS_IJPP": 139931,
+        "POS_NAZ": "Pristava/Cirkulanah"
+      },
+      {
+        "JPOS_IJPP": 139932,
+        "POS_NAZ": "Pristava/Cirkulanah K"
+      },
+      {
+        "JPOS_IJPP": 139934,
+        "POS_NAZ": "Pristava/Trž."
+      },
+      {
+        "JPOS_IJPP": 139948,
+        "POS_NAZ": "Pršetinci K"
+      },
+      {
+        "JPOS_IJPP": 139951,
+        "POS_NAZ": "Prvačina"
+      },
+      {
+        "JPOS_IJPP": 139952,
+        "POS_NAZ": "Prvačina ŽP"
+      },
+      {
+        "JPOS_IJPP": 139953,
+        "POS_NAZ": "Prvenci"
+      },
+      {
+        "JPOS_IJPP": 139954,
+        "POS_NAZ": "Pš.Polica"
+      },
+      {
+        "JPOS_IJPP": 139955,
+        "POS_NAZ": "Pševo"
+      },
+      {
+        "JPOS_IJPP": 135897,
+        "POS_NAZ": "Pševska c.52"
+      },
+      {
+        "JPOS_IJPP": 139956,
+        "POS_NAZ": "Ptuj AP"
+      },
+      {
+        "JPOS_IJPP": 139957,
+        "POS_NAZ": "Ptuj bol."
+      },
+      {
+        "JPOS_IJPP": 139958,
+        "POS_NAZ": "Ptuj Breg"
+      },
+      {
+        "JPOS_IJPP": 139959,
+        "POS_NAZ": "Ptuj Breg trg."
+      },
+      {
+        "JPOS_IJPP": 139960,
+        "POS_NAZ": "Ptuj Budina"
+      },
+      {
+        "JPOS_IJPP": 165692,
+        "POS_NAZ": "Ptuj Dornavska c. Merkur"
+      },
+      {
+        "JPOS_IJPP": 150322,
+        "POS_NAZ": "Ptuj Maistrova ulica"
+      },
+      {
+        "JPOS_IJPP": 139961,
+        "POS_NAZ": "Ptuj Nova vas"
+      },
+      {
+        "JPOS_IJPP": 150323,
+        "POS_NAZ": "Ptuj Nova vas 89"
+      },
+      {
+        "JPOS_IJPP": 150324,
+        "POS_NAZ": "Ptuj Nova vas cerkev"
+      },
+      {
+        "JPOS_IJPP": 139962,
+        "POS_NAZ": "Ptuj Ormoška"
+      },
+      {
+        "JPOS_IJPP": 150326,
+        "POS_NAZ": "Ptuj pod Gradom"
+      },
+      {
+        "JPOS_IJPP": 139963,
+        "POS_NAZ": "Ptuj Rogoznica"
+      },
+      {
+        "JPOS_IJPP": 139965,
+        "POS_NAZ": "Ptuj Rogoznica n.pokop."
+      },
+      {
+        "JPOS_IJPP": 139966,
+        "POS_NAZ": "Ptuj Rogoznica zad."
+      },
+      {
+        "JPOS_IJPP": 164833,
+        "POS_NAZ": "Ptuj Selska c. 46"
+      },
+      {
+        "JPOS_IJPP": 139967,
+        "POS_NAZ": "Ptuj SŠC"
+      },
+      {
+        "JPOS_IJPP": 139968,
+        "POS_NAZ": "Ptuj Transservis"
+      },
+      {
+        "JPOS_IJPP": 139969,
+        "POS_NAZ": "Ptuj Turnišče"
+      },
+      {
+        "JPOS_IJPP": 150328,
+        "POS_NAZ": "Ptuj Ul. 5 Prekomorske 13"
+      },
+      {
+        "JPOS_IJPP": 152155,
+        "POS_NAZ": "Ptuj Zadružni trg"
+      },
+      {
+        "JPOS_IJPP": 139971,
+        "POS_NAZ": "Ptujska Gora"
+      },
+      {
+        "JPOS_IJPP": 139972,
+        "POS_NAZ": "Ptujska Gora 108"
+      },
+      {
+        "JPOS_IJPP": 139973,
+        "POS_NAZ": "Puče"
+      },
+      {
+        "JPOS_IJPP": 139974,
+        "POS_NAZ": "Puče K"
+      },
+      {
+        "JPOS_IJPP": 139980,
+        "POS_NAZ": "Pungart"
+      },
+      {
+        "JPOS_IJPP": 900784,
+        "POS_NAZ": "Pungert"
+      },
+      {
+        "JPOS_IJPP": 139983,
+        "POS_NAZ": "Puščava/Lovrencu"
+      },
+      {
+        "JPOS_IJPP": 139985,
+        "POS_NAZ": "Pušenci K"
+      },
+      {
+        "JPOS_IJPP": 139993,
+        "POS_NAZ": "Rače Mariborska 61"
+      },
+      {
+        "JPOS_IJPP": 139994,
+        "POS_NAZ": "Rače Pinus"
+      },
+      {
+        "JPOS_IJPP": 140003,
+        "POS_NAZ": "Radehova"
+      },
+      {
+        "JPOS_IJPP": 140007,
+        "POS_NAZ": "Radizel"
+      },
+      {
+        "JPOS_IJPP": 140008,
+        "POS_NAZ": "Radizel 63"
+      },
+      {
+        "JPOS_IJPP": 140016,
+        "POS_NAZ": "Radohova vas/Pivki"
+      },
+      {
+        "JPOS_IJPP": 140018,
+        "POS_NAZ": "Radomerje"
+      },
+      {
+        "JPOS_IJPP": 150239,
+        "POS_NAZ": "Radomerje GD"
+      },
+      {
+        "JPOS_IJPP": 140019,
+        "POS_NAZ": "Radomlje"
+      },
+      {
+        "JPOS_IJPP": 150109,
+        "POS_NAZ": "Radomlje Pošta"
+      },
+      {
+        "JPOS_IJPP": 150498,
+        "POS_NAZ": "Radoslavci Bratuša 68"
+      },
+      {
+        "JPOS_IJPP": 140026,
+        "POS_NAZ": "Radovljica"
+      },
+      {
+        "JPOS_IJPP": 165229,
+        "POS_NAZ": "Radovljica zahod"
+      },
+      {
+        "JPOS_IJPP": 141727,
+        "POS_NAZ": "Raduha pri Sladkem Vrhu"
+      },
+      {
+        "JPOS_IJPP": 140032,
+        "POS_NAZ": "Rafolče"
+      },
+      {
+        "JPOS_IJPP": 140044,
+        "POS_NAZ": "Rakitnik"
+      },
+      {
+        "JPOS_IJPP": 140045,
+        "POS_NAZ": "Rakitovec/Kopru"
+      },
+      {
+        "JPOS_IJPP": 140046,
+        "POS_NAZ": "Rakitovec/Kopru ŽP"
+      },
+      {
+        "JPOS_IJPP": 135898,
+        "POS_NAZ": "Rakovica"
+      },
+      {
+        "JPOS_IJPP": 140050,
+        "POS_NAZ": "Rakovnik/Medvodah"
+      },
+      {
+        "JPOS_IJPP": 140051,
+        "POS_NAZ": "Ranca"
+      },
+      {
+        "JPOS_IJPP": 140053,
+        "POS_NAZ": "Raša"
+      },
+      {
+        "JPOS_IJPP": 165281,
+        "POS_NAZ": "Rašica/V.Lašče"
+      },
+      {
+        "JPOS_IJPP": 140055,
+        "POS_NAZ": "Ratanska vas"
+      },
+      {
+        "JPOS_IJPP": 140056,
+        "POS_NAZ": "Rateče Planica"
+      },
+      {
+        "JPOS_IJPP": 150665,
+        "POS_NAZ": "Ratkovec"
+      },
+      {
+        "JPOS_IJPP": 152235,
+        "POS_NAZ": "Ravne pod Krvavcem"
+      },
+      {
+        "JPOS_IJPP": 140078,
+        "POS_NAZ": "Ravnje"
+      },
+      {
+        "JPOS_IJPP": 140080,
+        "POS_NAZ": "Razbank"
+      },
+      {
+        "JPOS_IJPP": 140084,
+        "POS_NAZ": "Razdrto"
+      },
+      {
+        "JPOS_IJPP": 140085,
+        "POS_NAZ": "Razdrto K"
+      },
+      {
+        "JPOS_IJPP": 140086,
+        "POS_NAZ": "Razdrto tri hiše"
+      },
+      {
+        "JPOS_IJPP": 140089,
+        "POS_NAZ": "Razguri K"
+      },
+      {
+        "JPOS_IJPP": 140093,
+        "POS_NAZ": "Razpotje/Izlakah"
+      },
+      {
+        "JPOS_IJPP": 165453,
+        "POS_NAZ": "Razvanje Jeklotehna"
+      },
+      {
+        "JPOS_IJPP": 165465,
+        "POS_NAZ": "Razvanje Vema"
+      },
+      {
+        "JPOS_IJPP": 140101,
+        "POS_NAZ": "Rečica/Bledu"
+      },
+      {
+        "JPOS_IJPP": 140102,
+        "POS_NAZ": "Rečica/Bledu LIP"
+      },
+      {
+        "JPOS_IJPP": 140107,
+        "POS_NAZ": "Reka/Hoč.P."
+      },
+      {
+        "JPOS_IJPP": 140116,
+        "POS_NAZ": "Rep"
+      },
+      {
+        "JPOS_IJPP": 140117,
+        "POS_NAZ": "Reparec"
+      },
+      {
+        "JPOS_IJPP": 140129,
+        "POS_NAZ": "Reteče"
+      },
+      {
+        "JPOS_IJPP": 140132,
+        "POS_NAZ": "Ribče sp."
+      },
+      {
+        "JPOS_IJPP": 140133,
+        "POS_NAZ": "Ribče zg."
+      },
+      {
+        "JPOS_IJPP": 140134,
+        "POS_NAZ": "Ribčev Laz"
+      },
+      {
+        "JPOS_IJPP": 140145,
+        "POS_NAZ": "Ribno"
+      },
+      {
+        "JPOS_IJPP": 164818,
+        "POS_NAZ": "Rimska peč"
+      },
+      {
+        "JPOS_IJPP": 140152,
+        "POS_NAZ": "Rižana"
+      },
+      {
+        "JPOS_IJPP": 165258,
+        "POS_NAZ": "Rjavci/Hočje"
+      },
+      {
+        "JPOS_IJPP": 140154,
+        "POS_NAZ": "Rjavica"
+      },
+      {
+        "JPOS_IJPP": 140160,
+        "POS_NAZ": "Rodica"
+      },
+      {
+        "JPOS_IJPP": 140161,
+        "POS_NAZ": "Rodik"
+      },
+      {
+        "JPOS_IJPP": 140162,
+        "POS_NAZ": "Rodine"
+      },
+      {
+        "JPOS_IJPP": 140164,
+        "POS_NAZ": "Rodni Vrh K"
+      },
+      {
+        "JPOS_IJPP": 140165,
+        "POS_NAZ": "Rogaška Slatina"
+      },
+      {
+        "JPOS_IJPP": 140167,
+        "POS_NAZ": "Rogaška Slatina stek."
+      },
+      {
+        "JPOS_IJPP": 140169,
+        "POS_NAZ": "Rogatec"
+      },
+      {
+        "JPOS_IJPP": 140170,
+        "POS_NAZ": "Rogatec Š"
+      },
+      {
+        "JPOS_IJPP": 140171,
+        "POS_NAZ": "Rogatnica"
+      },
+      {
+        "JPOS_IJPP": 140175,
+        "POS_NAZ": "Rogoza KS"
+      },
+      {
+        "JPOS_IJPP": 140176,
+        "POS_NAZ": "Rogoza obr."
+      },
+      {
+        "JPOS_IJPP": 140177,
+        "POS_NAZ": "Rogoza Vrtec"
+      },
+      {
+        "JPOS_IJPP": 140178,
+        "POS_NAZ": "Rogoznica/Jiršovcih"
+      },
+      {
+        "JPOS_IJPP": 140186,
+        "POS_NAZ": "Rošnja"
+      },
+      {
+        "JPOS_IJPP": 140187,
+        "POS_NAZ": "Rotek"
+      },
+      {
+        "JPOS_IJPP": 140188,
+        "POS_NAZ": "Rova/Radomljah"
+      },
+      {
+        "JPOS_IJPP": 140193,
+        "POS_NAZ": "Rovte"
+      },
+      {
+        "JPOS_IJPP": 140194,
+        "POS_NAZ": "Rovte K"
+      },
+      {
+        "JPOS_IJPP": 165559,
+        "POS_NAZ": "Rozmanova ulica"
+      },
+      {
+        "JPOS_IJPP": 165560,
+        "POS_NAZ": "Rozmanova ulica II"
+      },
+      {
+        "JPOS_IJPP": 140196,
+        "POS_NAZ": "Rožengrunt kapela"
+      },
+      {
+        "JPOS_IJPP": 140197,
+        "POS_NAZ": "Rožengrunt žaga"
+      },
+      {
+        "JPOS_IJPP": 136559,
+        "POS_NAZ": "Rožna Dolina"
+      },
+      {
+        "JPOS_IJPP": 135899,
+        "POS_NAZ": "Rožna ulica"
+      },
+      {
+        "JPOS_IJPP": 140206,
+        "POS_NAZ": "Rucmanci"
+      },
+      {
+        "JPOS_IJPP": 140212,
+        "POS_NAZ": "Rudno"
+      },
+      {
+        "JPOS_IJPP": 135900,
+        "POS_NAZ": "Rupa"
+      },
+      {
+        "JPOS_IJPP": 165282,
+        "POS_NAZ": "Ruperče K"
+      },
+      {
+        "JPOS_IJPP": 140217,
+        "POS_NAZ": "Ruperče Ložane"
+      },
+      {
+        "JPOS_IJPP": 140219,
+        "POS_NAZ": "Ruše"
+      },
+      {
+        "JPOS_IJPP": 150346,
+        "POS_NAZ": "Ruše GD"
+      },
+      {
+        "JPOS_IJPP": 140220,
+        "POS_NAZ": "Ruše Š"
+      },
+      {
+        "JPOS_IJPP": 140223,
+        "POS_NAZ": "Ruše ŠC"
+      },
+      {
+        "JPOS_IJPP": 138935,
+        "POS_NAZ": "Ruše Škerget"
+      },
+      {
+        "JPOS_IJPP": 140222,
+        "POS_NAZ": "Ruše Tov.dušika K"
+      },
+      {
+        "JPOS_IJPP": 138936,
+        "POS_NAZ": "Ruše/Smolniku viadukt"
+      },
+      {
+        "JPOS_IJPP": 140224,
+        "POS_NAZ": "Ruta"
+      },
+      {
+        "JPOS_IJPP": 140231,
+        "POS_NAZ": "Saksid"
+      },
+      {
+        "JPOS_IJPP": 140232,
+        "POS_NAZ": "Sakušak"
+      },
+      {
+        "JPOS_IJPP": 140247,
+        "POS_NAZ": "Savci 53"
+      },
+      {
+        "JPOS_IJPP": 140248,
+        "POS_NAZ": "Savci 70"
+      },
+      {
+        "JPOS_IJPP": 165219,
+        "POS_NAZ": "Savica vas/village"
+      },
+      {
+        "JPOS_IJPP": 140255,
+        "POS_NAZ": "Sebenje/Bledu"
+      },
+      {
+        "JPOS_IJPP": 140256,
+        "POS_NAZ": "Sebenje/Trž."
+      },
+      {
+        "JPOS_IJPP": 140261,
+        "POS_NAZ": "Seča"
+      },
+      {
+        "JPOS_IJPP": 140262,
+        "POS_NAZ": "Sečovlje K"
+      },
+      {
+        "JPOS_IJPP": 140263,
+        "POS_NAZ": "Sečovlje Š"
+      },
+      {
+        "JPOS_IJPP": 140269,
+        "POS_NAZ": "Sejanci 51"
+      },
+      {
+        "JPOS_IJPP": 140282,
+        "POS_NAZ": "Sela/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 140283,
+        "POS_NAZ": "Sela/Ptuju K"
+      },
+      {
+        "JPOS_IJPP": 140285,
+        "POS_NAZ": "Sela/Sežani K"
+      },
+      {
+        "JPOS_IJPP": 141672,
+        "POS_NAZ": "Selca"
+      },
+      {
+        "JPOS_IJPP": 140290,
+        "POS_NAZ": "Selce/Pivki"
+      },
+      {
+        "JPOS_IJPP": 140291,
+        "POS_NAZ": "Selce/Sl.G."
+      },
+      {
+        "JPOS_IJPP": 140293,
+        "POS_NAZ": "Sele pri Polskavi kapela"
+      },
+      {
+        "JPOS_IJPP": 140299,
+        "POS_NAZ": "Selnica ob Dravi"
+      },
+      {
+        "JPOS_IJPP": 140300,
+        "POS_NAZ": "Selnica ob Muri K"
+      },
+      {
+        "JPOS_IJPP": 140301,
+        "POS_NAZ": "Selnica ob Muri Lah"
+      },
+      {
+        "JPOS_IJPP": 140303,
+        "POS_NAZ": "Selo pri Moravčah"
+      },
+      {
+        "JPOS_IJPP": 141728,
+        "POS_NAZ": "Selo/Štjaku"
+      },
+      {
+        "JPOS_IJPP": 140311,
+        "POS_NAZ": "Selo/Žireh"
+      },
+      {
+        "JPOS_IJPP": 140312,
+        "POS_NAZ": "Selo/Žireh I"
+      },
+      {
+        "JPOS_IJPP": 164886,
+        "POS_NAZ": "Semedela-tunel"
+      },
+      {
+        "JPOS_IJPP": 140323,
+        "POS_NAZ": "Senadole"
+      },
+      {
+        "JPOS_IJPP": 140324,
+        "POS_NAZ": "Senadolice"
+      },
+      {
+        "JPOS_IJPP": 140325,
+        "POS_NAZ": "Senčak pri Juršincih"
+      },
+      {
+        "JPOS_IJPP": 140326,
+        "POS_NAZ": "Senčak pri Juršincih 30"
+      },
+      {
+        "JPOS_IJPP": 140332,
+        "POS_NAZ": "Senešci"
+      },
+      {
+        "JPOS_IJPP": 140335,
+        "POS_NAZ": "Senično"
+      },
+      {
+        "JPOS_IJPP": 140340,
+        "POS_NAZ": "Senožeče"
+      },
+      {
+        "JPOS_IJPP": 140341,
+        "POS_NAZ": "Senožeti/Lit.pri Janezu"
+      },
+      {
+        "JPOS_IJPP": 140342,
+        "POS_NAZ": "Senožeti/Litiji"
+      },
+      {
+        "JPOS_IJPP": 140343,
+        "POS_NAZ": "Senožeti/Litiji K"
+      },
+      {
+        "JPOS_IJPP": 150254,
+        "POS_NAZ": "Sestrže"
+      },
+      {
+        "JPOS_IJPP": 140396,
+        "POS_NAZ": "Sežana"
+      },
+      {
+        "JPOS_IJPP": 140397,
+        "POS_NAZ": "Sežana občina"
+      },
+      {
+        "JPOS_IJPP": 165628,
+        "POS_NAZ": "Sežana OŠ"
+      },
+      {
+        "JPOS_IJPP": 140398,
+        "POS_NAZ": "Sežana Š"
+      },
+      {
+        "JPOS_IJPP": 140402,
+        "POS_NAZ": "Simonov zaliv"
+      },
+      {
+        "JPOS_IJPP": 140406,
+        "POS_NAZ": "Sirči"
+      },
+      {
+        "JPOS_IJPP": 140436,
+        "POS_NAZ": "Skoke"
+      },
+      {
+        "JPOS_IJPP": 140444,
+        "POS_NAZ": "Skopo"
+      },
+      {
+        "JPOS_IJPP": 140445,
+        "POS_NAZ": "Skorba"
+      },
+      {
+        "JPOS_IJPP": 140470,
+        "POS_NAZ": "Sladki Vrh"
+      },
+      {
+        "JPOS_IJPP": 150240,
+        "POS_NAZ": "Slamnjak"
+      },
+      {
+        "JPOS_IJPP": 165220,
+        "POS_NAZ": "Slap Savica/waterfall"
+      },
+      {
+        "JPOS_IJPP": 140477,
+        "POS_NAZ": "Slap/Trž."
+      },
+      {
+        "JPOS_IJPP": 140479,
+        "POS_NAZ": "Slape"
+      },
+      {
+        "JPOS_IJPP": 140480,
+        "POS_NAZ": "Slatenik"
+      },
+      {
+        "JPOS_IJPP": 140483,
+        "POS_NAZ": "Slatinski Dol"
+      },
+      {
+        "JPOS_IJPP": 140484,
+        "POS_NAZ": "Slatna"
+      },
+      {
+        "JPOS_IJPP": 165157,
+        "POS_NAZ": "Slavšina Galušak"
+      },
+      {
+        "JPOS_IJPP": 165221,
+        "POS_NAZ": "Slavšina Košarjak"
+      },
+      {
+        "JPOS_IJPP": 165222,
+        "POS_NAZ": "Slavšina odcep Jaklin"
+      },
+      {
+        "JPOS_IJPP": 165223,
+        "POS_NAZ": "Slavšina/Novinci"
+      },
+      {
+        "JPOS_IJPP": 140492,
+        "POS_NAZ": "Slivnica pri Mar."
+      },
+      {
+        "JPOS_IJPP": 140496,
+        "POS_NAZ": "Slomi K"
+      },
+      {
+        "JPOS_IJPP": 140497,
+        "POS_NAZ": "Slovenja vas"
+      },
+      {
+        "JPOS_IJPP": 140455,
+        "POS_NAZ": "Slovenska Bistrica"
+      },
+      {
+        "JPOS_IJPP": 140457,
+        "POS_NAZ": "Slovenska Bistrica GD"
+      },
+      {
+        "JPOS_IJPP": 140458,
+        "POS_NAZ": "Slovenska Bistrica grad"
+      },
+      {
+        "JPOS_IJPP": 140459,
+        "POS_NAZ": "Slovenska Bistrica Impol"
+      },
+      {
+        "JPOS_IJPP": 140460,
+        "POS_NAZ": "Slovenska Bistrica LD"
+      },
+      {
+        "JPOS_IJPP": 140456,
+        "POS_NAZ": "Slovenska Bistrica Leonardo"
+      },
+      {
+        "JPOS_IJPP": 140461,
+        "POS_NAZ": "Slovenska Bistrica Mercator"
+      },
+      {
+        "JPOS_IJPP": 140462,
+        "POS_NAZ": "Slovenska Bistrica ZD"
+      },
+      {
+        "JPOS_IJPP": 140463,
+        "POS_NAZ": "Slovenska Bistrica ŽP"
+      },
+      {
+        "JPOS_IJPP": 135759,
+        "POS_NAZ": "Slovenski Javornik"
+      },
+      {
+        "JPOS_IJPP": 150194,
+        "POS_NAZ": "Slovenski Javornik K"
+      },
+      {
+        "JPOS_IJPP": 135760,
+        "POS_NAZ": "Slovenski Javornik Turist"
+      },
+      {
+        "JPOS_IJPP": 140538,
+        "POS_NAZ": "Smokuč"
+      },
+      {
+        "JPOS_IJPP": 140539,
+        "POS_NAZ": "Smokvica"
+      },
+      {
+        "JPOS_IJPP": 140540,
+        "POS_NAZ": "Smolinci Hanžekovci"
+      },
+      {
+        "JPOS_IJPP": 150347,
+        "POS_NAZ": "Smolnik obračališče"
+      },
+      {
+        "JPOS_IJPP": 140546,
+        "POS_NAZ": "Smrečje v Črni"
+      },
+      {
+        "JPOS_IJPP": 140552,
+        "POS_NAZ": "Smrečno"
+      },
+      {
+        "JPOS_IJPP": 140555,
+        "POS_NAZ": "Smrjene"
+      },
+      {
+        "JPOS_IJPP": 140558,
+        "POS_NAZ": "Sobetinci"
+      },
+      {
+        "JPOS_IJPP": 140560,
+        "POS_NAZ": "Sočerga"
+      },
+      {
+        "JPOS_IJPP": 140566,
+        "POS_NAZ": "Sodinci"
+      },
+      {
+        "JPOS_IJPP": 140570,
+        "POS_NAZ": "Sodrež"
+      },
+      {
+        "JPOS_IJPP": 140581,
+        "POS_NAZ": "Sora"
+      },
+      {
+        "JPOS_IJPP": 140582,
+        "POS_NAZ": "Sorica"
+      },
+      {
+        "JPOS_IJPP": 165224,
+        "POS_NAZ": "Soteska v Bohinju"
+      },
+      {
+        "JPOS_IJPP": 140589,
+        "POS_NAZ": "Soteska/Kamniku"
+      },
+      {
+        "JPOS_IJPP": 140593,
+        "POS_NAZ": "Soviče"
+      },
+      {
+        "JPOS_IJPP": 140594,
+        "POS_NAZ": "Soviče 1"
+      },
+      {
+        "JPOS_IJPP": 140595,
+        "POS_NAZ": "Sovodenj"
+      },
+      {
+        "JPOS_IJPP": 135901,
+        "POS_NAZ": "Sp.Bitnje pri Bošnjakoviču"
+      },
+      {
+        "JPOS_IJPP": 140598,
+        "POS_NAZ": "Sp.Branica"
+      },
+      {
+        "JPOS_IJPP": 140600,
+        "POS_NAZ": "Sp.Brežnica"
+      },
+      {
+        "JPOS_IJPP": 140602,
+        "POS_NAZ": "Sp.Danje"
+      },
+      {
+        "JPOS_IJPP": 140606,
+        "POS_NAZ": "Sp.Duplek"
+      },
+      {
+        "JPOS_IJPP": 140607,
+        "POS_NAZ": "Sp.Duplek Log"
+      },
+      {
+        "JPOS_IJPP": 140608,
+        "POS_NAZ": "Sp.Duplek Slanič"
+      },
+      {
+        "JPOS_IJPP": 140610,
+        "POS_NAZ": "Sp.Gorica 48"
+      },
+      {
+        "JPOS_IJPP": 140611,
+        "POS_NAZ": "Sp.Gorica K"
+      },
+      {
+        "JPOS_IJPP": 140614,
+        "POS_NAZ": "Sp.Hajdina"
+      },
+      {
+        "JPOS_IJPP": 140615,
+        "POS_NAZ": "Sp.Hajdina Š"
+      },
+      {
+        "JPOS_IJPP": 150623,
+        "POS_NAZ": "Sp.Hajdina trg."
+      },
+      {
+        "JPOS_IJPP": 140616,
+        "POS_NAZ": "Sp.Hoče"
+      },
+      {
+        "JPOS_IJPP": 140617,
+        "POS_NAZ": "Sp.Hoče K"
+      },
+      {
+        "JPOS_IJPP": 140618,
+        "POS_NAZ": "Sp.Hoče Odc.letališče"
+      },
+      {
+        "JPOS_IJPP": 140619,
+        "POS_NAZ": "Sp.Hoče pokop."
+      },
+      {
+        "JPOS_IJPP": 141732,
+        "POS_NAZ": "Sp.Hoče šola"
+      },
+      {
+        "JPOS_IJPP": 140620,
+        "POS_NAZ": "Sp.Hoče ŽP"
+      },
+      {
+        "JPOS_IJPP": 140622,
+        "POS_NAZ": "Sp.Ivanjci"
+      },
+      {
+        "JPOS_IJPP": 140623,
+        "POS_NAZ": "Sp.Jablane"
+      },
+      {
+        "JPOS_IJPP": 140625,
+        "POS_NAZ": "Sp.Jakobski Dol K"
+      },
+      {
+        "JPOS_IJPP": 140628,
+        "POS_NAZ": "Sp.Kapla"
+      },
+      {
+        "JPOS_IJPP": 140629,
+        "POS_NAZ": "Sp.Ključarovci kapela"
+      },
+      {
+        "JPOS_IJPP": 140630,
+        "POS_NAZ": "Sp.Ključarovci trg."
+      },
+      {
+        "JPOS_IJPP": 140632,
+        "POS_NAZ": "Sp.Kovač"
+      },
+      {
+        "JPOS_IJPP": 140634,
+        "POS_NAZ": "Sp.Kungota Fifolt"
+      },
+      {
+        "JPOS_IJPP": 140635,
+        "POS_NAZ": "Sp.Kungota Kovač"
+      },
+      {
+        "JPOS_IJPP": 140636,
+        "POS_NAZ": "Sp.Lancovo"
+      },
+      {
+        "JPOS_IJPP": 140639,
+        "POS_NAZ": "Sp.Leskovec/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 140640,
+        "POS_NAZ": "Sp.Lipnica"
+      },
+      {
+        "JPOS_IJPP": 140642,
+        "POS_NAZ": "Sp.Loke/Blagovici"
+      },
+      {
+        "JPOS_IJPP": 140644,
+        "POS_NAZ": "Sp.Ložnica pri Slovenski Bistrici Ipavec"
+      },
+      {
+        "JPOS_IJPP": 140645,
+        "POS_NAZ": "Sp.Ložnica pri Slovenski Bistrici K"
+      },
+      {
+        "JPOS_IJPP": 140643,
+        "POS_NAZ": "Sp.Ložnica/Mostečnem"
+      },
+      {
+        "JPOS_IJPP": 140647,
+        "POS_NAZ": "Sp.Otok"
+      },
+      {
+        "JPOS_IJPP": 140651,
+        "POS_NAZ": "Sp.Poljčane Čoh"
+      },
+      {
+        "JPOS_IJPP": 140652,
+        "POS_NAZ": "Sp.Polskava"
+      },
+      {
+        "JPOS_IJPP": 140653,
+        "POS_NAZ": "Sp.Polskava 83"
+      },
+      {
+        "JPOS_IJPP": 140654,
+        "POS_NAZ": "Sp.Prebukovje"
+      },
+      {
+        "JPOS_IJPP": 140667,
+        "POS_NAZ": "Sp.Senarska"
+      },
+      {
+        "JPOS_IJPP": 140668,
+        "POS_NAZ": "Sp.Slemen"
+      },
+      {
+        "JPOS_IJPP": 140670,
+        "POS_NAZ": "Sp.Sveča"
+      },
+      {
+        "JPOS_IJPP": 140664,
+        "POS_NAZ": "Sp.Ščavnica"
+      },
+      {
+        "JPOS_IJPP": 140674,
+        "POS_NAZ": "Sp.Velovlek"
+      },
+      {
+        "JPOS_IJPP": 140675,
+        "POS_NAZ": "Sp.Visole"
+      },
+      {
+        "JPOS_IJPP": 140678,
+        "POS_NAZ": "Sp.Voličina"
+      },
+      {
+        "JPOS_IJPP": 140679,
+        "POS_NAZ": "Sp.Voličina Kranjc"
+      },
+      {
+        "JPOS_IJPP": 140682,
+        "POS_NAZ": "Sp.Žerjavci"
+      },
+      {
+        "JPOS_IJPP": 140688,
+        "POS_NAZ": "Spodnja Bela"
+      },
+      {
+        "JPOS_IJPP": 165606,
+        "POS_NAZ": "Spodnja Besnica/Kr.GD"
+      },
+      {
+        "JPOS_IJPP": 165608,
+        "POS_NAZ": "Spodnja Besnica/Kr.sp"
+      },
+      {
+        "JPOS_IJPP": 140689,
+        "POS_NAZ": "Spodnje Bitnje"
+      },
+      {
+        "JPOS_IJPP": 140690,
+        "POS_NAZ": "Spodnje Gorje"
+      },
+      {
+        "JPOS_IJPP": 140691,
+        "POS_NAZ": "Spodnje Gorje trgovina"
+      },
+      {
+        "JPOS_IJPP": 165668,
+        "POS_NAZ": "Spodnje Jezersko"
+      },
+      {
+        "JPOS_IJPP": 140692,
+        "POS_NAZ": "Spodnji Brnik"
+      },
+      {
+        "JPOS_IJPP": 150091,
+        "POS_NAZ": "Spodnji Brnik vas"
+      },
+      {
+        "JPOS_IJPP": 140693,
+        "POS_NAZ": "Spuhlja"
+      },
+      {
+        "JPOS_IJPP": 140694,
+        "POS_NAZ": "Spuhlja G"
+      },
+      {
+        "JPOS_IJPP": 135902,
+        "POS_NAZ": "Sr.Bitnje Avto prevoz Hafner"
+      },
+      {
+        "JPOS_IJPP": 135903,
+        "POS_NAZ": "Sr.Bitnje most pri Bitencu"
+      },
+      {
+        "JPOS_IJPP": 135904,
+        "POS_NAZ": "Sr.Bitnje Pokorn"
+      },
+      {
+        "JPOS_IJPP": 135905,
+        "POS_NAZ": "Sr.Bitnje Zora"
+      },
+      {
+        "JPOS_IJPP": 140703,
+        "POS_NAZ": "Sr.Osek Vogrinec"
+      },
+      {
+        "JPOS_IJPP": 140707,
+        "POS_NAZ": "Sr.vas pri Kamniku"
+      },
+      {
+        "JPOS_IJPP": 140710,
+        "POS_NAZ": "Sr.Visole"
+      },
+      {
+        "JPOS_IJPP": 135906,
+        "POS_NAZ": "Srakovlje"
+      },
+      {
+        "JPOS_IJPP": 140717,
+        "POS_NAZ": "Središče ob Dravi"
+      },
+      {
+        "JPOS_IJPP": 140718,
+        "POS_NAZ": "Srednja Bela"
+      },
+      {
+        "JPOS_IJPP": 150280,
+        "POS_NAZ": "Srednja Bela Kračman"
+      },
+      {
+        "JPOS_IJPP": 140719,
+        "POS_NAZ": "Srednja vas pri Poljanah"
+      },
+      {
+        "JPOS_IJPP": 140720,
+        "POS_NAZ": "Srednja vas pri Šenčurju"
+      },
+      {
+        "JPOS_IJPP": 140721,
+        "POS_NAZ": "Srednja vas pri Tržiču"
+      },
+      {
+        "JPOS_IJPP": 140722,
+        "POS_NAZ": "Srednja vas v Bohinju"
+      },
+      {
+        "JPOS_IJPP": 140723,
+        "POS_NAZ": "Srednje Bitnje"
+      },
+      {
+        "JPOS_IJPP": 164880,
+        "POS_NAZ": "Srmin GORC I"
+      },
+      {
+        "JPOS_IJPP": 164878,
+        "POS_NAZ": "Srmin GORC II"
+      },
+      {
+        "JPOS_IJPP": 164879,
+        "POS_NAZ": "Srmin GORC III"
+      },
+      {
+        "JPOS_IJPP": 150241,
+        "POS_NAZ": "St.Cesta 84"
+      },
+      {
+        "JPOS_IJPP": 150242,
+        "POS_NAZ": "St.Cesta Žerovinci K"
+      },
+      {
+        "JPOS_IJPP": 135806,
+        "POS_NAZ": "Stadion"
+      },
+      {
+        "JPOS_IJPP": 140751,
+        "POS_NAZ": "Stahovica"
+      },
+      {
+        "JPOS_IJPP": 150255,
+        "POS_NAZ": "Stanečka vas"
+      },
+      {
+        "JPOS_IJPP": 140758,
+        "POS_NAZ": "Stanošina"
+      },
+      {
+        "JPOS_IJPP": 140760,
+        "POS_NAZ": "Stara Fužina"
+      },
+      {
+        "JPOS_IJPP": 140761,
+        "POS_NAZ": "Stari Dvor"
+      },
+      {
+        "JPOS_IJPP": 136678,
+        "POS_NAZ": "Stari Dvor Frankovo"
+      },
+      {
+        "JPOS_IJPP": 140764,
+        "POS_NAZ": "Starše"
+      },
+      {
+        "JPOS_IJPP": 152236,
+        "POS_NAZ": "Stiška vas"
+      },
+      {
+        "JPOS_IJPP": 140776,
+        "POS_NAZ": "Stogovci/Majšperku"
+      },
+      {
+        "JPOS_IJPP": 140777,
+        "POS_NAZ": "Stojnci"
+      },
+      {
+        "JPOS_IJPP": 140778,
+        "POS_NAZ": "Stojnci trg."
+      },
+      {
+        "JPOS_IJPP": 140782,
+        "POS_NAZ": "Stoperce"
+      },
+      {
+        "JPOS_IJPP": 140791,
+        "POS_NAZ": "Strahinj"
+      },
+      {
+        "JPOS_IJPP": 140792,
+        "POS_NAZ": "Strahinj posestvo"
+      },
+      {
+        "JPOS_IJPP": 140798,
+        "POS_NAZ": "Stranje"
+      },
+      {
+        "JPOS_IJPP": 140799,
+        "POS_NAZ": "Stranje Koritnik"
+      },
+      {
+        "JPOS_IJPP": 140800,
+        "POS_NAZ": "Stranje Š"
+      },
+      {
+        "JPOS_IJPP": 140801,
+        "POS_NAZ": "Stranje Šlebir"
+      },
+      {
+        "JPOS_IJPP": 140807,
+        "POS_NAZ": "Straža/Oplotnici"
+      },
+      {
+        "JPOS_IJPP": 140809,
+        "POS_NAZ": "Stražgonjca"
+      },
+      {
+        "JPOS_IJPP": 140814,
+        "POS_NAZ": "Strelci"
+      },
+      {
+        "JPOS_IJPP": 140818,
+        "POS_NAZ": "Strma Gora"
+      },
+      {
+        "JPOS_IJPP": 140823,
+        "POS_NAZ": "Struge"
+      },
+      {
+        "JPOS_IJPP": 136647,
+        "POS_NAZ": "Strunjan"
+      },
+      {
+        "JPOS_IJPP": 135907,
+        "POS_NAZ": "Struževo bloki"
+      },
+      {
+        "JPOS_IJPP": 135908,
+        "POS_NAZ": "Struževo KS"
+      },
+      {
+        "JPOS_IJPP": 135909,
+        "POS_NAZ": "Struževo pod žel.mostom"
+      },
+      {
+        "JPOS_IJPP": 140834,
+        "POS_NAZ": "Studenice"
+      },
+      {
+        "JPOS_IJPP": 140835,
+        "POS_NAZ": "Studeno/Želez."
+      },
+      {
+        "JPOS_IJPP": 141673,
+        "POS_NAZ": "Studeno/Želez. I"
+      },
+      {
+        "JPOS_IJPP": 140836,
+        "POS_NAZ": "Studor"
+      },
+      {
+        "JPOS_IJPP": 135910,
+        "POS_NAZ": "Suha"
+      },
+      {
+        "JPOS_IJPP": 140837,
+        "POS_NAZ": "Suha veja"
+      },
+      {
+        "JPOS_IJPP": 140838,
+        "POS_NAZ": "Suhi Dol/Lučinah"
+      },
+      {
+        "JPOS_IJPP": 135807,
+        "POS_NAZ": "Supernova"
+      },
+      {
+        "JPOS_IJPP": 140851,
+        "POS_NAZ": "Sv.Ana v Sl.G."
+      },
+      {
+        "JPOS_IJPP": 140852,
+        "POS_NAZ": "Sv.Ana v Sl.G.K"
+      },
+      {
+        "JPOS_IJPP": 140853,
+        "POS_NAZ": "Sv.Anton"
+      },
+      {
+        "JPOS_IJPP": 150511,
+        "POS_NAZ": "Sv.Anton klanec"
+      },
+      {
+        "JPOS_IJPP": 140858,
+        "POS_NAZ": "Sv.Duh na Ostr.V."
+      },
+      {
+        "JPOS_IJPP": 140859,
+        "POS_NAZ": "Sv.Duh na Ostr.V.K"
+      },
+      {
+        "JPOS_IJPP": 140860,
+        "POS_NAZ": "Sv.Duh na Ostr.V.Reš"
+      },
+      {
+        "JPOS_IJPP": 140861,
+        "POS_NAZ": "Sv.Duh na Ostr.V.Ropič"
+      },
+      {
+        "JPOS_IJPP": 140865,
+        "POS_NAZ": "Sv.Jurij ob Ščavnici"
+      },
+      {
+        "JPOS_IJPP": 140866,
+        "POS_NAZ": "Sv.Jurij/Donačko g."
+      },
+      {
+        "JPOS_IJPP": 150214,
+        "POS_NAZ": "Sv.Maver"
+      },
+      {
+        "JPOS_IJPP": 150215,
+        "POS_NAZ": "Sv.Maver K"
+      },
+      {
+        "JPOS_IJPP": 140869,
+        "POS_NAZ": "Sv.Maver obr."
+      },
+      {
+        "JPOS_IJPP": 140870,
+        "POS_NAZ": "Sv.Mihael"
+      },
+      {
+        "JPOS_IJPP": 140871,
+        "POS_NAZ": "Sv.Nedelja"
+      },
+      {
+        "JPOS_IJPP": 140872,
+        "POS_NAZ": "Sv.Peter/Piranu"
+      },
+      {
+        "JPOS_IJPP": 140873,
+        "POS_NAZ": "Sv.Peter/Piranu obr."
+      },
+      {
+        "JPOS_IJPP": 140874,
+        "POS_NAZ": "Sv.Peter/Piranu šola"
+      },
+      {
+        "JPOS_IJPP": 150269,
+        "POS_NAZ": "Sv.Peter/Piranu ZD"
+      },
+      {
+        "JPOS_IJPP": 140878,
+        "POS_NAZ": "Sv.Tomaž"
+      },
+      {
+        "JPOS_IJPP": 140879,
+        "POS_NAZ": "Sv.Trojica v Sl.G."
+      },
+      {
+        "JPOS_IJPP": 140881,
+        "POS_NAZ": "Svečane"
+      },
+      {
+        "JPOS_IJPP": 140882,
+        "POS_NAZ": "Svečina"
+      },
+      {
+        "JPOS_IJPP": 140884,
+        "POS_NAZ": "Sveti Duh"
+      },
+      {
+        "JPOS_IJPP": 140887,
+        "POS_NAZ": "Svetinci"
+      },
+      {
+        "JPOS_IJPP": 140888,
+        "POS_NAZ": "Svetinje K"
+      },
+      {
+        "JPOS_IJPP": 140236,
+        "POS_NAZ": "Šalara"
+      },
+      {
+        "JPOS_IJPP": 150220,
+        "POS_NAZ": "Šalara K"
+      },
+      {
+        "JPOS_IJPP": 150216,
+        "POS_NAZ": "Šalara K Gažon"
+      },
+      {
+        "JPOS_IJPP": 150217,
+        "POS_NAZ": "Šalara pod Gažonom"
+      },
+      {
+        "JPOS_IJPP": 140242,
+        "POS_NAZ": "Šared"
+      },
+      {
+        "JPOS_IJPP": 140243,
+        "POS_NAZ": "Šared G"
+      },
+      {
+        "JPOS_IJPP": 140315,
+        "POS_NAZ": "Šembije"
+      },
+      {
+        "JPOS_IJPP": 136720,
+        "POS_NAZ": "Šempeter/Gorici"
+      },
+      {
+        "JPOS_IJPP": 150482,
+        "POS_NAZ": "Šempeter/Gorici bolnica"
+      },
+      {
+        "JPOS_IJPP": 150483,
+        "POS_NAZ": "Šempeter/Gorici Eurospin"
+      },
+      {
+        "JPOS_IJPP": 136722,
+        "POS_NAZ": "Šempeter/Gorici Letrika"
+      },
+      {
+        "JPOS_IJPP": 136717,
+        "POS_NAZ": "Šempeter/Gorici N.Letrika"
+      },
+      {
+        "JPOS_IJPP": 136718,
+        "POS_NAZ": "Šempeter/Gorici Podmark"
+      },
+      {
+        "JPOS_IJPP": 140319,
+        "POS_NAZ": "Šempeter/Gorici SAOP"
+      },
+      {
+        "JPOS_IJPP": 140329,
+        "POS_NAZ": "Šenčur"
+      },
+      {
+        "JPOS_IJPP": 140330,
+        "POS_NAZ": "Šenčur na Jami"
+      },
+      {
+        "JPOS_IJPP": 152277,
+        "POS_NAZ": "Šenčur poslovna cona"
+      },
+      {
+        "JPOS_IJPP": 140331,
+        "POS_NAZ": "Šenčur Š"
+      },
+      {
+        "JPOS_IJPP": 150391,
+        "POS_NAZ": "Šentilj Majer"
+      },
+      {
+        "JPOS_IJPP": 140348,
+        "POS_NAZ": "Šentilj/Sl.G.kosi"
+      },
+      {
+        "JPOS_IJPP": 140349,
+        "POS_NAZ": "Šentilj/Sl.G.obr."
+      },
+      {
+        "JPOS_IJPP": 140350,
+        "POS_NAZ": "Šentilj/Sl.G.ŽP"
+      },
+      {
+        "JPOS_IJPP": 140369,
+        "POS_NAZ": "Šentožbolt"
+      },
+      {
+        "JPOS_IJPP": 165259,
+        "POS_NAZ": "Šenturška Gora GD"
+      },
+      {
+        "JPOS_IJPP": 165260,
+        "POS_NAZ": "Šenturška Gora Polane"
+      },
+      {
+        "JPOS_IJPP": 140373,
+        "POS_NAZ": "Šentvid pri Lukovici"
+      },
+      {
+        "JPOS_IJPP": 140385,
+        "POS_NAZ": "Šetarova"
+      },
+      {
+        "JPOS_IJPP": 140388,
+        "POS_NAZ": "Ševlje"
+      },
+      {
+        "JPOS_IJPP": 140389,
+        "POS_NAZ": "Ševlje K"
+      },
+      {
+        "JPOS_IJPP": 140400,
+        "POS_NAZ": "Šikole"
+      },
+      {
+        "JPOS_IJPP": 140416,
+        "POS_NAZ": "Škarpa"
+      },
+      {
+        "JPOS_IJPP": 140420,
+        "POS_NAZ": "Škibini"
+      },
+      {
+        "JPOS_IJPP": 140421,
+        "POS_NAZ": "Škocjan/Kopru"
+      },
+      {
+        "JPOS_IJPP": 140422,
+        "POS_NAZ": "Škocjan/Kopru K"
+      },
+      {
+        "JPOS_IJPP": 140425,
+        "POS_NAZ": "Škofije"
+      },
+      {
+        "JPOS_IJPP": 140426,
+        "POS_NAZ": "Škofije meja"
+      },
+      {
+        "JPOS_IJPP": 136679,
+        "POS_NAZ": "Škofja Loka"
+      },
+      {
+        "JPOS_IJPP": 136680,
+        "POS_NAZ": "Škofja Loka Kroj"
+      },
+      {
+        "JPOS_IJPP": 136681,
+        "POS_NAZ": "Škofja Loka Lipica"
+      },
+      {
+        "JPOS_IJPP": 136682,
+        "POS_NAZ": "Škofja Loka Plevna"
+      },
+      {
+        "JPOS_IJPP": 140429,
+        "POS_NAZ": "Škofja Loka Puštal"
+      },
+      {
+        "JPOS_IJPP": 136683,
+        "POS_NAZ": "Škofja Loka St.Loka"
+      },
+      {
+        "JPOS_IJPP": 136684,
+        "POS_NAZ": "Škofja Loka ŽP"
+      },
+      {
+        "JPOS_IJPP": 165094,
+        "POS_NAZ": "Škofljica OŠ"
+      },
+      {
+        "JPOS_IJPP": 136690,
+        "POS_NAZ": "Škofljica žaga"
+      },
+      {
+        "JPOS_IJPP": 150108,
+        "POS_NAZ": "Škrjančevo"
+      },
+      {
+        "JPOS_IJPP": 150201,
+        "POS_NAZ": "Šmarca Kik"
+      },
+      {
+        "JPOS_IJPP": 140502,
+        "POS_NAZ": "Šmarca vas"
+      },
+      {
+        "JPOS_IJPP": 140504,
+        "POS_NAZ": "Šmarje pri Sežani"
+      },
+      {
+        "JPOS_IJPP": 140506,
+        "POS_NAZ": "Šmarje/Kopru"
+      },
+      {
+        "JPOS_IJPP": 140507,
+        "POS_NAZ": "Šmarje/Kopru K"
+      },
+      {
+        "JPOS_IJPP": 150218,
+        "POS_NAZ": "Šmarje/Kopru K Pomjan"
+      },
+      {
+        "JPOS_IJPP": 150195,
+        "POS_NAZ": "Šmarje/Kopru Š"
+      },
+      {
+        "JPOS_IJPP": 140514,
+        "POS_NAZ": "Šmartno na Pohorju"
+      },
+      {
+        "JPOS_IJPP": 140526,
+        "POS_NAZ": "Šmartno v Tuhinju"
+      },
+      {
+        "JPOS_IJPP": 140527,
+        "POS_NAZ": "Šmartno/Cerkljah"
+      },
+      {
+        "JPOS_IJPP": 140534,
+        "POS_NAZ": "Šmiklavž/G.Gradu"
+      },
+      {
+        "JPOS_IJPP": 140687,
+        "POS_NAZ": "Špitalič/Motniku"
+      },
+      {
+        "JPOS_IJPP": 140754,
+        "POS_NAZ": "Štanjel"
+      },
+      {
+        "JPOS_IJPP": 140769,
+        "POS_NAZ": "Štelcl"
+      },
+      {
+        "JPOS_IJPP": 140774,
+        "POS_NAZ": "Štjak"
+      },
+      {
+        "JPOS_IJPP": 140789,
+        "POS_NAZ": "Štorje"
+      },
+      {
+        "JPOS_IJPP": 140816,
+        "POS_NAZ": "Štrihovec"
+      },
+      {
+        "JPOS_IJPP": 150110,
+        "POS_NAZ": "Študa polje"
+      },
+      {
+        "JPOS_IJPP": 140826,
+        "POS_NAZ": "Študa trgovina"
+      },
+      {
+        "JPOS_IJPP": 150334,
+        "POS_NAZ": "Štuki"
+      },
+      {
+        "JPOS_IJPP": 140846,
+        "POS_NAZ": "Šumančeva žaga"
+      },
+      {
+        "JPOS_IJPP": 140902,
+        "POS_NAZ": "Tatinec"
+      },
+      {
+        "JPOS_IJPP": 140905,
+        "POS_NAZ": "Tekačevo"
+      },
+      {
+        "JPOS_IJPP": 140910,
+        "POS_NAZ": "Tenetiše/Kokrici"
+      },
+      {
+        "JPOS_IJPP": 140911,
+        "POS_NAZ": "Tenetiše/Kokrici Orli"
+      },
+      {
+        "JPOS_IJPP": 140916,
+        "POS_NAZ": "Terme Snovik"
+      },
+      {
+        "JPOS_IJPP": 140920,
+        "POS_NAZ": "Tesno"
+      },
+      {
+        "JPOS_IJPP": 164826,
+        "POS_NAZ": "TIC Ptuj"
+      },
+      {
+        "JPOS_IJPP": 140925,
+        "POS_NAZ": "Tinjska Gora"
+      },
+      {
+        "JPOS_IJPP": 140927,
+        "POS_NAZ": "Tirosek"
+      },
+      {
+        "JPOS_IJPP": 140931,
+        "POS_NAZ": "Todraž"
+      },
+      {
+        "JPOS_IJPP": 140932,
+        "POS_NAZ": "Todraž RUŽV"
+      },
+      {
+        "JPOS_IJPP": 140937,
+        "POS_NAZ": "Tomačevica"
+      },
+      {
+        "JPOS_IJPP": 140938,
+        "POS_NAZ": "Tomaj"
+      },
+      {
+        "JPOS_IJPP": 140939,
+        "POS_NAZ": "Tomaj Š"
+      },
+      {
+        "JPOS_IJPP": 135911,
+        "POS_NAZ": "Tominčeva 24"
+      },
+      {
+        "JPOS_IJPP": 165567,
+        "POS_NAZ": "Tomšičeva ulica K"
+      },
+      {
+        "JPOS_IJPP": 140951,
+        "POS_NAZ": "Topole/Mengšu"
+      },
+      {
+        "JPOS_IJPP": 136685,
+        "POS_NAZ": "Trata MD"
+      },
+      {
+        "JPOS_IJPP": 140959,
+        "POS_NAZ": "Trata pri Velesovem"
+      },
+      {
+        "JPOS_IJPP": 140961,
+        "POS_NAZ": "Trate/Muri"
+      },
+      {
+        "JPOS_IJPP": 150392,
+        "POS_NAZ": "Trate/Muri 23"
+      },
+      {
+        "JPOS_IJPP": 140962,
+        "POS_NAZ": "Trate/Muri 48"
+      },
+      {
+        "JPOS_IJPP": 140963,
+        "POS_NAZ": "Trate/Muri grad"
+      },
+      {
+        "JPOS_IJPP": 140969,
+        "POS_NAZ": "Trboje"
+      },
+      {
+        "JPOS_IJPP": 140999,
+        "POS_NAZ": "Trebeše"
+      },
+      {
+        "JPOS_IJPP": 141000,
+        "POS_NAZ": "Trebija"
+      },
+      {
+        "JPOS_IJPP": 141001,
+        "POS_NAZ": "Trebižani"
+      },
+      {
+        "JPOS_IJPP": 135815,
+        "POS_NAZ": "Trg Brolo"
+      },
+      {
+        "JPOS_IJPP": 141008,
+        "POS_NAZ": "Trgovišče"
+      },
+      {
+        "JPOS_IJPP": 141011,
+        "POS_NAZ": "Trniče"
+      },
+      {
+        "JPOS_IJPP": 141012,
+        "POS_NAZ": "Trnjava"
+      },
+      {
+        "JPOS_IJPP": 136676,
+        "POS_NAZ": "Trnje"
+      },
+      {
+        "JPOS_IJPP": 141017,
+        "POS_NAZ": "Trnovci"
+      },
+      {
+        "JPOS_IJPP": 141030,
+        "POS_NAZ": "Trnovska vas"
+      },
+      {
+        "JPOS_IJPP": 141031,
+        "POS_NAZ": "Trnovska vas most"
+      },
+      {
+        "JPOS_IJPP": 141035,
+        "POS_NAZ": "Trojane"
+      },
+      {
+        "JPOS_IJPP": 150895,
+        "POS_NAZ": "Trotkova"
+      },
+      {
+        "JPOS_IJPP": 141038,
+        "POS_NAZ": "Trsek"
+      },
+      {
+        "JPOS_IJPP": 141040,
+        "POS_NAZ": "Trstenik/Golniku"
+      },
+      {
+        "JPOS_IJPP": 141041,
+        "POS_NAZ": "Trstenik/Sl.G."
+      },
+      {
+        "JPOS_IJPP": 141043,
+        "POS_NAZ": "Truške"
+      },
+      {
+        "JPOS_IJPP": 141044,
+        "POS_NAZ": "Truške K"
+      },
+      {
+        "JPOS_IJPP": 150484,
+        "POS_NAZ": "Trzin dom"
+      },
+      {
+        "JPOS_IJPP": 141050,
+        "POS_NAZ": "Trzin GD"
+      },
+      {
+        "JPOS_IJPP": 141051,
+        "POS_NAZ": "Trzin ind.cona"
+      },
+      {
+        "JPOS_IJPP": 141052,
+        "POS_NAZ": "Trzin Mlake"
+      },
+      {
+        "JPOS_IJPP": 141053,
+        "POS_NAZ": "Trzin vas"
+      },
+      {
+        "JPOS_IJPP": 152273,
+        "POS_NAZ": "Tržec GD"
+      },
+      {
+        "JPOS_IJPP": 152274,
+        "POS_NAZ": "Tržec Majolka"
+      },
+      {
+        "JPOS_IJPP": 141047,
+        "POS_NAZ": "Tržič"
+      },
+      {
+        "JPOS_IJPP": 141048,
+        "POS_NAZ": "Tržič Peko"
+      },
+      {
+        "JPOS_IJPP": 164825,
+        "POS_NAZ": "Tržnica"
+      },
+      {
+        "JPOS_IJPP": 141057,
+        "POS_NAZ": "Tublje pri Komnu"
+      },
+      {
+        "JPOS_IJPP": 141058,
+        "POS_NAZ": "Tuljaki"
+      },
+      {
+        "JPOS_IJPP": 141061,
+        "POS_NAZ": "Tupaliče"
+      },
+      {
+        "JPOS_IJPP": 141062,
+        "POS_NAZ": "Tupaliče K"
+      },
+      {
+        "JPOS_IJPP": 141063,
+        "POS_NAZ": "Tupelče"
+      },
+      {
+        "JPOS_IJPP": 141065,
+        "POS_NAZ": "Turiška vas na Pohorju"
+      },
+      {
+        "JPOS_IJPP": 141066,
+        "POS_NAZ": "Turjak"
+      },
+      {
+        "JPOS_IJPP": 141070,
+        "POS_NAZ": "Turki"
+      },
+      {
+        "JPOS_IJPP": 141075,
+        "POS_NAZ": "Turški Vrh"
+      },
+      {
+        "JPOS_IJPP": 141078,
+        "POS_NAZ": "Ugovec"
+      },
+      {
+        "JPOS_IJPP": 165568,
+        "POS_NAZ": "Ulica 15. maja"
+      },
+      {
+        "JPOS_IJPP": 165541,
+        "POS_NAZ": "Ulica II. prekomorske brigade"
+      },
+      {
+        "JPOS_IJPP": 165569,
+        "POS_NAZ": "Ulica Vena Pilona"
+      },
+      {
+        "JPOS_IJPP": 141082,
+        "POS_NAZ": "Urh"
+      },
+      {
+        "JPOS_IJPP": 141095,
+        "POS_NAZ": "V.Dol/Komnu"
+      },
+      {
+        "JPOS_IJPP": 141115,
+        "POS_NAZ": "V.Nedelja trg."
+      },
+      {
+        "JPOS_IJPP": 141125,
+        "POS_NAZ": "V.Tinje"
+      },
+      {
+        "JPOS_IJPP": 141128,
+        "POS_NAZ": "V.Varnica"
+      },
+      {
+        "JPOS_IJPP": 141132,
+        "POS_NAZ": "V.Zimica"
+      },
+      {
+        "JPOS_IJPP": 150082,
+        "POS_NAZ": "Vahtnica"
+      },
+      {
+        "JPOS_IJPP": 165638,
+        "POS_NAZ": "Valburga I"
+      },
+      {
+        "JPOS_IJPP": 165639,
+        "POS_NAZ": "Valburga II"
+      },
+      {
+        "JPOS_IJPP": 141136,
+        "POS_NAZ": "Valdoltra"
+      },
+      {
+        "JPOS_IJPP": 141142,
+        "POS_NAZ": "Vanganel"
+      },
+      {
+        "JPOS_IJPP": 141143,
+        "POS_NAZ": "Vanganel Guci K"
+      },
+      {
+        "JPOS_IJPP": 141144,
+        "POS_NAZ": "Vareja"
+      },
+      {
+        "JPOS_IJPP": 141146,
+        "POS_NAZ": "Varejski hrib"
+      },
+      {
+        "JPOS_IJPP": 141148,
+        "POS_NAZ": "Vaše/Medvodah"
+      },
+      {
+        "JPOS_IJPP": 141158,
+        "POS_NAZ": "Velesovo"
+      },
+      {
+        "JPOS_IJPP": 141173,
+        "POS_NAZ": "Veterno"
+      },
+      {
+        "JPOS_IJPP": 141178,
+        "POS_NAZ": "Vičanci kapela"
+      },
+      {
+        "JPOS_IJPP": 141179,
+        "POS_NAZ": "Videm pri Ptuju"
+      },
+      {
+        "JPOS_IJPP": 141180,
+        "POS_NAZ": "Videm/Dobrepolju"
+      },
+      {
+        "JPOS_IJPP": 141181,
+        "POS_NAZ": "Videm/Ljubljani"
+      },
+      {
+        "JPOS_IJPP": 141182,
+        "POS_NAZ": "Videž"
+      },
+      {
+        "JPOS_IJPP": 141187,
+        "POS_NAZ": "Vidrga"
+      },
+      {
+        "JPOS_IJPP": 141189,
+        "POS_NAZ": "Viltuš"
+      },
+      {
+        "JPOS_IJPP": 141190,
+        "POS_NAZ": "Vinarje"
+      },
+      {
+        "JPOS_IJPP": 150243,
+        "POS_NAZ": "Vinski hram Jeruzalem"
+      },
+      {
+        "JPOS_IJPP": 150265,
+        "POS_NAZ": "Vinski Vrh kapela"
+      },
+      {
+        "JPOS_IJPP": 150266,
+        "POS_NAZ": "Vinski Vrh križ"
+      },
+      {
+        "JPOS_IJPP": 141198,
+        "POS_NAZ": "Vintgar Fortuna"
+      },
+      {
+        "JPOS_IJPP": 141199,
+        "POS_NAZ": "Vipava"
+      },
+      {
+        "JPOS_IJPP": 150107,
+        "POS_NAZ": "Vir Cerkev"
+      },
+      {
+        "JPOS_IJPP": 141205,
+        "POS_NAZ": "Vir/Domžalah"
+      },
+      {
+        "JPOS_IJPP": 141206,
+        "POS_NAZ": "Virmaše"
+      },
+      {
+        "JPOS_IJPP": 141217,
+        "POS_NAZ": "Visoče/Trž.K"
+      },
+      {
+        "JPOS_IJPP": 141218,
+        "POS_NAZ": "Visoko/Kr."
+      },
+      {
+        "JPOS_IJPP": 141219,
+        "POS_NAZ": "Vitan K"
+      },
+      {
+        "JPOS_IJPP": 141224,
+        "POS_NAZ": "Vitomarci Brlak K"
+      },
+      {
+        "JPOS_IJPP": 141225,
+        "POS_NAZ": "Vitomarci Rola"
+      },
+      {
+        "JPOS_IJPP": 141229,
+        "POS_NAZ": "Vodice/Lj."
+      },
+      {
+        "JPOS_IJPP": 141231,
+        "POS_NAZ": "Vodranci"
+      },
+      {
+        "JPOS_IJPP": 165225,
+        "POS_NAZ": "Vogel križišče/crossroad"
+      },
+      {
+        "JPOS_IJPP": 141236,
+        "POS_NAZ": "Voglje"
+      },
+      {
+        "JPOS_IJPP": 165746,
+        "POS_NAZ": "Voglje vas"
+      },
+      {
+        "JPOS_IJPP": 141238,
+        "POS_NAZ": "Vogrsko"
+      },
+      {
+        "JPOS_IJPP": 150497,
+        "POS_NAZ": "Vogrsko M.Dunaj"
+      },
+      {
+        "JPOS_IJPP": 141248,
+        "POS_NAZ": "Voklo"
+      },
+      {
+        "JPOS_IJPP": 141252,
+        "POS_NAZ": "Volča"
+      },
+      {
+        "JPOS_IJPP": 141254,
+        "POS_NAZ": "Volčja Draga"
+      },
+      {
+        "JPOS_IJPP": 141259,
+        "POS_NAZ": "Volčji Potok"
+      },
+      {
+        "JPOS_IJPP": 141260,
+        "POS_NAZ": "Volčji Potok Šraj"
+      },
+      {
+        "JPOS_IJPP": 141262,
+        "POS_NAZ": "Vopovlje"
+      },
+      {
+        "JPOS_IJPP": 141263,
+        "POS_NAZ": "Vosek"
+      },
+      {
+        "JPOS_IJPP": 141264,
+        "POS_NAZ": "Vrabče"
+      },
+      {
+        "JPOS_IJPP": 141265,
+        "POS_NAZ": "Vraber"
+      },
+      {
+        "JPOS_IJPP": 141268,
+        "POS_NAZ": "Vransko"
+      },
+      {
+        "JPOS_IJPP": 141270,
+        "POS_NAZ": "Vrba"
+      },
+      {
+        "JPOS_IJPP": 141279,
+        "POS_NAZ": "Vrh Kozjaka/Črnem Vrhu"
+      },
+      {
+        "JPOS_IJPP": 141282,
+        "POS_NAZ": "Vrh nad Želimljami"
+      },
+      {
+        "JPOS_IJPP": 141293,
+        "POS_NAZ": "Vrhnika"
+      },
+      {
+        "JPOS_IJPP": 141302,
+        "POS_NAZ": "Vrhovlje na Rafolčah K"
+      },
+      {
+        "JPOS_IJPP": 141304,
+        "POS_NAZ": "Vrhovlje/Sežani"
+      },
+      {
+        "JPOS_IJPP": 141309,
+        "POS_NAZ": "Vrhpolje/Kamniku"
+      },
+      {
+        "JPOS_IJPP": 141310,
+        "POS_NAZ": "Vrhpolje/Kamniku most"
+      },
+      {
+        "JPOS_IJPP": 136723,
+        "POS_NAZ": "Vrtojba"
+      },
+      {
+        "JPOS_IJPP": 136724,
+        "POS_NAZ": "Vrtojba bife"
+      },
+      {
+        "JPOS_IJPP": 136725,
+        "POS_NAZ": "Vrtojba cerkev"
+      },
+      {
+        "JPOS_IJPP": 141328,
+        "POS_NAZ": "Vukovski Dol"
+      },
+      {
+        "JPOS_IJPP": 141329,
+        "POS_NAZ": "Vurberk"
+      },
+      {
+        "JPOS_IJPP": 141330,
+        "POS_NAZ": "Vurberk K"
+      },
+      {
+        "JPOS_IJPP": 141331,
+        "POS_NAZ": "Vurberk polje"
+      },
+      {
+        "JPOS_IJPP": 141332,
+        "POS_NAZ": "Vurmat Šturm"
+      },
+      {
+        "JPOS_IJPP": 141335,
+        "POS_NAZ": "Vuzmetinci"
+      },
+      {
+        "JPOS_IJPP": 141336,
+        "POS_NAZ": "Vuzmetinci Govedič"
+      },
+      {
+        "JPOS_IJPP": 141337,
+        "POS_NAZ": "Zabavlje K"
+      },
+      {
+        "JPOS_IJPP": 141341,
+        "POS_NAZ": "Zaboršt"
+      },
+      {
+        "JPOS_IJPP": 141343,
+        "POS_NAZ": "Zabreznica"
+      },
+      {
+        "JPOS_IJPP": 141352,
+        "POS_NAZ": "Zadnja vas/Trž."
+      },
+      {
+        "JPOS_IJPP": 141355,
+        "POS_NAZ": "Zadraga"
+      },
+      {
+        "JPOS_IJPP": 141740,
+        "POS_NAZ": "Zagajski Vrh"
+      },
+      {
+        "JPOS_IJPP": 141365,
+        "POS_NAZ": "Zagojiči"
+      },
+      {
+        "JPOS_IJPP": 141368,
+        "POS_NAZ": "Zagorci"
+      },
+      {
+        "JPOS_IJPP": 141372,
+        "POS_NAZ": "Zagorje ob S."
+      },
+      {
+        "JPOS_IJPP": 141374,
+        "POS_NAZ": "Zagorje ob S.Bregar"
+      },
+      {
+        "JPOS_IJPP": 141378,
+        "POS_NAZ": "Zagorje ob S.Kisovec"
+      },
+      {
+        "JPOS_IJPP": 141383,
+        "POS_NAZ": "Zagorje ob S.Siporeks"
+      },
+      {
+        "JPOS_IJPP": 141385,
+        "POS_NAZ": "Zagorje ob S.St.trg"
+      },
+      {
+        "JPOS_IJPP": 141387,
+        "POS_NAZ": "Zagorje ob S.Varnost"
+      },
+      {
+        "JPOS_IJPP": 141390,
+        "POS_NAZ": "Zagorje/Knežaku"
+      },
+      {
+        "JPOS_IJPP": 141399,
+        "POS_NAZ": "Zagrajec K"
+      },
+      {
+        "JPOS_IJPP": 141404,
+        "POS_NAZ": "Zakl"
+      },
+      {
+        "JPOS_IJPP": 141414,
+        "POS_NAZ": "Zali Log"
+      },
+      {
+        "JPOS_IJPP": 141419,
+        "POS_NAZ": "Zalog pod Trojico"
+      },
+      {
+        "JPOS_IJPP": 141420,
+        "POS_NAZ": "Zalog pri Cerkljah"
+      },
+      {
+        "JPOS_IJPP": 141421,
+        "POS_NAZ": "Zalog pri Cerkljah sp"
+      },
+      {
+        "JPOS_IJPP": 141426,
+        "POS_NAZ": "Zalošče"
+      },
+      {
+        "JPOS_IJPP": 141435,
+        "POS_NAZ": "Zaplana"
+      },
+      {
+        "JPOS_IJPP": 141436,
+        "POS_NAZ": "Zapoge"
+      },
+      {
+        "JPOS_IJPP": 141439,
+        "POS_NAZ": "Zapuže"
+      },
+      {
+        "JPOS_IJPP": 141444,
+        "POS_NAZ": "Zasadi/Desterniku 15"
+      },
+      {
+        "JPOS_IJPP": 141445,
+        "POS_NAZ": "Zasadi/Desterniku 3"
+      },
+      {
+        "JPOS_IJPP": 141446,
+        "POS_NAZ": "Zasip"
+      },
+      {
+        "JPOS_IJPP": 141449,
+        "POS_NAZ": "Zavrč"
+      },
+      {
+        "JPOS_IJPP": 141450,
+        "POS_NAZ": "Zavrč grad"
+      },
+      {
+        "JPOS_IJPP": 141451,
+        "POS_NAZ": "Zavrč trg."
+      },
+      {
+        "JPOS_IJPP": 141456,
+        "POS_NAZ": "Zavrh/Sl.g."
+      },
+      {
+        "JPOS_IJPP": 141457,
+        "POS_NAZ": "Zavrh/Sl.g.K"
+      },
+      {
+        "JPOS_IJPP": 141475,
+        "POS_NAZ": "Zazid"
+      },
+      {
+        "JPOS_IJPP": 141479,
+        "POS_NAZ": "Zbilje jezero"
+      },
+      {
+        "JPOS_IJPP": 141480,
+        "POS_NAZ": "Zbilje K"
+      },
+      {
+        "JPOS_IJPP": 141481,
+        "POS_NAZ": "Zbiljski gaj"
+      },
+      {
+        "JPOS_IJPP": 141486,
+        "POS_NAZ": "Zduša"
+      },
+      {
+        "JPOS_IJPP": 135913,
+        "POS_NAZ": "Zg.Bitnje Jenko"
+      },
+      {
+        "JPOS_IJPP": 135915,
+        "POS_NAZ": "Zg.Bitnje trgovina"
+      },
+      {
+        "JPOS_IJPP": 141520,
+        "POS_NAZ": "Zg.Boč"
+      },
+      {
+        "JPOS_IJPP": 150384,
+        "POS_NAZ": "Zg.Brežnica"
+      },
+      {
+        "JPOS_IJPP": 135710,
+        "POS_NAZ": "Zg.Duplek"
+      },
+      {
+        "JPOS_IJPP": 141522,
+        "POS_NAZ": "Zg.Duplek 145 K"
+      },
+      {
+        "JPOS_IJPP": 141523,
+        "POS_NAZ": "Zg.Duplek pri križu"
+      },
+      {
+        "JPOS_IJPP": 141524,
+        "POS_NAZ": "Zg.Gladomes"
+      },
+      {
+        "JPOS_IJPP": 141525,
+        "POS_NAZ": "Zg.Gorica kapela"
+      },
+      {
+        "JPOS_IJPP": 141526,
+        "POS_NAZ": "Zg.Gorica KRS"
+      },
+      {
+        "JPOS_IJPP": 141527,
+        "POS_NAZ": "Zg.Gorje"
+      },
+      {
+        "JPOS_IJPP": 150624,
+        "POS_NAZ": "Zg.Hajdina"
+      },
+      {
+        "JPOS_IJPP": 150625,
+        "POS_NAZ": "Zg.Hajdina 158"
+      },
+      {
+        "JPOS_IJPP": 141529,
+        "POS_NAZ": "Zg.Hajdina G"
+      },
+      {
+        "JPOS_IJPP": 141731,
+        "POS_NAZ": "Zg.Hoče"
+      },
+      {
+        "JPOS_IJPP": 141530,
+        "POS_NAZ": "Zg.Hoče polje"
+      },
+      {
+        "JPOS_IJPP": 141533,
+        "POS_NAZ": "Zg.Jablane"
+      },
+      {
+        "JPOS_IJPP": 141535,
+        "POS_NAZ": "Zg.Jakobski Dol"
+      },
+      {
+        "JPOS_IJPP": 150244,
+        "POS_NAZ": "Zg.Kamenščak 23"
+      },
+      {
+        "JPOS_IJPP": 141537,
+        "POS_NAZ": "Zg.Kamenščak K Ljutomer"
+      },
+      {
+        "JPOS_IJPP": 150245,
+        "POS_NAZ": "Zg.Kamenščak Križ"
+      },
+      {
+        "JPOS_IJPP": 141538,
+        "POS_NAZ": "Zg.Kapla"
+      },
+      {
+        "JPOS_IJPP": 141539,
+        "POS_NAZ": "Zg.Korena Dvoršak"
+      },
+      {
+        "JPOS_IJPP": 141540,
+        "POS_NAZ": "Zg.Korena Hrastnik"
+      },
+      {
+        "JPOS_IJPP": 141542,
+        "POS_NAZ": "Zg.Kozjak"
+      },
+      {
+        "JPOS_IJPP": 141543,
+        "POS_NAZ": "Zg.Kozjak Mlakar"
+      },
+      {
+        "JPOS_IJPP": 141545,
+        "POS_NAZ": "Zg.Kungota"
+      },
+      {
+        "JPOS_IJPP": 141546,
+        "POS_NAZ": "Zg.Kungota Kozjak"
+      },
+      {
+        "JPOS_IJPP": 141547,
+        "POS_NAZ": "Zg.Lancovo"
+      },
+      {
+        "JPOS_IJPP": 141550,
+        "POS_NAZ": "Zg.Leskovec/Ptuju"
+      },
+      {
+        "JPOS_IJPP": 141551,
+        "POS_NAZ": "Zg.Loke"
+      },
+      {
+        "JPOS_IJPP": 141554,
+        "POS_NAZ": "Zg.Ložnica pri Slovenski Bistrici K"
+      },
+      {
+        "JPOS_IJPP": 141552,
+        "POS_NAZ": "Zg.Ložnica/Mostečnem"
+      },
+      {
+        "JPOS_IJPP": 141557,
+        "POS_NAZ": "Zg.Osek"
+      },
+      {
+        "JPOS_IJPP": 141558,
+        "POS_NAZ": "Zg.Otok"
+      },
+      {
+        "JPOS_IJPP": 141563,
+        "POS_NAZ": "Zg.Poljčane"
+      },
+      {
+        "JPOS_IJPP": 141564,
+        "POS_NAZ": "Zg.Polskava"
+      },
+      {
+        "JPOS_IJPP": 141565,
+        "POS_NAZ": "Zg.Polskava g.Golob"
+      },
+      {
+        "JPOS_IJPP": 141566,
+        "POS_NAZ": "Zg.Polskava Š"
+      },
+      {
+        "JPOS_IJPP": 141567,
+        "POS_NAZ": "Zg.Porčič"
+      },
+      {
+        "JPOS_IJPP": 141568,
+        "POS_NAZ": "Zg.Porčič Marles"
+      },
+      {
+        "JPOS_IJPP": 141569,
+        "POS_NAZ": "Zg.Prebukovje"
+      },
+      {
+        "JPOS_IJPP": 141570,
+        "POS_NAZ": "Zg.Pristava"
+      },
+      {
+        "JPOS_IJPP": 141572,
+        "POS_NAZ": "Zg.Ravno/Žetalah"
+      },
+      {
+        "JPOS_IJPP": 141577,
+        "POS_NAZ": "Zg.Ročica Ajlec"
+      },
+      {
+        "JPOS_IJPP": 141580,
+        "POS_NAZ": "Zg.Senarska"
+      },
+      {
+        "JPOS_IJPP": 152272,
+        "POS_NAZ": "Zg.Senarska K"
+      },
+      {
+        "JPOS_IJPP": 141578,
+        "POS_NAZ": "Zg.Ščavnica Žamotna vas K"
+      },
+      {
+        "JPOS_IJPP": 141583,
+        "POS_NAZ": "Zg.Tuhinj Mlinar"
+      },
+      {
+        "JPOS_IJPP": 141589,
+        "POS_NAZ": "Zg.Velka 91"
+      },
+      {
+        "JPOS_IJPP": 141586,
+        "POS_NAZ": "Zg.Velka Fifolt"
+      },
+      {
+        "JPOS_IJPP": 141587,
+        "POS_NAZ": "Zg.Velka K"
+      },
+      {
+        "JPOS_IJPP": 150393,
+        "POS_NAZ": "Zg.Velka obr."
+      },
+      {
+        "JPOS_IJPP": 141590,
+        "POS_NAZ": "Zg.Velka PTT"
+      },
+      {
+        "JPOS_IJPP": 141591,
+        "POS_NAZ": "Zg.Velka Tomažič"
+      },
+      {
+        "JPOS_IJPP": 141592,
+        "POS_NAZ": "Zg.Velovlek"
+      },
+      {
+        "JPOS_IJPP": 141593,
+        "POS_NAZ": "Zg.Visole"
+      },
+      {
+        "JPOS_IJPP": 141595,
+        "POS_NAZ": "Zg.Vrtiče"
+      },
+      {
+        "JPOS_IJPP": 141596,
+        "POS_NAZ": "Zg.Žerjavci tran."
+      },
+      {
+        "JPOS_IJPP": 141597,
+        "POS_NAZ": "Zg.Žerjavci Vrabl"
+      },
+      {
+        "JPOS_IJPP": 141599,
+        "POS_NAZ": "Zgornja Bela"
+      },
+      {
+        "JPOS_IJPP": 165607,
+        "POS_NAZ": "Zgornja Besnica/Kr.K"
+      },
+      {
+        "JPOS_IJPP": 165609,
+        "POS_NAZ": "Zgornja Besnica/Kr.Š"
+      },
+      {
+        "JPOS_IJPP": 165610,
+        "POS_NAZ": "Zgornja Besnica/Kr.ZD"
+      },
+      {
+        "JPOS_IJPP": 165611,
+        "POS_NAZ": "Zgornja Besnica/Kr.zg"
+      },
+      {
+        "JPOS_IJPP": 141600,
+        "POS_NAZ": "Zgornje Bitnje"
+      },
+      {
+        "JPOS_IJPP": 135916,
+        "POS_NAZ": "Zgornje Bitnje 140"
+      },
+      {
+        "JPOS_IJPP": 135917,
+        "POS_NAZ": "Zgornje Bitnje K"
+      },
+      {
+        "JPOS_IJPP": 141601,
+        "POS_NAZ": "Zgornji Brnik"
+      },
+      {
+        "JPOS_IJPP": 141620,
+        "POS_NAZ": "Zimica K"
+      },
+      {
+        "JPOS_IJPP": 141631,
+        "POS_NAZ": "Zlatoličje"
+      },
+      {
+        "JPOS_IJPP": 141632,
+        "POS_NAZ": "Zlatoličje Krepfl"
+      },
+      {
+        "JPOS_IJPP": 141637,
+        "POS_NAZ": "Zminec"
+      },
+      {
+        "JPOS_IJPP": 165678,
+        "POS_NAZ": "Zminec Bodovlje"
+      },
+      {
+        "JPOS_IJPP": 165677,
+        "POS_NAZ": "Zminec Sopotnica"
+      },
+      {
+        "JPOS_IJPP": 141641,
+        "POS_NAZ": "Zmrzlek"
+      },
+      {
+        "JPOS_IJPP": 141660,
+        "POS_NAZ": "Zvirče"
+      },
+      {
+        "JPOS_IJPP": 150225,
+        "POS_NAZ": "Žablje"
+      },
+      {
+        "JPOS_IJPP": 165605,
+        "POS_NAZ": "Žablje Babni Vrt K"
+      },
+      {
+        "JPOS_IJPP": 135918,
+        "POS_NAZ": "Žabnica"
+      },
+      {
+        "JPOS_IJPP": 141359,
+        "POS_NAZ": "Žaga/Mlinšah"
+      },
+      {
+        "JPOS_IJPP": 141360,
+        "POS_NAZ": "Žaga/Moravčah"
+      },
+      {
+        "JPOS_IJPP": 141361,
+        "POS_NAZ": "Žaga/Trž."
+      },
+      {
+        "JPOS_IJPP": 141400,
+        "POS_NAZ": "Žahenberc"
+      },
+      {
+        "JPOS_IJPP": 141402,
+        "POS_NAZ": "Žajdl"
+      },
+      {
+        "JPOS_IJPP": 141409,
+        "POS_NAZ": "Žale/Žetalah"
+      },
+      {
+        "JPOS_IJPP": 141428,
+        "POS_NAZ": "Žamenci GD"
+      },
+      {
+        "JPOS_IJPP": 141429,
+        "POS_NAZ": "Žamenci K"
+      },
+      {
+        "JPOS_IJPP": 141490,
+        "POS_NAZ": "Žeje"
+      },
+      {
+        "JPOS_IJPP": 150246,
+        "POS_NAZ": "Železne dveri"
+      },
+      {
+        "JPOS_IJPP": 150247,
+        "POS_NAZ": "Železne Dveri K"
+      },
+      {
+        "JPOS_IJPP": 165226,
+        "POS_NAZ": "Železniki cerkev"
+      },
+      {
+        "JPOS_IJPP": 141494,
+        "POS_NAZ": "Železniki Češnjica"
+      },
+      {
+        "JPOS_IJPP": 165227,
+        "POS_NAZ": "Železniki Domel"
+      },
+      {
+        "JPOS_IJPP": 141496,
+        "POS_NAZ": "Železniki Plavž"
+      },
+      {
+        "JPOS_IJPP": 141506,
+        "POS_NAZ": "Želodnik"
+      },
+      {
+        "JPOS_IJPP": 141509,
+        "POS_NAZ": "Ženjak"
+      },
+      {
+        "JPOS_IJPP": 141514,
+        "POS_NAZ": "Žerjavka"
+      },
+      {
+        "JPOS_IJPP": 141515,
+        "POS_NAZ": "Žerovinci"
+      },
+      {
+        "JPOS_IJPP": 141516,
+        "POS_NAZ": "Žerovinci GD"
+      },
+      {
+        "JPOS_IJPP": 141518,
+        "POS_NAZ": "Žetale"
+      },
+      {
+        "JPOS_IJPP": 141519,
+        "POS_NAZ": "Žetale Paukon"
+      },
+      {
+        "JPOS_IJPP": 141603,
+        "POS_NAZ": "Žibrše K"
+      },
+      {
+        "JPOS_IJPP": 141604,
+        "POS_NAZ": "Žice"
+      },
+      {
+        "JPOS_IJPP": 141605,
+        "POS_NAZ": "Žice Perko"
+      },
+      {
+        "JPOS_IJPP": 141606,
+        "POS_NAZ": "Žiče/Radomljah"
+      },
+      {
+        "JPOS_IJPP": 141610,
+        "POS_NAZ": "Žičnica V.planina"
+      },
+      {
+        "JPOS_IJPP": 141613,
+        "POS_NAZ": "Žiganja vas"
+      },
+      {
+        "JPOS_IJPP": 141615,
+        "POS_NAZ": "Žihlava trg."
+      },
+      {
+        "JPOS_IJPP": 150111,
+        "POS_NAZ": "Žikarce Slanič"
+      },
+      {
+        "JPOS_IJPP": 141621,
+        "POS_NAZ": "Žiri"
+      },
+      {
+        "JPOS_IJPP": 141622,
+        "POS_NAZ": "Žiri Dom"
+      },
+      {
+        "JPOS_IJPP": 141623,
+        "POS_NAZ": "Žiri K"
+      },
+      {
+        "JPOS_IJPP": 141624,
+        "POS_NAZ": "Žiri market"
+      },
+      {
+        "JPOS_IJPP": 141625,
+        "POS_NAZ": "Žirje"
+      },
+      {
+        "JPOS_IJPP": 141674,
+        "POS_NAZ": "Žirovnica"
+      },
+      {
+        "JPOS_IJPP": 139274,
+        "POS_NAZ": "Žirovnica OPC"
+      },
+      {
+        "JPOS_IJPP": 141627,
+        "POS_NAZ": "Žitečka vas"
+      },
+      {
+        "JPOS_IJPP": 141652,
+        "POS_NAZ": "Župečja vas"
+      },
+      {
+        "JPOS_IJPP": 141656,
+        "POS_NAZ": "Župetinci Andrenci K"
+      },
+      {
+        "JPOS_IJPP": 165570,
+        "POS_NAZ": "Žusterna-bazen"
+      },
+      {
+        "JPOS_IJPP": 135821,
+        "POS_NAZ": "Žusterna III"
+      },
+      {
+        "JPOS_IJPP": 164887,
+        "POS_NAZ": "Žusterna parkirišče"
+      },
+      {
+        "JPOS_IJPP": 902595,
+        "POS_NAZ": "Žusterna parkirišče (x)"
+      },
+      {
+        "JPOS_IJPP": 141661,
+        "POS_NAZ": "Žvirče"
+      }
+    ],
+    "Error": "0",
+    "ErrorMsg": ""
+  }
+]
