@@ -46,7 +46,7 @@ redisClient.connect().then(() => {
     //scrapeSlovenskeZelezniceDOM().then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
     // Compare Puppeteer and DOM
     //comparePerformance('42300', '43400', '14.01.2025', 'vlak').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
-    //comparePerformance('Ljubljana', 'Celje', '2025-03-28', 'prevoz').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
+    //comparePerformance('Ljubljana', 'Celje', '2025-03-30', 'prevoz').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
 
 }).catch(err => {
     console.error('Redis connection error:', err);
