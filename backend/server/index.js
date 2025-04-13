@@ -90,7 +90,19 @@ app.get('/webscraper/destinations', async (req, res) => {
         await redisClient.setEx(cacheKey, 43200, JSON.stringify(destinations)); // 12h TTL
     }
 
-    res.json(destinations.map(dest => ({Id: dest.Id, Kraj: dest.Kraj})));
+    res.json(destinations.map(dest => ({
+        Id: dest._id,
+        Kraj: dest.Kraj,
+        Postaje: (dest.Postaje || []).map(p => ({
+            Ime: p.Ime,
+            Vlak: p.Vlak || null,
+            APMS: p.APMS || null,
+            Arriva: p.Arriva || null,
+            Prevozi: p.Prevozi || null,
+            lat: p.lat,
+            lon: p.lon
+        }))
+    })));
 });
 
 async function handleSearch(req, res, scraperFn, transportType) {
