@@ -2,6 +2,7 @@ import React, {useState, useEffect, Suspense, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
 import SearchForm from '../components/SearchForm';
 import LoadingComponent from '../components/LoadingComponent';
+import NearbyStations from '../components/NearbyStations';
 import {DestinationsContext} from '../context/DestinationsContext';
 import axios from 'axios';
 
@@ -21,8 +22,12 @@ function SearchPage() {
     const [loadingAPMS, setLoadingAPMS] = useState(false);
     const [loadingPrevozi, setLoadingPrevozi] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
     const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const departure = queryParams.get('departure');
+    const destination = queryParams.get('destination');
+    const selectedDeparture = destinations.find(dest => dest.Kraj.toLowerCase() === departure?.toLowerCase());
+    const selectedDestination = destinations.find(dest => dest.Kraj.toLowerCase() === destination?.toLowerCase());
 
     useEffect(() => {
         if (loading || destinations.length === 0 || error) return;
@@ -135,6 +140,15 @@ function SearchPage() {
                 initialDate={new URLSearchParams(location.search).get('date')}
                 errorMessage={errorMessage || error}
             />
+
+            {selectedDeparture && (
+                <NearbyStations destination={selectedDeparture} label="🧭 Možnosti v bližini kraja odhoda:"/>
+            )}
+
+            {selectedDestination && (
+                <NearbyStations destination={selectedDestination} label="🧭 Možnosti v bližini kraja prihoda:"/>
+            )}
+
             {!errorMessage && (
                 <div className="results-container mt-8 w-full px-4 sm:px-0">
                     <Suspense fallback={<LoadingComponent content="Nalaganje podatkov..."/>}>
