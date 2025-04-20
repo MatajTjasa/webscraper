@@ -101,6 +101,63 @@ async function safeGoto(page, url) {
     throw new Error(`Failed to load ${url} after multiple attempts`);
 }
 
+async function findNearbyStops(departure, destination, date, transportType, scraperFn) {
+    const allDestinations = await getDestinationsFromDatabase();
+
+    const findStopResults = async (fromList, toCode, fromLabel, toLabel, reverse = false) => {
+        const results = [];
+
+        for (const postaja of fromList || []) {
+            const code = postaja[transportType];
+            if (!code) continue;
+
+            try {
+                const response = reverse
+                    ? await scraperFn(toCode, code, date)
+                    : await scraperFn(code, toCode, date);
+
+                if (response.length > 0) {
+                    results.push({
+                        from: reverse ? fromLabel : postaja.Ime,
+                        to: reverse ? postaja.Ime : toLabel,
+                        schedule: response
+                    });
+                }
+            } catch (e) {
+                console.error(`Failed at ${postaja.Ime}:`, e.message);
+            }
+        }
+
+        return results;
+    };
+
+    const mainDep = allDestinations.find(d => d.Kraj.toLowerCase() === departure.toLowerCase());
+    const mainDest = allDestinations.find(d => d.Kraj.toLowerCase() === destination.toLowerCase());
+    const mainDepCode = mainDep?.[transportType];
+    const mainDestCode = mainDest?.[transportType];
+
+    const results = {
+        main: [],
+        nearbyDepartures: [],
+        nearbyDestinations: []
+    };
+
+    if (mainDepCode && mainDestCode) {
+        try {
+            const mainResult = await scraperFn(mainDepCode, mainDestCode, date);
+            if (mainResult.length > 0) {
+                results.main = mainResult;
+            }
+        } catch (e) {
+            console.error('Main search failed:', e.message);
+        }
+    }
+
+    results.nearbyDepartures = await findStopResults(mainDep?.Postaje, mainDestCode, departure, destination);
+    results.nearbyDestinations = await findStopResults(mainDest?.Postaje, mainDepCode, departure, destination, true);
+
+    return results;
+}
 
 module.exports = {
     retry,
@@ -111,5 +168,6 @@ module.exports = {
     formatLocation,
     formatPrice,
     safeGoto,
-    delay
+    delay,
+    findNearbyStops,
 };

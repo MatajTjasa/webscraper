@@ -8,6 +8,7 @@ const {scrapeSlovenskeZelezniceDOM} = require("../scrapers/slovenske_zeleznice_D
 const {comparePerformance} = require("./comparePerformance");
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
+const {searchAPMS} = require('../services/apmsService');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 require('dotenv').config();
@@ -229,11 +230,20 @@ app.post('/webscraper/searchAll', async (req, res) => {
     });
 });
 
+
 app.post('/webscraper/searchAPMSbyUrl', async (req, res) => {
+    const {date, departure, destination} = req.body;
     console.log('Starting request searchAPMSbyUrl.');
-    await handleSearch(req, res, scrapeAPMSbyUrl, 'APMS');
-    console.log('Ending request searchAPMSbyUrl.');
+
+    const result = await searchAPMS(departure, destination, date, redisClient);
+
+    if (result.error) {
+        return res.status(400).json({message: result.error});
+    }
+
+    return res.json(result.data);
 });
+
 
 app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     console.log('Starting request searchArrivaByUrl.');
