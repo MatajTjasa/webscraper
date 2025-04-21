@@ -24,6 +24,14 @@ if (!uri) {
 
 const database = mongoClient.db('webscraperDB');
 
+
+function getDatabase() {
+    if (!mongoClient) {
+        throw new Error('MongoClient is not connected yet.');
+    }
+    return mongoClient.db('webscraperDB');
+}
+
 async function getDestinationsFromDatabase() {
     if (!mongoClient) {
         mongoClient = new MongoClient(uri);
@@ -48,4 +56,9 @@ async function getCodeArriva(locationName) {
     return result ? result.JPOS_IJPP : null;
 }
 
-module.exports = {getDestinationsFromDatabase, getCommonDestinations, getCodeArriva};
+module.exports = {
+    getDatabase,
+    getDestinationsFromDatabase,
+    getCommonDestinations,
+    getCodeArriva
+};

@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {getDestinationsFromDatabase} = require('./database');
+const {getDestinationsFromDatabase, getDatabase} = require('./database');
 
 // Helper methods
 const retry = (fn, retries = 3) => async (...args) => {
@@ -159,6 +159,89 @@ async function findNearbyStops(departure, destination, date, transportType, scra
     return results;
 }
 
+async function findNearbyGeoLocations(kraj, radiusInKm = 15, transportType) {
+    const db = getDatabase();
+    const collection = db.collection('destinationsFlat');
+
+    const main = await collection.findOne({Kraj: kraj, type: 'kraj'});
+    if (!main || !main.location) return [];
+
+    const query = {
+        location: {
+            $near: {
+                $geometry: main.location,
+                $maxDistance: radiusInKm * 1000 // meters
+            }
+        },
+        [transportType]: {$ne: ""}, //not equal
+        Kraj: {$ne: kraj}
+    };
+
+    return await collection.find(query).toArray();
+}
+
+async function searchWithNearbyGeoLocations(departure, destination, date, transportType, scraperFn, redisClient) {
+    const formattedDate = reformatDate(date, transportType);
+    const depCodes = await getDestinationCodes(departure, redisClient);
+    const destCodes = await getDestinationCodes(destination, redisClient);
+
+    const results = {
+        main: [],
+        nearbyDepartures: [],
+        nearbyDestinations: []
+    };
+
+    // main route
+    if (depCodes[transportType] && destCodes[transportType]) {
+        try {
+            const mainResult = await scraperFn(depCodes[transportType], destCodes[transportType], formattedDate);
+            if (mainResult.length > 0) {
+                results.main = mainResult;
+            }
+        } catch (e) {
+            console.error(`Main relation did not succeed:`, e.message);
+        }
+    }
+
+    // nearby departures
+    const nearbyDeps = await findNearbyGeoLocations(departure, 15, transportType);
+    for (const dep of nearbyDeps) {
+        if (!dep[transportType]) continue;
+        try {
+            const altResult = await scraperFn(dep[transportType], destCodes[transportType], formattedDate);
+            if (altResult.length > 0) {
+                results.nearbyDepartures.push({
+                    iz: dep.Kraj,
+                    v: destination,
+                    vozniRed: altResult
+                });
+            }
+        } catch (e) {
+            console.error(`Error in near departure station ${dep.Kraj}:`, e.message);
+        }
+    }
+
+    // nearby destinations
+    const nearbyDests = await findNearbyGeoLocations(destination, 15, transportType);
+    for (const dest of nearbyDests) {
+        if (!dest[transportType]) continue;
+        try {
+            const altResult = await scraperFn(depCodes[transportType], dest[transportType], formattedDate);
+            if (altResult.length > 0) {
+                results.nearbyDestinations.push({
+                    iz: departure,
+                    v: dest.Kraj,
+                    vozniRed: altResult
+                });
+            }
+        } catch (e) {
+            console.error(`Error in near destination station ${dest.Kraj}:`, e.message);
+        }
+    }
+
+    return results;
+}
+
 module.exports = {
     retry,
     validateTransportSupport,
@@ -170,4 +253,6 @@ module.exports = {
     safeGoto,
     delay,
     findNearbyStops,
+    findNearbyGeoLocations,
+    searchWithNearbyGeoLocations
 };
