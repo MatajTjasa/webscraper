@@ -66,9 +66,9 @@ function SearchPage() {
         setLoadingAPMS(true);
         setLoadingPrevozi(true);
 
-        fetchArrivaResults(departure, destination, date);
-        fetchAPMSResults(departure, destination, date);
         fetchTrainsResults(departure, destination, date);
+        fetchAPMSResults(departure, destination, date);
+        fetchArrivaResults(departure, destination, date);
         fetchPrevoziResults(departure, destination, date);
     }, [location.search, destinations, loading, error]);
 
