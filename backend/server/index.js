@@ -9,6 +9,7 @@ const {comparePerformance} = require("./comparePerformance");
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
 const {searchAPMS} = require('../services/apmsService');
+const {searchArriva} = require('../services/arrivaService');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 require('dotenv').config();
@@ -247,9 +248,23 @@ app.post('/webscraper/searchAPMSbyUrl', async (req, res) => {
 
 app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     console.log('Starting request searchArrivaByUrl.');
-    await handleSearch(req, res, scrapeArrivaByUrl, 'Arriva', false);
+
+    const {date, departure, destination} = req.body;
+    const result = await searchArriva(departure, destination, date, redisClient);
+
+    if (result.error) {
+        return res.status(400).json({message: result.error});
+    }
+
     console.log('Ending request searchArrivaByUrl.');
+    return res.json(result.data);
 });
+
+// app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
+//     console.log('Starting request searchArrivaByUrl.');
+//     await handleSearch(req, res, scrapeArrivaByUrl, 'Arriva', false);
+//     console.log('Ending request searchArrivaByUrl.');
+// });
 
 app.post('/webscraper/searchSlovenskeZelezniceByUrl', async (req, res) => {
     console.log('Starting request searchSlovenskeZelezniceByUrl.');
