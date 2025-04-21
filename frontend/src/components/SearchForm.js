@@ -1,6 +1,7 @@
 import React, {useState, useRef, useContext, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {DestinationsContext} from '../context/DestinationsContext';
+import AutocompleteInput from "./AutocompleteInput";
 
 function SearchForm({initialDeparture, initialDestination, initialDate, errorMessage}) {
     const {destinations, error} = useContext(DestinationsContext);
@@ -14,8 +15,6 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const navigate = useNavigate();
-    const departureRef = useRef(null);
-    const destinationRef = useRef(null);
 
     useEffect(() => {
         if (!initialDate) {
@@ -28,22 +27,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
         }
     }, [initialDate]);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (departureRef.current && !departureRef.current.contains(event.target)) {
-                setDepartureDropdownActive(false);
-            }
-            if (destinationRef.current && !destinationRef.current.contains(event.target)) {
-                setDestinationDropdownActive(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [departureRef, destinationRef]);
+    const normalize = str => str?.toLowerCase().trim();
 
     const validateInputs = () => {
         if (!departure || !destination || !date) {
@@ -51,9 +35,22 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
             return false;
         }
 
-        const validDestination = destinations.some(dest => dest.Kraj.toLowerCase() === destination.toLowerCase());
+        const normDeparture = normalize(departure);
+        const normDestination = normalize(destination);
 
-        if (!validDestination) {
+        const isValidDeparture = destinations.some(dest => {
+            const krajMatch = normalize(dest.Kraj) === normDeparture;
+            const postajaMatch = (dest.Postaje || []).some(post => normalize(post.Ime) === normDeparture);
+            return krajMatch || postajaMatch;
+        });
+
+        const isValidDestination = destinations.some(dest => {
+            const krajMatch = normalize(dest.Kraj) === normDestination;
+            const postajaMatch = (dest.Postaje || []).some(post => normalize(post.Ime) === normDestination);
+            return krajMatch || postajaMatch;
+        });
+
+        if (!isValidDeparture || !isValidDestination) {
             setLocalErrorMessage('Neveljavna destinacija. Prosim izberi veljavno destinacijo.');
             return false;
         }
@@ -66,7 +63,6 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
         setHasSubmitted(true);
 
         if (isSubmitting) return;
-
         if (!validateInputs()) return;
 
         setIsSubmitting(true);
@@ -82,14 +78,6 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
         const temp = departure;
         setDeparture(destination);
         setDestination(temp);
-
-        const validDestination = destinations.some(dest => dest.Kraj.toLowerCase() === destination.toLowerCase());
-
-        if (!validDestination) {
-            setLocalErrorMessage('Neveljavna destinacija. Prosim izberi veljavno destinacijo.');
-            return;
-        }
-
         setLocalErrorMessage('');
     };
 
@@ -117,37 +105,13 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                         className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row justify-center items-center sm:space-x-4"
                     >
                         <div className="flex w-full sm:w-auto items-center">
-                            <div className="custom-dropdown-container relative w-full sm:w-44" ref={departureRef}>
-                                <input
-                                    type="text"
-                                    placeholder="Kraj odhoda"
-                                    value={departure}
-                                    onChange={(e) => setDeparture(e.target.value)}
-                                    className="custom-dropdown px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md w-full bg-white dark:bg-gray-700 text-black dark:text-white"
-                                    onClick={() => setDepartureDropdownActive(!departureDropdownActive)}
-                                />
-                                {departureDropdownActive && destinations.length > 0 && (
-                                    <div
-                                        className="custom-dropdown-list absolute z-10 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
-                                        {destinations
-                                            .filter(dest =>
-                                                dest.Kraj.toLowerCase().includes(departure.toLowerCase())
-                                            )
-                                            .map((dest, index) => (
-                                                <div
-                                                    key={index}
-                                                    onClick={() => {
-                                                        setDeparture(dest.Kraj);
-                                                        setDepartureDropdownActive(false);
-                                                    }}
-                                                    className="px-4 py-2 cursor-pointer hover:bg-blue-100 dark:hover:bg-gray-600"
-                                                >
-                                                    {dest.Kraj}
-                                                </div>
-                                            ))}
-                                    </div>
-                                )}
-                            </div>
+                            <AutocompleteInput
+                                value={departure}
+                                onChange={setDeparture}
+                                label="Kraj odhoda"
+                                dropdownActive={departureDropdownActive}
+                                setDropdownActive={setDepartureDropdownActive}
+                            />
                             <button
                                 type="button"
                                 onClick={handleSwap}
@@ -157,37 +121,13 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                             </button>
                         </div>
 
-                        <div className="custom-dropdown-container relative w-full sm:w-44" ref={destinationRef}>
-                            <input
-                                type="text"
-                                placeholder="Kraj prihoda"
-                                value={destination}
-                                onChange={(e) => setDestination(e.target.value)}
-                                className="custom-dropdown px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md w-full bg-white dark:bg-gray-700 text-black dark:text-white"
-                                onClick={() => setDestinationDropdownActive(!destinationDropdownActive)}
-                            />
-                            {destinationDropdownActive && destinations.length > 0 && (
-                                <div
-                                    className="custom-dropdown-list absolute z-10 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mt-1 max-h-40 overflow-y-auto text-left">
-                                    {destinations
-                                        .filter(dest =>
-                                            dest.Kraj.toLowerCase().includes(destination.toLowerCase())
-                                        )
-                                        .map((dest, index) => (
-                                            <div
-                                                key={index}
-                                                onClick={() => {
-                                                    setDestination(dest.Kraj);
-                                                    setDestinationDropdownActive(false);
-                                                }}
-                                                className="px-4 py-2 cursor-pointer hover:bg-blue-100 dark:hover:bg-gray-600"
-                                            >
-                                                {dest.Kraj}
-                                            </div>
-                                        ))}
-                                </div>
-                            )}
-                        </div>
+                        <AutocompleteInput
+                            value={destination}
+                            onChange={setDestination}
+                            label="Kraj prihoda"
+                            dropdownActive={destinationDropdownActive}
+                            setDropdownActive={setDestinationDropdownActive}
+                        />
 
                         <div className="custom-dropdown-container relative w-full sm:w-48">
                             <input
