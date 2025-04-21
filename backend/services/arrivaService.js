@@ -1,5 +1,5 @@
 const {scrapeArrivaByUrl} = require('../scrapers/arriva_byUrl');
-const {searchWithNearbyGeoLocations} = require('../server/helpers');
+const {searchWithNearbyGeoLocations, cacheAllRelations} = require('../server/helpers');
 
 async function searchArriva(departure, destination, date, redisClient) {
     const results = await searchWithNearbyGeoLocations(
@@ -10,6 +10,8 @@ async function searchArriva(departure, destination, date, redisClient) {
         scrapeArrivaByUrl,
         redisClient
     );
+
+    await cacheAllRelations(departure, destination, date, results, 'APMS', redisClient);
 
     return {error: null, data: results};
 }

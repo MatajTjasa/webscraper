@@ -182,6 +182,7 @@ async function findNearbyGeoLocations(kraj, radiusInKm = 15, transportType) {
 
 async function searchWithNearbyGeoLocations(departure, destination, date, transportType, scraperFn, redisClient) {
     const formattedDate = reformatDate(date, transportType);
+    const cacheDate = reformatDateForCache(date);
     const depCodes = await getDestinationCodes(departure, redisClient);
     const destCodes = await getDestinationCodes(destination, redisClient);
 
@@ -193,53 +194,87 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
 
     // main route
     if (depCodes[transportType] && destCodes[transportType]) {
-        try {
-            const mainResult = await scraperFn(depCodes[transportType], destCodes[transportType], formattedDate);
-            if (mainResult.length > 0) {
-                results.main = mainResult;
+        const mainKey = `${transportType}-${departure}-${destination}-${cacheDate}`;
+        const cachedMain = await redisClient.get(mainKey);
+        if (cachedMain && cachedMain !== '[]') {
+            results.main = JSON.parse(cachedMain);
+        } else {
+            try {
+                const mainResult = await scraperFn(depCodes[transportType], destCodes[transportType], formattedDate);
+                if (mainResult.length > 0) {
+                    results.main = mainResult;
+                    await redisClient.setEx(mainKey, 3600, JSON.stringify(mainResult));
+                }
+            } catch (e) {
+                console.error(`Main relation did not succeed:`, e.message);
             }
-        } catch (e) {
-            console.error(`Main relation did not succeed:`, e.message);
         }
+    } else {
+        console.log(`${transportType} does not support exact main relation, checking nearby...`);
     }
 
     // nearby departures
     const nearbyDeps = await findNearbyGeoLocations(departure, 15, transportType);
     for (const dep of nearbyDeps) {
-        if (!dep[transportType]) continue;
-        try {
-            const altResult = await scraperFn(dep[transportType], destCodes[transportType], formattedDate);
-            if (altResult.length > 0) {
-                results.nearbyDepartures.push({
-                    iz: dep.Kraj,
-                    v: destination,
-                    vozniRed: altResult
-                });
+        if (!dep[transportType] || !destCodes[transportType]) continue;
+        const key = `${transportType}-${dep.Kraj}-${destination}-${cacheDate}`;
+        const cached = await redisClient.get(key);
+        if (cached && cached !== '[]') {
+            results.nearbyDepartures.push({iz: dep.Kraj, v: destination, vozniRed: JSON.parse(cached)});
+        } else {
+            try {
+                const altResult = await scraperFn(dep[transportType], destCodes[transportType], formattedDate);
+                if (altResult.length > 0) {
+                    results.nearbyDepartures.push({iz: dep.Kraj, v: destination, vozniRed: altResult});
+                    await redisClient.setEx(key, 3600, JSON.stringify(altResult));
+                }
+            } catch (e) {
+                console.error(`Error in near departure station ${dep.Kraj}:`, e.message);
             }
-        } catch (e) {
-            console.error(`Error in near departure station ${dep.Kraj}:`, e.message);
         }
     }
 
     // nearby destinations
     const nearbyDests = await findNearbyGeoLocations(destination, 15, transportType);
     for (const dest of nearbyDests) {
-        if (!dest[transportType]) continue;
-        try {
-            const altResult = await scraperFn(depCodes[transportType], dest[transportType], formattedDate);
-            if (altResult.length > 0) {
-                results.nearbyDestinations.push({
-                    iz: departure,
-                    v: dest.Kraj,
-                    vozniRed: altResult
-                });
+        if (!dest[transportType] || !depCodes[transportType]) continue;
+        const key = `${transportType}-${departure}-${dest.Kraj}-${cacheDate}`;
+        const cached = await redisClient.get(key);
+        if (cached && cached !== '[]') {
+            results.nearbyDestinations.push({iz: departure, v: dest.Kraj, vozniRed: JSON.parse(cached)});
+        } else {
+            try {
+                const altResult = await scraperFn(depCodes[transportType], dest[transportType], formattedDate);
+                if (altResult.length > 0) {
+                    results.nearbyDestinations.push({iz: departure, v: dest.Kraj, vozniRed: altResult});
+                    await redisClient.setEx(key, 3600, JSON.stringify(altResult));
+                }
+            } catch (e) {
+                console.error(`Error in near destination station ${dest.Kraj}:`, e.message);
             }
-        } catch (e) {
-            console.error(`Error in near destination station ${dest.Kraj}:`, e.message);
         }
     }
 
     return results;
+}
+
+async function cacheAllRelations(departure, destination, date, results, transportType, redisClient) {
+    const cacheDate = reformatDateForCache(date);
+
+    if (Array.isArray(results.main) && results.main.length > 0) {
+        const key = `${transportType}-${departure}-${destination}-${cacheDate}`;
+        await redisClient.setEx(key, 3600, JSON.stringify(results.main));
+    }
+
+    for (const group of results.nearbyDepartures || []) {
+        const key = `${transportType}-${group.iz}-${group.v}-${cacheDate}`;
+        await redisClient.setEx(key, 3600, JSON.stringify(group.vozniRed));
+    }
+
+    for (const group of results.nearbyDestinations || []) {
+        const key = `${transportType}-${group.iz}-${group.v}-${cacheDate}`;
+        await redisClient.setEx(key, 3600, JSON.stringify(group.vozniRed));
+    }
 }
 
 module.exports = {
@@ -254,5 +289,6 @@ module.exports = {
     delay,
     findNearbyStops,
     findNearbyGeoLocations,
-    searchWithNearbyGeoLocations
+    searchWithNearbyGeoLocations,
+    cacheAllRelations
 };
