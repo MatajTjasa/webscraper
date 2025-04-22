@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import loadingEmptyState from "../components/LoadingEmptyState";
+import {FaBus} from "react-icons/fa";
 
 function ResultGroup({from, to, rows, defaultOpen = true}) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -20,7 +21,14 @@ function ResultGroup({from, to, rows, defaultOpen = true}) {
 function ResultsAPMS({results}) {
     return (
         <div className="container result-section mb-8 p-4 rounded-2xl shadow-md bg-white dark:bg-gray-800">
-            <h2 className="text-xl md:text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-200">APMS</h2>
+            <div className="flex items-center mb-4">
+                <FaBus className="text-[#4682B4] dark:text-purple-400 mr-2 text-2xl md:text-2xl"/>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-gray-200">
+                    <a href="https://apms.si" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        APMS
+                    </a>
+                </h2>
+            </div>
 
             {results.main && results.main.length > 0 && (
                 <ResultGroup
@@ -64,7 +72,7 @@ function ResultTable({rows}) {
                 <tr>
                     {['Kraj odhoda', 'Čas odhoda', 'Kraj prihoda', 'Čas prihoda', 'Trajanje', 'Km', 'Cena'].map((header, idx) => (
                         <th key={idx}
-                            className="px-4 py-3 bg-[#4682B4] dark:bg-purple-800 text-white text-sm md:text-base text-left">
+                            className="px-4 py-3 bg-[#4682B4] dark:bg-purple-900 text-white text-sm md:text-base text-center">
                             {header}
                         </th>
                     ))}

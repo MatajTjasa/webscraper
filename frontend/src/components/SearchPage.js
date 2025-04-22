@@ -52,8 +52,15 @@ function SearchPage() {
             return;
         }
 
-        const validDeparture = destinations.some(dest => dest.Kraj.toLowerCase() === departure.toLowerCase());
-        const validDestination = destinations.some(dest => dest.Kraj.toLowerCase() === destination.toLowerCase());
+        const validDeparture = destinations.some(dest =>
+            dest.Kraj.toLowerCase() === departure.toLowerCase() ||
+            (dest.Postaje || []).some(postaja => postaja.Ime.toLowerCase() === departure.toLowerCase())
+        );
+
+        const validDestination = destinations.some(dest =>
+            dest.Kraj.toLowerCase() === destination.toLowerCase() ||
+            (dest.Postaje || []).some(postaja => postaja.Ime.toLowerCase() === destination.toLowerCase())
+        );
 
         if (!validDeparture || !validDestination) {
             setErrorMessage('Neveljavna destinacija. Prosim izberi veljavno destinacijo.');
@@ -141,13 +148,13 @@ function SearchPage() {
                 errorMessage={errorMessage || error}
             />
 
-            {selectedDeparture && (
+            {/*            {selectedDeparture && (
                 <NearbyStations destination={selectedDeparture} label="🧭 Možnosti v bližini kraja odhoda:"/>
             )}
 
             {selectedDestination && (
                 <NearbyStations destination={selectedDestination} label="🧭 Možnosti v bližini kraja prihoda:"/>
-            )}
+            )}*/}
 
             {!errorMessage && (
                 <div className="results-container mt-8 w-full px-4 sm:px-0">

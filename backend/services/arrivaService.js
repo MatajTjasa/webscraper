@@ -11,7 +11,7 @@ async function searchArriva(departure, destination, date, redisClient) {
         redisClient
     );
 
-    await cacheAllRelations(departure, destination, date, results, 'APMS', redisClient);
+    await cacheAllRelations(departure, destination, date, results, 'Arriva', redisClient);
 
     return {error: null, data: results};
 }

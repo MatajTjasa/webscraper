@@ -1,51 +1,100 @@
-import React from 'react';
+import React, {useState} from 'react';
 import loadingEmptyState from "../components/LoadingEmptyState";
+import {FaBus} from 'react-icons/fa';
+
+function ResultGroup({from, to, rows, defaultOpen = true}) {
+    const [isOpen, setIsOpen] = useState(defaultOpen);
+
+    return (
+        <div className="mb-6 border border-gray-300 rounded-xl shadow-lg overflow-hidden">
+            <h3
+                onClick={() => setIsOpen(!isOpen)}
+                className="cursor-pointer text-md md:text-lg font-semibold px-4 py-3 bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600"
+            >
+                {from} ⇒ {to} {isOpen ? '▾' : '▸'}
+            </h3>
+            {isOpen && <ResultTable rows={rows}/>}
+        </div>
+    );
+}
 
 function ResultsArriva({results}) {
     return (
-        <div className="container result-section mb-8 p-4 rounded-lg shadow-md">
-            <h2 className="text-xl md:text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-200">Arriva</h2>
-            <div className="overflow-x-auto rounded-lg shadow-md border border-gray-300">
-                <table className="min-w-full table-auto rounded-md shadow-md bg-white dark:bg-gray-800">
-                    <thead>
-                    <tr>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Kraj
-                            odhoda
-                        </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Čas
-                            odhoda
-                        </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Kraj
-                            prihoda
-                        </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Čas
-                            prihoda
-                        </th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Trajanje</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Dolžina</th>
-                        <th className="px-2 md:px-4 py-2 bg-[#4682B4] dark:bg-purple-900 text-white text-xs md:text-sm lg:text-base">Cena</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {results.map((bus, index) => (
-                        <tr
-                            key={index}
-                            className={`hover:bg-gray-200 dark:hover:bg-gray-700 ${
-                                index % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-900'
-                            }`}
-                        >
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.departure}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.departureTime}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.arrival}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.arrivalTime}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.travelDuration}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.length}</td>
-                            <td className="border border-gray-300 dark:border-gray-700 px-2 md:px-4 py-2 text-xs md:text-sm lg:text-base text-gray-800 dark:text-gray-200">{bus.price}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+        <div className="container result-section mb-8 p-4 rounded-2xl shadow-md bg-white dark:bg-gray-800">
+            <div className="flex items-center mb-4">
+                <FaBus className="text-[#4682B4] dark:text-purple-400 mr-2 text-2xl md:text-2xl"/>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-gray-200">
+                    <a href="https://arriva.si" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        Arriva
+                    </a>
+                </h2>
             </div>
+
+            {results.main && results.main.length > 0 && (
+                <ResultGroup
+                    from={results.main[0].departure}
+                    to={results.main[0].arrival}
+                    rows={results.main}
+                    defaultOpen={true}
+                />
+            )}
+
+            {results.nearbyDepartures && results.nearbyDepartures.length > 0 &&
+                results.nearbyDepartures.map((group, index) => (
+                    <ResultGroup
+                        key={`ndep-${index}`}
+                        from={group.vozniRed[0].departure}
+                        to={group.vozniRed[0].arrival}
+                        rows={group.vozniRed}
+                        defaultOpen={false}
+                    />
+                ))}
+
+            {results.nearbyDestinations && results.nearbyDestinations.length > 0 &&
+                results.nearbyDestinations.map((group, index) => (
+                    <ResultGroup
+                        key={`ndest-${index}`}
+                        from={group.vozniRed[0].departure}
+                        to={group.vozniRed[0].arrival}
+                        rows={group.vozniRed}
+                        defaultOpen={false}
+                    />
+                ))}
+        </div>
+    );
+}
+
+function ResultTable({rows}) {
+    return (
+        <div className="overflow-x-auto">
+            <table className="min-w-full table-auto bg-white dark:bg-gray-800 border-collapse">
+                <thead>
+                <tr>
+                    {['Kraj odhoda', 'Čas odhoda', 'Kraj prihoda', 'Čas prihoda', 'Trajanje', 'Km', 'Cena'].map((header, idx) => (
+                        <th key={idx}
+                            className="px-4 py-3 bg-[#4682B4] dark:bg-purple-900 text-white text-sm md:text-base text-center">
+                            {header}
+                        </th>
+                    ))}
+                </tr>
+                </thead>
+                <tbody>
+                {rows.map((bus, index) => (
+                    <tr
+                        key={index}
+                        className={`transition hover:bg-blue-50 dark:hover:bg-gray-700 ${index % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900'}`}
+                    >
+                        <td className="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{bus.departure}</td>
+                        <td className="px-4 py-2 border-t border-gray-200 dark:border-gray-700 font-semibold">{bus.departureTime}</td>
+                        <td className="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{bus.arrival}</td>
+                        <td className="px-4 py-2 border-t border-gray-200 dark:border-gray-700 font-semibold">{bus.arrivalTime}</td>
+                        <td className="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{bus.travelDuration}</td>
+                        <td className="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{bus.length}</td>
+                        <td className="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{bus.price}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </div>
     );
 }
