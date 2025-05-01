@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {getDestinationsFromDatabase, getDatabase} = require('./database');
+const {getDestinationsFromDatabase, getDatabase, getDestinationsFlatFromDatabase} = require('./database');
 
 // Helper methods
 const retry = (fn, retries = 3) => async (...args) => {
@@ -59,6 +59,43 @@ const getDestinationCodes = async (kraj, redisClient) => {
     };
 
     const valid = Object.values(mappings).every(code => code !== "");
+
+    return {...mappings, valid};
+};
+
+const getDestinationFlatCodes = async (kraj, redisClient) => {
+    let destinations;
+
+    try {
+        const cachedDestinations = await redisClient.get('destinationsFlat');
+        if (cachedDestinations) {
+            destinations = JSON.parse(cachedDestinations);
+        } else {
+            destinations = await getDestinationsFlatFromDatabase();
+            await redisClient.setEx('destinationsFlat', 43200, JSON.stringify(destinations));
+        }
+    } catch (error) {
+        console.error('Error retrieving destinationsFlat from Redis:', error);
+        destinations = await getDestinationsFlatFromDatabase();
+    }
+
+    const destination = destinations.find(dest => {
+        return (dest.Ime && dest.Ime.toLowerCase() === kraj.toLowerCase()) ||
+            (dest.Kraj && dest.Kraj.toLowerCase() === kraj.toLowerCase());
+    });
+
+    if (!destination) {
+        return {valid: false};
+    }
+
+    const mappings = {
+        APMS: destination.APMS || "",
+        Arriva: destination.Arriva || "",
+        Train: destination.Vlak || "",
+        Prevozi: destination.Prevozi || ""
+    };
+
+    const valid = Object.values(mappings).some(code => code !== "");
 
     return {...mappings, valid};
 };
@@ -164,7 +201,10 @@ async function findNearbyGeoLocations(kraj, radiusInKm = 15, transportType) {
     const collection = db.collection('destinationsFlat');
 
     const main = await collection.findOne({Kraj: kraj, type: 'kraj'});
-    if (!main || !main.location) return [];
+    if (!main || !main.location) {
+        console.log(`findNearbyGeoLocations: did not find kraj ${kraj}`);
+        return [];
+    }
 
     const query = {
         location: {
@@ -214,7 +254,7 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
     }
 
     // nearby departures
-    const nearbyDeps = await findNearbyGeoLocations(departure, 15, transportType);
+    const nearbyDeps = await findNearbyGeoLocations(departure, 5, transportType);
     for (const dep of nearbyDeps) {
         if (!dep[transportType] || !destCodes[transportType]) continue;
         const key = `${transportType}-${dep.Kraj}-${destination}-${cacheDate}`;
@@ -235,7 +275,7 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
     }
 
     // nearby destinations
-    const nearbyDests = await findNearbyGeoLocations(destination, 15, transportType);
+    const nearbyDests = await findNearbyGeoLocations(destination, 5, transportType);
     for (const dest of nearbyDests) {
         if (!dest[transportType] || !depCodes[transportType]) continue;
         const key = `${transportType}-${departure}-${dest.Kraj}-${cacheDate}`;

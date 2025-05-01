@@ -12,6 +12,10 @@ const {searchAPMS} = require('../services/apmsService');
 const {searchArriva} = require('../services/arrivaService');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
+const {scheduleCacheRefresh} = require("../services/cacheService");
+const {checkArrivaRelations} = require("./checkArrivaRelations");
+const {checkAvailableRoutes} = require("./checkAvailableRoutes");
+
 require('dotenv').config();
 
 const app = express();
@@ -49,6 +53,10 @@ redisClient.connect().then(() => {
     // Compare Puppeteer and DOM
     //comparePerformance('42300', '43400', '14.01.2025', 'vlak').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
     //comparePerformance('Ljubljana', 'Celje', '2025-03-30', 'prevoz').then(data => console.log(JSON.stringify(data, null, 2))).catch(err => console.error('Error:', err));
+
+    //scheduleCacheRefresh(redisClient, PORT);
+    //checkArrivaRelations().catch(console.error);
+    //checkAvailableRoutes(redisClient);
 
 }).catch(err => {
     console.error('Redis connection error:', err);

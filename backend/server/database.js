@@ -41,12 +41,21 @@ async function getDestinationsFromDatabase() {
     return await collection.find({}).toArray();
 }
 
+async function getDestinationsFlatFromDatabase() {
+    if (!mongoClient) {
+        mongoClient = new MongoClient(uri);
+        await mongoClient.connect();
+    }
+    const collection = database.collection('destinationsFlat');
+    return await collection.find({}).toArray();
+}
+
 async function getCommonDestinations() {
     if (!mongoClient) {
         mongoClient = new MongoClient(uri);
         await mongoClient.connect();
     }
-    const collection = database.collection('transport');
+    const collection = database.collection('destinationsCommon');
     return await collection.find({}).toArray();
 }
 
@@ -59,6 +68,7 @@ async function getCodeArriva(locationName) {
 module.exports = {
     getDatabase,
     getDestinationsFromDatabase,
+    getDestinationsFlatFromDatabase,
     getCommonDestinations,
     getCodeArriva
 };

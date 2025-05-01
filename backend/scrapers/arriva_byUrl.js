@@ -26,7 +26,7 @@ async function scrapeArrivaByUrl(departure, destination, date) {
 
         const html = response.data;
 
-        if (!html || html.includes("No direct connections")) {
+        if (!html || html.includes("Med izbranima postajališčema ni direktne avtobusne povezave.") || html.includes("Izbrali ste napačne parametre, prosimo, poskusite znova.")) {
             console.log("No direct connections found or invalid data.");
             return [];
         }
