@@ -83,9 +83,18 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
 
     return (
         <div className="App mx-auto">
-            <div className="cloud" style={{top: '50px', left: '50px'}}></div>
-            <div className="cloud" style={{top: '100px', left: '250px'}}></div>
-            <div className="cloud" style={{top: '150px', right: '50px'}}></div>
+
+            <img src="/cloud_transparent5.png" alt="Cloud" className="cloud-image"
+                 style={{top: '10px', left: '5%', width: '280px', opacity: 0.85}}/>
+            <img src="/cloud_transparent5.png" alt="Cloud" className="cloud-image"
+                 style={{top: '110px', left: '15%', width: '180px', opacity: 0.8}}/>
+            <img src="/cloud_transparent5.png" alt="Cloud" className="cloud-image"
+                 style={{top: '40px', right: '8%', width: '240px', opacity: 0.88}}/>
+            <img src="/cloud_transparent5.png" alt="Cloud" className="cloud-image"
+                 style={{top: '280px', right: '20%', width: '130px', opacity: 0.75}}/>
+            <img src="/cloud_transparent5.png" alt="Cloud" className="cloud-image"
+                 style={{top: '300px', left: '10%', width: '150px', opacity: 0.7}}/>
+
             <div className="stars">
                 <div className="star" style={{top: '10%', left: '20%'}}></div>
                 <div className="star" style={{top: '30%', left: '40%'}}></div>

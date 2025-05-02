@@ -75,7 +75,7 @@ function App() {
                         backgroundColor: '#1E8EFD',
                         overflowX: 'hidden',
                         overflowY: 'auto',
-                        backgroundImage: 'linear-gradient(to bottom right, #fff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 80%, #B4ECF0)',
+                        backgroundImage: 'linear-gradient(to bottom right, #fff, #eae7df 15%, #6DB3F2 60%, #1E8EFD 100%, #B4ECF0)',
                         transition: 'background 0.5s ease, color 0.5s ease',
                         backgroundAttachment: 'fixed',
                         backgroundSize: 'cover',
