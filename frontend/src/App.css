@@ -40,9 +40,10 @@ body {
 
 @media (min-width: 1440px) {
     .cloud-image {
-        transform: scale(40);
+        transform: scale(1.4);
     }
 }
+
 
 @media (min-width: 1600px) {
     .cloud-image {

@@ -122,7 +122,7 @@ function ResultTable({activeRows, inactiveRows, showInactive, toggleInactiveRows
                 <tr>
                     {['Kraj odhoda', 'Čas odhoda', 'Kraj prihoda', 'Čas prihoda', 'Trajanje', 'Prestopi', 'Vlak', 'Opozorilo'].map((header, idx) => (
                         <th key={idx}
-                            className={`px-4 py-3 bg-[#4682B4] dark:bg-purple-900 text-white text-sm md:text-base font-semibold ${['Prestopi', 'Vlak', 'Opozorilo'].includes(header) ? 'text-center' : 'text-left'}`}>
+                            className={`px-4 py-3 bg-[#4682B4] dark:bg-purple-900 text-white text-sm md:text-base font-semibold text-center`}>
                             {header}
                         </th>
                     ))}

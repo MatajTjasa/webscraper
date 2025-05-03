@@ -149,15 +149,15 @@ function SearchPage() {
             />
 
             {/*            {selectedDeparture && (
-                <NearbyStations destination={selectedDeparture} label="🧭 Možnosti v bližini kraja odhoda:"/>
+                <NearbyStations destination={selectedDeparture} label="Možnosti v bližini kraja odhoda:"/>
             )}
 
             {selectedDestination && (
-                <NearbyStations destination={selectedDestination} label="🧭 Možnosti v bližini kraja prihoda:"/>
+                <NearbyStations destination={selectedDestination} label="Možnosti v bližini kraja prihoda:"/>
             )}*/}
 
             {!errorMessage && (
-                <div className="results-container mt-8 w-full px-4 sm:px-0">
+                <div className="results-container mt-8 w-full max-w-screen-xl mx-auto px-4">
                     <Suspense fallback={<LoadingComponent content="Nalaganje podatkov..."/>}>
                         <ResultsAPMS results={apmsResults} isLoading={loadingAPMS}/>
                         <ResultsArriva results={arrivaResults} isLoading={loadingArriva}/>
