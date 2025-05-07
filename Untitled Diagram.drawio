@@ -67,8 +67,8 @@
         <mxCell id="7NyOA-QyOS0l97fLP46v-18" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;&lt;b&gt;DB Query&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Verdana;" parent="1" vertex="1">
           <mxGeometry x="-591" y="173" width="87" height="28" as="geometry" />
         </mxCell>
-        <mxCell id="7NyOA-QyOS0l97fLP46v-21" value="&lt;font&gt;&lt;b&gt;API Request / Response&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-90;fontFamily=Verdana;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="-936.88" y="464.5" width="197" height="28" as="geometry" />
+        <mxCell id="7NyOA-QyOS0l97fLP46v-21" value="&lt;font&gt;&lt;b&gt;API Requests / Responses&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-90;fontFamily=Verdana;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-943.88" y="464.5" width="212" height="28" as="geometry" />
         </mxCell>
         <mxCell id="7NyOA-QyOS0l97fLP46v-24" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;WWW&lt;/font&gt;" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#f9f7ed;strokeColor=#36393d;fontFamily=Verdana;" parent="1" vertex="1">
           <mxGeometry x="-576.17" y="-9" width="305" height="161" as="geometry" />
