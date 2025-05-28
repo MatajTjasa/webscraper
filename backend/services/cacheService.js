@@ -20,20 +20,38 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
 
     const commonDestinations = await getCommonDestinations();
 
-    const tasks = commonDestinations.flatMap(({departure, destination}) => [
-        {
-            name: 'APMS',
-            url: `/webscraper/searchAPMSbyUrl`,
-            cacheKey: `APMS-${departure}-${destination}-${date}`,
-            data: {departure, destination, date}
-        },
-        {
-            name: 'Arriva',
-            url: `/webscraper/searchArrivaByUrl`,
-            cacheKey: `ArrivaByUrl-${departure}-${destination}-${date}`,
-            data: {departure, destination, date}
+    const tasks = commonDestinations.flatMap(({locationA, locationB, providers}) => {
+        const taskList = [];
+
+        if (providers?.APMS) {
+            taskList.push({
+                name: 'APMS',
+                url: `/webscraper/searchAPMSbyUrl`,
+                cacheKey: `APMS-${locationA}-${locationB}-${date}`,
+                data: {departure: locationA, destination: locationB, date}
+            });
         }
-    ]);
+
+        if (providers?.Arriva) {
+            taskList.push({
+                name: 'Arriva',
+                url: `/webscraper/searchArrivaByUrl`,
+                cacheKey: `Arriva-${locationA}-${locationB}-${date}`,
+                data: {departure: locationA, destination: locationB, date}
+            });
+        }
+
+        if (providers?.Vlak) {
+            taskList.push({
+                name: 'Train',
+                url: `/webscraper/searchSlovenskeZelezniceByUrlByUrl`,
+                cacheKey: `Train-${locationA}-${locationB}-${date}`,
+                data: {departure: locationA, destination: locationB, date}
+            });
+        }
+
+        return taskList;
+    });
 
     for (const task of tasks) {
         try {
@@ -51,19 +69,6 @@ async function refreshCacheForDate(redisClient, PORT, date, ttl) {
     console.log(`Cache refresh task completed for ${date}.`);
 }
 
-async function getSubscriptions(redisClient) {
-    const keys = await redisClient.keys('subscription:*');
-    if (keys.length === 0) {
-        console.log('No subscriptions found.');
-        return [];  // Return an empty array if no subscriptions exist
-    }
-    const subscriptions = await Promise.all(keys.map(async (key) => {
-        const subscription = await redisClient.get(key);
-        return JSON.parse(subscription);
-    }));
-    return subscriptions;
-}
-
 async function runSequentially(redisClient, PORT) {
     if (isTaskRunning) {
         console.log('Previous task is still running. Skipping this execution.');
@@ -79,16 +84,6 @@ async function runSequentially(redisClient, PORT) {
             {offset: 0, ttl: 120},  // 30 minutes TTL for today
             {offset: 1, ttl: 240}  // 1 hour TTL for tomorrow
         ];
-
-        const subscriptions = await getSubscriptions(redisClient);
-
-        if (subscriptions.length === 0) {
-            console.log("No subscriptions found. Skipping notifications.");
-        } else {
-            for (const subscription of subscriptions) {
-                await checkArrivaHealth(redisClient, PORT, subscription);
-            }
-        }
 
         for (const {offset, ttl} of datesAndTTLs) {
             const date = getSlovenianDateString(offset);
@@ -115,7 +110,7 @@ function scheduleCacheRefresh(redisClient, PORT) {
         runSequentially(redisClient, PORT);
     });
 
-    // Initial cache refresh for today, tomorrow, and the day after tomorrow
+    // Initial cache refresh for today and tomorrow
     runSequentially(redisClient, PORT);
 }
 

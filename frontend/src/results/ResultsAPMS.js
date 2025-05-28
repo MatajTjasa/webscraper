@@ -43,9 +43,9 @@ function ResultsAPMS({results}) {
                 results.nearbyDepartures.map((group, index) => (
                     <ResultGroup
                         key={`ndep-${index}`}
-                        from={group.vozniRed[0].departure}
-                        to={group.vozniRed[0].arrival}
-                        rows={group.vozniRed}
+                        from={group.schedule[0].departure}
+                        to={group.schedule[0].arrival}
+                        rows={group.schedule}
                         defaultOpen={false}
                     />
                 ))}
@@ -54,9 +54,9 @@ function ResultsAPMS({results}) {
                 results.nearbyDestinations.map((group, index) => (
                     <ResultGroup
                         key={`ndest-${index}`}
-                        from={group.vozniRed[0].departure}
-                        to={group.vozniRed[0].arrival}
-                        rows={group.vozniRed}
+                        from={group.schedule[0].departure}
+                        to={group.schedule[0].arrival}
+                        rows={group.schedule}
                         defaultOpen={false}
                     />
                 ))}

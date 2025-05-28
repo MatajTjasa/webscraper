@@ -8,13 +8,12 @@ const {scrapeSlovenskeZelezniceDOM} = require("../scrapers/slovenske_zeleznice_D
 const {comparePerformance} = require("./comparePerformance");
 const {retry, validateTransportSupport, getDestinationCodes, reformatDate, reformatDateForCache} = require('./helpers');
 const {getDestinationsFromDatabase} = require('./database');
-const {searchAPMS} = require('../services/apmsService');
-const {searchArriva} = require('../services/arrivaService');
+const {search} = require('../services/searchService');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 const {scheduleCacheRefresh} = require("../services/cacheService");
 const {checkArrivaRelations} = require("./checkArrivaRelations");
-const {checkAvailableRoutes} = require("./checkAvailableRoutes");
+//const {checkAvailableRoutes} = require("./checkAvailableRoutes");
 
 require('dotenv').config();
 
@@ -57,6 +56,7 @@ redisClient.connect().then(() => {
     //scheduleCacheRefresh(redisClient, PORT);
     //checkArrivaRelations().catch(console.error);
     //checkAvailableRoutes(redisClient);
+    //scheduleCacheRefresh(redisClient, PORT)
 
 }).catch(err => {
     console.error('Redis connection error:', err);
@@ -244,7 +244,7 @@ app.post('/webscraper/searchAPMSbyUrl', async (req, res) => {
     const {date, departure, destination} = req.body;
     console.log('Starting request searchAPMSbyUrl.');
 
-    const result = await searchAPMS(departure, destination, date, redisClient);
+    const result = await search(departure, destination, date, 'APMS', scrapeAPMSbyUrl, redisClient);
 
     if (result.error) {
         return res.status(400).json({message: result.error});
@@ -258,7 +258,7 @@ app.post('/webscraper/searchArrivaByUrl', async (req, res) => {
     console.log('Starting request searchArrivaByUrl.');
 
     const {date, departure, destination} = req.body;
-    const result = await searchArriva(departure, destination, date, redisClient);
+    const result = await search(departure, destination, date, 'Arriva', scrapeArrivaByUrl, redisClient);
 
     if (result.error) {
         return res.status(400).json({message: result.error});

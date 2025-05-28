@@ -144,7 +144,7 @@ function SearchForm({initialDeparture, initialDestination, initialDate, errorMes
                                 placeholder="Date (dd.mm.yyyy)"
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className="custom-date px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md w-full bg-white dark:bg-gray-700 text-black dark:text-white"
+                                className="custom-date px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white w-full sm:w-auto"
                             />
                         </div>
 

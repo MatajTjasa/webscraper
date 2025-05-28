@@ -254,18 +254,18 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
     }
 
     // nearby departures
-    const nearbyDeps = await findNearbyGeoLocations(departure, 5, transportType);
+    const nearbyDeps = await findNearbyGeoLocations(departure, 15, transportType);
     for (const dep of nearbyDeps) {
         if (!dep[transportType] || !destCodes[transportType]) continue;
         const key = `${transportType}-${dep.Kraj}-${destination}-${cacheDate}`;
         const cached = await redisClient.get(key);
         if (cached && cached !== '[]') {
-            results.nearbyDepartures.push({iz: dep.Kraj, v: destination, vozniRed: JSON.parse(cached)});
+            results.nearbyDepartures.push({from: dep.Kraj, to: destination, schedule: JSON.parse(cached)});
         } else {
             try {
                 const altResult = await scraperFn(dep[transportType], destCodes[transportType], formattedDate);
                 if (altResult.length > 0) {
-                    results.nearbyDepartures.push({iz: dep.Kraj, v: destination, vozniRed: altResult});
+                    results.nearbyDepartures.push({from: dep.Kraj, to: destination, schedule: altResult});
                     await redisClient.setEx(key, 3600, JSON.stringify(altResult));
                 }
             } catch (e) {
@@ -275,18 +275,18 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
     }
 
     // nearby destinations
-    const nearbyDests = await findNearbyGeoLocations(destination, 5, transportType);
+    const nearbyDests = await findNearbyGeoLocations(destination, 15, transportType);
     for (const dest of nearbyDests) {
         if (!dest[transportType] || !depCodes[transportType]) continue;
         const key = `${transportType}-${departure}-${dest.Kraj}-${cacheDate}`;
         const cached = await redisClient.get(key);
         if (cached && cached !== '[]') {
-            results.nearbyDestinations.push({iz: departure, v: dest.Kraj, vozniRed: JSON.parse(cached)});
+            results.nearbyDestinations.push({from: departure, to: dest.Kraj, schedule: JSON.parse(cached)});
         } else {
             try {
                 const altResult = await scraperFn(depCodes[transportType], dest[transportType], formattedDate);
                 if (altResult.length > 0) {
-                    results.nearbyDestinations.push({iz: departure, v: dest.Kraj, vozniRed: altResult});
+                    results.nearbyDestinations.push({from: departure, to: dest.Kraj, schedule: altResult});
                     await redisClient.setEx(key, 3600, JSON.stringify(altResult));
                 }
             } catch (e) {
@@ -307,13 +307,13 @@ async function cacheAllRelations(departure, destination, date, results, transpor
     }
 
     for (const group of results.nearbyDepartures || []) {
-        const key = `${transportType}-${group.iz}-${group.v}-${cacheDate}`;
-        await redisClient.setEx(key, 3600, JSON.stringify(group.vozniRed));
+        const key = `${transportType}-${group.from}-${group.to}-${cacheDate}`;
+        await redisClient.setEx(key, 3600, JSON.stringify(group.schedule));
     }
 
     for (const group of results.nearbyDestinations || []) {
-        const key = `${transportType}-${group.iz}-${group.v}-${cacheDate}`;
-        await redisClient.setEx(key, 3600, JSON.stringify(group.vozniRed));
+        const key = `${transportType}-${group.from}-${group.to}-${cacheDate}`;
+        await redisClient.setEx(key, 3600, JSON.stringify(group.schedule));
     }
 }
 

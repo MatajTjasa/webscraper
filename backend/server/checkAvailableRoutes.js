@@ -1,8 +1,6 @@
 // Skripta za preverjanje in predpomnjenje relacij za common destinacije
 const fs = require('fs');
 const {getCommonDestinations, getDestinationsFromDatabase} = require('../server/database');
-const {searchAPMS} = require('../services/apmsService');
-const {searchArriva} = require('../services/arrivaService');
 const {scrapeSlovenskeZelezniceByUrl} = require('../scrapers/slovenske_zeleznice_byUrl');
 const {searchWithNearbyGeoLocations, getDestinationCodes, reformatDate} = require('../server/helpers');
 require('dotenv').config();
@@ -93,4 +91,4 @@ async function checkAvailableRoutes(redisClient, PORT) {
     console.log('All route checks written to confirmed_common_routes.json');
 }
 
-module.exports = {checkAvailableRoutes};
+//module.exports = {checkAvailableRoutes};
