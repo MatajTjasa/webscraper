@@ -152,7 +152,7 @@ async function handleSearch(req, res, scraperFn, transportType) {
         //console.log(`Fetching data for ${transportType} ${date} from API: ${duration} seconds at ${endTime}.`);
 
         clearRequest(cacheKey);
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(results));
+        await redisClient.setEx(cacheKey, 21600, JSON.stringify(results));
         res.json(results);
     } catch (error) {
         clearRequest(cacheKey);

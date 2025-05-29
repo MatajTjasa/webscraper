@@ -243,7 +243,7 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
                 const mainResult = await scraperFn(depCodes[transportType], destCodes[transportType], formattedDate);
                 if (mainResult.length > 0) {
                     results.main = mainResult;
-                    await redisClient.setEx(mainKey, 3600, JSON.stringify(mainResult));
+                    await redisClient.setEx(mainKey, 21600, JSON.stringify(mainResult));
                 }
             } catch (e) {
                 console.error(`Main relation did not succeed:`, e.message);
@@ -266,7 +266,7 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
                 const altResult = await scraperFn(dep[transportType], destCodes[transportType], formattedDate);
                 if (altResult.length > 0) {
                     results.nearbyDepartures.push({from: dep.Kraj, to: destination, schedule: altResult});
-                    await redisClient.setEx(key, 3600, JSON.stringify(altResult));
+                    await redisClient.setEx(key, 21600, JSON.stringify(altResult));
                 }
             } catch (e) {
                 console.error(`Error in near departure station ${dep.Kraj}:`, e.message);
@@ -287,7 +287,7 @@ async function searchWithNearbyGeoLocations(departure, destination, date, transp
                 const altResult = await scraperFn(depCodes[transportType], dest[transportType], formattedDate);
                 if (altResult.length > 0) {
                     results.nearbyDestinations.push({from: departure, to: dest.Kraj, schedule: altResult});
-                    await redisClient.setEx(key, 3600, JSON.stringify(altResult));
+                    await redisClient.setEx(key, 21600, JSON.stringify(altResult));
                 }
             } catch (e) {
                 console.error(`Error in near destination station ${dest.Kraj}:`, e.message);
@@ -303,17 +303,17 @@ async function cacheAllRelations(departure, destination, date, results, transpor
 
     if (Array.isArray(results.main) && results.main.length > 0) {
         const key = `${transportType}-${departure}-${destination}-${cacheDate}`;
-        await redisClient.setEx(key, 3600, JSON.stringify(results.main));
+        await redisClient.setEx(key, 21600, JSON.stringify(results.main));
     }
 
     for (const group of results.nearbyDepartures || []) {
         const key = `${transportType}-${group.from}-${group.to}-${cacheDate}`;
-        await redisClient.setEx(key, 3600, JSON.stringify(group.schedule));
+        await redisClient.setEx(key, 21600, JSON.stringify(group.schedule));
     }
 
     for (const group of results.nearbyDestinations || []) {
         const key = `${transportType}-${group.from}-${group.to}-${cacheDate}`;
-        await redisClient.setEx(key, 3600, JSON.stringify(group.schedule));
+        await redisClient.setEx(key, 21600, JSON.stringify(group.schedule));
     }
 }
 
